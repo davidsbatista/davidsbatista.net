@@ -5,6 +5,7 @@ date: 2017-03-25 00:00:00
 tags: [parsing, SyntaxNet, Python, NLTK, Dependency Graph]
 categories: [blog]
 comments: true
+disqus_identifier: 20170325
 preview_pic: /assets/images/2017-03-25-syntaxnet.png
 ---
 
