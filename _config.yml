@@ -1,0 +1,34 @@
+title: David S. Batista
+#tagline: ""
+description: "Ph.D., Natural Language Processing, Machine Learning, Big-Data"
+baseurl: ""
+url: ""
+email: dsbatista@gmail.com
+twitter_username: 
+github_username:  davidsbatista
+linkedin_link: http://linkedin.com/in/dsbatista
+stackoverflow: 4324153/david-batista
+gscholar: -tRNGd0AAAAJ
+researchgate: David_Batista4
+timezone: Europe/Berlin
+
+markdown: kramdown
+permalink: pretty
+#excerpt_separator: <!--more-->
+
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+  input: GFM
+
+#lsi: true
+
+# Gems
+gems: [jekyll-paginate]
+
+paginate: 10
+paginate_path: "blog/p:num"
