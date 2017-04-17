@@ -2,6 +2,7 @@
 layout: post
 title: Document Classification
 comments: true
+disqus_identifier: 20170401
 date: 2017-04-01 00:14:00
 categories: [blog]
 tags: [classification, multi-label, sklearn, tf-idf, word2vec, doc2vec]
