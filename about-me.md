@@ -4,20 +4,29 @@ title: About Me
 permalink: /about-me/
 ---
 
-<img src="/assets/images/about-me.jpg" alt="about-me.jpg" width="25%">
 
-I love to play with data and extract knowledge from large volumes of data, be it structured or unstructured, numbers or text. I hold a [Ph.D. in Natural Laguange Processing and Machine Learning], you can see my [Curriculum Vitae] for more details. I have a strong interest in the following topics:
+<img style="float: left; padding-right: 10px;" align="left"  src="/assets/images/about-me.jpg" alt="about-me.jpg" width="25%">
+
+Hi! My name is David, I live in Berlin and I love to play with data and extract knowledge from large volumes of data, be it structured or unstructured, numbers or text. 
+
+I hold a [Ph.D.] in Natural Laguange Processing and Machine Learning, where I explored and proposed new methods for [semantic relationship extraction]. You can see a complete list of my publications as index on my [Google Schoolar] page.
+
+<!--<br>-->
+
+<hr style="height:1pt; visibility:hidden;" />
+
+I'm interested in the following topics:
 
 * Natural Language Processing
-* Machine Learning
-* Deep Learning
 * Information Extraction (i.e., Named-Entity Recognition, Relationship Extraction)
 * Aspect-based Sentiment Analysis
-
+* Machine Learning
+* Deep Learning
 
 [Curriculum Vitae]: https://davidsbatista.github.io/about/dsbatista-cv.en.pdf
-[Ph.D. in Natural Laguange Processing and Machine Learning]: https://davidsbatista.github.io/publications/dsbatista-phd-thesis-2016.pdf
-
+[Ph.D.]: https://davidsbatista.github.io/publications/dsbatista-phd-thesis-2016.pdf
+[semantic relationship extraction]: https://en.wikipedia.org/wiki/Relationship_extraction
+[Google Schoolar]: https://scholar.google.de/citations?user=-tRNGd0AAAAJ&hl=en
 
 <!--
 
