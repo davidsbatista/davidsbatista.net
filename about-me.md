@@ -9,7 +9,7 @@ permalink: /about-me/
 
 Hi! My name is David, I live in Berlin and I love to play with data and extract knowledge from large volumes of data, be it structured or unstructured, numbers or text. 
 
-I hold a [Ph.D.] in Natural Laguange Processing and Machine Learning, where I explored and proposed new methods for [semantic relationship extraction]. You can see a complete list of my publications as index on my [Google Schoolar] page.
+I hold a [Ph.D.] in Natural Laguange Processing and Machine Learning, where I explored and proposed new methods for [semantic relationship extraction]. You can see a complete list of my publications as indexed on my [Google Schoolar] page.
 
 <!--<br>-->
 
