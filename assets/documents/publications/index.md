@@ -1,8 +1,6 @@
 ---
 layout: page
-comments: false
-share: false
+title: Publications
 ---
 
-## Publications
 {% include publications.html %}
