@@ -24,7 +24,7 @@ I'm interested in the following topics:
 * Deep Learning
 
 [Curriculum Vitae]: https://davidsbatista.github.io/about/dsbatista-cv.en.pdf
-[Ph.D.]: https://davidsbatista.github.io/publications/dsbatista-phd-thesis-2016.pdf
+[Ph.D.]: http://davidsbatista.net/assets/documents/publications/dsbatista-phd-thesis-2016.pdf
 [semantic relationship extraction]: https://en.wikipedia.org/wiki/Relationship_extraction
 [Google Schoolar]: https://scholar.google.de/citations?user=-tRNGd0AAAAJ&hl=en
 
