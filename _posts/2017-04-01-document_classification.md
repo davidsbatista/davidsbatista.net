@@ -258,7 +258,7 @@ df_stats.plot(x='genre', y='#movies', kind='bar', legend=False, grid=True, figsi
 {% endhighlight python %}
 
 <figure>
-  <img class="fullw" src="/assets/images/2017-04-01-IMDB-movie-genre-classification.png" alt="2014-09-23-keyphrase_extraction.png">
+  <img class="fullw" src="/assets/images/2017-04-01-IMDB-movie-genre-classification.png">
 </figure>
 
 

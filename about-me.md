@@ -5,11 +5,13 @@ permalink: /about-me/
 ---
 
 
-<img style="float: left; padding-right: 10px;" align="left"  src="/assets/images/about-me.jpg" alt="about-me.jpg" width="25%">
+<img style="float: left; padding-right: 10px;" align="left"  src="/assets/images/about-me.jpg" alt="about-me.jpg" width="32.5%">
 
-Hi! My name is David, I live in Berlin and I love to play with data and extract knowledge from large volumes of data, be it structured or unstructured, numbers or text. 
+Hi! :-) 
 
-I hold a [Ph.D.] in Natural Laguange Processing and Machine Learning, where I explored and proposed new methods for [semantic relationship extraction]. You can see a complete list of my publications as indexed on my [Google Schoolar] page.
+My name is David, I live in Berlin and I love to play with data and extract knowledge from large volumes of data, be it structured or unstructured, numbers or text. 
+
+I hold a [Ph.D.] degree in Natural Laguange Processing and Machine Learning, where I explored and proposed new methods for [semantic relationship extraction]. You can see a complete list of my publications as indexed by [Google Schoolar].
 
 <!--<br>-->
 
