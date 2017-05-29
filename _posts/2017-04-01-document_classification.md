@@ -21,7 +21,7 @@ In this post I will show an approach to classify a document into a set of pre-de
 
 In order to create the dataset for this experiment you need to download _genres.list_ and _plot.list_ files from a [mirror FTP](ftp://ftp.fu-berlin.de/pub/misc/movies/database/), and then parse files in order to associate the titles, plots, and genres. 
 
-I've already done this step, and parsed both files in order to generate a single file, available here [movies_genres.csv](https://github.com/davidsbatista/text-classification/blob/master/movies_genres.csv), containing the plot and the genres associated to each movie. 
+I've already done this step, and parsed both files in order to generate a single file, available here [movies_genres.csv](https://github.com/davidsbatista/text-classification/blob/master/movies_genres.csv.bz2), containing the plot and the genres associated to each movie. 
 
 
 ## Pre-processing and cleaning
