@@ -11,7 +11,12 @@ preview_pic: /assets/images/2017-07-07-PyData_Berlin.png
 
 The [PyData Berlin](https://pydata.org/berlin2017/) conference took place in the first weekend July, at the HTW. Full 3 days of many interesting subjects including Natural Language Processing, Machine Learning, Data Visualization, etc. I was happy to have my talk proposal accepted, and had the opportunity to present work done during my PhD on Semantic Relationship extraction.
 
-The videos are still not available, I will updated this post when the videos are out. In the meantime, here is a quick resume of some of the talks I attended:
+<figure>
+  <img style="width: 45%; height: 45%" src="/assets/images/2017-07-07-PyData_Berlin.png">
+</figure>
+
+
+__NOTE__: The videos are still not available, I will updated this post when the videos are out. In the meantime, here is a quick resume of some of the talks I attended:
 
 <!-- assets/documents/talks/PyData2017-Berlin-presentation.pdf -->
 
