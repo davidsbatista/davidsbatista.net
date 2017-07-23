@@ -6,10 +6,10 @@ tags: [python, NLTK, SyntaxNet, API, Portuguese, part-of-speech, syntactic depen
 categories: [blog]
 comments: true
 disqus_identifier: 20170722
-preview_pic:
+preview_pic: /assets/images/2017-07-22-SyntaxNetHTTP.png
 ---
 
-In a [previous post](../../../../../blog/2017/03/25/syntaxnet/) I explained how load the syntactic and morphological information given by SyntaxNet into NLTK structures, such as Dependency Graph, by parsing the std output. Although usefull this is does not scale when one wants to process thousands of sentences, but finally I've found a Docker image to setup SyntaxNet as a webservice.
+In a [previous post](../../../../../blog/2017/03/25/syntaxnet/) I explained how load the syntactic and morphological information given by SyntaxNet into NLTK structures by parsing the std output. Although usefull this is does not scale when one wants to process thousands of sentences, but finally I've found a Docker image to setup SyntaxNet as a webservice.
 
 It turns out this is simple and straightforward using a Docker image. Here are the steps on how to do it, and setting up for Portuguese:
 
@@ -75,13 +75,38 @@ The only problem I've found was that it was loading the models for all the langu
 
 I did an experiment, comparing both images, by measuring the time taken to process 500 sentences in Portuguese.
 
-| Docker Image      | Time              |
-|:------------------|:-----------------:|
-| [Original](https://github.com/askplatypus/syntaxnet-api) | 35m12.131s |
-| [Updated](https://github.com/davidsbatista/syntaxnet-api) | 25m56.689s |
+<!---
+  | Docker Image      | Time              |
+  |:------------------|:-----------------:|
+  | [Original](https://github.com/askplatypus/syntaxnet-api) | 35m12.131s |
+  | [Updated](https://github.com/davidsbatista/syntaxnet-api) | 25m56.689s |
+--->
+
+<center>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Docker Image</th>
+      <th style="text-align: center">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="https://github.com/askplatypus/syntaxnet-api">Original</a></td>
+      <td style="text-align: center">35m12.131s</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="https://github.com/davidsbatista/syntaxnet-api">Updated</a></td>
+      <td style="text-align: center">25m56.689s</td>
+    </tr>
+  </tbody>
+</table>
+</center>
 
 
-The image, loading models only for Portuguese it's here:
+Using the image that first pre-loads the Portuguese model is about 10min faster. Note, this was done in a machine without any GPUS, I believe using GPUs this would be much faster.
+
+The image, loading models only for Portuguese, it's here:
 
 [https://github.com/davidsbatista/syntaxnet-api](https://github.com/davidsbatista/syntaxnet-api)
 
