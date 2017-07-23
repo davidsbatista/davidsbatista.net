@@ -11,6 +11,8 @@ preview_pic: /assets/images/2017-03-25-syntaxnet.png
 
 In May 2016 Google released [SyntaxNet](https://research.googleblog.com/2016/05/announcing-syntaxnet-worlds-most.html), a syntactic parser whose performance beat previous proposed approaches. 
 
+__UPDATE__: check this [post from 2017-07-22](../../../../../blog/2017/07/22/SyntaxNet-API-Portuguese/) on how to have SyntaxNet exposed as a web service.
+
 In this post I will show you how to have SyntaxNet's syntactic dependencies and other morphological information in Python, precisely how to load [NLTK](http://www.nltk.org/) structures such as [DependencyGraph](http://www.nltk.org/_modules/nltk/parse/dependencygraph.html) and [Tree](http://www.nltk.org/_modules/nltk/tree.html) with SyntaxNet's output.
 
  In this example will use the Portuguese model, but as you will see this can be easily adapted to any language, provided you have already a pretrained model.
@@ -176,5 +178,7 @@ And for the second sentence:
 
 
 I'm still trying to figure it out how to have SyntaxNet running as a daemon or service, where we can give a sentence and have as a result, for instance, a JSON object with the syntactic and morphologic information.
+
+__UPDATE__: check this [post from 2017-07-22](../../../../../blog/2017/07/22/SyntaxNet-API-Portuguese/) on how to have SyntaxNet exposed as a web service.
 
 -----
