@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Google's SyntaxNet Web API for Portuguese 
+title: Google's SyntaxNet - HTTP API for Portuguese 
 date: 2017-07-22 00:00:00
 tags: [python, NLTK, SyntaxNet, API, Portuguese, part-of-speech, syntactic dependencies]
 categories: [blog]
@@ -9,7 +9,7 @@ disqus_identifier: 20170722
 preview_pic:
 ---
 
-In a [previous post]() I explained how load the syntactic and morphological information given by SyntaxNet into NLTK structures, such as Dependency Graph, by parsing the std output. Although usefull this is does not scale when one wants to process thousands of sentences, but finally I've found a Docker image to setup SyntaxNet as a webservice.
+In a [previous post](../../../../../blog/2017/03/25/syntaxnet/) I explained how load the syntactic and morphological information given by SyntaxNet into NLTK structures, such as Dependency Graph, by parsing the std output. Although usefull this is does not scale when one wants to process thousands of sentences, but finally I've found a Docker image to setup SyntaxNet as a webservice.
 
 It turns out this is simple and straightforward using a Docker image. Here are the steps on how to do it, and setting up for Portuguese:
 
@@ -46,9 +46,9 @@ to see a list of current images, you want to see the `IMAGE ID` for the syntaxne
 
 	docker run -i -p 7000:7000 -t IMAGE_ID_value
 
-The `-p 7000:7000` forwards the port 7000 on your host to the same port on the running image, the parameter `-i` forces the ouput to be shown on stdout, you may replace this by `-d` to make the image run in the background and detach from the shell.
+This should expose a webservice on your localhost on port 7000 similar to [http://syntaxnet.askplatyp.us/v1#/default](http://syntaxnet.askplatyp.us/v1#/default)
 
-This should expose a webservice similar to this one: [http://syntaxnet.askplatyp.us/v1#/default](http://syntaxnet.askplatyp.us/v1#/default)
+The `-p 7000:7000` forwards the port 7000 on your host to the same port on the running image, the parameter `-i` forces the ouput to be shown on stdout, you may replace this by `-d` to make the image run in the background and detach from the shell.
 
 You can also run in from the command line, with `curl`:
 
@@ -62,8 +62,31 @@ This should output something like this:
     2	mundo,	_	NOUN	n|M|S	Gender=Masc|Number=Sing	1	nsubj
     3	teste!	_	ADJ	adj|M|S	Gender=Masc|Number=Sing	2	amod
 
+NOTE: I omitted some of the ouputted info for each word to make everything fit in one line :)
 
-<!--
-with all languages
-https://hub.docker.com/r/danielperezr88/syntaxnet-api/
--->
+
+## Alternatives (bit faster)
+
+After running a few experiments in batch I notice this was still a bit slow, probably because I was also running it on a machine without any GPUs. 
+
+Looking through more SyntaxNet Docker images I've [found another](https://github.com/danielperezr88/syntaxnet-api), a fork of the one described above, which pre-loads the models, and makes the batch processing a bit faster.
+
+The only problem I've found was that it was loading the models for all the languages, and this would take around 10GB of RAM! So I created a new image by removing all the other models expect the one for Portuguese, and build it using the commands described above.
+
+I did an experiment, comparing both images, by measuring the time taken to process 500 sentences in Portuguese.
+
+| Docker Image      | Time              |
+|:------------------|:-----------------:|
+| [Original](https://github.com/askplatypus/syntaxnet-api) | 35m12.131s |
+| [Updated](https://github.com/davidsbatista/syntaxnet-api) | 25m56.689s |
+
+
+The image, loading models only for Portuguese it's here:
+
+[https://github.com/davidsbatista/syntaxnet-api](https://github.com/davidsbatista/syntaxnet-api)
+
+
+__NOTE__: After experimenting, building and running Docker images you might want to clean up, and free up some space on your machine, these links might help:
+
+* [https://lebkowski.name/docker-volumes/](https://lebkowski.name/docker-volumes/)
+* [https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes](https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes)
