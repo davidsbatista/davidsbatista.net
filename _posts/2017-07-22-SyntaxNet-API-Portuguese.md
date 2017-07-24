@@ -9,7 +9,7 @@ disqus_identifier: 20170722
 preview_pic: /assets/images/2017-07-22-SyntaxNetHTTP.png
 ---
 
-In a [previous post](../../../../../blog/2017/03/25/syntaxnet/) I explained how load the syntactic and morphological information given by SyntaxNet into NLTK structures by parsing the std output. Although usefull this is does not scale when one wants to process thousands of sentences, but finally I've found a Docker image to setup SyntaxNet as a webservice.
+In a [previous post](../../../../../blog/2017/03/25/syntaxnet/) I explained how load the syntactic and morphological information given by SyntaxNet into NLTK structures by parsing the standard output. Although usefull this is does not scale when one wants to process thousands of sentences, but finally I've found a Docker image to setup SyntaxNet as a webservice.
 
 It turns out this is simple and straightforward using a Docker image. Here are the steps on how to do it, and setting up for Portuguese:
 
@@ -28,7 +28,7 @@ cd syntaxnet-api
 docker build . -t syntaxnet-api
 ~~~~
 
-Before building the docker image (i.e., running `docker build . -t syntaxnet-api`) you can specify which language you want SyntaxNet to parse. This is done by updateding the following line in `flask_server.py`, in this case for Portuguese:
+Before building the docker image (i.e., running `docker build . -t syntaxnet-api`) you can specify which language you want SyntaxNet to parse. This is done by updating the following line in `flask_server.py`, in this case for Portuguese:
 
 ~~~~
 # Overrides available languages map
@@ -71,7 +71,7 @@ After running a few experiments in batch I notice this was still a bit slow, pro
 
 Looking through more SyntaxNet Docker images I've [found another](https://github.com/danielperezr88/syntaxnet-api), a fork of the one described above, which pre-loads the models, and makes the batch processing a bit faster.
 
-The only problem I've found was that it was loading the models for all the languages, and this would take around 10GB of RAM! So I created a new image by removing all the other models expect the one for Portuguese, and build it using the commands described above.
+The only problem I've found was that it was loading the models for all the languages, and this would take around 10GB of RAM! So I created a new image by removing all the other models except the one for Portuguese, and build it using the commands described above.
 
 I did an experiment, comparing both images, by measuring the time taken to process 500 sentences in Portuguese.
 
