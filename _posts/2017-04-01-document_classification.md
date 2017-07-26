@@ -79,7 +79,7 @@ df.info()
     memory usage: 26.9+ MB
 
 
-We have a total of 117 352 movies and each of them is associated with 28 possible genres. The genres columns simply contain a 1 or 0 depending of whether the movie is classified into that particular genre or not. This means the [one-hot-encoding schema](https://www.wikiwand.com/en/One-hot) is already provided in this file.
+We have a total of 117 352 movies and each of them is associated with 28 possible genres. The genres columns simply contain a 1 or 0 depending of whether the movie is classified into that particular genre or not. This means the multi-label binary mask is already provided in this file.
 
 
 Next we are going to calculate the absolute number of movies per genre. Note: each movie can be associated with more than one genre, we just want to know which genres have more movies.
