@@ -18,11 +18,12 @@ The [PyData Berlin](https://pydata.org/berlin2017/) conference took place in the
 
 __NOTE__: The videos are still not available, I will updated this post when the videos are out. In the meantime, here is a quick resume of some of the talks I attended:
 
-<!-- assets/documents/talks/PyData2017-Berlin-presentation.pdf -->
 
 #### Evaluating Topic Models
 
 [Matti Lyra](https://github.com/mattilyra) gave an interesting talk on how to evaluate unsupervised models, mostly focused on how to evaluate topic models generated from LDA. He went through the proposed evaluation methodologies and described the pros and cons of each one of them. Slides are available [here](https://github.com/mattilyra/pydataberlin-2017)
+
+[![Word Embeddings](https://img.youtube.com/vi/UkmIljRIG_M/hqdefault.jpg)](https://www.youtube.com/watch?v=UkmIljRIG_M)
 
 ---
 
