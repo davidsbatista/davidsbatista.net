@@ -12,7 +12,8 @@ gscholar: -tRNGd0AAAAJ
 researchgate: David_Batista4
 timezone: Europe/Berlin
 
-markdown: kramdown
+#markdown: kramdown
+markdown: redcarpet
 permalink: pretty
 #excerpt_separator: <!--more-->
 
