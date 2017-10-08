@@ -1,15 +1,17 @@
 ---
 layout: post
-title: Sequence Learning - Hidden Markov Models
+title: Hidden Markov Models
 date: 2017-08-09 00:00:00
-tags: [hidden markov models, sequence modeling, tutorial]
+tags: [hidden markov models, naive bayes, sequence classifier, tutorial]
 categories: [blog]
 comments: true
 disqus_identifier: 20170809
-preview_pic:
+preview_pic: /assets/images/2017-08-09-Sequential_Supervised_Learning_part_I.png
 ---
 
-# __Introduction__
+This is the first post, of a series of posts, about sequential supervised learning applied to Natural Language Processing (NLP). In this post I will write about the classical algorithm for sequence learning, the Hidden Markov Model (HMM), explain how it's related with the Naive Bayes Model and it's limitations.
+
+## __Introduction__
 
 The classical problem in Machine Learning is to learn a classifier that can distinguish between two or more classes, i.e., that can accurately predict a class for a new object given training examples of objects already classified.
 
@@ -30,53 +32,69 @@ Note that there are other machine learning problems which also involve sequences
 
 The paper [Machine Learning for Sequential Data: A Review by Thomas G. Dietterich](http://web.engr.oregonstate.edu/~tgd/publications/mlsd-ssspr.pdf) contains many more examples, and is a good introduction to the supervised sequential learning problem.
 
-The Hidden Markov Model (HMM) was one the first algorithms to classify sequences. It has it's roots on the Naive Bayes model, and an HMM can be seen as a sequential extension to the Naive Bayes model.
+The Hidden Markov Model (HMM) was one the first proposed algorithms to classify sequences. It has it's roots on the Naive Bayes model, and an HMM can be seen as a sequential extension to the Naive Bayes model.
 
-## Naive Bayes classifier
+## __Naive Bayes classifier__
 
-It's based on the Bayes' theorem, where $$y$$ it's a class and $$\vec{x}$$ is a feature vector associated to an observation:
+The Naive Bayes (NB) classifier is a ___generative model___, which builds a model of each class based on the training examples for each class. Then, in prediction, given an observation, it returns the class most likely to have generated the observation. In contrast ___discriminative models___, like logistic regression, try to learn which features from the training examples are most useful to discriminate between the different possible classes.
+
+The Naive Bayes classifier returns the class that as the maximum posterior probability given the features:
+
+$$ \hat{y} = argmax\ p(y \mid \vec{x})$$
+
+where $$y$$ it's a class and $$\vec{x}$$ is a feature vector associated to an observation. The NB classifier is based on the Bayes' theorem, applying the theroem to the equation above, we get:
 
 $$ p(y \mid \vec{x}) = \frac{p(y) \cdot p(\vec{x} \mid y)}{p(\vec{x})} $$
 
-when iterating over all the classes for an observation, the denominator is always the same, we will always asking about the most likely class for the same $$\vec{x}$$, we can then simplify the formula:
+In training, when iterating over all classes, for a given observation, and calculating the probabilities above, the probability of the observation, i.e., the denominator, is always the same, it has no influence, so we can then simplify the formula:
 
 $$p(y \mid \vec{x}) = p(y) \cdot p(\vec{x} \mid y) $$
 
-The numerator can also be written as a joint probability:
+which, if we decompose the vector of features, is the same as:
 
-$$p(y) \cdot p(\vec{x} \mid y) = p(y,\vec{x})$$
+$$ p(y \mid \vec{x}) = p(y) \cdot p(x_{1}, x_{2}, x_{3}, \dots, x_{1} \mid y) $$
 
-by applying the chain rule: $$p(x_{1}, x_{2}, \dots, x_{m}) = \prod_{i=1}^{m} p(x_{i} \mid x_{i-1}, x_{i-2}, \dots, x_{1})$$ we can transform $$p(y,\vec{x})$$ into:
+this is hard to compute, because it involves estimating every possible combination of features. We can be relaxed this computation by applying the Naïves Bayes assumption, which states that:
 
-$$ p(y \mid \vec{x}) = p(y) \prod_{i=1}^{m} p(x_{i} \mid x_{i-1}, x_{i-2}, \dots, x_{1}, y) $$
+<center>
+<b>
+ "each feature is conditional independent of every other feature, given the class"
+</b>
+ </center>
 
-apply the Naïves Bayes assumption: $$p(x_{i} \mid y,x_{j}) = p(x_{i} \mid y)$$ with $$i \neq j$$ i.e. "each feature is conditional independent of every other feature, given the class":
+formerly, $$p(x_{i} \mid y,x_{j}) = p(x_{i} \mid y)$$ with $$i \neq j$$. The probabilities $$p(x_{i} \mid y)$$ are independent given the class $$y$$ and hence can be ‘naively’ multiplied:
+
+$$ p(x_{1}, x_{2}, \dots, x_{1} \mid y) =  p(x_{1} \mid y) \cdot p(x_{2} \mid y), \cdots, p(x_{m} \mid y)$$
+
+pluging this into our equation:
 
 $$ p(y \mid \vec{x}) = p(y) \prod_{i=1}^{m} p(x_{i} \mid y) $$
 
-we get the final Naive Bayes model, which has a consequence of the assumption above,
-doesn't capture dependencies between each input variables in $$\vec{x}$$.
-
-#### __Naive Bayes Important Observations__
-
-* __TODO__
+we get the final Naive Bayes model, which as consequence of the assumption above, doesn't capture dependencies between each input variables in $$\vec{x}$$.
 
 
-## From Naive Bayes to Hidden Markov Models
+## __From Naive Bayes to Hidden Markov Models__
 
-To predict a class sequence $$y=(y_{1}, \dots, y_{n})$$ for an observation sequence  $$x=(x_{1}, \dots, y_{n})$$, a simple sequence model can be formulated as a product over single Naïve Bayes Models:
+The model presented before predicts a class for a set of features associated to an observation. To predict a class sequence $$y=(y_{1}, \dots, y_{n})$$ for sequence of observation $$x=(x_{1}, \dots, y_{n})$$, a simple sequence model can be formulated as a product over single Naïve Bayes models:
 
 $$ p(\vec{y} \mid \vec{x}) = \prod_{i=1}^{n} p(y_{i}) \cdot p(x_{i} \mid y_{i}) $$
 
 Two aspects about this model:
 
-* there is only one feature at each sequence position, namely the identity of the respective observation because, again, there is the assumption that each feature is generated independently (conditioned on y).
+* there is only one feature at each sequence position, namely the identity of the respective observation due the assumption that each feature is generated independently, conditioned on the class $$y_{i}$$.
 
 * it doesn't capture interactions between the observable variables $$x_{i}$$.
 
 It is however reasonable to assume that there are dependencies between the observations at consecutive sequence positions $$y_{i}$$, remember the example above about the part-of-speech tags ?
 
-The Hidden Markov Model introduces state transition probabilities, first order if it only accounts for the previous state:
+This is where the First-order Hidden Markov Model appears, introducing the __Markov Assumption__:
+
+
+<center>
+<b>
+ "the probability of a particular state is dependent only on the previous state"
+</b>
+ </center>
 
 $$ p(\vec{y} \mid \vec{x}) = \prod_{i=1}^{n} p(y_{i} \mid y_{i-1}) \cdot p(x_{i} \mid y_{i}) $$
 
@@ -88,36 +106,58 @@ where Y represents the set of all possible label sequences $$\vec{y}$$.
 
 ----
 
-## __Hidden Markov Models__
+## __Hidden Markov Model__
 
-Set of states/labels: $$Q = q_{1}, q_{2}, \cdots, q_{N}$$
+A Hidden Markov Model (HMM) is a sequence classifier. As other machine learning algorithms it can be trained, i.e.: given labeled sequences of observations, and then using the learned parameters to assign a sequence of labels given a sequence of observations. Let's define an HMM framework containing the following components:
 
-Set of observations/words: $$O = o_{1}, o_{2}, o_{N}$$
+* states (i.e., labels): $$T = t_{1}, t_{2}, \cdots, t_{N}$$
+* observations (i.e., words) : $$W = w_{1}, w_{2}, \cdots, w_{N}$$
+* two special states: $$t_{start}$$ and $$t_{end}$$ which are not associated with the observation
 
-* An initial probability
-* A final probability
-* A transition probability, matrix A, i.e., the probability from going from one label to another
-* An emission probability, matrix B, i.e., probability of an observation being generated from a state $$q_{i}$$.
+and probabilities relating states and observations:
+
+* __initial probability__: an initial probability distribution over states
+* __final probability__: a final probability distribution over states
+* __transition probability__: a matrix $$A$$ with the probabilities from going from one label to another
+* __emission probability__: a matrix $$B$ with the probabilities of an observation being generated from a state
+
+<figure>
+  <img style="width: 65%; height: 65%" src="/assets/images/2017-08-09-Sequential_Supervised_Learning_part_I.png">
+</figure>
+
+<!--
+picture taken from:
+http://www.cs.virginia.edu/~hw5x/Course/CS6501-Text-Mining/_site/mps/mp3.html
+
+https://liqiangguo.wordpress.com/page/2/
+-->
+
+A First-order Hidden Markov Model has assumptions:
+
+* __Markov Assumption__: the probability of a particular state is dependent only on the previous state.
+
+* __Output Independence__: the probability of an output observation $$w_{i}$$ depends only on the state that produced the observation $$t_{i}$$ and not on any other states or any other observations.
+
 
 Within this framework we can define 3 three major problems which can be efficiently solved by relying on dynamic programming and by making use of the independence assumptions of the HMM model.
 
-#### __1 - Computing the likelihood of an observation sequence__
+#### __Likelihood: computing the probability of an observation sequence__
 
-* Given an HMM λ = (A,B) and an observation sequence $$O = o1,o2,...,oT$$
-* How to determine the likelihood $$P(O\|λ)$$
+* Given an HMM $$\gamma$$ = ($$A$$,$$B$$) and an observation sequence $$W = w_{1}, w_{2}, \dots, w_{T}$$
+* How to determine the likelihood $$P( W \mid λ)$$, i.e., what is the probability of this observation sequence ?
 * Forward algorithm
 
-#### __2 - Finding best label sequence for an observation sequence__
+#### __Decoding: finding best label sequence for an observation sequence__
 
-* Given an HMM λ = (A,B) and sequence of observations O = o1,o2,...,oT
-* How to find the most probable sequence of states Q = q1q2q3 ...qT ?
+* Given an HMM $$\gamma$$ = ($$A$$,$$B$$) and an observation sequence $$W = w_{1}, w_{2}, \cdots, w_{T}$$
+* How to find the most probable sequence of states $$T = t_{1}, t_{2}, t_{3}, \dots, t_{T}$$ ?
 * Posterior Decoding or minimum risk decoding
 * Viterbi
 
-#### __3 - Learning the HMM parameters__
+#### __Learning: learn the HMM parameters__
 
-* Given an observation sequence O and the set of possible states in the HMM
-* How to learn the HMM parameters A and B
+* Given an observation sequence $$W$$ and the set of possible states $$T$$ in the HMM
+* How to learn the HMM parameters $$A$$ and $$B$$
 * Forward-Backward
 * Baum-Welch algorithm
 
@@ -132,11 +172,13 @@ https://vimeo.com/154512602
 
 #### __HMM Important Observations__
 
-* There is only one feature at each word/sequence position, namely the identity i.e., the value of the respective observation.
+* There is only one feature at each word/observation in the sequence, namely the identity i.e., the value of the respective observation.
 
-* Each state depends only on its immediate predecessor, that is, each state $$y_{i}$$ is independent of all its ancestors $$y_{1}, y_{2}, \dots, y_{i-2}$$ given its previous state $$y_{i-1}$$.
+* Each state depends only on its immediate predecessor, that is, each state $$t_{i}$$ is independent of all its ancestors $$t_{1}, t_{2}, \dots, t_{i-2}$$ given its previous state $$t_{i-1}$$.
 
-* Each observation variable $$x_{i}$$ depends only on the current state $$y_{i}$$.
+* Each observation variable $$w_{i}$$ depends only on the current state $$t_{i}$$.
 
 
-Both models presented before, the Naïve Bayes and the Hidden Markov models are generative models, that is, they model the joint distribution $p(y, x)$.
+## __Links / Papers__
+
+* [Chapter 6: "Naive Bayes and Sentiment Classification" in Speech and Language Processing. Daniel Jurafsky & James H. Martin](https://web.stanford.edu/~jurafsky/slp3/6.pdf)
