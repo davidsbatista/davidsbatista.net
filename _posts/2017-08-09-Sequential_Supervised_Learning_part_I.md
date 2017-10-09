@@ -46,6 +46,9 @@ where $$y$$ it's a class and $$\vec{x}$$ is a feature vector associated to an ob
 
 $$ p(y \mid \vec{x}) = \frac{p(y) \cdot p(\vec{x} \mid y)}{p(\vec{x})} $$
 
+
+In classification logistic regression chooses a class by using the equation defined above to compute the probability of each class and then choose the one that yields the maximum probability.
+
 In training, when iterating over all classes, for a given observation, and calculating the probabilities above, the probability of the observation, i.e., the denominator, is always the same, it has no influence, so we can then simplify the formula:
 
 $$p(y \mid \vec{x}) = p(y) \cdot p(\vec{x} \mid y) $$
@@ -72,6 +75,12 @@ $$ p(y \mid \vec{x}) = p(y) \prod_{i=1}^{m} p(x_{i} \mid y) $$
 
 we get the final Naive Bayes model, which as consequence of the assumption above, doesn't capture dependencies between each input variables in $$\vec{x}$$.
 
+
+### __Trainning__
+
+### __Classification__
+
+---
 
 ## __From Naive Bayes to Hidden Markov Models__
 
@@ -138,8 +147,12 @@ A First-order Hidden Markov Model has assumptions:
 
 * __Output Independence__: the probability of an output observation $$w_{i}$$ depends only on the state that produced the observation $$t_{i}$$ and not on any other states or any other observations.
 
-
 Within this framework we can define 3 three major problems which can be efficiently solved by relying on dynamic programming and by making use of the independence assumptions of the HMM model.
+
+
+<!--
+file:///Users/dsbatista/Desktop/CRFs/tutorial%20on%20hmm%20and%20applications.pdf
+-->
 
 #### __Likelihood: computing the probability of an observation sequence__
 

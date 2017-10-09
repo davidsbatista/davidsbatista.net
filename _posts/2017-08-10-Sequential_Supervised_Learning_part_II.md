@@ -13,13 +13,13 @@ This is the second part of a series of posts about sequential supervised learnin
 
 In this post I will try to explain how to build a sequence classifier based on a __Logistic Regression__ classifier.
 
-In a [previous post](../../09/Sequential_Supervised_Learning_part_I/) I wrote about the __Naïve Bayes Model__ and how it is connected with the __Hidden Markov Model__. Both are __generative models__, the __Logistic Regression__ classifier however is a __discriminative model__.
+In a [previous post](../../09/Sequential_Supervised_Learning_part_I/) I wrote about the __Naïve Bayes Model__ and how it is connected with the __Hidden Markov Model__, which are both __generative models__, in contrast the __Logistic Regression__ classifier however is a __discriminative model__, this where this post will start, explaining this difference.
 
-A classifier chooses which output label $$y$$ to assign an input $$x$$, by choosing from all the possible $$y_{i}$$ the one that maximizes $$p(y \mid x)$$
+A classifier chooses which output label $$y$$ to assign an input $$x$$, by selecting from all the possible $$y_{i}$$ the one that maximizes $$p(y \mid x)$$
 
 The Naive Bayes classifier estimates $$p(y \mid x)$$ indirectly, by applying the Baye's theorem to $$p(y \mid x)$$, and then computing the class conditional distribution/likelihood $$p(x \mid y)$$ and the prior $$p(y)$$.
 
-In contrast a discriminative model directly computes $$p(y \mid x)$$ by discriminating among the different possible values of the class $$y$$ instead of computing a likelihood.
+In contrast a discriminative model directly computes $$p(y \mid x)$$ by discriminating among the different possible values of the class $$y$$ instead of computing a likelihood. The Logistic Regression classifier is one of such type of classifiers.
 
 ## __Logistic Regression__
 
@@ -33,8 +33,15 @@ where $$f_{i}$$ is a feature and $$w_{i}$$ the weight associated to the feature.
 
 The extracted features, are binary-valued features, i.e., only takes the values 0 and 1, and are commonly called indicator functions. Each of these features is calculated by a function that is associated with the input $$x$$ and the class $$y$$. Each indicator function is represented as $$f_{i}(y,x)$$, the feature $$i$$ for class $$y$$, given observation $$x$$.
 
-$$P(y|x) = \frac{\exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x,y) \bigg)} {\sum\limits_{y \in Y} \exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x,y) \bigg)}  $$
+$$P(y|x) = \frac{\exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x,y) \bigg)} {\sum\limits_{y' \in Y} \exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x,y') \bigg)}$$
 
+<!--
+file:///Users/dsbatista/Desktop/CRFs/HIDDEN%20MARKOV%20AND%20MAXIMUM%20ENTROPY%20MODELS.pdf
+
+file:///Users/dsbatista/Desktop/CRFs/Logistic%20Regression.pdf
+
+https://www.quora.com/What-is-the-relationship-between-Log-Linear-model-MaxEnt-model-and-Logistic-Regression
+-->
 
 ### __Trainning__
 
@@ -42,25 +49,25 @@ In training the logistic regression classifier we want to find the ideal weights
 
 Logistic regression is trained with conditional maximum likelihood estimation. This means we choose the parameters $$w$$ that maximize the (log) probability of the $$y$$ labels in the training data given the observations $$x$$.
 
-
 ### __Classification__
 
-In classification logistic regression chooses a class by using the equation defined above to compute the probability of each class and then choose the one that yields the maximum probability.
+In classification, logistic regression chooses a class by computing the probability of a given observation belonging to each of all the possible classes, then we can choose the one that yields the maximum probability.
 
+$$\hat{y} = \underset{y \in Y} {\arg\max} \ P(y \mid x)$$
 
-<!--
-#### Multinomial Logistic Regression
+$$\hat{y} = \underset{y \in Y} {\arg\max} \frac{\exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x,y) \bigg)} {\sum\limits_{y' \in Y} \exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x,y') \bigg)}  $$
 
-Multinomial Logistic Regression, also known as Maximum Entropy, specially in the NLP community is the Logistic regressions extended to a multi-class scenario.
-
-__TODO__: same equations as above but for a for multi-class scenario
-
-https://www.quora.com/What-is-the-relationship-between-Log-Linear-model-MaxEnt-model-and-Logistic-Regression
--->
 
 ---
 
 ## __Maximum Entropy Markov Model__
+
+<!--
+
+file:///Users/dsbatista/Desktop/CRFs/memm-icml2000.pdf
+
+https://liqiangguo.wordpress.com/page/2/
+-->
 
 The idea of the Maximum Entropy Markov Model (MEMM) is to make use of both the Hidden Markov Models and the Maximum Entropy models also known as multinomial Logistic Regression.
 
