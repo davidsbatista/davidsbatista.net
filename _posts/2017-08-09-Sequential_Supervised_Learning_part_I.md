@@ -78,6 +78,17 @@ we get the final Naive Bayes model, which as consequence of the assumption above
 
 ### __Trainning__
 
+Training in Naive Bayes is mainly done by counting features and classes. To calculate the prior, we simple count how many samples in the training data fall into each class $y_{i}$ divided by the total number of samples:
+
+$$p(y_{i}) = \frac{ N_{y_{i}} } {N} $$
+
+To calculate the likelihood estimate, we count the number of times feature $$w_{i}$$ appears among all features in all samples of class $$y_{i}$$:
+
+$$ p(x_{i} \mid y_{i}) = \frac{count(w_{i},y_{i})} {  \sum_{x_{i} \in X} count(x_{i},y_{i})}$$
+
+This will result in a big table of occurrences of features for all classes in the training data.
+
+
 ### __Classification__
 
 ---
