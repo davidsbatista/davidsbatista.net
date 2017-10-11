@@ -78,7 +78,9 @@ we get the final Naive Bayes model, which as consequence of the assumption above
 
 ### __Trainning__
 
-Training in Naive Bayes is mainly done by counting features and classes. To calculate the prior, we simple count how many samples in the training data fall into each class $y_{i}$ divided by the total number of samples:
+Training in Naive Bayes is mainly done by counting features and classes. Note that the procedure described below needs to be done for every class $$y_{i}$$.
+
+To calculate the prior, we simple count how many samples in the training data fall into each class $y_{i}$ divided by the total number of samples:
 
 $$p(y_{i}) = \frac{ N_{y_{i}} } {N} $$
 
@@ -90,6 +92,19 @@ This will result in a big table of occurrences of features for all classes in th
 
 
 ### __Classification__
+
+When given a new sample to classify, and assuming that it contains features $$x_{1}, w_{3}, w_{5}$$, we need to compute, for each class $$y_{i}$$:
+
+$$ p(y_{i} \mid x_{1}, w_{3}, w_{5})$$
+
+This is decomposed into:
+
+$$ p(y_{i} \mid x_{1}, w_{3}, w_{5}) = p(y_{i}) \cdot p(y_{i} \mid x_{1}) \cdot p(y_{i} \mid x_{3}) \cdot p(y_{i} \mid x_{5})$$
+
+Again, this is calculated for each class y_{i}, and the assign the one that has the highest score.
+
+
+
 
 ---
 
