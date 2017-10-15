@@ -105,6 +105,9 @@ $$w_{i}$$ are the weights to be learned, associated to each feature $$f_{i}(x,y)
 <!--
 http://www.mit.edu/~6.863/spring2011/jmnew/6.pdf
 
+http://www.cs.columbia.edu/~smaskey/CS6998/slides/statnlp_week10.pdf
+
+
 http://www.cs.columbia.edu/~smaskey/CS6998-0412/slides/week13_statnlp_web.pdf
 https://www.youtube.com/watch?v=Qn4vZvOEqB0
 http://www.win-vector.com/dfiles/LogisticRegressionMaxEnt.pdf

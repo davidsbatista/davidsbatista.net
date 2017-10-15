@@ -27,16 +27,17 @@ $$p(y_1, y_2, \dots, y_m \mid x_1, x_2, \dots, x_m)$$
 
 In NLP problems these sequences can have a sequential correlation. That is, nearby $x$ and $y$ values are likely to be related to each other. For instance, in English, it's common that after the preposition _to_ the part-of-speech tag associated to the following word is a verb.
 
-
 Note that there are other machine learning problems which also involve sequences but are clearly different. For instance, in time-series, there is also a sequence, but we want to predict a value $$y$$ at point $$t+1$$, and we can use all the previous true observed $$y$$ to predict. In sequential supervised learning we must predict all $$y$$ values in the sequence.
 
-The paper [Machine Learning for Sequential Data: A Review by Thomas G. Dietterich](http://web.engr.oregonstate.edu/~tgd/publications/mlsd-ssspr.pdf) contains many more examples, and is a good introduction to the supervised sequential learning problem.
-
-The Hidden Markov Model (HMM) was one the first proposed algorithms to classify sequences. It has it's roots on the Naive Bayes model, and an HMM can be seen as a sequential extension to the Naive Bayes model.
+The Hidden Markov Model (HMM) was one the first proposed algorithms to classify sequences. There are other sequence models, but I will start by explaining the HMMM as a sequential extension to the Naive Bayes model.
 
 ## __Naive Bayes classifier__
 
 The Naive Bayes (NB) classifier is a ___generative model___, which builds a model of each class based on the training examples for each class. Then, in prediction, given an observation, it returns the class most likely to have generated the observation. In contrast ___discriminative models___, like logistic regression, try to learn which features from the training examples are most useful to discriminate between the different possible classes.
+
+<figure>
+  <img style="width: 55%; height: 55%" border="5" src="/assets/images/2017-08-09-1024px-Bayes_Theorem_MMB_01.jpg">
+</figure>
 
 The Naive Bayes classifier returns the class that as the maximum posterior probability given the features:
 
@@ -101,7 +102,7 @@ This is decomposed into:
 
 $$ p(y_{i} \mid x_{1}, w_{3}, w_{5}) = p(y_{i}) \cdot p(y_{i} \mid x_{1}) \cdot p(y_{i} \mid x_{3}) \cdot p(y_{i} \mid x_{5})$$
 
-Again, this is calculated for each class y_{i}, and the assign the one that has the highest score.
+Again, this is calculated for each class $$y_{i}$$, and the assign the one that has the highest score.
 
 
 
@@ -154,7 +155,7 @@ and probabilities relating states and observations:
 * __initial probability__: an initial probability distribution over states
 * __final probability__: a final probability distribution over states
 * __transition probability__: a matrix $$A$$ with the probabilities from going from one label to another
-* __emission probability__: a matrix $$B$ with the probabilities of an observation being generated from a state
+* __emission probability__: a matrix $$B$$ with the probabilities of an observation being generated from a state
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2017-08-09-Sequential_Supervised_Learning_part_I.png">
@@ -163,53 +164,148 @@ and probabilities relating states and observations:
 <!--
 picture taken from:
 http://www.cs.virginia.edu/~hw5x/Course/CS6501-Text-Mining/_site/mps/mp3.html
-
 https://liqiangguo.wordpress.com/page/2/
 -->
 
-A First-order Hidden Markov Model has assumptions:
+A First-order Hidden Markov Model has the following assumptions:
 
-* __Markov Assumption__: the probability of a particular state is dependent only on the previous state.
+* __Markov Assumption__: the probability of a particular state is dependent only on the previous state. Formally: $$P(t_{i} \mid t_{1}, \cdots, t_{i-1}) = P(t_{i} \mid t_{i-1})$$
 
-* __Output Independence__: the probability of an output observation $$w_{i}$$ depends only on the state that produced the observation $$t_{i}$$ and not on any other states or any other observations.
+* __Output Independence__: the probability of an output observation $$w_{i}$$ depends only on the state that produced the observation $$t_{i}$$ and not on any other states or any other observations. Formally: $$P(w_{i} \mid t_{1} ...q_{i},...,q_{T} ,o_{1},...,o_{i},...,o_{T} ) = P(o_{i} \mid q_{i})$$
 
-Within this framework we can define 3 three major problems which can be efficiently solved by relying on dynamic programming and by making use of the independence assumptions of the HMM model.
+Notice how the output assumption is closely related with the Naive Bayes classifier presented before.
+
+We can now define two problems which can be solved by an HMM, the first is learning the parameters associated to a given observation sequence, that is __training__. For instance given words of a sentence and the associated part-of-speech tags, one can learn the latent structure.
+
+The other one is applying a trained HMM to an observation sequence, for instance, having a sentence, __predicting__ each word's part-of-speech tag, using the latent structure from the training data learned by the HMM.
 
 
+#### __Learning: finding the maximum likelihood parameters__
+
+<!--
+* Given an observation sequence $$W$$ and the set of possible states $$T$$ in the HMM
+* How to learn the HMM parameters $$A$$ and $$B$$
+* Forward-Backward
+* Baum-Welch algorithm
+-->
+
+<!--
+https://jyyuan.wordpress.com/2014/01/28/baum-welch-algorithm-finding-parameters-for-our-hmm/
+http://setosa.io/ev/markov-chains/
+https://vimeo.com/154512602
+-->
 <!--
 file:///Users/dsbatista/Desktop/CRFs/tutorial%20on%20hmm%20and%20applications.pdf
 -->
 
-#### __Likelihood: computing the probability of an observation sequence__
+
+#### __Decoding: finding the state sequence for an observation sequence__
+
+Given a trained HMM (i.e., that is the transition matrixes $$A$$ and $$B$$) and a new observation sequence $$W = w_{1}, w_{2}, \cdots, w_{N}$$ we want to find the sequence of states that best explains it.
+
+* Posterior Decoding or Minimum Risk Decoding: minimises the probability of error on each hidden state variable $$T_{i}$$
+
+* Viterbi: finds the best state assignment to the sequence $$T_{1} \cdots T_{N}$$ as a whole.
+
+
+
+* Viterbi
+
+<!--
+Selecting the state with the highest posterior for each position independently,
+
+$$\hat{y} = argmax p(Y_{i} = y_{i} \mid X = x)$$
+
+* sequence posterior:
+* state posterior : prob. being in a given state in a certain position given the observed sequence
+* transition posterior:
+
+
+to compute the posteriors we need to compute the likelihood
+
+
+##### __Likelihood: computing the probability of an observation sequence__
 
 * Given an HMM $$\gamma$$ = ($$A$$,$$B$$) and an observation sequence $$W = w_{1}, w_{2}, \dots, w_{T}$$
 * How to determine the likelihood $$P( W \mid λ)$$, i.e., what is the probability of this observation sequence ?
 * Forward algorithm
 
-#### __Decoding: finding best label sequence for an observation sequence__
 
-* Given an HMM $$\gamma$$ = ($$A$$,$$B$$) and an observation sequence $$W = w_{1}, w_{2}, \cdots, w_{T}$$
-* How to find the most probable sequence of states $$T = t_{1}, t_{2}, t_{3}, \dots, t_{T}$$ ?
-* Posterior Decoding or minimum risk decoding
-* Viterbi
+for a particular hidden state Q and an observation O, the likelihood of the observation sequence is:
 
-#### __Learning: learn the HMM parameters__
+$$P(W|T) = \prod_{i=1}^{N} P(w_{i} \mid t_{i})$$
 
-* Given an observation sequence $$W$$ and the set of possible states $$T$$ in the HMM
-* How to learn the HMM parameters $$A$$ and $$B$$
-* Forward-Backward
-* Baum-Welch algorithm
+Applying the following equation for an already known state sequence:
 
-<!--
+$$P(3 1 3|hot hot cold) = P(3|hot)×P(1|hot)×P(3|cold)$$
 
-https://jyyuan.wordpress.com/2014/01/28/baum-welch-algorithm-finding-parameters-for-our-hmm/
-http://setosa.io/ev/markov-chains/
-https://vimeo.com/154512602
+But we don't know what the actual hidden state is. We’ll need to compute the probability of an observation sequence instead by summing over all possible state sequences, weighted by their probability.
 
+First, let’s compute the joint probability of being in a particular state sequence T and generating a particular sequence O of observation events. In general, this is
+
+
+$$P(W|T) = P(W|T) \cdot  P(T) = \prod{} P(o_{i} \mid t_{i}) \times \prod{} P(q_{i} \mid q_{i-1})$$
+
+The computation of the joint probability of our ice-cream observation 3 1 3 and
+one possible hidden state sequence hot hot cold is:
+
+P(3 1 3,hot hot cold) = P(hot|start)×P(hot|hot)×P(cold|hot)×P(3|hot)×P(1|hot)×P(3|cold)
+
+__TODO__: graphical representation
+
+Now that we know how to compute the joint probability of the observations
+with a particular hidden state sequence, we can compute the total probability of the observations just by summing over all possible hidden state sequences:
+
+$$P(W) = \sum_{T} P(W \mid T) = \sum_{T} P(W|T) \cdot  P(T) $$
+
+
+__TODO__: relation with Naive Bayes
+
+For our particular case, we would sum over the eight 3-event sequences cold cold cold, cold cold hot, that is, P(3 1 3) = P(3 1 3, cold cold cold) +P(3 1 3, cold cold hot) +P(3 1 3,hot hot cold) +...
+
+For an HMM with N hidden states and an observation sequence of T observations,
+there are $$N^{T}$$ possible hidden sequences.
+
+For a task of part-of-speech tagging, we have 12 tags (N) and having a sentence with 10 words, that would be 12^10 separate observation likelihoods to compute.
+
+__TODO__: Forward algorithm
+
+The forward algorithm computes the observation probability by summing over the probabilities of all possible hidden state paths that could generate the observation sequence, but it does so efficiently by implicitly folding each of these paths into a single forward trellis.
+
+The FB algorithm relies on the independence of previous states assumption, which is illustrated in the trellis view by having arrows only between consecutive states.
+
+The FB algorithm defines two auxiliary probabilities:
+  * the forward probability
+  * backward probability.
 -->
 
 
-#### __HMM Important Observations__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### __HMM Important Observations__
+
+* The main idea of this post was to see the connection between the Naive Bayes classifier and the HMM as a sequence classifier
+
+* If we make the hidden state of HMM fixed, we will have a Naive Bayes model.
+
+__TODO__: picture (Suppose we use graphical model's notation. Naive Bayes model can be described as)
 
 * There is only one feature at each word/observation in the sequence, namely the identity i.e., the value of the respective observation.
 
@@ -218,6 +314,10 @@ https://vimeo.com/154512602
 * Each observation variable $$w_{i}$$ depends only on the current state $$t_{i}$$.
 
 
-## __Links / Papers__
+## __Papers__
+
+* [Machine Learning for Sequential Data: A Review by Thomas G. Dietterich](http://web.engr.oregonstate.edu/~tgd/publications/mlsd-ssspr.pdf)
 
 * [Chapter 6: "Naive Bayes and Sentiment Classification" in Speech and Language Processing. Daniel Jurafsky & James H. Martin](https://web.stanford.edu/~jurafsky/slp3/6.pdf)
+
+* [A tutorial on Hidden Markov Models and Selected Applications in Speech Recognition](http://www.ece.ucsb.edu/Faculty/Rabiner/ece259/Reprints/tutorial%20on%20hmm%20and%20applications.pdf)
