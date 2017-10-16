@@ -158,7 +158,7 @@ and probabilities relating states and observations:
 * __emission probability__: a matrix $$B$$ with the probabilities of an observation being generated from a state
 
 <figure>
-  <img style="width: 65%; height: 65%" src="/assets/images/2017-08-09-Sequential_Supervised_Learning_part_I.png">
+  <img style="width: 65%; height: 65%" src="/assets/images/2017-08-09-HMM.png">
 </figure>
 
 <!--
