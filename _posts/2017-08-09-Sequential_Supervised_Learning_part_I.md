@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Hidden Markov Models
+title: Hidden Markov Models and the Naive Bayes connection
 date: 2017-08-09 00:00:00
 tags: [hidden markov models, naive bayes, sequence classifier, tutorial]
 categories: [blog]
@@ -182,21 +182,78 @@ The other one is applying a trained HMM to an observation sequence, for instance
 
 #### __Learning: finding the maximum likelihood parameters__
 
-<!--
-* Given an observation sequence $$W$$ and the set of possible states $$T$$ in the HMM
-* How to learn the HMM parameters $$A$$ and $$B$$
-* Forward-Backward
-* Baum-Welch algorithm
--->
+Given an observation sequence $$W$$ and the associated states $$T$$  how can we learn the HMM parameters, that is, the matrices $$A$$ and $$B$$ ?
+
+In a HHM supervised scenario this is done by __Maximum Likelihood Estimation__.
+
+The estimation process consists of counting how many times each event occurs in the corpus and normalise the counts to form proper probability distributions. Let us define the following quantities, called sufficient statistics, that represent the counts of each event in the corpus:
+
+___
+
+
+<!-- How often does tag $$t_{k}$$ is the initial state/tag: -->
+__Initial counts__: $$C_{init} (t_{k}) = \sum_{m=1}^{M} 1(t_{1}^m = t_{k})$$
+
+
+<!-- How often does tag t_{k} transints to t_{l} -->
+__Transition counts__: $$C_{trans} (t_{k}, t_{l}) = \sum_{m=1}^{M} \sum_{m=2}^N 1(t_{i}^{m} = t_{k} ∧ t_{i-1}^{m} = t_{l})$$
+
+
+<!-- How often does tag t_{k} is the final state/tag -->
+__Final Counts__: $$C_{final} (t_{k}) = \sum_{m=1}^{M} 1(t_{N}^m = t_{k})$$
+
+
+<!-- How often does tag/state t_{k} is associated with the observation/word w_{j} -->
+__Emissions counts__: $$C_{emiss} (w_{j},t_{k}) = \sum_{m=1}^{M} \sum_{i=1}^N 1(x_{i}^{m} = w_{j} ∧ y_{i}^{m} = t_{k})$$
+
+___
+
+where, $$M$$ is the number of training examples and $$N$$ the length of the sequence. The previous equations scan the training corpus and count how often each event occurs.
+
+Here $$y_{m}^{i}$$ the underscript denotes the state index position for a given sequence, and the superscript denotes the sequence index in the dataset, and the same applies for the observations. Note that 1 is an indicator function that has the value 1 when the particular event happens, and zero otherwise
 
 <!--
+my data = M = number of training examples
+M number of training examples
+N lenght of the sequence
+
+x - observation sequence
+y - state sequence
+
 https://jyyuan.wordpress.com/2014/01/28/baum-welch-algorithm-finding-parameters-for-our-hmm/
 http://setosa.io/ev/markov-chains/
 https://vimeo.com/154512602
 -->
-<!--
-file:///Users/dsbatista/Desktop/CRFs/tutorial%20on%20hmm%20and%20applications.pdf
--->
+
+
+$$P_{init(c_{t}|start)} = \frac { C_{init(t_{k})} } {\sum_{l=1}^{K} C_{init(t_{l})}}$$
+
+
+$$P_{final(stop|c_{l})} = \frac { C_{final(c_{l})} } {\sum_{k=1}^{K} C_{trans(C_{k},C_{l})} + C_{final(C_{l}) }}$$
+
+
+$$P_{trans(c_{k}|c_{l})} = \frac { C_{trans(c_{k},c_{l})} } {\sum_{p=1}^{K} C_{trans(C_{p},C_{l})} + C_{final(C_{l}) }}$$
+
+
+$$P_{emiss(w_{j}|c_{k})} = \frac { C_{emiss(w_{j},c_{k})} } { \sum_{q=1}^{J} C_{emiss(w_{q},C_{k})}}$$
+
+
+
+
+
+
+
+
+
+___
+___
+___
+___
+
+
+
+
+
 
 
 #### __Decoding: finding the state sequence for an observation sequence__
@@ -206,10 +263,6 @@ Given a trained HMM (i.e., that is the transition matrixes $$A$$ and $$B$$) and 
 * Posterior Decoding or Minimum Risk Decoding: minimises the probability of error on each hidden state variable $$T_{i}$$
 
 * Viterbi: finds the best state assignment to the sequence $$T_{1} \cdots T_{N}$$ as a whole.
-
-
-
-* Viterbi
 
 <!--
 Selecting the state with the highest posterior for each position independently,
@@ -307,6 +360,10 @@ The FB algorithm defines two auxiliary probabilities:
 
 __TODO__: picture (Suppose we use graphical model's notation. Naive Bayes model can be described as)
 
+<!--
+https://stats.stackexchange.com/questions/303717/is-there-any-relationship-between-naive-bayes-and-hidden-markov-model
+-->
+
 * There is only one feature at each word/observation in the sequence, namely the identity i.e., the value of the respective observation.
 
 * Each state depends only on its immediate predecessor, that is, each state $$t_{i}$$ is independent of all its ancestors $$t_{1}, t_{2}, \dots, t_{i-2}$$ given its previous state $$t_{i-1}$$.
@@ -314,10 +371,12 @@ __TODO__: picture (Suppose we use graphical model's notation. Naive Bayes model 
 * Each observation variable $$w_{i}$$ depends only on the current state $$t_{i}$$.
 
 
-## __Papers__
+## __References__
 
 * [Machine Learning for Sequential Data: A Review by Thomas G. Dietterich](http://web.engr.oregonstate.edu/~tgd/publications/mlsd-ssspr.pdf)
 
 * [Chapter 6: "Naive Bayes and Sentiment Classification" in Speech and Language Processing. Daniel Jurafsky & James H. Martin](https://web.stanford.edu/~jurafsky/slp3/6.pdf)
+
+* [LxMLS - Lab Guide July 16, 2017](http://lxmls.it.pt/2017/LxMLS2017.pdf)
 
 * [A tutorial on Hidden Markov Models and Selected Applications in Speech Recognition](http://www.ece.ucsb.edu/Faculty/Rabiner/ece259/Reprints/tutorial%20on%20hmm%20and%20applications.pdf)

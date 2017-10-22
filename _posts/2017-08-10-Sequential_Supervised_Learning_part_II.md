@@ -64,8 +64,70 @@ $$\hat{y} = \underset{y \in Y} {\arg\max} \frac{\exp \bigg( \sum\limits_{i=1}^{N
 
 <!--
 
-file:///Users/dsbatista/Desktop/CRFs/memm-icml2000.pdf
+1)
+In text-related tasks, the observation probabilities are typically represented as a multinomial distribution over a discrete, finite vocabulary of words, and Baum-Welch training is used to learn parameters that maximize the probability of the observation sequences in the training data.
 
+in particular a representation that describes observations in terms of many overlapping features, such as capitalization, word endings, part-of-speech, formatting, position on the page, and node memberships in WordNet, in addition to the traditional word identity.
+
+For example, when trying to extract previously unseen company names from a newswire article, the identity of a word alone is not very predictive; however, knowing that the word is capitalized, that is a noun, that it is used in an appositive, and that it appears near the top of the article would all be quite predictive (in conjunction with the context provided by the state-transition structure).
+
+Note that these features are not independent of each other.
+
+observations to be parameterized with these overlapping features.
+
+2)
+The second problem with the traditional approach is that it sets the HMM parameters to maximize the likelihood of the observation sequence; however, in most text applications, including all those listed above, the task is to predict the state sequence given the observation sequence. In other words, the traditional approach inappropriately uses a generative joint model in order to solve a conditional problem in which the observations are given.
+
+
+
+maximum entropy Markov models (MEMMs), in which the HMM transition and observation functions are replaced by a single function
+
+$$P(s \mid s',o)$$
+
+that provides the probability of the current state s given the previous state  s' and the current observation o.
+
+In contrast to HMMs, in which the current observation only depends on the current state, the current observation in an MEMM may also depend on the previous state.
+
+$$P(s \mid s', o)$$
+
+the probability of the transition from state $$s$$ to state $$s'$$ on input $$o$$
+
+
+State Estimation from Observations
+- changes in the recursive Viterbi step
+- changes in the Baum-Welch
+
+
+The use of state-observation transition functions rather than the separate transition and observation functions in HMMs allows us to model transitions in terms of multiple, nonindependent features of observations, which we believe to be the most valuable contribution of the present work
+
+To do this, we turn to exponential models fit by maximum entropy.
+
+Maximum entropy is a framework for estimating probability distributions from data. It is based on the principle that the best model for the data is the one that is consistent with certain constraints derived from the training data, but otherwise makes the fewest possible assumptions. In our probabilistic framework, the distribution with the “fewest possible assumptions” is that which is closest to the uniform distribution, that is, the one with the highest entropy.
+
+As in other conditional maximum entropy models, features do not depend only on the observation but also on the outcome predicted by the function being modeled
+
+
+Formally, for each previous state $$s'$$ and feature $$a$$, the transition function $$P_{s'}(s \mid o) must have the property that:
+
+
+
+maximum-likelihood distribution and has the exponential form
+
+
+
+In statistics, generalized iterative scaling (GIS) and improved iterative scaling (IIS) are two early algorithms used to fit log-linear models,[1] notably multinomial logistic regression (MaxEnt) classifiers and extensions of it such as MaxEnt Markov models[2] and conditional random fields. These algorithms have been largely surpassed by gradient-based methods such as L-BFGS[3] and coordinate descent algorithms.[4]
+
+(https://www.wikiwand.com/en/Generalized_iterative_scaling)
+
+
+Tabela com descricao de algoritmo (training)
+
+
+
+
+
+
+file:///Users/dsbatista/Desktop/CRFs/memm-icml2000.pdf
 https://liqiangguo.wordpress.com/page/2/
 -->
 
