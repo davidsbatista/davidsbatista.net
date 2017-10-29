@@ -11,7 +11,13 @@ preview_pic:
 
 This is the third and the last part of a series of posts about sequential supervised learning applied to NLP.
 
+<!--
 
+http://videolectures.net/cikm08_elkan_llmacrf/
+
+http://www.stokastik.in/understanding-conditional-random-fields/
+
+-->
 
 # __Conditional Random Fields__
 

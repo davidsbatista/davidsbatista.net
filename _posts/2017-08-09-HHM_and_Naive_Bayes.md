@@ -1,15 +1,15 @@
 ---
 layout: post
-title: Hidden Markov Models and the Naive Bayes connection
+title: Hidden Markov Model and Naive Bayes relationship
 date: 2017-08-09 00:00:00
 tags: [hidden markov models, naive bayes, sequence classifier, tutorial]
 categories: [blog]
 comments: true
 disqus_identifier: 20170809
-preview_pic: /assets/images/2017-08-09-Sequential_Supervised_Learning_part_I.png
+preview_pic: /assets/images/2017-08-09-HMM.png
 ---
 
-This is the first post, of a series of posts, about sequential supervised learning applied to Natural Language Processing (NLP). In this post I will write about the classical algorithm for sequence learning, the Hidden Markov Model (HMM), explain how it's related with the Naive Bayes Model and it's limitations.
+This is the first post, of a series of posts, about sequential supervised learning applied to Natural Language Processing. In this first post I will write about the classical algorithm for sequence learning, the Hidden Markov Model (HMM), explain how it's related with the Naive Bayes Model and it's limitations.
 
 ## __Introduction__
 
@@ -21,7 +21,7 @@ A classical example in NLP is part-of-speech tagging, in this scenario, each $$x
 
 Another example, is named-entity recognition, in which, again, each $$x_{i}$$ describes a word and $$y_{i}$$ is a semantic label associated to that word (e.g.: _person_, _location_, _organization_, _event_, etc.).
 
-In both examples the data consist of sequences of $(x, y)$ pairs. We want to model our learning problem based on that sequence:
+In both examples __the data consist of sequences of $(x, y)$ pairs__. We want to model our learning problem based on that sequence:
 
 $$p(y_1, y_2, \dots, y_m \mid x_1, x_2, \dots, x_m)$$
 
@@ -179,38 +179,41 @@ We can now define two problems which can be solved by an HMM, the first is learn
 
 The other one is applying a trained HMM to an observation sequence, for instance, having a sentence, __predicting__ each word's part-of-speech tag, using the latent structure from the training data learned by the HMM.
 
+<br>
 
 #### __Learning: finding the maximum likelihood parameters__
 
-Given an observation sequence $$W$$ and the associated states $$T$$  how can we learn the HMM parameters, that is, the matrices $$A$$ and $$B$$ ?
+Given an observation sequence $$W$$ and the associated states $$T$$ how can we learn the HMM parameters, that is, the matrices $$A$$ and $$B$$ ?
 
-In a HHM supervised scenario this is done by __Maximum Likelihood Estimation__.
+In a HHM supervised scenario this is done by applying the __Maximum Likelihood Estimation__ principle, which will compute the matrices.
 
-The estimation process consists of counting how many times each event occurs in the corpus and normalise the counts to form proper probability distributions. Let us define the following quantities, called sufficient statistics, that represent the counts of each event in the corpus:
-
-___
-
-
-<!-- How often does tag $$t_{k}$$ is the initial state/tag: -->
-__Initial counts__: $$C_{init} (t_{k}) = \sum_{m=1}^{M} 1(t_{1}^m = t_{k})$$
-
-
-<!-- How often does tag t_{k} transints to t_{l} -->
-__Transition counts__: $$C_{trans} (t_{k}, t_{l}) = \sum_{m=1}^{M} \sum_{m=2}^N 1(t_{i}^{m} = t_{k} ∧ t_{i-1}^{m} = t_{l})$$
-
-
-<!-- How often does tag t_{k} is the final state/tag -->
-__Final Counts__: $$C_{final} (t_{k}) = \sum_{m=1}^{M} 1(t_{N}^m = t_{k})$$
-
-
-<!-- How often does tag/state t_{k} is associated with the observation/word w_{j} -->
-__Emissions counts__: $$C_{emiss} (w_{j},t_{k}) = \sum_{m=1}^{M} \sum_{i=1}^N 1(x_{i}^{m} = w_{j} ∧ y_{i}^{m} = t_{k})$$
+This is achieved by counting how many times each event occurs in the corpus and normalising the counts to form proper probability distributions. We need to count 4 quantities which represent the counts of each event in the corpus:
 
 ___
 
-where, $$M$$ is the number of training examples and $$N$$ the length of the sequence. The previous equations scan the training corpus and count how often each event occurs.
+__Initial counts__: $$\displaystyle C_{init} (t_{k}) = \sum_{m=1}^{M} 1(t_{1}^m = t_{k})$$
+<br>(how often does state/label $$t_{k}$$ is the initial state/label)
+<br>
+<br>
 
-Here $$y_{m}^{i}$$ the underscript denotes the state index position for a given sequence, and the superscript denotes the sequence index in the dataset, and the same applies for the observations. Note that 1 is an indicator function that has the value 1 when the particular event happens, and zero otherwise
+__Transition counts__: $$\displaystyle C_{trans} (t_{k}, t_{l}) = \sum_{m=1}^{M} \sum_{m=2}^N 1(t_{i}^{m} = t_{k} ∧ t_{i-1}^{m} = t_{l})$$
+<br>(how often does state/label $$t_{k}$$ transints to another state/label $$t_{l}$$)
+<br>
+<br>
+
+__Final Counts__: $$\displaystyle C_{final} (t_{k}) = \sum_{m=1}^{M} 1(t_{N}^m = t_{k})$$
+<br>(how often does state/label $$t_{k}$$ is the final state/label)
+<br>
+<br>
+
+__Emissions counts__: $$\displaystyle C_{emiss} (w_{j},t_{k}) = \sum_{m=1}^{M} \sum_{i=1}^N 1(x_{i}^{m} = w_{j} ∧ t_{i}^{m} = t_{k})$$
+<br>(how often does state/label $$t_{k}$$ is associated with the observation/word $$w_{j}$$)
+<br>
+<br>
+
+___
+
+where, $$M$$ is the number of training examples and $$N$$ the length of the sequence, __1__ is an indicator function that has the value 1 when the particular event happens, and 0 otherwise. The equations scan the training corpus and count how often each event occurs. Then all these 4 counts are normalise in order to have proper probability distributions:
 
 <!--
 my data = M = number of training examples
@@ -223,46 +226,38 @@ y - state sequence
 https://jyyuan.wordpress.com/2014/01/28/baum-welch-algorithm-finding-parameters-for-our-hmm/
 http://setosa.io/ev/markov-chains/
 https://vimeo.com/154512602
+
+http://www3.cs.stonybrook.edu/~ychoi/cse628/lecture/06-hmm.pdf
+
 -->
 
 
-$$P_{init(c_{t}|start)} = \frac { C_{init(t_{k})} } {\sum_{l=1}^{K} C_{init(t_{l})}}$$
+$$P_{init(c_{t}|start)} = \frac { C_{init(t_{k})} } {\sum\limits_{l=1}^{K} C_{init(t_{l})}}$$
 
 
-$$P_{final(stop|c_{l})} = \frac { C_{final(c_{l})} } {\sum_{k=1}^{K} C_{trans(C_{k},C_{l})} + C_{final(C_{l}) }}$$
+$$P_{final(stop|c_{l})} = \frac { C_{final(c_{l})} } {\sum\limits_{k=1}^{K} C_{trans(C_{k},C_{l})} + C_{final(C_{l}) }}$$
 
 
-$$P_{trans(c_{k}|c_{l})} = \frac { C_{trans(c_{k},c_{l})} } {\sum_{p=1}^{K} C_{trans(C_{p},C_{l})} + C_{final(C_{l}) }}$$
+$$P_{trans(c_{k}|c_{l})} = \frac { C_{trans(c_{k},c_{l})} } {\sum\limits_{p=1}^{K} C_{trans(C_{p},C_{l})} + C_{final(C_{l}) }}$$
 
 
-$$P_{emiss(w_{j}|c_{k})} = \frac { C_{emiss(w_{j},c_{k})} } { \sum_{q=1}^{J} C_{emiss(w_{q},C_{k})}}$$
-
-
-
-
-
-
-
-
+$$P_{emiss(w_{j}|c_{k})} = \frac { C_{emiss(w_{j},c_{k})} } { \sum\limits_{q=1}^{J} C_{emiss(w_{q},C_{k})}}$$
 
 ___
-___
-___
-___
 
+These equations will give is the __transition probability__ matrix $$A$$, with the probabilities from going from one label to another and the __emission probability__ matrix $$B$$ with the probabilities of an observation being generated from a state.
 
-
-
-
-
+<br>
 
 #### __Decoding: finding the state sequence for an observation sequence__
 
-Given a trained HMM (i.e., that is the transition matrixes $$A$$ and $$B$$) and a new observation sequence $$W = w_{1}, w_{2}, \cdots, w_{N}$$ we want to find the sequence of states that best explains it.
+Given a trained HMM (i.e., that is the transition matrixes $$A$$ and $$B$$) and a new observation sequence $$W = w_{1}, w_{2}, \cdots, w_{N}$$ we want to find the sequence of states $$T = t_{1}, t_{2}, \cdots, t_{N}$$ that best explains it. There are two ways of doing this:
 
-* Posterior Decoding or Minimum Risk Decoding: minimises the probability of error on each hidden state variable $$T_{i}$$
+* __Posterior Decoding__: minimises the probability of error on each hidden state variable $$T_{i}$$, it consists in picking the highest
+  state posterior for each position $$i$$ in the sequence. This approach does not guarantee that selected tag/label sequence is valid, there might be a transition between two of the best state posteriors with probability zero.
 
-* Viterbi: finds the best state assignment to the sequence $$T_{1} \cdots T_{N}$$ as a whole.
+* __Viterbi__: finds the best state assignment to the sequence $$T_{1} \cdots T_{N}$$ as a whole. It takes into consideration how selecting one
+
 
 <!--
 Selecting the state with the highest posterior for each position independently,
@@ -273,16 +268,17 @@ $$\hat{y} = argmax p(Y_{i} = y_{i} \mid X = x)$$
 * state posterior : prob. being in a given state in a certain position given the observed sequence
 * transition posterior:
 
-
 to compute the posteriors we need to compute the likelihood
+
+-->
 
 
 ##### __Likelihood: computing the probability of an observation sequence__
 
+<!--
 * Given an HMM $$\gamma$$ = ($$A$$,$$B$$) and an observation sequence $$W = w_{1}, w_{2}, \dots, w_{T}$$
 * How to determine the likelihood $$P( W \mid λ)$$, i.e., what is the probability of this observation sequence ?
 * Forward algorithm
-
 
 for a particular hidden state Q and an observation O, the likelihood of the observation sequence is:
 
@@ -321,6 +317,8 @@ there are $$N^{T}$$ possible hidden sequences.
 
 For a task of part-of-speech tagging, we have 12 tags (N) and having a sentence with 10 words, that would be 12^10 separate observation likelihoods to compute.
 
+
+
 __TODO__: Forward algorithm
 
 The forward algorithm computes the observation probability by summing over the probabilities of all possible hidden state paths that could generate the observation sequence, but it does so efficiently by implicitly folding each of these paths into a single forward trellis.
@@ -349,7 +347,9 @@ The FB algorithm defines two auxiliary probabilities:
 
 
 
-
+<br>
+<br>
+<br>
 
 
 ### __HMM Important Observations__
@@ -358,9 +358,10 @@ The FB algorithm defines two auxiliary probabilities:
 
 * If we make the hidden state of HMM fixed, we will have a Naive Bayes model.
 
+<!--
+
 __TODO__: picture (Suppose we use graphical model's notation. Naive Bayes model can be described as)
 
-<!--
 https://stats.stackexchange.com/questions/303717/is-there-any-relationship-between-naive-bayes-and-hidden-markov-model
 -->
 

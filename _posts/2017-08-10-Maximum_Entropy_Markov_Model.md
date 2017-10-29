@@ -36,6 +36,9 @@ The extracted features, are binary-valued features, i.e., only takes the values 
 $$P(y|x) = \frac{\exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x,y) \bigg)} {\sum\limits_{y' \in Y} \exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x,y') \bigg)}$$
 
 <!--
+
+http://www.ai.mit.edu/courses/6.891-nlp/READINGS/maxent.pdf
+
 file:///Users/dsbatista/Desktop/CRFs/HIDDEN%20MARKOV%20AND%20MAXIMUM%20ENTROPY%20MODELS.pdf
 
 file:///Users/dsbatista/Desktop/CRFs/Logistic%20Regression.pdf
