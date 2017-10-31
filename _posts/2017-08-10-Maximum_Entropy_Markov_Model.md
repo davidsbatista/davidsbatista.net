@@ -1,21 +1,20 @@
 ---
 layout: post
-title: Maximum Entropy Markov Models
+title: Maximum Entropy Markov Models and Logistic Regression
 date: 2017-08-10 00:00:00
 tags: [maximum markov models, sequence classifier, tutorial]
 categories: [blog]
 comments: true
 disqus_identifier: 20170810
-preview_pic:
+preview_pic: /assets/images/2017-08-19-Maximum_Entropy_Markov_Models.png
 ---
 
-This is the second part of a series of posts about sequential supervised learning applied to NLP.
 
-In this post I will try to explain how to build a sequence classifier based on a __Logistic Regression__ classifier.
+This is the second part of a series of posts about sequential supervised learning applied to NLP. It can be seen as a follow up on the previous post, where I tried do explain the relationship between HMM and Naive Bayes. In this post I will try to explain how to build a sequence classifier based on a Logistic Regression classifier, i.e.,  using a discriminative approach.
 
-In a [previous post](../../09/Sequential_Supervised_Learning_part_I/) I wrote about the __Naïve Bayes Model__ and how it is connected with the __Hidden Markov Model__, which are both __generative models__, in contrast the __Logistic Regression__ classifier however is a __discriminative model__, this where this post will start, explaining this difference.
+In a [previous post](../../09/Sequential_Supervised_Learning_part_I/) I wrote about the __Naïve Bayes Model__ and how it is connected with the __Hidden Markov Model__. Both are __generative models__, in contrast the __Logistic Regression__ classifier which is a __discriminative model__, this how this post will start, by explaining this difference.
 
-A classifier chooses which output label $$y$$ to assign an input $$x$$, by selecting from all the possible $$y_{i}$$ the one that maximizes $$p(y \mid x)$$
+A machine learning classifier chooses which output label $$y$$ to assign to an input $$x$$, by selecting from all the possible $$y_{i}$$ the one that maximizes $$p(y \mid x)$$
 
 The Naive Bayes classifier estimates $$p(y \mid x)$$ indirectly, by applying the Baye's theorem to $$p(y \mid x)$$, and then computing the class conditional distribution/likelihood $$p(x \mid y)$$ and the prior $$p(y)$$.
 

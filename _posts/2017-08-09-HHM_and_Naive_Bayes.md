@@ -41,7 +41,7 @@ The Naive Bayes (NB) classifier is a ___generative model___, which builds a mode
 
 The Naive Bayes classifier returns the class that as the maximum posterior probability given the features:
 
-$$ \hat{y} = argmax\ p(y \mid \vec{x})$$
+$$ \hat{y} = arg\ max\ p(y \mid \vec{x})$$
 
 where $$y$$ it's a class and $$\vec{x}$$ is a feature vector associated to an observation. The NB classifier is based on the Bayes' theorem, applying the theroem to the equation above, we get:
 
@@ -189,8 +189,6 @@ In a HHM supervised scenario this is done by applying the __Maximum Likelihood E
 
 This is achieved by counting how many times each event occurs in the corpus and normalising the counts to form proper probability distributions. We need to count 4 quantities which represent the counts of each event in the corpus:
 
-___
-
 __Initial counts__: $$\displaystyle C_{init} (t_{k}) = \sum_{m=1}^{M} 1(t_{1}^m = t_{k})$$
 <br>(how often does state/label $$t_{k}$$ is the initial state/label)
 <br>
@@ -211,25 +209,9 @@ __Emissions counts__: $$\displaystyle C_{emiss} (w_{j},t_{k}) = \sum_{m=1}^{M} \
 <br>
 <br>
 
-___
+where, $$M$$ is the number of training examples and $$N$$ the length of the sequence, __1__ is an indicator function that has the value 1 when the particular event happens, and 0 otherwise. The equations scan the training corpus and count how often each event occurs.
 
-where, $$M$$ is the number of training examples and $$N$$ the length of the sequence, __1__ is an indicator function that has the value 1 when the particular event happens, and 0 otherwise. The equations scan the training corpus and count how often each event occurs. Then all these 4 counts are normalise in order to have proper probability distributions:
-
-<!--
-my data = M = number of training examples
-M number of training examples
-N lenght of the sequence
-
-x - observation sequence
-y - state sequence
-
-https://jyyuan.wordpress.com/2014/01/28/baum-welch-algorithm-finding-parameters-for-our-hmm/
-http://setosa.io/ev/markov-chains/
-https://vimeo.com/154512602
-
-http://www3.cs.stonybrook.edu/~ychoi/cse628/lecture/06-hmm.pdf
-
--->
+All these 4 counts are then normalised in order to have proper probability distributions:
 
 
 $$P_{init(c_{t}|start)} = \frac { C_{init(t_{k})} } {\sum\limits_{l=1}^{K} C_{init(t_{l})}}$$
@@ -243,97 +225,80 @@ $$P_{trans(c_{k}|c_{l})} = \frac { C_{trans(c_{k},c_{l})} } {\sum\limits_{p=1}^{
 
 $$P_{emiss(w_{j}|c_{k})} = \frac { C_{emiss(w_{j},c_{k})} } { \sum\limits_{q=1}^{J} C_{emiss(w_{q},C_{k})}}$$
 
-___
 
-These equations will give is the __transition probability__ matrix $$A$$, with the probabilities from going from one label to another and the __emission probability__ matrix $$B$$ with the probabilities of an observation being generated from a state.
+These equations will produce the __transition probability__ matrix $$A$$, with the probabilities from going from one label to another and the __emission probability__ matrix $$B$$ with the probabilities of an observation being generated from a state.
 
 <br>
 
-#### __Decoding: finding the state sequence for an observation sequence__
+#### __Decoding: finding the hidden state sequence for an observation__
 
 Given a trained HMM (i.e., that is the transition matrixes $$A$$ and $$B$$) and a new observation sequence $$W = w_{1}, w_{2}, \cdots, w_{N}$$ we want to find the sequence of states $$T = t_{1}, t_{2}, \cdots, t_{N}$$ that best explains it. There are two ways of doing this:
 
-* __Posterior Decoding__: minimises the probability of error on each hidden state variable $$T_{i}$$, it consists in picking the highest
-  state posterior for each position $$i$$ in the sequence. This approach does not guarantee that selected tag/label sequence is valid, there might be a transition between two of the best state posteriors with probability zero.
+* __Posterior Decoding__: consists in picking the highest state posterior for each position $$i$$ in the sequence independently.
 
-* __Viterbi__: finds the best state assignment to the sequence $$T_{1} \cdots T_{N}$$ as a whole. It takes into consideration how selecting one
+* __Viterbi__: finds the best state assignment to the sequence $$T_{1} \cdots T_{N}$$ as a whole.
 
+<br>
 
-<!--
-Selecting the state with the highest posterior for each position independently,
+##### __Posterior Decoding__
 
-$$\hat{y} = argmax p(Y_{i} = y_{i} \mid X = x)$$
+Selects the state with the highest posterior for each position independently:
 
-* sequence posterior:
-* state posterior : prob. being in a given state in a certain position given the observed sequence
-* transition posterior:
+$$y_{i} = arg\ max \ P(Y_{i} = y_{i} \mid X = x)$$
 
-to compute the posteriors we need to compute the likelihood
+We need three posteriors:
 
--->
+* __Sequence Posterior__: $$ P( Y=y \mid  X = x) = \frac{P(X = x, Y = y)}{P(X = x)}$$
+<!-- probability of a particular hidden state sequence given that we have observed a particular sequence -->
 
+* __State Posterior__: $$ P( Y_{i} = y_{i} \mid  X = x)$$
+<!-- prob. being in a given state in a certain position given the observed sequence -->
 
-##### __Likelihood: computing the probability of an observation sequence__
+* __Transition Posterior__: $$ P( Y_{i+1} = y_{i+1}, Y_{i} = y_{i} \mid  X = x)$$
 
-<!--
-* Given an HMM $$\gamma$$ = ($$A$$,$$B$$) and an observation sequence $$W = w_{1}, w_{2}, \dots, w_{T}$$
-* How to determine the likelihood $$P( W \mid λ)$$, i.e., what is the probability of this observation sequence ?
-* Forward algorithm
+<!--probability of making a transition, from position i to i + 1, given the observed sequence.-->
 
-for a particular hidden state Q and an observation O, the likelihood of the observation sequence is:
+To compute the posteriors we need to compute the likelihood of an observation sequence $$P(W = w)$$, i.e., what is the probability of the observation sequence $$w$$ ? If we already knew a hidden-state sequence, e.g. $$t_{5}\ t_{3}\ t_{2}$$, we could simple apply the following equation using the transitions matrixes:
 
-$$P(W|T) = \prod_{i=1}^{N} P(w_{i} \mid t_{i})$$
+$$P(w_{1} \ w_{2} \ w_{3} | t_{5} \ t_{3} \ t_{2}) = P(w_{1} \mid start) \cdot P(t_{3} \mid t_{5}) \cdot P(t_{3} \mid t_{2}) \cdot P(w_{1} \mid t_{5}) \cdot P(w_{2} \mid t_{3}) \cdot P(w_{3} \mid t_{2})$$
 
-Applying the following equation for an already known state sequence:
+But we don't know what the actual hidden state is. We’ll need to compute the probability of an observation sequence instead by summing over all possible state sequences $$t\ \in\ T^{N}$$ weighted by their probability.
 
-$$P(3 1 3|hot hot cold) = P(3|hot)×P(1|hot)×P(3|cold)$$
-
-But we don't know what the actual hidden state is. We’ll need to compute the probability of an observation sequence instead by summing over all possible state sequences, weighted by their probability.
-
-First, let’s compute the joint probability of being in a particular state sequence T and generating a particular sequence O of observation events. In general, this is
-
-
-$$P(W|T) = P(W|T) \cdot  P(T) = \prod{} P(o_{i} \mid t_{i}) \times \prod{} P(q_{i} \mid q_{i-1})$$
-
-The computation of the joint probability of our ice-cream observation 3 1 3 and
-one possible hidden state sequence hot hot cold is:
-
-P(3 1 3,hot hot cold) = P(hot|start)×P(hot|hot)×P(cold|hot)×P(3|hot)×P(1|hot)×P(3|cold)
+$$P(W = w) = \sum\limits_{t\ \in\ T^{N}} P( W = w, T = t)$$
 
 __TODO__: graphical representation
 
-Now that we know how to compute the joint probability of the observations
-with a particular hidden state sequence, we can compute the total probability of the observations just by summing over all possible hidden state sequences:
+We know how to compute the joint probability of the observations with a particular hidden state sequence, we can compute the total probability of the observations just by summing over all possible hidden state sequences:
 
 $$P(W) = \sum_{T} P(W \mid T) = \sum_{T} P(W|T) \cdot  P(T) $$
 
-
 __TODO__: relation with Naive Bayes
 
-For our particular case, we would sum over the eight 3-event sequences cold cold cold, cold cold hot, that is, P(3 1 3) = P(3 1 3, cold cold cold) +P(3 1 3, cold cold hot) +P(3 1 3,hot hot cold) +...
-
 For an HMM with N hidden states and an observation sequence of T observations,
-there are $$N^{T}$$ possible hidden sequences.
+there are $$N^{T}$$ possible hidden sequences. In a task of part-of-speech tagging, we could have 12 tags (N) and having a sentence with 10 words, that would be 12^10 separate observation likelihoods to compute.
 
-For a task of part-of-speech tagging, we have 12 tags (N) and having a sentence with 10 words, that would be 12^10 separate observation likelihoods to compute.
+---
 
-
-
-__TODO__: Forward algorithm
+__Forward-Backward (FB) algorithm__
 
 The forward algorithm computes the observation probability by summing over the probabilities of all possible hidden state paths that could generate the observation sequence, but it does so efficiently by implicitly folding each of these paths into a single forward trellis.
 
 The FB algorithm relies on the independence of previous states assumption, which is illustrated in the trellis view by having arrows only between consecutive states.
 
-The FB algorithm defines two auxiliary probabilities:
-  * the forward probability
-  * backward probability.
+<br>
+<br>
+<br>
+
+##### __Viterbi__
+
+<!--
+
+Noah Smith: https://vimeo.com/154512602
+http://www3.cs.stonybrook.edu/~ychoi/cse628/lecture/06-hmm.pdf
+
+http://idiom.ucsd.edu/~rlevy/teaching/winter2009/ligncse256/lectures/hmm_viterbi_mini_example.pdf
+
 -->
-
-
-
-
-
 
 
 
@@ -378,6 +343,6 @@ https://stats.stackexchange.com/questions/303717/is-there-any-relationship-betwe
 
 * [Chapter 6: "Naive Bayes and Sentiment Classification" in Speech and Language Processing. Daniel Jurafsky & James H. Martin](https://web.stanford.edu/~jurafsky/slp3/6.pdf)
 
-* [LxMLS - Lab Guide July 16, 2017](http://lxmls.it.pt/2017/LxMLS2017.pdf)
+* [LxMLS - Lab Guide July 16, 2017 - Day 2 "Sequence Models"](http://lxmls.it.pt/2017/LxMLS2017.pdf)
 
 * [A tutorial on Hidden Markov Models and Selected Applications in Speech Recognition](http://www.ece.ucsb.edu/Faculty/Rabiner/ece259/Reprints/tutorial%20on%20hmm%20and%20applications.pdf)
