@@ -12,23 +12,37 @@ preview_pic: /assets/images/2017-08-19-Maximum_Entropy_Markov_Models.png
 
 This is the second part of a series of posts about sequential supervised learning applied to NLP. It can be seen as a follow up on the previous post, where I tried do explain the relationship between HMM and Naive Bayes. In this post I will try to explain how to build a sequence classifier based on a Logistic Regression classifier, i.e.,  using a discriminative approach.
 
-In a [previous post](../../09/Sequential_Supervised_Learning_part_I/) I wrote about the __Naïve Bayes Model__ and how it is connected with the __Hidden Markov Model__. Both are __generative models__, in contrast the __Logistic Regression__ classifier which is a __discriminative model__, this how this post will start, by explaining this difference.
+<br>
 
-A machine learning classifier chooses which output label $$y$$ to assign to an input $$x$$, by selecting from all the possible $$y_{i}$$ the one that maximizes $$p(y \mid x)$$
+## __Discriminative vs. Generative Models__
 
-The Naive Bayes classifier estimates $$p(y \mid x)$$ indirectly, by applying the Baye's theorem to $$p(y \mid x)$$, and then computing the class conditional distribution/likelihood $$p(x \mid y)$$ and the prior $$p(y)$$.
+In a [previous post](../../09/HHM_and_Naive_Bayes/) I wrote about the __Naïve Bayes Model__ and how it is connected with the __Hidden Markov Model__. Both are __generative models__, in contrast the __Logistic Regression__ classifier which is a __discriminative model__, this post will start, by explaining this difference.
+
+<!-- \newcommand{\argmax}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{max}}\;} -->
+
+In general a machine learning classifier chooses which output label $$y$$ to assign to an input $$x$$, by selecting from all the possible $$y_{i}$$ the one that maximizes $$P(y\mid x)$$.
+
+The Naive Bayes classifier estimates $$p(y \mid x)$$ indirectly, by applying the Baye's theorem, and then computing the class conditional distribution/likelihood $$P(x \mid y)$$ and the prior $$P(y)$$.
+
+$$ \hat{y} = \underset{y}{\arg\max}\ P(y \mid x) = \underset{y}{\arg\max} \ P(x \mid y) \cdot P(y)$$
+
+This indirection makes Naive Bayes a generative model, a model that is trained to generated the data $$x$$ from the class $$y$$. The likelihood $$p(x \mid y)$$, means that we are given a class $$y$$ and will try to predict which features to see in the input $$x$$.
 
 In contrast a discriminative model directly computes $$p(y \mid x)$$ by discriminating among the different possible values of the class $$y$$ instead of computing a likelihood. The Logistic Regression classifier is one of such type of classifiers.
 
+$$ \hat{y} = \underset{y}{\arg\max} \ P(y \mid x)$$
+
+<br>
+
 ## __Logistic Regression__
 
-Logistic regression is an algorithm use for classification, which is has it's roots in linear regression.
+Logistic regression is supervised machine learning algorithm used for classification, which is has it's roots in linear regression.
 
-When used to solve NLP tasks, it estimates $$p( y\mid x)$$ by extracting features from the input text and combining them linearly (i.e., multiplying each feature by a weight and then adding them up), and then applying a function to this combination:
+When used to solve NLP tasks, it estimates $$p( y\mid x)$$ by extracting features from the input text and combining them linearly i.e., multiplying each feature by a weight and then adding them up, and then applying a function the exponential function to this combination:
 
 $$P(y|x) = \frac{1}{Z} \ \exp \sum_{i=1}^{N} w_{i} \cdot f_{i}$$
 
-where $$f_{i}$$ is a feature and $$w_{i}$$ the weight associated to the feature. The $$\exp$$ surrounding the weight-feature dot product ensures that all values are positive and the denominator $$Z$$ is needed to force all values into a valid probability where the sum is 1.
+where $$f_{i}$$ is a feature and $$w_{i}$$ the weight associated to the feature. The $$\exp$$ (i.e., exponential function) surrounding the weight-feature dot product ensures that all values are positive and the denominator $$Z$$ is needed to force all values into a valid probability where the sum is 1.
 
 The extracted features, are binary-valued features, i.e., only takes the values 0 and 1, and are commonly called indicator functions. Each of these features is calculated by a function that is associated with the input $$x$$ and the class $$y$$. Each indicator function is represented as $$f_{i}(y,x)$$, the feature $$i$$ for class $$y$$, given observation $$x$$.
 
@@ -47,9 +61,24 @@ https://www.quora.com/What-is-the-relationship-between-Log-Linear-model-MaxEnt-m
 
 ### __Trainning__
 
-In training the logistic regression classifier we want to find the ideal weights for each feature that will make the classes of the training example more likely.
+By training the logistic regression classifier we want to find the ideal weights for each feature, that is, the weights that will make training example fit the classes to which they belong.
 
-Logistic regression is trained with conditional maximum likelihood estimation. This means we choose the parameters $$w$$ that maximize the (log) probability of the $$y$$ labels in the training data given the observations $$x$$.
+Logistic regression is trained with conditional maximum likelihood estimation. This means that we will choose the parameters $$w$$ that maximize the probability of the $$y$$ labels in the training data given the observations $$x$$:
+
+$$\hat{w} = \underset{w}{\arg\max} \sum_{j} \log \ P(y^{j} \mid y^{j})$$
+
+__TODO__: why log?
+
+The objective function to maximize is:
+
+$$L(w) = \sum_{j} \log\ P(y^{j} \mid y^{j})$$
+
+which by replacing with expanded form presented before and by applying the division log rules, takes the following form:
+
+$$ L(w) = \sum\limits_{j} \log \exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i} (x^{j},y^{j}) \bigg) - \sum\limits_{j} \log {\sum\limits_{y' \in Y} \exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x^{j},y'^{j}) \bigg)}$$
+
+Maximize this objective, i.e. fiding the optimal weights, are typically solved by methods like stochastic gradient ascent, L-BFGS, or conjugate gradient.
+
 
 ### __Classification__
 
@@ -59,63 +88,59 @@ $$\hat{y} = \underset{y \in Y} {\arg\max} \ P(y \mid x)$$
 
 $$\hat{y} = \underset{y \in Y} {\arg\max} \frac{\exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x,y) \bigg)} {\sum\limits_{y' \in Y} \exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x,y') \bigg)}  $$
 
+<br>
 
 ---
 
+<br>
+
+
 ## __Maximum Entropy Markov Model__
 
-<!--
+The idea of the Maximum Entropy Markov Model (MEMM) is to make use of both the HMM framework to __predict sequence labels given an observation sequence, but incorporating the multinomial Logistic Regression (aka Maximum Entropy)__, which gives freedom in the type and number of features one can extract from the observation sequence.
 
-1)
-In text-related tasks, the observation probabilities are typically represented as a multinomial distribution over a discrete, finite vocabulary of words, and Baum-Welch training is used to learn parameters that maximize the probability of the observation sequences in the training data.
+The MEMM was proposed as way to have richer set of observation features:
 
-in particular a representation that describes observations in terms of many overlapping features, such as capitalization, word endings, part-of-speech, formatting, position on the page, and node memberships in WordNet, in addition to the traditional word identity.
+* _"a representation that describes observations in terms of many overlapping features, such as capitalization, word endings, part-of-speech, formatting, position on the page, and node memberships in WordNet, in addition to the traditional word identity."_
 
-For example, when trying to extract previously unseen company names from a newswire article, the identity of a word alone is not very predictive; however, knowing that the word is capitalized, that is a noun, that it is used in an appositive, and that it appears near the top of the article would all be quite predictive (in conjunction with the context provided by the state-transition structure).
+and also to solve the prediction problem with a discriminative approach:
 
-Note that these features are not independent of each other.
-
-observations to be parameterized with these overlapping features.
-
-2)
-The second problem with the traditional approach is that it sets the HMM parameters to maximize the likelihood of the observation sequence; however, in most text applications, including all those listed above, the task is to predict the state sequence given the observation sequence. In other words, the traditional approach inappropriately uses a generative joint model in order to solve a conditional problem in which the observations are given.
+* _"the traditional approach sets the HMM parameters to maximize the likelihood of the observation sequence; however, in most text applications [...] the task is to predict the state sequence given the observation sequence. In other words, the traditional approach inappropriately uses a generative joint model in order to solve a conditional problem in which the observations are given._"
 
 
 
-maximum entropy Markov models (MEMMs), in which the HMM transition and observation functions are replaced by a single function
+
+In the Maximum Entropy Markov Models the transition and observation functions (i.e., the HMM matrices $$A$$ and $$B$$ from the previous post) are replaced by a single function:
 
 $$P(s \mid s',o)$$
 
-that provides the probability of the current state s given the previous state  s' and the current observation o.
+the probability of the current state $$s$$ given the previous state $$s'$$ and the current observation $$o$$. The figure below shows this difference in computing the state/label/tag transitions.
+
+<figure>
+  <img style="width: 65%; height: 65%" border="5" src="/assets/images/2017-08-19-HMM_and_MEMM.png">
+</figure>
 
 In contrast to HMMs, in which the current observation only depends on the current state, the current observation in an MEMM may also depend on the previous state.
 
-$$P(s \mid s', o)$$
-
-the probability of the transition from state $$s$$ to state $$s'$$ on input $$o$$
-
+<!--
 
 State Estimation from Observations
 - changes in the recursive Viterbi step
 - changes in the Baum-Welch
 
 
+ - $$P(s \mid s',o)$$ is split into $$|S|$$ separately trained transition functions 
+- Each of these functions is given by an exponential model
+
 The use of state-observation transition functions rather than the separate transition and observation functions in HMMs allows us to model transitions in terms of multiple, nonindependent features of observations, which we believe to be the most valuable contribution of the present work
 
 To do this, we turn to exponential models fit by maximum entropy.
-
-Maximum entropy is a framework for estimating probability distributions from data. It is based on the principle that the best model for the data is the one that is consistent with certain constraints derived from the training data, but otherwise makes the fewest possible assumptions. In our probabilistic framework, the distribution with the “fewest possible assumptions” is that which is closest to the uniform distribution, that is, the one with the highest entropy.
-
-As in other conditional maximum entropy models, features do not depend only on the observation but also on the outcome predicted by the function being modeled
 
 
 Formally, for each previous state $$s'$$ and feature $$a$$, the transition function $$P_{s'}(s \mid o) must have the property that:
 
 
-
 maximum-likelihood distribution and has the exponential form
-
-
 
 In statistics, generalized iterative scaling (GIS) and improved iterative scaling (IIS) are two early algorithms used to fit log-linear models,[1] notably multinomial logistic regression (MaxEnt) classifiers and extensions of it such as MaxEnt Markov models[2] and conditional random fields. These algorithms have been largely surpassed by gradient-based methods such as L-BFGS[3] and coordinate descent algorithms.[4]
 
@@ -124,30 +149,35 @@ In statistics, generalized iterative scaling (GIS) and improved iterative scalin
 
 Tabela com descricao de algoritmo (training)
 
-
-
-
-
-
 file:///Users/dsbatista/Desktop/CRFs/memm-icml2000.pdf
 https://liqiangguo.wordpress.com/page/2/
 -->
 
-The idea of the Maximum Entropy Markov Model (MEMM) is to make use of both the Hidden Markov Models and the Maximum Entropy models also known as multinomial Logistic Regression.
 
-The Hidden Markov Model exploits the Markov assumption to search over a label space, the problem is that this model is restricted on the types of features it can include, basically only the identify feature of the observation.
 
-__MaxEnt (Logistic Regression)__
-* classify a single observation into one of a set of discrete classes
-* can incorporate arbitrary/overlapping features
 
-__HMM (Hidden Markov Models)__
-* sequence tagging — assign a class to each element in a sequence
-* independent assumption (cannot incorporate arbitrary/overlapping features)
 
-__Maximum Entropy Markov Models__:
-* combines HMM and MaxEnt
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 Again, we  want to model our learning problem based on a sequence:
 
 $$p(y_{1},\dots,y_{m}∣x_{1},\dots,x_{m}) $$
@@ -165,33 +195,38 @@ Having applied these independence assumptions, we then model each term using a l
 $$ p(y_{i} \mid y_{i-1}, x_{1} \dots x_{m}) = \frac{\exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x,y) \bigg)} {\sum\limits_{y \in Y} \exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x,y) \bigg)}  $$
 
 $$w_{i}$$ are the weights to be learned, associated to each feature $$f_{i}(x,y)$$.
+-->
 
 <!--
 http://www.mit.edu/~6.863/spring2011/jmnew/6.pdf
-
 http://www.cs.columbia.edu/~smaskey/CS6998/slides/statnlp_week10.pdf
-
-
 http://www.cs.columbia.edu/~smaskey/CS6998-0412/slides/week13_statnlp_web.pdf
 https://www.youtube.com/watch?v=Qn4vZvOEqB0
 http://www.win-vector.com/dfiles/LogisticRegressionMaxEnt.pdf
 http://www.ai.mit.edu/courses/6.891-nlp/READINGS/maxent.pdf
 -->
 
-### Training (parameters inference): __TODO__
+<br>
 
-### Testing (decoding a sequence): __TODO__
+---
 
-<!-- greedy inference vs. Viterbi -->
+<br>
 
-
-
-### Observations:
+### __MEMM Important Observations__
 
 * The advantage for HMM is the use of feature vectors. Transition probability can be sensitive to any word in the input sequence. MEMMs support long-distance interactions over the whole observation sequence.
 
 * We have exponential model for each state to tell us the conditional probability of the next states
 
-* This type of model directly models the conditional distribution of the hidden states given the observations, rather than modeling the joint distribution.
+* This type of model directly models the conditional distribution of the hidden states given the observations, rather than modelling the joint distribution.
 
 * Label bias problem
+
+
+## __References__
+
+* [Chapter 7: "Logistic Regression" in Speech and Language Processing. Daniel Jurafsky & James H. Martin](https://web.stanford.edu/~jurafsky/slp3/7.pdf)
+
+* [Maximum Entropy Markov Models for Information Extraction and Segmentation](http://www.ai.mit.edu/courses/6.891-nlp/READINGS/maxent.pdf)
+
+* [LxMLS - Lab Guide July 16, 2017 - Day 2 "Sequence Models"](http://lxmls.it.pt/2017/LxMLS2017.pdf)
