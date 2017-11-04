@@ -98,6 +98,26 @@ $$\hat{y} = \underset{y \in Y} {\arg\max} \frac{\exp \bigg( \sum\limits_{i=1}^{N
 ## __Maximum Entropy Markov Model__
 
 The idea of the Maximum Entropy Markov Model (MEMM) is to make use of both the HMM framework to __predict sequence labels given an observation sequence, but incorporating the multinomial Logistic Regression (aka Maximum Entropy)__, which gives freedom in the type and number of features one can extract from the observation sequence.
+<!--
+
+The HMM taggingmodel is based on probabilities of the form P(tag|tag) and P(word|tag). That means that if we want to include some source of knowledge into the tagging process, we must find a way to encode the knowledge into one of these two probabilities. But many knowledge sources are hard to fit into these models. For example, we saw in Sec. ?? that for tagging unknown words, useful features include capitalization, the presence of hyphens, word endings, and so on. There is no easy way to fit these features into an HMM-style model; as we discussed in Ch. 5, P(capitalization|tag), P(hyphen|tag), P(suffix|tag), and so on
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 The MEMM was proposed as way to have richer set of observation features:
 
@@ -122,35 +142,41 @@ the probability of the current state $$s$$ given the previous state $$s'$$ and 
 
 In contrast to HMMs, in which the current observation only depends on the current state, the current observation in an MEMM may also depend on the previous state.
 
-<!--
+Note that the HMM model includes distinct probability estimates for each transition and observation, while the MEMM gives one probability estimate per hidden state, which is the probability of the next tag given the previous tag and the observation.
 
-State Estimation from Observations
-- changes in the recursive Viterbi step
-- changes in the Baum-Welch
+unlike the HMM, the MEMM can condition on any useful feature of the input observation. In the HMM this wasn’t possible because the HMM is likelihood based, and hence would have needed compute the likelihood of each feature of the observation.
 
+We will use MaxEnt for this last piece, estimating the probability of each local tag given the previous tag, the observed word, and, as we will see, any other features we want to include.
+
+## MaxEnt
 
  - $$P(s \mid s',o)$$ is split into $$|S|$$ separately trained transition functions 
 - Each of these functions is given by an exponential model
 
-The use of state-observation transition functions rather than the separate transition and observation functions in HMMs allows us to model transitions in terms of multiple, nonindependent features of observations, which we believe to be the most valuable contribution of the present work
+The use of state-observation transition functions rather than the separate transition and observation functions as in HMMs allows us to model transitions in terms of multiple, nonindependent features of observations
 
 To do this, we turn to exponential models fit by maximum entropy.
 
-
-Formally, for each previous state $$s'$$ and feature $$a$$, the transition function $$P_{s'}(s \mid o) must have the property that:
-
-
 maximum-likelihood distribution and has the exponential form
 
-In statistics, generalized iterative scaling (GIS) and improved iterative scaling (IIS) are two early algorithms used to fit log-linear models,[1] notably multinomial logistic regression (MaxEnt) classifiers and extensions of it such as MaxEnt Markov models[2] and conditional random fields. These algorithms have been largely surpassed by gradient-based methods such as L-BFGS[3] and coordinate descent algorithms.[4]
+The original MEMM paper, published in 2000, used a generalized iterative scaling (GIS) algorithm to fit the multinomial logistic regression (MaxEnt). That algorithms has been largely surpassed by gradient-based methods such as L-BFGS.
 
-(https://www.wikiwand.com/en/Generalized_iterative_scaling)
+
+
+<!--
 
 
 Tabela com descricao de algoritmo (training)
 
 file:///Users/dsbatista/Desktop/CRFs/memm-icml2000.pdf
 https://liqiangguo.wordpress.com/page/2/
+
+
+
+State Estimation from Observations
+- changes in the recursive Viterbi step
+- changes in the Baum-Welch
+
 -->
 
 
@@ -219,6 +245,8 @@ http://www.ai.mit.edu/courses/6.891-nlp/READINGS/maxent.pdf
 * We have exponential model for each state to tell us the conditional probability of the next states
 
 * This type of model directly models the conditional distribution of the hidden states given the observations, rather than modelling the joint distribution.
+
+* It has the Markov Assumption just like HMM
 
 * Label bias problem
 
