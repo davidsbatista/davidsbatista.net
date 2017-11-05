@@ -13,6 +13,12 @@ This is the third and the last part of a series of posts about sequential superv
 
 <!--
 
+\newcommand{\argmax}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{max}}\;}
+
+https://liqiangguo.wordpress.com/page/2/
+http://www.cs.columbia.edu/~smaskey/CS6998/slides/statnlp_week10.pdf
+http://www.cs.columbia.edu/~smaskey/CS6998-0412/slides/week13_statnlp_web.pdf
+
 http://videolectures.net/cikm08_elkan_llmacrf/
 
 http://www.stokastik.in/understanding-conditional-random-fields/

@@ -228,6 +228,29 @@ $$P_{emiss(w_{j}|c_{k})} = \frac { C_{emiss(w_{j},c_{k})} } { \sum\limits_{q=1}^
 
 These equations will produce the __transition probability__ matrix $$A$$, with the probabilities from going from one label to another and the __emission probability__ matrix $$B$$ with the probabilities of an observation being generated from a state.
 
+__TODO__: Laplace smoothing
+
+<!--
+
+However, there is one additional issue that needs to be addressed
+before the model can be used for tagging: how
+should the model respond to words that model did not encounter
+during training? If left unattended then P(Oi|Si) =
+0 and consequently, Viterbi’s algorithm will make incorrect
+decisions during the predicting process. The technique
+we employ to address this issue is Laplace smoothing (also
+known as additive smoothing) [5]. The general idea of this
+approach is that every state will always have a small emission
+probability of producing an unseen word (denoted in our
+case by “hUi”). And every time the model encounters an unknown
+word it will use P(hUi|S) as the emission probability.
+The small probability is created by setting C(hUi, S) = 1
+and incrementing C(S) by 1 for each state S after calculating
+the transition probabilities and before calculating the
+emission probabilities.
+
+-->
+
 <br>
 
 #### __Decoding: finding the hidden state sequence for an observation__
@@ -298,10 +321,9 @@ http://www3.cs.stonybrook.edu/~ychoi/cse628/lecture/06-hmm.pdf
 
 http://idiom.ucsd.edu/~rlevy/teaching/winter2009/ligncse256/lectures/hmm_viterbi_mini_example.pdf
 
+http://idiom.ucsd.edu/~rlevy/teaching/winter2009/ligncse256/lectures/hmm_viterbi_mini_example.pdf
+
 -->
-
-
-
 
 
 
