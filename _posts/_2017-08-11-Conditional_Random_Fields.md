@@ -23,25 +23,33 @@ http://videolectures.net/cikm08_elkan_llmacrf/
 
 http://www.stokastik.in/understanding-conditional-random-fields/
 
--->
-
-# __Conditional Random Fields__
 
 
-### Training (parameters inference): __TODO__
-
-### Testing (decoding a sequence): __TODO__
-
-### Observations:
-
-* __TODO__
-
-<!--
 A first key idea in CRFs will be to define a feature vector that maps an entire
 input sequence x paired with an entire state sequence s to some d-dimensional feature vector.
 
 IDEA: maps an entire input sequence x paired with an entire state sequence s to
 some d-dimensional feature vector.
 
-The chief difference between MEMM and CRF is that MEMM is locally renormalized and suffers from the label bias problem, while CRFs are globally renormalized.
 -->
+
+# __Label Bias Problem__
+
+
+
+### __CRF Important Observations__
+
+* The big difference between MEMM and CRF is that MEMM is locally renormalized and suffers from the label bias problem, while CRFs are globally re-normalized.
+
+
+
+## __Software Packages__
+
+*
+
+
+
+
+## __References__
+
+* [Conditional Random Fields: An Introduction. Hanna M. Wallach, February 24, 2004. University of Pennsylvania CIS Technical Report MS-CIS-04-21](http://dirichlet.net/pdf/wallach04conditional.pdf)

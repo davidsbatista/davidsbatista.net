@@ -100,10 +100,17 @@ and also to solve the prediction problem with a discriminative approach:
 
 * _"the traditional approach sets the HMM parameters to maximize the likelihood of the observation sequence; however, in most text applications [...] the task is to predict the state sequence given the observation sequence. In other words, the traditional approach inappropriately uses a generative joint model in order to solve a conditional problem in which the observations are given._"
 
+<figure>
+  <img style="width: 55%; height: 55%" border="5" src="/assets/images/2017-08-19-Maximum_Entropy_Markov_Models.png">
+  <figcaption>
+  (a) The dependency graph for a traditional HMM. <br>
+  (b) The dependency graph for a Maximum Entropy Markov Model. <br> (taken from A. McCallum et al. 2000)</figcaption>
+</figure>
+
 
 In the Maximum Entropy Markov Models the transition and observation functions (i.e., the HMM matrices $$A$$ and $$B$$ from the previous post) are replaced by a single function:
 
-$$P(s \mid s',o)$$
+$$P(s_{t} \mid s_{t-1}, o_{t})$$
 
 the probability of the current state $$s$$ given the previous state $$s'$$ and the current observation $$o$$. The figure below shows this difference in computing the state/label/tag transitions.
 
@@ -113,13 +120,13 @@ the probability of the current state $$s$$ given the previous state $$s'$$ and 
 
 In contrast to HMMs, in which the current observation only depends on the current state, the current observation in an MEMM may also depend on the previous state. The HMM model includes distinct probability estimates for each transition and observation, while the MEMM gives one probability estimate per hidden state, which is the probability of the next tag given the previous tag and the observation.
 
-In the MEMM instead of the transition and observation matrices, there is only one transition probability matrix. This matrix encapsulates all combinations of previous states $$S_{i−1}$$ and current observation $$O_{i}$$ pairs in the training data to the current state $$S_{i}$$.
+In the MEMM instead of the transition and observation matrices, there is only one transition probability matrix. This matrix encapsulates all combinations of previous states $$S_{t−1}$$ and current observation $$O_{t}$$ pairs in the training data to the current state $$S_{t}$$.
 
 Let $$N$$ be the number of unique states and M the number of unique words: the matrix has the shape:
 
 $$(N \cdot M) \cdot N$$
 
-### __Features Representation__
+### __Features Functions__
 
 The MEMM can condition on any useful feature of the input observation, in the HMM this wasn’t possible because the HMM is likelihood based, and hence we would have needed to compute the likelihood of each feature of the observation.
 
@@ -159,6 +166,12 @@ For the decoding an adapted version of Viterbi is used on which..
 * It also uses the Viterbi algorithm (slightly adapted) to perform decoding.
 
 * It suffers from the label bias problem.
+
+
+## __Software Packages__
+
+*
+
 
 ## __References__
 
