@@ -256,12 +256,23 @@ This is can be achieved by using the Viterbi algorithm, that finds the best stat
 
 #### __Viterbi__
 
-<br>
-
 <!--
+
+http://cs.nyu.edu/courses/fall17/CSCI-UA.0480-006/Ralphs_viterbi.pdf
 http://www3.cs.stonybrook.edu/~ychoi/cse628/lecture/06-hmm.pdf
 http://idiom.ucsd.edu/~rlevy/teaching/winter2009/ligncse256/lectures/hmm_viterbi_mini_example.pdf
+
 -->
+
+
+
+
+
+
+
+
+
+
 
 ---
 
@@ -283,6 +294,8 @@ http://idiom.ucsd.edu/~rlevy/teaching/winter2009/ligncse256/lectures/hmm_viterbi
 ## __Software Packages__
 
 * [seqlearn](https://github.com/larsmans/seqlearn): a sequence classification library for Python which includes an implementation of Hidden Markov Models, it follows the sklearn API.
+
+* [NLTK HMM](http://www.nltk.org/_modules/nltk/tag/hmm.html): NLTK also contains a module which implementats a Hidden Markov Models framework.
 
 * [lxmls-toolkit](https://github.com/LxMLS/lxmls-toolkit): the Natural Language Processing Toolkit used in the Lisbon Machine Learning Summer School also contains an implementation of Hidden Markov Models.
 

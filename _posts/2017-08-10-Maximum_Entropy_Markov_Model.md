@@ -6,7 +6,7 @@ tags: [maximum markov models, sequence classifier, tutorial]
 categories: [blog]
 comments: true
 disqus_identifier: 20170810
-preview_pic: /assets/images/2017-08-19-Maximum_Entropy_Markov_Models.png
+preview_pic: /assets/images/2017-08-10-Maximum_Entropy_Markov_Models.png
 ---
 
 
@@ -101,7 +101,7 @@ and also to solve the prediction problem with a discriminative approach:
 * _"the traditional approach sets the HMM parameters to maximize the likelihood of the observation sequence; however, in most text applications [...] the task is to predict the state sequence given the observation sequence. In other words, the traditional approach inappropriately uses a generative joint model in order to solve a conditional problem in which the observations are given._"
 
 <figure>
-  <img style="width: 55%; height: 55%" border="5" src="/assets/images/2017-08-19-Maximum_Entropy_Markov_Models.png">
+  <img style="width: 55%; height: 55%" border="5" src="/assets/images/2017-08-10-Maximum_Entropy_Markov_Models.png">
   <figcaption>
   (a) The dependency graph for a traditional HMM. <br>
   (b) The dependency graph for a Maximum Entropy Markov Model. <br> (taken from A. McCallum et al. 2000)</figcaption>
@@ -115,7 +115,7 @@ $$P(s_{t} \mid s_{t-1}, o_{t})$$
 the probability of the current state $$s$$ given the previous state $$s'$$ and the current observation $$o$$. The figure below shows this difference in computing the state/label/tag transitions.
 
 <figure>
-  <img style="width: 65%; height: 65%" border="5" src="/assets/images/2017-08-19-HMM_and_MEMM.png">
+  <img style="width: 65%; height: 65%" border="5" src="/assets/images/2017-08-10-HMM_and_MEMM.png">
 </figure>
 
 In contrast to HMMs, in which the current observation only depends on the current state, the current observation in an MEMM may also depend on the previous state. The HMM model includes distinct probability estimates for each transition and observation, while the MEMM gives one probability estimate per hidden state, which is the probability of the next tag given the previous tag and the observation.
