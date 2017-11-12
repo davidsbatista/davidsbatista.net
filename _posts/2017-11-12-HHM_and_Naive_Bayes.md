@@ -47,7 +47,7 @@ where $$y$$ it's a class and $$\vec{x}$$ is a feature vector associated to an ob
 
 <figure>
   <img style="width: 45%; height: 45%" border="5" src="/assets/images/2017-11-12-1024px-Bayes_Theorem_MMB_01.jpg">
-  <figcaption>Bayes Therom in blue neon. <br> (taken from Wikipedia)</figcaption>
+  <figcaption>Bayes theorem in blue neon. <br> (taken from Wikipedia)</figcaption>
 </figure>
 
 The NB classifier is based on the Bayes' theorem. Applying the theorem to the equation above, we get:
