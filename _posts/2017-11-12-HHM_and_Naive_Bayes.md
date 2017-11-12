@@ -91,7 +91,7 @@ $$p(y_{i}) = \frac{ N_{y_{i}} } {N} $$
 
 To calculate the likelihood estimate, we count the number of times feature $$w_{i}$$ appears among all features in all samples of class $$y_{i}$$:
 
-$$ p(x_{i} \mid y_{i}) = \frac{\count(x_{i},y_{i})} {  \sum\limits_{x_{i} \in X} \count(x_{i},y_{i})}$$
+$$ p(x_{i} \mid y_{i}) = \frac{\text{count}(x_{i},y_{i})} {  \sum\limits_{x_{i} \in X} \text{count}(x_{i},y_{i})}$$
 
 This will result in a big table of occurrences of features for all classes in the training data.
 
