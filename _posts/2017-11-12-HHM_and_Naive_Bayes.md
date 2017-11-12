@@ -1,11 +1,11 @@
 ---
 layout: post
 title: Hidden Markov Model and Naive Bayes relationship
-date: 2017-11-12 00:00:00
+date: 2017-11-11 00:00:00
 tags: [hidden markov models, naive bayes, sequence classifier, tutorial]
 categories: [blog]
 comments: true
-disqus_identifier: 20171112
+disqus_identifier: 20171111
 preview_pic: /assets/images/2017-11-12-HMM.png
 ---
 
