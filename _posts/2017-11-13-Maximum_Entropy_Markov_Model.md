@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Maximum Entropy Markov Models and Logistic Regression
-date: 2017-11-12 00:00:00
+date: 2017-11-13 00:00:00
 tags: [maximum markov models, sequence classifier, tutorial]
 categories: [blog]
 comments: true
-disqus_identifier: 20171112
-preview_pic: /assets/images/2017-08-10-Maximum_Entropy_Markov_Models.png
+disqus_identifier: 20171113
+preview_pic: /assets/images/2017-11-12-HMM_vs_MEMM.png
 ---
 
 
