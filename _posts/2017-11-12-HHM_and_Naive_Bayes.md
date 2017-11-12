@@ -196,22 +196,22 @@ In a HHM supervised scenario this is done by applying the __Maximum Likelihood E
 
 This is achieved by counting how many times each event occurs in the corpus and normalizing the counts to form proper probability distributions. We need to count 4 quantities which represent the counts of each event in the corpus:
 
-__Initial counts__: $$\displaystyle C_{init} (t_{k}) = \sum_{m=1}^{M} 1(t_{1}^m = t_{k})$$
+__Initial counts__: $$\displaystyle C_{\text{init}} (t_{k}) = \sum_{m=1}^{M} 1(t_{1}^m = t_{k})$$
 <br>(how often does state $$t_{k}$$ is the initial state)
 <br>
 <br>
 
-__Transition counts__: $$\displaystyle C_{trans} (t_{k}, t_{l}) = \sum_{m=1}^{M} \sum_{m=2}^N 1(t_{i}^{m} = t_{k} ∧ t_{i-1}^{m} = t_{l})$$
+__Transition counts__: $$\displaystyle C_{\text{trans}} (t_{k}, t_{l}) = \sum_{m=1}^{M} \sum_{m=2}^N 1(t_{i}^{m} = t_{k} ∧ t_{i-1}^{m} = t_{l})$$
 <br>(how often does state $$t_{k}$$ transits to another state $$t_{l}$$)
 <br>
 <br>
 
-__Final Counts__: $$\displaystyle C_{final} (t_{k}) = \sum_{m=1}^{M} 1(t_{N}^m = t_{k})$$
+__Final Counts__: $$\displaystyle C_{\text{final}} (t_{k}) = \sum_{m=1}^{M} 1(t_{N}^m = t_{k})$$
 <br>(how often does state $$t_{k}$$ is the final state)
 <br>
 <br>
 
-__Emissions counts__: $$\displaystyle C_{emiss} (w_{j},t_{k}) = \sum_{m=1}^{M} \sum_{i=1}^N 1(x_{i}^{m} = w_{j} ∧ t_{i}^{m} = t_{k})$$
+__Emissions counts__: $$\displaystyle C_{\text{emiss}} (w_{j},t_{k}) = \sum_{m=1}^{M} \sum_{i=1}^N 1(x_{i}^{m} = w_{j} ∧ t_{i}^{m} = t_{k})$$
 <br>(how often does state $$t_{k}$$ is associated with the observation/word $$w_{j}$$)
 <br>
 <br>
