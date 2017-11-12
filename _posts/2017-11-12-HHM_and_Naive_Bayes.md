@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Hidden Markov Model and Naive Bayes relationship
-date: 2017-08-09 00:00:00
+date: 2017-11-12 00:00:00
 tags: [hidden markov models, naive bayes, sequence classifier, tutorial]
 categories: [blog]
 comments: true
-disqus_identifier: 20170809
-preview_pic: /assets/images/2017-08-09-HMM.png
+disqus_identifier: 20171112
+preview_pic: /assets/images/2017-11-12-HMM.png
 ---
 
 This is the first post, of a series of posts, about sequential supervised learning applied to Natural Language Processing. In this first post I will write about the classical algorithm for sequence learning, the Hidden Markov Model (HMM), explain how it's related with the Naive Bayes Model and it's limitations.
@@ -46,7 +46,7 @@ where $$y$$ it's a class and $$\vec{x}$$ is a feature vector associated to an ob
 <br>
 
 <figure>
-  <img style="width: 45%; height: 45%" border="5" src="/assets/images/2017-08-09-1024px-Bayes_Theorem_MMB_01.jpg">
+  <img style="width: 45%; height: 45%" border="5" src="/assets/images/2017-11-12-1024px-Bayes_Theorem_MMB_01.jpg">
   <figcaption>Bayes Therom in blue neon. <br> (taken from Wikipedia)</figcaption>
 </figure>
 
@@ -91,7 +91,7 @@ $$p(y_{i}) = \frac{ N_{y_{i}} } {N} $$
 
 To calculate the likelihood estimate, we count the number of times feature $$w_{i}$$ appears among all features in all samples of class $$y_{i}$$:
 
-$$ p(x_{i} \mid y_{i}) = \frac{count(w_{i},y_{i})} {  \sum\limits_{x_{i} \in X} count(x_{i},y_{i})}$$
+$$ p(x_{i} \mid y_{i}) = \frac{count(x_{i},y_{i})} {  \sum\limits_{x_{i} \in X} count(x_{i},y_{i})}$$
 
 This will result in a big table of occurrences of features for all classes in the training data.
 
@@ -153,8 +153,8 @@ where Y represents the set of all possible label sequences $$\vec{y}$$.
 
 A Hidden Markov Model (HMM) is a sequence classifier. As other machine learning algorithms it can be trained, i.e.: given labeled sequences of observations, and then using the learned parameters to assign a sequence of labels given a sequence of observations. Let's define an HMM framework containing the following components:
 
-* states (e.g., labels): $$T = t_{1}, t_{2}, \cdots, t_{N}$$
-* observations (e.g., words) : $$W = w_{1}, w_{2}, \cdots, w_{N}$$
+* states (e.g., labels): $$T = t_{1}, t_{2}, \ldots, t_{N}$$
+* observations (e.g., words) : $$W = w_{1}, w_{2}, \ldots, w_{N}$$
 * two special states: $$t_{start}$$ and $$t_{end}$$ which are not associated with the observation
 
 and probabilities relating states and observations:
@@ -167,16 +167,16 @@ and probabilities relating states and observations:
 
 A First-order Hidden Markov Model has the following assumptions:
 
-* __Markov Assumption__: the probability of a particular state is dependent only on the previous state. Formally: $$P(t_{i} \mid t_{1}, \cdots, t_{i-1}) = P(t_{i} \mid t_{i-1})$$
+* __Markov Assumption__: the probability of a particular state is dependent only on the previous state. Formally: $$P(t_{i} \mid t_{1}, \ldots, t_{i-1}) = P(t_{i} \mid t_{i-1})$$
 
-* __Output Independence__: the probability of an output observation $$w_{i}$$ depends only on the state that produced the observation $$t_{i}$$ and not on any other states or any other observations. Formally: $$P(w_{i} \mid t_{1} ...q_{i},...,q_{T} ,o_{1},...,o_{i},...,o_{T} ) = P(o_{i} \mid q_{i})$$
+* __Output Independence__: the probability of an output observation $$w_{i}$$ depends only on the state that produced the observation $$t_{i}$$ and not on any other states or any other observations. Formally: $$P(w_{i} \mid t_{1} \ldots q_{i}, \ldots, q_{T} ,o_{1}, \ldots,o_{i}, \ldots,o_{T} ) = P(o_{i} \mid q_{i})$$
 
 Notice how the output assumption is closely related with the Naive Bayes classifier presented before. The figure below makes it easier to understand the dependencies and the relationship with the Naive Bayes classifier:
 
 <br>
 
 <figure>
-  <img style="width: 65%; height: 65%" src="/assets/images/2017-08-09-HMM.png">
+  <img style="width: 65%; height: 65%" src="/assets/images/2017-11-12-HMM.png">
   <figcaption>Transitions and Emissions probabilities in the HMM. <br> (image adapted from CS6501 of the University of Virginia)</figcaption>
 </figure>
 
@@ -202,7 +202,7 @@ __Initial counts__: $$\displaystyle C_{init} (t_{k}) = \sum_{m=1}^{M} 1(t_{1}^m 
 <br>
 
 __Transition counts__: $$\displaystyle C_{trans} (t_{k}, t_{l}) = \sum_{m=1}^{M} \sum_{m=2}^N 1(t_{i}^{m} = t_{k} ∧ t_{i-1}^{m} = t_{l})$$
-<br>(how often does state $$t_{k}$$ transints to another state $$t_{l}$$)
+<br>(how often does state $$t_{k}$$ transits to another state $$t_{l}$$)
 <br>
 <br>
 
@@ -250,29 +250,55 @@ Every time the HMM encounters an unknown word it will use the value $$P(\text{UN
 
 #### __Decoding: finding the hidden state sequence for an observation__
 
-Given a trained HMM i.e., the transition matrixes $$A$$ and $$B$$, and a new observation sequence $$W = w_{1}, w_{2}, \cdots, w_{N}$$ we want to find the sequence of states $$T = t_{1}, t_{2}, \cdots, t_{N}$$ that best explains it.
+Given a trained HMM i.e., the transition matrixes $$A$$ and $$B$$, and a new observation sequence $$W = w_{1}, w_{2}, \ldots, w_{N}$$ we want to find the sequence of states $$T = t_{1}, t_{2}, \ldots, t_{N}$$ that best explains it.
 
-This is can be achieved by using the Viterbi algorithm, that finds the best state assignment to the sequence $$T_{1} \cdots T_{N}$$ as a whole. There is another algorithm, Posterior Decoding which consists in picking the highest state posterior for each position $$i$$ in the sequence independently.
+This is can be achieved by using the Viterbi algorithm, that finds the best state assignment to the sequence $$T_{1} \ldots T_{N}$$ as a whole. There is another algorithm, Posterior Decoding which consists in picking the highest state posterior for each position $$i$$ in the sequence independently.
 
 #### __Viterbi__
 
-<!--
+It's a dynamic programming algorithm for computing:
 
-http://cs.nyu.edu/courses/fall17/CSCI-UA.0480-006/Ralphs_viterbi.pdf
-http://www3.cs.stonybrook.edu/~ychoi/cse628/lecture/06-hmm.pdf
-http://idiom.ucsd.edu/~rlevy/teaching/winter2009/ligncse256/lectures/hmm_viterbi_mini_example.pdf
+$$ \delta_{i}(T) = \underset{t_{0},\ldots,t_{i-1},t}{max} \ \ P(t_{0},\ldots,t_{i-1},t,w_{1},\ldots,w_{i-1})$$
 
--->
+the score of a best path up to position $$i$$ ending in state $$t$$. The Viterbi algorithm tackles the equation above by using the Markov assumption and defining two functions:
 
+$$ \delta_{i}(t) = \underset{t_{i-1}}{max} \ \ P(t \mid t_{i-1}) \cdot P(w_{i-1} \mid t_{i-1})  \cdot \delta_{i}(t_{i-1})$$
 
+the most likely previous state for each state (store a back-trace):
 
+$$ \Psi_{i}(t) = \underset{t_{i-1}}{argmax} \ \ P(t \mid t_{i-1}) \cdot P(w \mid t_{i-1})  \cdot \delta_{i}(t_{i-1})$$
 
+<br>
 
+The Viterbi algorithm uses a representation of the HMM called a __trellis__, which unfolds all possible states for each position and it makes explicit the independence assumption: each position only depends on the previous position.
 
+<figure>
+  <img style="width: 55%; height: 55%" src="/assets/images/2017-11-12-Viterbi_I.png">
+  <figcaption>An unfilled trellis representation of an HMM.</figcaption>
+</figure>
 
+<br>
 
+<figure>
+<div id="images" style="text-align:center;">
+<img style="display: inline-block; margin-left: auto; margin-right: auto; height: 130px;" src="/assets/images/2017-11-12-Viterbi_Emission.png"/>
+<img style="display: inline-block; margin-left: auto; margin-right: auto; height: 130px;" src="/assets/images/2017-11-12-Viterbi_State_Transitions.png"/>
+</div>
+<figcaption>Word Emission and State Transitions probabilities matrices.</figcaption>
+</figure>
 
+<br>
 
+Using the Viterbi algorithm and the emission and transition probabilities matrices, one can fill in the trellis scores and effectively find the Viterby path.
+
+<figure>
+  <img style="width: 55%; height: 55%" src="/assets/images/2017-11-12-Viterbi_II.png">
+  <figcaption>An filled trellis representation of an HMM.</figcaption>
+</figure>
+
+<br>
+
+The figures above were taken from a Viterbi algorithm example by [Roger Levy](http://idiom.ucsd.edu/~rlevy/) for the [Linguistics/CSE 256 class](http://idiom.ucsd.edu/~rlevy/teaching/winter2009/ligncse256/). You can find the full example [here](/assets/documents/posts/2017-11-12-hmm_viterbi_mini_example.pdf).
 
 ---
 
@@ -295,7 +321,7 @@ http://idiom.ucsd.edu/~rlevy/teaching/winter2009/ligncse256/lectures/hmm_viterbi
 
 * [seqlearn](https://github.com/larsmans/seqlearn): a sequence classification library for Python which includes an implementation of Hidden Markov Models, it follows the sklearn API.
 
-* [NLTK HMM](http://www.nltk.org/_modules/nltk/tag/hmm.html): NLTK also contains a module which implementats a Hidden Markov Models framework.
+* [NLTK HMM](http://www.nltk.org/_modules/nltk/tag/hmm.html): NLTK also contains a module which implements a Hidden Markov Models framework.
 
 * [lxmls-toolkit](https://github.com/LxMLS/lxmls-toolkit): the Natural Language Processing Toolkit used in the Lisbon Machine Learning Summer School also contains an implementation of Hidden Markov Models.
 
@@ -309,83 +335,12 @@ http://idiom.ucsd.edu/~rlevy/teaching/winter2009/ligncse256/lectures/hmm_viterbi
 
 * [LxMLS - Lab Guide July 16, 2017 - Day 2 "Sequence Models"](http://lxmls.it.pt/2017/LxMLS2017.pdf)
 
-* [Chapter 9: "Hidden Markov Modles" in Speech and Language Processing. Daniel Jurafsky & James H. Martin. Draft of August 7, 2017.](https://web.stanford.edu/~jurafsky/slp3/9.pdf)
+* [Chapter 9: "Hidden Markov Models" in Speech and Language Processing. Daniel Jurafsky & James H. Martin. Draft of August 7, 2017.](https://web.stanford.edu/~jurafsky/slp3/9.pdf)
+
+* [Hidden Markov Model inference with the Viterbi algorithm: a mini-example](/assets/documents/posts/2017-11-12-hmm_viterbi_mini_example.pdf)
 
 ## __Extra__
 
-There is also a very good lecture, given by [Noah Smith](https://homes.cs.washington.edu/~nasmith/) at [LxMLS2016](http://lxmls.it.pt/2016/) about Sequence Models, mainly focusing on Hidden Markov Models and it's applications from sequence learning to language modelling.
+There is also a very good lecture, given by [Noah Smith](https://homes.cs.washington.edu/~nasmith/) at [LxMLS2016](http://lxmls.it.pt/2016/) about Sequence Models, mainly focusing on Hidden Markov Models and it's applications from sequence learning to language modeling.
 
 [![](https://img.youtube.com/vi/8vGSAwR716k/hqdefault.jpg)](https://www.youtube.com/watch?v=8vGSAwR716k)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-##### __Posterior Decoding__
-
-Selects the state with the highest posterior for each position independently:
-
-$$y_{i} = arg\ max \ P(Y_{i} = y_{i} \mid X = x)$$
-
-We need three posteriors:
-
-* __Sequence Posterior__: $$ P( Y=y \mid  X = x) = \frac{P(X = x, Y = y)}{P(X = x)}$$
-<!-- probability of a particular hidden state sequence given that we have observed a particular sequence
-
-* __State Posterior__: $$ P( Y_{i} = y_{i} \mid  X = x)$$
-<!-- prob. being in a given state in a certain position given the observed sequence
-
-* __Transition Posterior__: $$ P( Y_{i+1} = y_{i+1}, Y_{i} = y_{i} \mid  X = x)$$
-
-<!--probability of making a transition, from position i to i + 1, given the observed sequence
-
-To compute the posteriors we need to compute the likelihood of an observation sequence $$P(W = w)$$, i.e., what is the probability of the observation sequence $$w$$ ? If we already knew a hidden-state sequence, e.g. $$t_{5}\ t_{3}\ t_{2}$$, we could simple apply the following equation using the transitions matrixes:
-
-$$P(w_{1} \ w_{2} \ w_{3} | t_{5} \ t_{3} \ t_{2}) = P(w_{1} \mid start) \cdot P(t_{3} \mid t_{5}) \cdot P(t_{3} \mid t_{2}) \cdot P(w_{1} \mid t_{5}) \cdot P(w_{2} \mid t_{3}) \cdot P(w_{3} \mid t_{2})$$
-
-But we don't know what the actual hidden state is. We’ll need to compute the probability of an observation sequence instead by summing over all possible state sequences $$t\ \in\ T^{N}$$ weighted by their probability.
-
-$$P(W = w) = \sum\limits_{t\ \in\ T^{N}} P( W = w, T = t)$$
-
-__TODO__: graphical representation
-
-We know how to compute the joint probability of the observations with a particular hidden state sequence, we can compute the total probability of the observations just by summing over all possible hidden state sequences:
-
-$$P(W) = \sum_{T} P(W \mid T) = \sum_{T} P(W|T) \cdot  P(T) $$
-
-For an HMM with N hidden states and an observation sequence of T observations,
-there are $$N^{T}$$ possible hidden sequences. In a task of part-of-speech tagging, we could have 12 tags (N) and having a sentence with 10 words, that would be 12^10 separate observation likelihoods to compute.
-
----
-
-__Forward-Backward (FB) algorithm__
-
-The forward algorithm computes the observation probability by summing over the probabilities of all possible hidden state paths that could generate the observation sequence, but it does so efficiently by implicitly folding each of these paths into a single forward trellis.
-
-The FB algorithm relies on the independence of previous states assumption, which is illustrated in the trellis view by having arrows only between consecutive states.
-
-<br>
-<br>
-<br>
-
--->
