@@ -221,16 +221,16 @@ where, $$M$$ is the number of training examples and $$N$$ the length of the sequ
 All these 4 counts are then normalised in order to have proper probability distributions:
 
 
-$$P_{init(c_{t}|start)} = \frac { C_{init(t_{k})} } {\sum\limits_{l=1}^{K} C_{init(t_{l})}}$$
+$$P_{\text{init}(c_{t}|\text{start})} = \frac { C_{\text{init}(t_{k})} } {\sum\limits_{l=1}^{K} C_{\text{init}(t_{l})}}$$
 
 
-$$P_{final(stop|c_{l})} = \frac { C_{final(c_{l})} } {\sum\limits_{k=1}^{K} C_{trans(C_{k},C_{l})} + C_{final(C_{l}) }}$$
+$$P_{\text{final}(\text{stop}|c_{l})} = \frac { C_{\text{final}(c_{l})} } {\sum\limits_{k=1}^{K} C_{\text{trans}(C_{k},C_{l})} + C_{\text{final}(C_{l}) }}$$
 
 
-$$P_{trans(c_{k}|c_{l})} = \frac { C_{trans(c_{k},c_{l})} } {\sum\limits_{p=1}^{K} C_{trans(C_{p},C_{l})} + C_{final(C_{l}) }}$$
+$$P_{\text{trans}(c_{k}|c_{l})} = \frac { C_{\text{trans}(c_{k},c_{l})} } {\sum\limits_{p=1}^{K} C_{\text{trans}(C_{p},C_{l})} + C_{\text{final}(C_{l}) }}$$
 
 
-$$P_{emiss(w_{j}|c_{k})} = \frac { C_{emiss(w_{j},c_{k})} } { \sum\limits_{q=1}^{J} C_{emiss(w_{q},C_{k})}}$$
+$$P_{\text{emiss}(w_{j}|c_{k})} = \frac { C_{\text{emiss}(w_{j},c_{k})} } { \sum\limits_{q=1}^{J} C_{\text{emiss}(w_{q},C_{k})}}$$
 
 
 These equations will produce the __transition probability__ matrix $$A$$, with the probabilities from going from one label to another and the __emission probability__ matrix $$B$$ with the probabilities of an observation being generated from a state.
@@ -258,15 +258,15 @@ This is can be achieved by using the Viterbi algorithm, that finds the best stat
 
 It's a dynamic programming algorithm for computing:
 
-$$ \delta_{i}(T) = \underset{t_{0},\ldots,t_{i-1},t}{max} \ \ P(t_{0},\ldots,t_{i-1},t,w_{1},\ldots,w_{i-1})$$
+$$ \delta_{i}(T) = \underset{t_{0},\ldots,t_{i-1},t}{\max} \ \ P(t_{0},\ldots,t_{i-1},t,w_{1},\ldots,w_{i-1})$$
 
 the score of a best path up to position $$i$$ ending in state $$t$$. The Viterbi algorithm tackles the equation above by using the Markov assumption and defining two functions:
 
-$$ \delta_{i}(t) = \underset{t_{i-1}}{max} \ \ P(t \mid t_{i-1}) \cdot P(w_{i-1} \mid t_{i-1})  \cdot \delta_{i}(t_{i-1})$$
+$$ \delta_{i}(t) = \underset{t_{i-1}}{\max} \ \ P(t \mid t_{i-1}) \cdot P(w_{i-1} \mid t_{i-1})  \cdot \delta_{i}(t_{i-1})$$
 
 the most likely previous state for each state (store a back-trace):
 
-$$ \Psi_{i}(t) = \underset{t_{i-1}}{argmax} \ \ P(t \mid t_{i-1}) \cdot P(w \mid t_{i-1})  \cdot \delta_{i}(t_{i-1})$$
+$$ \Psi_{i}(t) = \underset{t_{i-1}}{\arg\max} \ \ P(t \mid t_{i-1}) \cdot P(w \mid t_{i-1})  \cdot \delta_{i}(t_{i-1})$$
 
 <br>
 
