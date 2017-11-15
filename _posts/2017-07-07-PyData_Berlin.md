@@ -25,7 +25,7 @@ The [PyData Berlin](https://pydata.org/berlin2017/) conference took place in the
 
 #### AI assisted creativity
 
-[Roelof Pieters](https://twitter.com/graphific) from [creative.ai](creative.ai) presented a talk about AI assisted creativity, mainly focusing on how generative models based on neural networks can be used to generate text, audio, speech, and images. The talk was focused on how to use these models has an augmentation tool and not an automation tool. It also presented a good history and a time-line on machine learning assisted art generation.
+[Roelof Pieters](https://twitter.com/graphific) from [creative.ai](http://creative.ai) presented a talk about AI assisted creativity, mainly focusing on how generative models based on neural networks can be used to generate text, audio, speech, and images. The talk was focused on how to use these models has an augmentation tool and not an automation tool. It also presented a good history and a time-line on machine learning assisted art generation.
 
 [![AI assisted creativity](https://img.youtube.com/vi/1XmCz3HFU9I/hqdefault.jpg)](https://www.youtube.com/watch?v=1XmCz3HFU9I)
 
