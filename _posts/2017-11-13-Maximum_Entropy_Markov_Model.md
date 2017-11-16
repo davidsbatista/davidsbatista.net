@@ -126,7 +126,7 @@ In contrast to HMMs, in which the current observation only depends on the curren
 
 In the MEMM instead of the transition and observation matrices, there is only one transition probability matrix. This matrix encapsulates all combinations of previous states $$S_{t−1}$$ and current observation $$O_{t}$$ pairs in the training data to the current state $$S_{t}$$.
 
-Let $$N$$ be the number of unique states and M the number of unique words, the matrix has the shape:
+Let $$N$$ be the number of unique states and $$M$$ the number of unique words, the matrix has the shape:
 
 $$(N \cdot M) \cdot N$$
 
@@ -136,7 +136,7 @@ The MEMM can condition on any useful feature of the input observation, in the HM
 
 The use of state-observation transition functions, rather than the separate transition and observation functions as in HMMs, allows us to model transitions in terms of multiple, non-independent features of observations.
 
-This is achieved by a multinomial logistic regression, to estimate the probability of each local tag given the previous tag, the observed word, and any other features we want to include:
+This is achieved by a multinomial logistic regression, to estimate the probability of each local tag given the previous tag (i.e., $$s'$$), the observed word (i.e. $$o$$), and any other features (i.e., $$f_{i}(x,y')$$) we want to include:
 
 
 $$P(s \mid s',o) = \frac{1}{Z(o,s')} \exp\bigg( \sum_{i=1}^{N} w_{i} \cdot f_{i}(x,y') \bigg)$$
