@@ -273,7 +273,7 @@ $$ \Psi_{i}(t) = \underset{t_{i-1}}{\arg\max} \ \ P(t \mid t_{i-1}) \cdot P(w \m
 The Viterbi algorithm uses a representation of the HMM called a __trellis__, which unfolds all possible states for each position and it makes explicit the independence assumption: each position only depends on the previous position.
 
 <figure>
-  <img style="width: 55%; height: 55%" src="/assets/images/2017-11-12-Viterbi_I.png">
+  <img style="width: 55%; height: 55%" src="/assets/images/2017-11-11-Viterbi_I.png">
   <figcaption>An unfilled trellis representation of an HMM.</figcaption>
 </figure>
 
@@ -281,7 +281,7 @@ The Viterbi algorithm uses a representation of the HMM called a __trellis__, whi
 
 <figure>
 <div id="images" style="text-align:center;">
-<img style="display: inline-block; margin-left: auto; margin-right: auto; height: 130px;" src="/assets/images/2017-11-12-Viterbi_Emission.png"/>
+<img style="display: inline-block; margin-left: auto; margin-right: auto; height: 130px;" src="/assets/images/2017-11-11-Viterbi_Emission.png"/>
 <img style="display: inline-block; margin-left: auto; margin-right: auto; height: 130px;" src="/assets/images/2017-11-12-Viterbi_State_Transitions.png"/>
 </div>
 <figcaption>Word Emission and State Transitions probabilities matrices.</figcaption>
@@ -292,7 +292,7 @@ The Viterbi algorithm uses a representation of the HMM called a __trellis__, whi
 Using the Viterbi algorithm and the emission and transition probabilities matrices, one can fill in the trellis scores and effectively find the Viterby path.
 
 <figure>
-  <img style="width: 55%; height: 55%" src="/assets/images/2017-11-12-Viterbi_II.png">
+  <img style="width: 55%; height: 55%" src="/assets/images/2017-11-11-Viterbi_II.png">
   <figcaption>An filled trellis representation of an HMM.</figcaption>
 </figure>
 
@@ -337,7 +337,7 @@ The figures above were taken from a Viterbi algorithm example by [Roger Levy](ht
 
 * [Chapter 9: "Hidden Markov Models" in Speech and Language Processing. Daniel Jurafsky & James H. Martin. Draft of August 7, 2017.](https://web.stanford.edu/~jurafsky/slp3/9.pdf)
 
-* [Hidden Markov Model inference with the Viterbi algorithm: a mini-example](/assets/documents/posts/2017-11-12-hmm_viterbi_mini_example.pdf)
+* [Hidden Markov Model inference with the Viterbi algorithm: a mini-example](/assets/documents/posts/2017-11-11-hmm_viterbi_mini_example.pdf)
 
 ## __Extra__
 
