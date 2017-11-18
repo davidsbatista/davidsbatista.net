@@ -282,7 +282,7 @@ The Viterbi algorithm uses a representation of the HMM called a __trellis__, whi
 <figure>
 <div id="images" style="text-align:center;">
 <img style="display: inline-block; margin-left: auto; margin-right: auto; height: 130px;" src="/assets/images/2017-11-11-Viterbi_Emission.png"/>
-<img style="display: inline-block; margin-left: auto; margin-right: auto; height: 130px;" src="/assets/images/2017-11-12-Viterbi_State_Transitions.png"/>
+<img style="display: inline-block; margin-left: auto; margin-right: auto; height: 130px;" src="/assets/images/2017-11-11-Viterbi_State_Transitions.png"/>
 </div>
 <figcaption>Word Emission and State Transitions probabilities matrices.</figcaption>
 </figure>
