@@ -298,7 +298,7 @@ Using the Viterbi algorithm and the emission and transition probabilities matric
 
 <br>
 
-The figures above were taken from a Viterbi algorithm example by [Roger Levy](http://idiom.ucsd.edu/~rlevy/) for the [Linguistics/CSE 256 class](http://idiom.ucsd.edu/~rlevy/teaching/winter2009/ligncse256/). You can find the full example [here](/assets/documents/posts/2017-11-12-hmm_viterbi_mini_example.pdf).
+The figures above were taken from a Viterbi algorithm example by [Roger Levy](http://idiom.ucsd.edu/~rlevy/) for the [Linguistics/CSE 256 class](http://idiom.ucsd.edu/~rlevy/teaching/winter2009/ligncse256/). You can find the full example [here](/assets/documents/posts/2017-11-11-hmm_viterbi_mini_example.pdf).
 
 ---
 
