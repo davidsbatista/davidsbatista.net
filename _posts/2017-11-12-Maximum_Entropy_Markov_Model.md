@@ -152,7 +152,11 @@ to 1 across each row.
 
 ### __Training and Decoding__
 
-The original MEMM paper, published in 2000, used a generalized iterative scaling (GIS) algorithm to fit the multinomial logistic regression, that is finding the perfect weights according to the training data. That algorithm has been largely surpassed by gradient-based methods such as L-BFGS.
+From the original paper:
+
+"In what follows, we will split $$P(s \mid s', O)$$ into $$\mid S \mid$$ separately trained transition functions $$ P_{s'} ( S \mid o) = P(s \mid s', O)$$. Each of these functions is given by an exponential model"
+
+THE MEMM trains one logistic regression per state transition, normalised locally. The original MEMM paper, published in 2000, used a generalized iterative scaling (GIS) algorithm to fit the multinomial logistic regression, that is finding the perfect weights according to the training data. That algorithm has been largely surpassed by gradient-based methods such as L-BFGS.
 
 For the decoding, the same algorithm as in the HMM is used, the Viterbi, although just slightly adapted to accommodate the new method of estimating state transitions.
 
@@ -196,3 +200,8 @@ for the task of noun-phrase chunking.
 * [Chapter 6: "Hidden Markov and Maximum Entropy Models" in Speech and Language Processing. Daniel Jurafsky & James H. Martin. Draft of September 18, 2007](https://www.cs.jhu.edu/~jason/papers/jurafsky+martin.bookdraft07.ch6.pdf)
 
 * [Hidden Markov Models vs. Maximum Entropy Markov Models for Part-of-speech tagging](https://github.com/willxie/hmm-vs-memm)
+
+
+## __Acknowledgments__
+
+The writing of this post is also the outcome of many discussions and white board sessions I had together with [Tobias Sterbak](https://twitter.com/tobias_sterbak)
