@@ -139,10 +139,10 @@ The use of state-observation transition functions, rather than the separate tran
 This is achieved by a multinomial logistic regression, to estimate the probability of each local tag given the previous tag (i.e., $$s'$$), the observed word (i.e. $$o$$), and any other features (i.e., $$f_{i}(x,y')$$) we want to include:
 
 
-$$P(s \mid s',o) = \frac{1}{Z(o,s')} \exp\bigg( \sum_{i=1}^{N} w_{i} \cdot f_{i}(x,y') \bigg)$$
+$$P(s \mid s',o) = \frac{1}{Z(o,s')}\  \exp\bigg( \sum_{i=1}^{N} w_{i} \cdot f_{i}(o,s') \bigg)$$
 
 
-where, $$w_{i}$$ are the weights to be learned, associated to each feature $$f_{i}(x,y)$$ and $$Z$$ is the normalizing factor that makes the matrix sum
+where, $$w_{i}$$ are the weights to be learned, associated to each feature $$f_{i}(o,s')$$ and $$Z$$ is the normalizing factor that makes the matrix sum
 to 1 across each row.
 
 <figure>
