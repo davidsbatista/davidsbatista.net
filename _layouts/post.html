@@ -27,6 +27,7 @@ layout: default
 </div>
 
 <div class="post-nav">
+  <center>
   {% if page.previous.url %}
     <a class="nav-link" href="{{ page.previous.url | prepend: site.baseurl }}" title="{{ page.previous.title }}">&#8592; previous</a>
   {% endif %}
@@ -34,7 +35,10 @@ layout: default
   {% if page.next.url %}
     <a class="nav-link" href="{{ page.next.url | prepend: site.baseurl }}" title="{{ page.next.title }}">next &#8594;</a>
   {% endif %}
+ </center>
 </div>
+
+{% include cc-license.html %}
 
 {% if page.comments %}
   {% include comments.html %}

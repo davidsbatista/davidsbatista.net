@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Google's SyntaxNet in Python NLTK 
+title: Google's SyntaxNet in Python NLTK
 date: 2017-03-25 00:00:00
 tags: [parsing, SyntaxNet, Python, NLTK, Dependency Graph]
 categories: [blog]
@@ -9,7 +9,7 @@ disqus_identifier: 20170325
 preview_pic: /assets/images/2017-03-25-syntaxnet.png
 ---
 
-In May 2016 Google released [SyntaxNet](https://research.googleblog.com/2016/05/announcing-syntaxnet-worlds-most.html), a syntactic parser whose performance beat previous proposed approaches. 
+In May 2016 Google released [SyntaxNet](https://research.googleblog.com/2016/05/announcing-syntaxnet-worlds-most.html), a syntactic parser whose performance beat previous proposed approaches.
 
 __UPDATE__: check this [post from 2017-07-22](../../../../../blog/2017/07/22/SyntaxNet-API-Portuguese/) on how to have SyntaxNet exposed as a web service.
 
@@ -105,7 +105,7 @@ for line in output[0].split("\n"):
 
 {% endhighlight %}
 
-We then join each word/token information in a string separated by '\tab' character, each word/token in a different line. 
+We then join each word/token information in a string separated by '\tab' character, each word/token in a different line.
 
 {% highlight python %}
 
@@ -147,7 +147,7 @@ For the first sentence we have the following triples and tree:
     ((u'memorando', u'VERB'), u'ccomp', (u'critica', u'VERB'))
     ((u'critica', u'VERB'), u'mark', (u'que', u'SCONJ'))
     ((u'critica', u'VERB'), u'dobj', (u'Trump.', u'PROPN'))
-    
+
                        assinaram
                 ___________|_____________
           funcionários               memorando
@@ -167,7 +167,7 @@ And for the second sentence:
     ((u'ovos', u'NOUN'), u'nummod', (u'250', u'NUM'))
     ((u'ovos', u'NOUN'), u'nmod', (u'ano.', u'NOUN'))
     ((u'ano.', u'NOUN'), u'case', (u'por', u'ADP'))
-    
+
                 pode
         _________|____
        |             ovos
