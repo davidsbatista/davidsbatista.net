@@ -22,7 +22,7 @@ Several [lexicons](https://github.com/davidsbatista/lexicons) I gathered for dif
 
 * [publico-acronyms.txt](https://github.com/davidsbatista/lexicons/blob/master/publico-acronyms.txt) a list of acronyms and it's possible extensions, extracted from a collection of Portuguese news gathered from the on-line newspaper publico.pt.
 
-* [wikipedia-acronyms.txt](wikipedia-acronyms.txt) a list of acronyms and it's possible extensions, extracted from the English Wikipedia.
+* [wikipedia-acronyms.txt](https://github.com/davidsbatista/lexicons/blob/master/wikipedia-acronyms.txt) a list of acronyms and it's possible extensions, extracted from the English Wikipedia.
 
 * [PT-stopwords.txt](https://github.com/davidsbatista/lexicons/blob/master/PT-stopwords.txt) a collections of stop-words for Portuguese.
 
