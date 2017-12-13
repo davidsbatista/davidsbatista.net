@@ -9,9 +9,6 @@ disqus_identifier: 20171203
 preview_pic: /assets/images/
 ---
 
-I've decided to make a quick review over, probably the most popular methods to generate word embeddings. First just to understand them a bit more in deep and also to apply them to a corpus of Portuguese news articles that I had been collecting since a few years.
-
-
 # __Word2Vec: Skip-Gram__
 
 <!--
@@ -73,68 +70,29 @@ cat news_aricles | cut --complement -f1,2,3 $1 \
 | tr -s " " \
 | sed s/"['\"\(\)\`”′″‴«»„”“‘’º]"/""/g \
 | sed s/"\(\w\)[\.,:;\!?\"\/+]\s"/"\1 "/g \
-| sed s/"\["/""/g | sed s/"\]"/""/g \ sed -e 's/\.//g' \
-| sed s/" - "/" "/g | sed s/" — "/" "/g \
-| sed s/" , "/" "/g | sed s/" \/ "/" "/g \
-| sed s/"-,"/""/g | sed s/"—,"/""/g | sed s/"--"/""/g \
+| sed s/"\["/""/g \
+| sed s/"\]"/""/g \
+| sed -e 's/\.//g' \
+| sed s/" - "/" "/g \
+| sed s/" — "/" "/g \
+| sed s/" — "/" "/g \
+| sed s/" — "/" "/g \
+| sed s/" – "/" "/g \
+| sed s/" – "/" "/g \
+| sed s/" , "/" "/g \
+| sed s/" \/ "/" "/g \
+| sed s/"-,"/""/g \
+| sed s/"—,"/""/g \
+| sed s/"–,"/""/g \
+| sed s/"--"/""/g \
 | sed s/"\(\w\)[\.,:;\!?\"\/+]\s"/"\1 "/g \
 | tr -s " " > news_articles_clean.txt;
 {% endhighlight bash %}
 
 The script takes as input a text file with a news article per line, including title, date, category, etc.; it takes only the text fields (i.e., title, lead, news text) and generates a file where each line consists of a title, a lead of a news text. All the tokens are in lower case and there is no punctuation.
 
-After all this pre-processing a quick way to inspect the generated tokens is to run the following line, which it will output all the tokens in the file ordered by frequency of occurrence:
+A quick way to inspect the generated tokens is to run the following line, which it will output all the tokens in the file ordered by frequency of occurrence:
 
 {% highlight bash %}
 cat news_articles_clean.txt | tr ' ' '\n' | sort | uniq -c | sort -gr > tokens_counts.txt
 {% endhighlight bash %}
-
-But still I noticed that even after this some special characters were in the text, I've found out that most of them were
-[Non-breaking space characters](https://www.wikiwand.com/en/Non-breaking_space).
-
-{% highlight python %}
-from collections import defaultdict
-
-out = [10, 32]
-special_chars = [9, 11, 12, 13, 133, 160, 5760, 8192, 8193, 8194, 8195, 8196,
-                 8197, 8198, 8199, 8200, 8201, 8202, 8232, 8233, 8239, 8287,
-                 12288, 6158, 8288, 65279, 8205, 8204, 8203, 183, 9085, 9248,
-                 9250, 9251]
-chars = []
-
-for x in special_chars:
-    chars.append(chr(x))
-
-chars_found = defaultdict(int)
-for i in range(len(data)):
-    for char in chars:
-        if char in data[i]:
-            chars_found[char] += 1
-
-{% endhighlight python %}
-
-
-I've discovered some more characters that needed to be clean:
-
-{% highlight python %}
-{'\xa0': 66970,
- '·': 10,
- '\u2009': 2,
- '\u200b': 1,
- '\u200c': 1,
- '\u2028': 62,
- '\u2029': 1}
-{% endhighlight python %}
-
-Just another pass through the data to clean and it's done:
-
-{% highlight python %}
- for i in range(len(data)):
-     for char in chars:
-         if char in data[i]:
-             data[i] = data[i].replace('\xa0',' ').replace('·','')
-             .replace('\u2009',' ').replace('\u200b',' ').replace('\u200c',' ')
-             .replace('\u2028',' ').replace('\u2029',' ')
-
-
-{% endhighlight python %}
