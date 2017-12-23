@@ -7,6 +7,7 @@ categories: [blog]
 comments: true
 disqus_identifier: 20171111
 preview_pic: /assets/images/2017-11-11-HMM.png
+description: An introduction to Naive Bayes and Hidden Markov Models
 ---
 
 This is the first post, of a series of posts, about sequential supervised learning applied to Natural Language Processing. In this first post I will write about the classical algorithm for sequence learning, the Hidden Markov Model (HMM), explain how it's related with the Naive Bayes Model and it's limitations.

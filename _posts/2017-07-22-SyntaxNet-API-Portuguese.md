@@ -1,12 +1,13 @@
 ---
 layout: post
-title: Google's SyntaxNet - HTTP API for Portuguese 
+title: Google's SyntaxNet - HTTP API for Portuguese
 date: 2017-07-22 00:00:00
 tags: [python, NLTK, SyntaxNet, API, Portuguese, part-of-speech, syntactic dependencies]
 categories: [blog]
 comments: true
 disqus_identifier: 20170722
 preview_pic: /assets/images/2017-07-22-SyntaxNetHTTP.png
+description: Setting up a SyntaxNet HTTP endpoint for Portuguese
 ---
 
 In a [previous post](../../../../../blog/2017/03/25/syntaxnet/) I explained how load the syntactic and morphological information given by SyntaxNet into NLTK structures by parsing the standard output. Although usefull this is does not scale when one wants to process thousands of sentences, but finally I've found a Docker image to setup SyntaxNet as a webservice.
@@ -38,7 +39,7 @@ Before building the docker image (i.e., running `docker build . -t syntaxnet-api
 
 #### 3. __Run the Docker Image__
 
-Next, after building the docker image, you just need to run it. Type 
+Next, after building the docker image, you just need to run it. Type
 
 	docker images
 
@@ -67,7 +68,7 @@ NOTE: I omitted some of the ouputted info for each word to make everything fit i
 
 ## Alternatives (bit faster)
 
-After running a few experiments in batch I notice this was still a bit slow, probably because I was also running it on a machine without any GPUs. 
+After running a few experiments in batch I notice this was still a bit slow, probably because I was also running it on a machine without any GPUs.
 
 Looking through more SyntaxNet Docker images I've [found another](https://github.com/danielperezr88/syntaxnet-api), a fork of the one described above, which pre-loads the models, and makes the batch processing a bit faster.
 

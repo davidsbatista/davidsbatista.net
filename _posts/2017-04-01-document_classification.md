@@ -8,6 +8,7 @@ categories: [blog]
 tags: [classification, multi-label, sklearn, tf-idf, word2vec, doc2vec]
 comments: true
 preview_pic: /assets/images/2017-04-01-IMDB-movie-genre-classification.png
+description: An introduction to Document Classification
 ---
 
 Classifying a document into a pre-defined category is a common problem, for instance, classifying an email as spam or not spam. In this case there is an instance to be classified into one of two possible classes, i.e. binary classification.
@@ -19,9 +20,9 @@ In this post I will show an approach to classify a document into a set of pre-de
 
 ## Dataset
 
-In order to create the dataset for this experiment you need to download _genres.list_ and _plot.list_ files from a [mirror FTP](ftp://ftp.fu-berlin.de/pub/misc/movies/database/), and then parse files in order to associate the titles, plots, and genres. 
+In order to create the dataset for this experiment you need to download _genres.list_ and _plot.list_ files from a [mirror FTP](ftp://ftp.fu-berlin.de/pub/misc/movies/database/), and then parse files in order to associate the titles, plots, and genres.
 
-I've already done this step, and parsed both files in order to generate a single file, available here [movies_genres.csv](https://github.com/davidsbatista/text-classification/blob/master/movies_genres.csv.bz2), containing the plot and the genres associated to each movie. 
+I've already done this step, and parsed both files in order to generate a single file, available here [movies_genres.csv](https://github.com/davidsbatista/text-classification/blob/master/movies_genres.csv.bz2), containing the plot and the genres associated to each movie.
 
 
 ## Pre-processing and cleaning
@@ -308,14 +309,14 @@ df.to_csv("movies_genres_en.csv", sep='\t', encoding='utf-8', index=False)
 
 ## Vector Representation and Classification
 
-For vector representation and I will use two Python packages: 
+For vector representation and I will use two Python packages:
 
 * [sklearn](http://scikit-learn.org/)
 * [gensim](https://radimrehurek.com/gensim/)
 
-To train supervised classifiers, we first need to transform the plot into a vector of numbers. I will explore 3 different vector representations: 
+To train supervised classifiers, we first need to transform the plot into a vector of numbers. I will explore 3 different vector representations:
 
-* TF-IDF weighted vectors 
+* TF-IDF weighted vectors
 * word2vec embeddings
 * doc2vec embeddings
 
@@ -324,7 +325,7 @@ After having this vector representations of the text we can train supervised cla
 
 #### TF-IDF
 
-Based on the [bag-of-words model](https://www.wikiwand.com/en/Bag-of-words_model), i.e., no word order is kept. I considered [TF-IDF](https://www.wikiwand.com/en/Tf%E2%80%93idf) weighted vectors, composed of different [_n_-grams](https://www.wikiwand.com/en/N-gram) size, namely: uni-grams, bi-grams and tri-grams. I also experimentally eliminated words that appear in more than a given number of documents. All this features can be easily configured with [TfidfVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html) class. 
+Based on the [bag-of-words model](https://www.wikiwand.com/en/Bag-of-words_model), i.e., no word order is kept. I considered [TF-IDF](https://www.wikiwand.com/en/Tf%E2%80%93idf) weighted vectors, composed of different [_n_-grams](https://www.wikiwand.com/en/N-gram) size, namely: uni-grams, bi-grams and tri-grams. I also experimentally eliminated words that appear in more than a given number of documents. All this features can be easily configured with [TfidfVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html) class.
 
 The _max_df_ parameter is used for removing terms that appear too frequently, i.e., _max_df_ = 0.50 means “ignore terms that appear in more than 50% of the documents”. The _ngram_range_ parameter selects how large are the sequence of words to be considered.
 
@@ -336,7 +337,7 @@ tfidf__ngram_range: ((1, 1), (1, 2), (1, 3))
 
 
 #### Word2Vec
-  
+
 Under this scenario, a movie plot is represented by a single real-value dense vector based on the [word embeddings](https://www.wikiwand.com/en/Word_embedding) associated with each word. This is done by selecting words from the plot, based on their [part-of-speech (PoS)-tags](http://universaldependencies.org/u/pos/), and then summing their word embeddings and averaging them into a single vector. I used the [GoogleNews-vectors](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit), which have dimension of 300 and are derived from English corpora. For this experiment I selected only adjectives and nouns;
 
 
@@ -370,9 +371,9 @@ test_x = [x[0].strip() for x in x_test.tolist()]
 {% endhighlight python %}
 
 
-After loading the data I also split the data into two sets: 
+After loading the data I also split the data into two sets:
 
-* 2/3 ~ 66.6% of the data for tuning the parameters of the classifiers 
+* 2/3 ~ 66.6% of the data for tuning the parameters of the classifiers
 * 1/3 ~ 33.3% will be used to test the performance of the classifiers
 
 
@@ -468,18 +469,18 @@ print classification_report(test_y, predictions, target_names=genres)
     Naive Bayes best parameters set:
         TfidfVectorizer: max_df=0.25, ngram_range=(1, 3)
         MultinomialNB: alpha=0.001
-    
+
     Linear SVM best parameters set:
         TfidfVectorizer: max_df=0.25 ngram_range=(1, 2)
         LinearSVC:  C=1, class_weight='balanced'
-    
+
     LogisticRegression best parameters set:
         TfidfVectorizer:  max_df=0.75, ngram_range=(1, 2)
         LogisticRegression: C=1, class_weight='balanced'
-    
-    
+
+
                          precision    recall   f1-score   
-    
+
     Naive Bayes            0.95        0.76      0.84     
     Linear SVM             0.89        0.86      0.87     
     LogisticRegression     0.70        0.89      0.78     
@@ -491,12 +492,12 @@ print classification_report(test_y, predictions, target_names=genres)
 
     Linear SVM best parameters set:
         LinearSVC:  C=1, class_weight=None
-    
+
     LogisticRegression best parameters set:
         LogisticRegression: C=1, class_weight=None
-    
+
                          precision    recall   f1-score   
-    
+
     Linear SVM             0.68        0.37      0.45
     LogisticRegression     0.67        0.40      0.48
 
@@ -507,12 +508,12 @@ print classification_report(test_y, predictions, target_names=genres)
 
     Linear SVM best parameters set:
         LinearSVC:  C=0.1, class_weight=None
-    
+
     LogisticRegression best parameters set:
         LogisticRegression: C=1, class_weight=None
-    
+
                          precision    recall   f1-score   
-    
+
     Linear SVM             0.69        0.31      0.40
     LogisticRegression     0.65        0.36      0.45
 
@@ -527,9 +528,9 @@ The best results are achieved with a Linear SVM and TF-IDF representation of the
     Best parameters set:
         TfidfVectorizer(max_df=0.25, ngram_range=(1, 2))
             LinearSVC(C=1, class_weight='balanced')
-    
+
                   precision    recall  f1-score   support
-    
+
          Action       0.89      0.84      0.86      4046
           Adult       1.00      0.67      0.80        21
       Adventure       0.89      0.81      0.85      3415
@@ -557,13 +558,13 @@ The best results are achieved with a Linear SVM and TF-IDF representation of the
        Thriller       0.86      0.78      0.82      2914
             War       0.91      0.79      0.84       447
         Western       0.96      0.86      0.91       874
-    
+
     avg / total       0.89      0.86      0.87     83596
 
 
-The embeddings methods shows very low results, the representation based on the word2vec was just a naive way to get sentence embeddings, more robust methods could be explored like concatenating each words vector into a single vector, and give it as input to a neural network. 
+The embeddings methods shows very low results, the representation based on the word2vec was just a naive way to get sentence embeddings, more robust methods could be explored like concatenating each words vector into a single vector, and give it as input to a neural network.
 
-The doc2vec vectors were generated with gensim out-of-the-box, some parameter tunning on vectors generation process might give better results. 
+The doc2vec vectors were generated with gensim out-of-the-box, some parameter tunning on vectors generation process might give better results.
 
 Also, word2vec and doc2vec, since they have a much lower dimension, i.e. 300 compared to 50 000 up to 100 000 of the TF-IDF weighted vectors, could probably be achieved with a non-linear kernel.
 

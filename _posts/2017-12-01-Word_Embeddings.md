@@ -6,14 +6,22 @@ tags: [word embeddings, word2vec, fasttext, glove]
 categories: [blog]
 comments: true
 disqus_identifier: 20171203
-preview_pic: /assets/images/
+preview_pic: /assets/images/2017-12-03-word-embeddings.jpg
 ---
+
+Word embeddings are the technique that made possible all the latest achievements in NLP using neural networks. In this blog post I will review three popular techniques to generate word embeddings: skip-gram, glove and fasttext.
 
 # __Word2Vec: Skip-Gram__
 
 <!--
 stochastic gradient descent
 backward propagation
+
+
+picture by:
+
+https://pixabay.com/en/users/terimakasih0-624267/
+
 -->
 
 # __GloVe__

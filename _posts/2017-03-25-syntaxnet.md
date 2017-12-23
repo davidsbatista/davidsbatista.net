@@ -7,6 +7,7 @@ categories: [blog]
 comments: true
 disqus_identifier: 20170325
 preview_pic: /assets/images/2017-03-25-syntaxnet.png
+description: Parsing SyntaxNet output with Python NLTK
 ---
 
 In May 2016 Google released [SyntaxNet](https://research.googleblog.com/2016/05/announcing-syntaxnet-worlds-most.html), a syntactic parser whose performance beat previous proposed approaches.

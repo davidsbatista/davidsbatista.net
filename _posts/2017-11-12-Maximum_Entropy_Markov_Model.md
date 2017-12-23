@@ -7,6 +7,7 @@ categories: [blog]
 comments: true
 disqus_identifier: 20171112
 preview_pic: /assets/images/2017-11-12-HMM_vs_MEMM.png
+description: An introduction to Maximum Entropy Markov Models
 ---
 
 
