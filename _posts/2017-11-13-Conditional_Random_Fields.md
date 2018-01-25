@@ -102,7 +102,7 @@ $$
 P(\bar{y} \mid \bar{x}; \bar{w}) = \frac{\exp(\bar{w} \cdot F(\bar{x},\bar{y}))}{\sum\limits_{\bar{y}' \in Y} \exp(\bar{w} \cdot F(\bar{x},\bar{y}'))}
 $$
 
-This can been seen as another log-linear model, but it is is "giant" in the sense that:
+This can been seen as another log-linear model, but "giant" in the sense that:
 
 * The space of possible values for $$\bar{y}$$, i.e., $$Y^{n}$$, is huge, where $$n$$ is the since of the sequence.
 * The normalisation constant involves a sum over the set $$Y^{n}$$.
