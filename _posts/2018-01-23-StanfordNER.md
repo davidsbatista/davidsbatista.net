@@ -34,7 +34,8 @@ Create a file with a sample sentence in english.
 
     echo "Switzerland, Davos 2018: Soros accuses Trump of wanting a 'mafia state' and blasts social media." > test_file.txt
 
-Then run the java command, applying the `english.all.3class.distsim.crf.ser.gz` model to the sentence above:
+Then, to apply the `english.all.3class.distsim.crf.ser.gz` to the sentence above,
+run the java command shown bellow:
 
     java -cp stanford-ner-2017-06-09/stanford-ner.jar edu.stanford.nlp.ie.crf.CRFClassifier -loadClassifier classifiers/english.all.3class.distsim.crf.ser.gz -textFile test_file.txt
 
@@ -42,7 +43,7 @@ This should output:
 
     Switzerland/LOCATION ,/O Davos/PERSON 2018/O :/O Soros/PERSON accuses/O Trump/PERSON of/O wanting/O a/O `/O mafia/O state/O '/O and/O blasts/O social/O media/O ./O
 
-The output of the model can be configured with the `-outputFormat` parameter, for instance, with `-outputFormat tsv`:
+The output of the model can be configured with the `-outputFormat` parameter, for instance, with `-outputFormat tsv`, you get:
 
     Switzerland	LOCATION
     ,	O
@@ -65,7 +66,7 @@ The output of the model can be configured with the `-outputFormat` parameter, fo
     media	O
     .	O
 
-Other possible formats are: `xml`, `inlineXML`, `tsv` or `slashTags`
+The possible formats are: `xml`, `inlineXML`, `tsv` or `slashTags`
 
 
 ---
@@ -77,7 +78,7 @@ This section describes the basic steps to train your own NER model, from pre-pro
 
 ## __Corpus__
 
-I've used a annotated corpus which unfortunately isn't public available, and this experiments were done in the context of a research project with the goal to train a named-entity recognizer for Portuguese. The [CINTIL Corpus – International Corpus of Portuguese](http://catalog.elra.info/product_info.php?products_id=1102&language=en) is available through a commercial or academic research license.
+I've used a annotated corpus which unfortunately isn't public available, and this experiments were done in the context of a research project while doing my PhD, with the goal to train a named-entity recognizer for Portuguese. The [CINTIL Corpus – International Corpus of Portuguese](http://catalog.elra.info/product_info.php?products_id=1102&language=en) is only available through a commercial or academic research license.
 
 ### __Pre-Processing__
 
@@ -89,7 +90,11 @@ The first thing I did was to pre-process the original corpus. In it's original f
 
 You can read more about Portuguese contractions [here](https://www.wikiwand.com/en/Contraction_(grammar)#/Portuguese) and [here](https://blogs.transparent.com/portuguese/contractions-in-portuguese/).
 
-I also converted the original corpus format into a CoNNL style format, since the original comes XML. Then, I discard some annotations (i.e., MSC and EVT) which were not relevant for my experiments. I used BIO encoding for 4 different types of named-entities, resulting in a total of 30 343 sentences, and the following number of tags for each token:
+So I come up with a script (very quick and dirty) to convert the extended contractions back to the short original forms, since that is the way one finds most of the news texts in Portuguese.
+
+I also converted the original corpus format into a CoNNL style format, i.e., one token per line, since the original corpus is distributed in XML format.
+
+Then, I discard some annotations (i.e., MSC and EVT) which were not relevant for my experiments. I've kept the original BIO encoding schema for 4 different types of named-entities, resulting in a total of 30 343 sentences, and the following number of tags for each token:
 
 {% highlight python %}
           Total Number of Tokens
@@ -115,11 +120,11 @@ Total          638 837
 
 ## __K-folds__
 
-I've created 5 folds, with an average of 6 069 sentences per fold, over the original corpus. I noticed after looking at the distribution of types of entities per fold, that the folds were unbalanced.
+I've created 5 folds, with around of 6 068 sentences per fold, over the original corpus. I noticed after looking at the distribution of types of entities per fold, that the folds were unbalanced.
 
-I ran some experiments, using this original distribution of tags per folds, and quickly noticed that the results were very low for some tags.
+I ran some experiments, using this original distribution of tags per folds, and quickly noticed that the results were very low for some tags. Therefore, I simply shuffled the order of sentences in the corpus, and then generated new folds.
 
-Therefore, I simply shuffled the order of sentences in the corpus, and then generated new folds. Notice that the order of the sentences doesn't influence the model, since the CRF will tag each sentence individually. I then inspected the distribution of tokens, which was now balanced compared to before.
+Notice that the order of the sentences doesn't influence the model, since the CRF will tag each sentence individually. I then inspected the distribution of tokens, which was now balanced compared to before.
 
 You can apply more robust techniques to achieve this balance, but sometimes, like in this case,  a simply shuffle will do the trick.
 
@@ -132,28 +137,29 @@ The command to train each fold using StanfordNER is the following:
 
 Breaking it down:
 
-`-prop stanford_ner.prop`: the file which contains the configuration for the model be learned, such as features and the learning algorithm (see next section).
+`-prop stanford_ner.prop`: the file which contains the configuration for the model be learned, such as features and the learning algorithm (see next section);
 
-`-trainFile corpus/fold_1_2_3_4`: file containing training data
+`-trainFile corpus/fold_1_2_3_4`: file containing training data;
 
-`-testFile corpus/fold_0`: file containing testing data
+`-testFile corpus/fold_0`: file containing testing data;
 
-`1>tagged_fold_0.csv`: output of the tagged training data, it contains 3 columns: word, true_tag, predicted_tag; this can be useful to perform further evaluations
+`1>tagged_fold_0.csv`: output of the tagged training data, it contains 3 columns: word, true_tag, predicted_tag; this can be useful to perform further evaluations;
 
-`2>results_fold_0.txt`: output of the evaluation results and also the logging produced during the learning phase, might also be useful to confirm which checks are on, the number of iterations of the learning algorithm, etc.
+`2>results_fold_0.txt`: output of the evaluation results and also the logging produced during the feature extraction/generation and the learning algorithm, might be useful to confirm which properties are on, the number of iterations of the learning algorithm, etc.;
 
 `-serializeTo model_fold_0.ser.gz`: file to save the learned model.
 
 
 The built-in evaluation of StanfordNER shows the results per label and aggregated, that is, you see the overall results for `LOC`, `ORG`, `PER` and `WRK`, and not on each possible token label, i.e.: `B-LOC`, `I-LOC`, etc.
 
-I wrote a simple script which read all the results for each fold, that is, the true label and the predicted label, a computes precision, recall and f1 by each possible token label.
+I wrote a simple script which read all the results for each fold (e.g., output in the file `results_fold_X.txt`), that is, the true label and the predicted label, and computes precision, recall and F1 for each token label.
 
 
 ## __Features: experiments and results__
 
-One of the great advantages of StanfordNER is the powerful template of features, which I believe is the contribution of different persons. The downside is that the documentation is not so great and you need to go through the source code to understand exactly what each feature represents.
+One of the great advantages of StanfordNER is the powerful features template, which I believe, is the contribution of different persons, students and researchers from the NLP group at Stanford.
 
+The downside is that the documentation is not so great and sometimes, you really need to go through the source code to understand exactly what each feature represents.
 
 #### __Experiment 1__
 
@@ -167,11 +173,11 @@ useNext = true
 useTags = true
 ```
 
-according to the documentation (javadoc file for NERFeatureFactory.java):
+according to the documentation (javadoc file for `NERFeatureFactory.java`):
 
-* usePrev:	Gives you feature for (pw,c), and together with other options enables other previous features, such as (pt,c) [with useTags)
+* usePrev:	Gives you feature for (pw,c), and together with other options enables other previous features, such as (pt,c) [with useTags]
 
-* useNext:	Gives you feature for (nw,c), and together with other options enables other next features, such as (nt,c) [with useTags)
+* useNext:	Gives you feature for (nw,c), and together with other options enables other next features, such as (nt,c) [with useTags]
 
 * useTags:	Gives you features for (t,c), (pt,c) [if usePrev], (nt,c) [if useNext]
 
@@ -184,7 +190,7 @@ this will fire features which associate the position of a word, and the position
 
 ```
 useGazettes=true
-gazette=resources/gazettes/DBPedia-pt-per-gazette.txt;resources/gazettes/DBPedia-pt-loc-gazette.txt;resources/gazettes/DBPedia-pt-org-gazette.txt
+gazette=resources/DBPedia-pt-per-gazette.txt;resources/DBPedia-pt-loc-gazette.txt;resources/DBPedia-pt-org-gazette.txt
 cleanGazette=true
 
 checkNameList=true
@@ -197,27 +203,35 @@ distSimLexicon=resources/word_cluster.txt
 casedDistSim=true
 ```
 
+
 ##### __Gazetteers__
 
-The `useGazettes=true` and `gazetee=files` states that the model should use gazetteers and to generate features, the gazetteers files format is:
+The `useGazettes=true` and `gazetee=list_of_files` states that the model should use gazetteers to generate features, the gazetteers files format is:
 `ent_type \t entry` for instance:
 
 ```
 LOC  Berlin
 LOC  Lisboa
+LOC  Zurique
 ```
 
-`cleanGazette=true` means that a feature is generated for a sequence of tokens in text when all the tokens match a gazette entry.
+`cleanGazette=true` means that a feature is generated for a sequence of tokens when all the tokens (in that sequence) match a gazette entry.
+
+
 
 ##### __Name Lists__
 
 `checkNameList=true` if set to true it will look at the files specified by `lastNameList`, `maleNameList`, `femaleNameList`, and add these as features for person names, here each name is split into an individual word, and the feature is just a single word, in the list of names.
 
+
+
 ##### __Distributional Similarity__
 
-The flag `useDistSim=true`, forces the load of the file specified by `distSimLexicon`, this file should contain a word and a class identifier for that word, or the other way around depending on `distSimFileFormat`. The idea if to use distributional similarity classes as features. There many methods to generate, from a big corpus, classes of words. Two possible methods are:
+The flag `useDistSim=true`, will trigger the load of the file specified by `distSimLexicon`, this file should contain a word and a class identifier for that word, or the other way around depending on `distSimFileFormat`. The idea is to use distributional similarity, based on classes, as features.
 
-* [Class-Based n-gram Models of Natural Language](https://github.com/percyliang/brown-cluster)
+One just first needs to generate these distributional similarity classes for words. There many methods to learn, from a big corpus, such word classes words. Two possible methods are:
+
+* [Class-Based n-gram Models of Natural Language](https://github.com/percyliang/brown-cluster) aka Brown Clusters
 
 * Clustering words based on the embeddings representation, you can see __demo-classes.sh__ file, part of [word2vec](https://github.com/tmikolov/word2vec) package for an example.
 
@@ -243,10 +257,11 @@ I-WRK	    0.749      0.311	 0.440
 {% endhighlight %}
 
 
+It doesn't seem so bad, but let's see if we can do better.
 
 #### __Experiment 2__
 
-Next, on a second experiment I switched on a few more features. The idea is then to run again the training and testing for the same folds and see how the performance varies, and doing this with different sets of switched on or off.
+Next, on a second experiment I switched on a few more features. The idea is then to run again the training and testing for the same folds and see how the performance varies, and doing this with different sets of features, switched on or off.
 
 I added the following two features to the baseline features:
 
@@ -279,11 +294,11 @@ B-WRK	    0.857      0.578	 0.690
 I-WRK	    0.783      0.370	 0.502
 {% endhighlight %}
 
-There is a significant boost in the both precision and recall results, comparing with the previous results, so it seems we are on the right path :) The only thing is the recall for the `I-LOC` and `I-ORG` which still a bit low comparing with the recall values for the other tags.
+There is a significant boost in the both precision and recall results, comparing with the previous results, so it seems we are on the right path :) The only thing is the recall for the `I-LOC`, `I-ORG` and `I-WRK` which still a bit low comparing with the recall values for the other tags.
 
 #### __Experiment 3__
 
-Next I added two more features:
+Next, I added two more features:
 
 ```
 useShapeConjunctions=True
@@ -328,7 +343,9 @@ I-WRK	    0.784      0.381	 0.513
 {% endhighlight %}
 
 
-This resulted in, overall, lower results than before, I suspected this was mainly due to the huge amount of feature generated by the `useSymTags` flag.
+This resulted in overall lower results than before, I suspected this was mainly due to the huge amount of features generated by the `useSymTags` flag, so I turned it off for the next experiment.
+
+
 
 #### __Experiment 4__
 
@@ -357,7 +374,7 @@ B-WRK	    0.854      0.580	 0.691
 I-WRK	    0.771      0.370	 0.500
 {% endhighlight %}
 
-this kept more or less the same results, with some improvements for the `I-LOC` and `I-ORG`, but a lower `I-WRK`, as you can see it's hard to keep improving every tag, and feature exploration/engineering is not always a straightforward task.
+this kept more or less the same results, with some improvements for the `I-LOC` and `I-ORG`, but a lower `I-WRK`, as you can see it's hard to keep improving every tag.
 
 
 ## __Best Results__
@@ -373,41 +390,63 @@ shapes_all=True
 useDisjunctive=True
 useLastRealWord=True
 useNextRealWord=True
+
+plus the baseline features described in the first experiment.
 ```
 
-plus the first baseline features described in the first experiment.
+
 
 {% highlight python %}
           Precision    Recall     F1
 
-B-LOC	    0.792      0.765	 0.778
-I-LOC	    0.770      0.547	 0.639
+B-LOC	    0.795      0.765	 0.779
+I-LOC	    0.779      0.578	 0.664
 
-B-ORG	    0.845      0.712	 0.773
-I-ORG	    0.831      0.669	 0.741
+B-ORG	    0.845      0.710	 0.772
+I-ORG	    0.832      0.666	 0.740
 
-B-PER	    0.909      0.798	 0.850
-I-PER	    0.875      0.768	 0.818
+B-PER	    0.909      0.799	 0.850
+I-PER	    0.873      0.769	 0.818
 
-B-WRK	    0.858      0.589	 0.698
-I-WRK	    0.811      0.491	 0.612
+B-WRK	    0.857      0.588	 0.698
+I-WRK	    0.808      0.490	 0.610
 {% endhighlight %}
 
 
-The recall for `I-LOC`, `I-ORG` and `I-WRK` could probably still be improved a bit, but stop experiment after around 10 iterations/experiments.
+With some more research the recall for `I-LOC`, `I-ORG` and `I-WRK` could probably still be improved.
 
-After this feature selection/engineering step you might want to train a model on all your data with using best set of features.
+#### __Learning Algorithm__
 
 <!--
-# QNMinimizer terminated due to average improvement: | newest_val - previous_val | / |newestVal| < TOL
-
-0.15
-0.13
-
-TOL = 10
-TOL = 1e-4
+https://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/sequences/SeqClassifierFlags.html
 -->
 
+StanfordNER supports a few numerical optimization algorithms. One can see which ones are implemented and can be used to train the CRF by looking into the  getMinimizer() method in the CRFClassifier.java file.
+
+I configured my properties file to use the Orthant-Wise Limited-memory Quasi-Newton, by setting:
+
+`useOWLQN=True`
+
+The L1-prior can be set with:
+
+`priorLambda=10`
+
+An useful trick is to play with the convergence tolerance parameter TOL, which is checked at each iteration:
+
+`|newest_val - previous_val| / |newestVal| < TOL`
+
+the TOL is controlled by:
+
+`tolerance=0.0001`
+
+Yet another useful parameter is to explicitly control the maximum number of iterations for which the learning algorithm should run, for instance:
+
+`maxQNItr=100`
+
+---
+
+
+After doing feature selection and trying different parameters of the learning algorithm, you train a model on all your data with using best set of features and the best parameters for the learning algorithm.
 
 ---
 
@@ -454,9 +493,9 @@ Out[16]: "<LOCATION>Switzerland</LOCATION>, <PERSON>Davos</PERSON> 2018: <PERSON
 
 ## __References__
 
-Template features file used by this experiment as well as the evaluation scripts:
+A template features file, the evaluation scripts, and the gazetteers are all here:
 
-* [https://github.com/davidsbatista/NER-experiments](https://github.com/davidsbatista)
+* [https://github.com/davidsbatista/StanfordNER-experiments](https://github.com/davidsbatista/StanfordNER-experiments)
 
 The dictionaries and gazetteers used for feature generation are publicly available here:
 
