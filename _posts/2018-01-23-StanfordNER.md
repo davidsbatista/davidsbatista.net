@@ -12,17 +12,12 @@ description: Using StanfordNER to train a Named-Entity Recognizer and setting up
 
 Stanford NER is a named-entity recognizer based on linear chain Conditional Random Field (CRF) sequence models. This post details some of the experiments I've done with it, using a corpus to train a Named-Entity Recognizer: the features I've explored (some undocumented), how to setup a web service exposing the trained model and how to call it from a python script.
 
-<!--
-image taken from: http://slideplayer.com/slide/5898548/
-Named Entity Recognition and the Stanford NER Software Jenny Rose Finkel Stanford University March 9, 2007.
--->
-
 # __Stanford NER__
 
 
 <figure>
-  <img style="width: 50%; height: 50%" src="/assets/images/2018-01-23-stanford_ner.png">
-  <figcaption>Named Entity Recognition and the Stanford NER Software (Jenny Finkel)</figcaption>
+  <img style="width: 66%; height: 66%" src="/assets/images/2018-01-23-stanford_ner.png">
+  <figcaption>Named Entity Recognition and the Stanford NER</figcaption>
 </figure>
 
 
