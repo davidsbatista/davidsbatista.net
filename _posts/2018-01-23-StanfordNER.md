@@ -6,7 +6,7 @@ tags: [StanfordNER Conditional Random Fields Named-Entity Recognition]
 categories: [blog]
 comments: true
 disqus_identifier: 20180123
-preview_pic: /assets/images/2018-01-23-stanford_ner.png
+preview_pic: /assets/images/2018-01-23-stanford_ner.jpg
 description: Using StanfordNER to train a Named-Entity Recognizer and setting up a web service
 ---
 
@@ -16,7 +16,7 @@ Stanford NER is a named-entity recognizer based on linear chain Conditional Rand
 
 
 <figure>
-  <img style="width: 66%; height: 66%" src="/assets/images/2018-01-23-stanford_ner.png">
+  <img style="width: 66%; height: 66%" src="/assets/images/2018-01-23-stanford_ner.jpg">
   <figcaption>Named Entity Recognition and the Stanford NER</figcaption>
 </figure>
 
