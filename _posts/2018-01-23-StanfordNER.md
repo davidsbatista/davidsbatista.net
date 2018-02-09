@@ -14,12 +14,12 @@ Stanford NER is a named-entity recognizer based on linear chain Conditional Rand
 
 # __Stanford NER__
 
-
+<!--
 <figure>
   <img style="width: 66%; height: 66%" src="/assets/images/2018-01-23-stanford_ner.jpg">
   <figcaption>Named Entity Recognition and the Stanford NER</figcaption>
 </figure>
-
+-->
 
 Stanford NER requires Java, I've used [StanfordNER 3.8.0](https://nlp.stanford.edu/software/stanford-ner-2017-06-09.zip), which requires Java v1.8+, so the first thing is to have Java v1.8+ installed and running on your system.
 
