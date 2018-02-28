@@ -10,9 +10,9 @@ preview_pic: /assets/images/2018-02-28-scikit-learn.png
 description: Applying scikit-learn TfidfVectorizer on tokenized text
 ---
 
-Sometimes your tokenization process is so complex that cannot be be captured by a simple regular expression that you can pass to the scikit-learn `TfidfVectorizer`. Instead you just want to pass a list of tokens, resulting of a tokenization process, to initialize a `TfidfVectorizer` object.
+Sometimes your tokenization process is so complex that cannot be captured by a simple regular expression that you can pass to the scikit-learn `TfidfVectorizer`. Instead you just want to pass a list of tokens, resulting of a tokenization process, to initialize a `TfidfVectorizer` object.
 
-There are manly two things that need to be done. First, in the initialization of the `TfidfVectorizer` object you need to pass a dummy `tokenizer` and `preprocessor` that simply return what they receive. Note, you can instead of a `dummy_fun` you can also pass a lambda function, e.g.: `lambda x: x`, but be aware that if you then want to use the cool `n_jobs=10` for training classifiers or doing parameter grid search pickle cannot handle lambda functions.
+There are manly two things that need to be done. First, in the initialization of the `TfidfVectorizer` object you need to pass a dummy `tokenizer` and `preprocessor` that simply return what they receive. Note, you can instead of a `dummy_fun` also pass a lambda function, e.g.: `lambda x: x`, but be aware that if you then want to use the cool `n_jobs=10` for training classifiers or doing parameter grid search pickle cannot handle lambda functions.
 
 ```python
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -33,7 +33,7 @@ Then you can fit a collections of documents already tokenized
 docs = [
     ['Two', 'wrongs', 'don\'t', 'make', 'a', 'right', '.'],
     ['The', 'pen', 'is', 'mightier', 'than', 'the', 'sword'],
-    ['Don't', 'put', 'all', 'your', 'eggs', 'in', 'one', 'basket', '.']
+    ['Don\'t', 'put', 'all', 'your', 'eggs', 'in', 'one', 'basket', '.']
 ]
 ```
 
@@ -67,7 +67,7 @@ tfidf.vocabulary_
 The next thing to keep in mind is that whenever you want to compute the tf-idf score for a document that is already tokenized you should wrap it in a list when you call the `transform()` method from `TfidfVectorizer`, so that it is handled as a single document instead of interpreting each token as a document.
 
 ```python
-doc = ["Don't", 'count', 'your', 'chickens', 'before', 'they', 'hatch']
+doc = ['Don\'t', 'count', 'your', 'chickens', 'before', 'they', 'hatch']
 ```
 
 ```python
