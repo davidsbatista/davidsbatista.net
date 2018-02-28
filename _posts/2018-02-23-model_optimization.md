@@ -17,11 +17,6 @@ The idea is pretty simple, you pass two dictionaries to a helper class: the mode
 
 The credit for the code below goes to [Panagiotis Katsaroumpas](http://www.codiply.com/) who initially wrote it, I just fix it, since it was breaking with newer versions of scikit-learn, and also failed in Python 3. The original version is on this [blog post](http://www.codiply.com/blog/hyperparameter-grid-search-across-multiple-models-in-scikit-learn/).
 
-
-{% highlight python %}
-
-{% endhighlight %}
-
 ```python
 import pandas as pd
 import numpy as np
