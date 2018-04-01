@@ -256,3 +256,11 @@ $$
 ## __Acknowledgments__
 
 The writing of this post is also the outcome of many discussions and white board sessions I had together with [Tobias Sterbak](https://twitter.com/tobias_sterbak) and [Sebastian Mika](https://www.linkedin.com/in/sebastianmika/).
+
+## __Related posts__
+
+ * __[Hidden Markov Model and Naive Bayes relationship](../../../../../blog/2017/11/11/HHM_and_Naive_Bayes/)__
+
+ * __[Maximum Entropy Markov Models and Logistic Regression](../../../../../blog/2017/11/12/Maximum_Entropy_Markov_Model/)__
+
+ * __[StanfordNER - training a new model and deploying a web service](../../../../../blog/2018/01/23/StanfordNER/)__

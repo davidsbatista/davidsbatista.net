@@ -572,7 +572,3 @@ Also, word2vec and doc2vec, since they have a much lower dimension, i.e. 300 com
 The full code for this post is available on my github:
 
 [https://github.com/davidsbatista/text-classification](https://github.com/davidsbatista/text-classification)
-
------
-
-

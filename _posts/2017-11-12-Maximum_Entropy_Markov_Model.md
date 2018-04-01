@@ -206,3 +206,11 @@ for the task of noun-phrase chunking.
 ## __Acknowledgments__
 
 The writing of this post is also the outcome of many discussions and white board sessions I had together with [Tobias Sterbak](https://twitter.com/tobias_sterbak)
+
+## __Related posts__
+
+* __[Hidden Markov Model and Naive Bayes relationship](../../../../../blog/2017/11/11/HHM_and_Naive_Bayes/)__
+
+* __[Conditional Random Fields for Sequence Prediction](../../../../../blog/2017/11/13/Conditional_Random_Fields/)__
+
+* __[StanfordNER - training a new model and deploying a web service](../../../../../blog/2018/01/23/StanfordNER/)__

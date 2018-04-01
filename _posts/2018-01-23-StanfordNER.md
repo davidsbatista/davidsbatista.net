@@ -506,21 +506,27 @@ There are also other NER datasets which can be used for supervised learning:
 
 Some features are documented in [Frequently Asked Questions](https://nlp.stanford.edu/software/crf-faq.shtml), but by looking at following classes one can find much more information and details, and also undocumented and newly released template features:
 
-###### __NERFeatureFactory.java__
-* [code](https://github.com/stanfordnlp/CoreNLP/blob/master/src/edu/stanford/nlp/ie/NERFeatureFactory.java)
-* [javadoc](https://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/ie/NERFeatureFactory.html)
+###### __NERFeatureFactory.java__ [code](https://github.com/stanfordnlp/CoreNLP/blob/master/src/edu/stanford/nlp/ie/NERFeatureFactory.java) [javadoc](https://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/ie/NERFeatureFactory.html)
 
 
-###### __CRFClassifier.java__
-* [code](https://github.com/stanfordnlp/CoreNLP/blob/master/src/edu/stanford/nlp/ie/crf/CRFClassifier.java)
-* [javadoc](https://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/ie/crf/CRFClassifier.html)
+###### __CRFClassifier.java__ [code](https://github.com/stanfordnlp/CoreNLP/blob/master/src/edu/stanford/nlp/ie/crf/CRFClassifier.java) [javadoc](https://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/ie/crf/CRFClassifier.html)
 
 
-###### __SeqClassifierFlags.java__
-* [code](https://github.com/stanfordnlp/CoreNLP/blob/master/src/edu/stanford/nlp/sequences/SeqClassifierFlags.java)
-* [javadoc](https://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/sequences/SeqClassifierFlags.html)
+###### __SeqClassifierFlags.java__ [code](https://github.com/stanfordnlp/CoreNLP/blob/master/src/edu/stanford/nlp/sequences/SeqClassifierFlags.java) [javadoc](https://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/sequences/SeqClassifierFlags.html)
 
 
 ### __Presentations__
 
-* [Named Entity Recognition and the Stanford NER Software Jenny Rose Finkel Stanford University March 9, 2007](http://slideplayer.com/slide/5898548/)
+* [Stanford NER Software by Jenny Rose Finkel Stanford University March 9, 2007](http://slideplayer.com/slide/5898548/)
+
+
+## __Related posts__
+
+* __[Hidden Markov Model and Naive Bayes relationship](../../../../../blog/2017/11/11/HHM_and_Naive_Bayes/)__
+
+* __[Maximum Entropy Markov Models and Logistic Regression](../../../../../blog/2017/11/12/Maximum_Entropy_Markov_Model/)__
+
+* __[Conditional Random Fields for Sequence Prediction](../../../../../blog/2017/11/13/Conditional_Random_Fields/)__
+
+* __[Extracting Relationships between Named-Entities](../../../../../blog/2017/05/08/ReVerb/)__
+

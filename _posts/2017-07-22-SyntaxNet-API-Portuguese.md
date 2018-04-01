@@ -116,3 +116,7 @@ __NOTE__: After experimenting, building and running Docker images you might want
 
 * [https://lebkowski.name/docker-volumes/](https://lebkowski.name/docker-volumes/)
 * [https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes](https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes)
+
+## __Related posts__
+
+ * __[Loading SyntaxNet's syntactic dependencies into NLTK's DependencyGraph](../../../../../blog/2017/03/25/syntaxnet/)__

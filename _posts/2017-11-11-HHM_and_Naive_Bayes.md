@@ -345,3 +345,12 @@ The figures above were taken from a Viterbi algorithm example by [Roger Levy](ht
 There is also a very good lecture, given by [Noah Smith](https://homes.cs.washington.edu/~nasmith/) at [LxMLS2016](http://lxmls.it.pt/2016/) about Sequence Models, mainly focusing on Hidden Markov Models and it's applications from sequence learning to language modeling.
 
 [![](https://img.youtube.com/vi/8vGSAwR716k/hqdefault.jpg)](https://www.youtube.com/watch?v=8vGSAwR716k)
+
+
+## __Related posts__
+
+ * __[Maximum Entropy Markov Models and Logistic Regression](../../../../../blog/2017/11/12/Maximum_Entropy_Markov_Model/)__
+
+ * __[Conditional Random Fields for Sequence Prediction](../../../../../blog/2017/11/13/Conditional_Random_Fields/)__
+
+ * __[StanfordNER - training a new model and deploying a web service](../../../../../blog/2018/01/23/StanfordNER/)__
