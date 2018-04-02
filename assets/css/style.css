@@ -52,7 +52,7 @@ a:hover {
 }
 .site-link:hover {
   color: #807dba;
-  text-decoration: none;
+  text-decoration: bold;
 }
 
 .post-link {
@@ -62,7 +62,7 @@ a:hover {
 }
 .post-link:hover {
   color: #807dba;
-  text-decoration: none;
+  text-decoration: bold;
 }
 
 .post-meta {
@@ -149,7 +149,7 @@ a:hover {
 .site-nav .menu-icon { display: none; }
 
 .site-nav .site-link {
-  margin-left: 20px;
+  margin-left: 35px;
   font-size: 20px;
 }
 
@@ -468,7 +468,7 @@ header h1 {
   .site-nav {
     position: fixed;
     z-index: 10;
-    top: 14px; right: 8px;
+    top: 14px; right: 18px;
     background-color: white;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
