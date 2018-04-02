@@ -575,6 +575,6 @@ The full code for this post is available on my github:
 
 ## __Related posts__
 
-* __[Extracting Relationships between Named-Entities](../../../../../blog/2017/05/08/ReVerb/)__
+* __[Extracting Relationships between Named-Entities](../../../../../blog_post/2017/05/08/ReVerb/)__
 
 * __[StanfordNER - training a new model and deploying a web service](../../../../../blog/2018/01/23/StanfordNER/)__
