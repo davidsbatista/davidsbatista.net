@@ -4,8 +4,8 @@ title: Applying scikit-learn TfidfVectorizer on tokenized text
 date: 2018-02-28 00:0:00
 categories: [blog]
 tags: [sklearn, TfidfVectorizer, tokenization]
-comments: false
-disqus_identifier: #20180223
+comments: true 
+disqus_identifier: 20180228
 preview_pic: /assets/images/2018-02-28-scikit-learn.png
 description: Applying scikit-learn TfidfVectorizer on tokenized text
 ---
