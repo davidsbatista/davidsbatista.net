@@ -4,11 +4,11 @@ title: Hyperparameter optimization across multiple models in scikit-learn
 comments: true
 disqus_identifier: 20180223
 date: 2018-02-23 00:0:00
-categories: [blog]
-tags: [hyperparameter, tunning, optimization, sklearn, gridsearch, cross-validation]
+categories: blog
+tags: scikit-learn grid-search hyperparameter-optimization
 comments: true
 preview_pic: /assets/images/2018-02-23-model_optimization.png
-description: Hyperparameter optimization across multiple models in scikit-learn
+description: This blog post shows how to perform hyperparameter optimization across multiple models in scikit-learn, using a helper class one can tune several models at once and print a report with the results and parameters settings.
 ---
 
 I found myself, from time to time, always bumping into a piece of code (written by someone else) to perform grid search across different models in scikit-learn and always adapting it to suit my needs, and fixing it, since it contained some already deprecated calls. I finally decided to post it here in my blog, so I can quickly find it and also to share it with whoever needs it.

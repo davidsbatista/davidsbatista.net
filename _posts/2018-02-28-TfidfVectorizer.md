@@ -2,12 +2,12 @@
 layout: post
 title: Applying scikit-learn TfidfVectorizer on tokenized text
 date: 2018-02-28 00:0:00
-categories: [blog]
-tags: [sklearn, TfidfVectorizer, tokenization]
-comments: true 
+categories: blog
+tags: scikit-learn tokenization
+comments: true
 disqus_identifier: 20180228
 preview_pic: /assets/images/2018-02-28-scikit-learn.png
-description: Applying scikit-learn TfidfVectorizer on tokenized text
+description: An example showing how to use scikit-learn TfidfVectorizer class on text which is already tokenized, i.e., in a list of tokens.
 ---
 
 Sometimes your tokenization process is so complex that cannot be captured by a simple regular expression that you can pass to the scikit-learn `TfidfVectorizer`. Instead you just want to pass a list of tokens, resulting of a tokenization process, to initialize a `TfidfVectorizer` object.

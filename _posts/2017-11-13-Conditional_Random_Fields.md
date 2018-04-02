@@ -2,12 +2,12 @@
 layout: post
 title: Conditional Random Fields for Sequence Prediction
 date: 2017-11-13 00:00:00
-tags: [conditional random fields, sequence prediction, tutorial]
-categories: [blog]
+tags: conditional-random-fields sequence-prediction viterbi
+categories: blog
 comments: true
 disqus_identifier: 20171113
 preview_pic: /assets/images/2017-11-13-Conditional_Random_Fields.png
-description: An introduction to Linear-Chain Conditional Random Fields
+description: An introduction to Linear-Chain Conditional Random Fields, explaining what was the motivation behind it's proposal and making a comparison with two other sequence models,  Hidden-Markov Model, and Maximum Entropy Markov Model.
 ---
 
 This is the third and (maybe) the last part of a series of posts about sequential supervised learning applied to NLP. In this post I will talk about Conditional Random Fields (CRF), explain what was the main motivation behind the proposal of this model, and make a final comparison between Hidden Markov Models (HMM), Maximum Entropy Markov Models (MEMM) and CRF for sequence prediction.

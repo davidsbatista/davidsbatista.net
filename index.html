@@ -39,16 +39,34 @@ layout: default
   {% endfor %}
 </div>
 
+<!--
 <div class="pagination">
   {% if paginator.next_page %}
     <a class="nav-link" href="/blog/p{{ paginator.next_page }}/">&#8592; previous</a>
   {% endif %}
-  <a class="nav-link" href="#top">&#8593;</a>
   {% if paginator.previous_page %}
     {% if paginator.page == 2 %}
       <a class="nav-link" href="/">next &#8594;</a>
     {% else %}
       <a class="nav-link" href="/blog/p{{paginator.previous_page}}/">next &#8594;</a>
     {% endif %}
+  {% endif %}
+</div>
+-->
+
+<div class="pagination">
+  {% if paginator.next_page %}
+    <a class="pagination-item older" href="/blog/p{{ paginator.next_page }}/">Older</a>
+  {% else %}
+    <span class="pagination-item older">Older</span>
+  {% endif %}
+  {% if paginator.previous_page %}
+    {% if paginator.page == 2 %}
+      <a class="pagination-item newer" href="/">Newer</a>
+    {% else %}
+      <a class="pagination-item newer" href="/blog/p{{paginator.previous_page}}/">Newer</a>
+    {% endif %}
+  {% else %}
+    <span class="pagination-item newer">Newer</span>
   {% endif %}
 </div>

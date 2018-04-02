@@ -2,7 +2,7 @@ title: David S. Batista
 #tagline: ""
 description: "Ph.D., Natural Language Processing, Machine Learning, Big-Data"
 baseurl: ""
-url: "http://davidsbatista.net:1981/"
+url: "http://www.davidsbatista.net/"
 email: dsbatista@gmail.com
 twitter_username: DavidSBatista
 github_username:  davidsbatista
@@ -31,5 +31,5 @@ kramdown:
 # Gems
 plugins: [jekyll-paginate, jekyll-sitemap]
 
-paginate: 10
+paginate: 5
 paginate_path: "blog/p:num"

@@ -2,14 +2,13 @@
 layout: post
 title: Maximum Entropy Markov Models and Logistic Regression
 date: 2017-11-12 00:00:00
-tags: [maximum markov models, sequence classifier, tutorial]
+tags: maximum-entropy-markov-models logistic-regression sequence-prediction viterbi
 categories: [blog]
 comments: true
 disqus_identifier: 20171112
 preview_pic: /assets/images/2017-11-12-HMM_vs_MEMM.png
-description: An introduction to Maximum Entropy Markov Models
+description: This blog post is an introduction to Maximum Entropy Markov Model, it points the fundamental difference between discriminative and generative models, and what are the main advantages of the Maximum Entropy Markov Model over the Naive Bayes model.
 ---
-
 
 This is the second part of a series of posts about sequential supervised learning applied to NLP. It can be seen as a follow up on the previous post, where I tried do explain the relationship between HMM and Naive Bayes. In this post I will try to explain how to build a sequence classifier based on a Logistic Regression classifier, i.e.,  using a discriminative approach.
 

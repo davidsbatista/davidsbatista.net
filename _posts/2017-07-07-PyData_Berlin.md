@@ -2,12 +2,12 @@
 layout: post
 title: PyData Berlin 2017
 date: 2017-07-07 00:00:00
-tags: [pydata, berlin, python, data, conference]
+tags: PyData
 categories: [blog]
 comments: true
 disqus_identifier: 20170707
 preview_pic: /assets/images/2017-07-07-PyData_Berlin.png
-description: Summary of some talks at PyData Berlin 2017
+description: A quick summary of some talks held at PyData Berlin 2017.
 ---
 
 The [PyData Berlin](https://pydata.org/berlin2017/) conference took place in the first weekend July, at the HTW. Full 3 days of many interesting subjects including Natural Language Processing, Machine Learning, Data Visualization, etc. I was happy to have my talk proposal accepted, and had the opportunity to present work done during my PhD on Semantic Relationship extraction.

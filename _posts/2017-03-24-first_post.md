@@ -1,7 +1,7 @@
 ---
 layout: post
 title: First post :-)
-comments: true
+comments: false
 ---
 
 Just the first post ever to test everything :-)

@@ -2,12 +2,12 @@
 layout: post
 title: Hidden Markov Model and Naive Bayes relationship
 date: 2017-11-11 00:00:00
-tags: [hidden markov models, naive bayes, sequence classifier, tutorial]
+tags: hidden-markov-models naive-bayes sequence-prediction viterbi
 categories: [blog]
 comments: true
 disqus_identifier: 20171111
 preview_pic: /assets/images/2017-11-11-HMM.png
-description: An introduction to Naive Bayes and Hidden Markov Models
+description: An introduction to Hidden Markov Models, one of the first proposed algorithms for sequence prediction, and it's relationships with the Naive Bayes approach.
 ---
 
 This is the first post, of a series of posts, about sequential supervised learning applied to Natural Language Processing. In this first post I will write about the classical algorithm for sequence learning, the Hidden Markov Model (HMM), explain how it's related with the Naive Bayes Model and it's limitations.

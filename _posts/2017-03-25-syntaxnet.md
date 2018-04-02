@@ -2,12 +2,12 @@
 layout: post
 title: Google's SyntaxNet in Python NLTK
 date: 2017-03-25 00:00:00
-tags: [parsing, SyntaxNet, Python, NLTK, Dependency Graph]
-categories: [blog]
+tags: SyntaxNet NLTK dependency-graph pos-tags syntactic-dependencies
+categories: blog
 comments: true
 disqus_identifier: 20170325
 preview_pic: /assets/images/2017-03-25-syntaxnet.png
-description: Parsing SyntaxNet output with Python NLTK
+description: This post shows how to load the output of SyntaxNet into Python NLTK toolkit, precisely how to instantiate a DependencyGraph object with SyntaxNet's output.
 ---
 
 In May 2016 Google released [SyntaxNet](https://research.googleblog.com/2016/05/announcing-syntaxnet-worlds-most.html), a syntactic parser whose performance beat previous proposed approaches.

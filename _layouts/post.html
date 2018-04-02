@@ -26,23 +26,17 @@ layout: default_post
 
 </div>
 
-<!--
-<div class="post-nav">
-  <center>
-  {% if page.previous.url %}
-    <a class="nav-link" href="{{ page.previous.url | prepend: site.baseurl }}" title="{{ page.previous.title }}">&#8592; previous</a>
-  {% endif %}
-  <a class="nav-link" href="#top">&#8593;</a>
-  {% if page.next.url %}
-    <a class="nav-link" href="{{ page.next.url | prepend: site.baseurl }}" title="{{ page.next.title }}">next &#8594;</a>
-  {% endif %}
- </center>
-</div>
--->
+<center>
+<b>tagged in</b>: [
+{% for tag in page.tags %}
+  {% capture tag_name %}{{ tag }}{% endcapture %}
+  <a href="/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code></a>
+{% endfor %}
+]
+</center>
 
 {% include cc-license.html %}
 
 {% if page.comments %}
   {% include comments.html %}
 {% endif %}
-
