@@ -1,13 +1,8 @@
 <footer class="site-footer">
-
   <div class="wrap">
-
     <div class="footer-top">
-
       <a class="site-title site-link" href="{{ site.baseurl }}/">{{ site.title }}</a><br>
-
       <ul>
-
         {% if site.email %}
           <li><a class="site-link" href="mailto:{{ site.email }}"><i class="fa fa-envelope-square fa-fw fa-2x"></i></a></li>
         {% endif %}
@@ -28,19 +23,11 @@
           <li><a class="site-link" href="http://scholar.google.com/citations?user={{ author.gscholar }}" class="author-social" target="_blank"><i class="icon-google"></i></a></li>
         {% endif %}
 
-        <!--
-        researchgate: David_Batista4
-        {% if author.researchgate %}<a href="http://www.researchgate.net/profile/{{ author.researchgate }}" class="author-social" target="_blank"><i class="icon-google"></i>Research Gate</a>{% endif %}
-        -->
-
         <li><a class="site-link" href="{{ "/feed.xml" | prepend: site.baseurl }}"><i class="fa fa-rss-square fa-fw fa-2x"></i></a></li>
     </div>
-
     <div class="footer-bottom">
       <p>{{ site.description }}</p>
       © 2017 Powered by Jekyll. Theme initially created by <a href=https://bdewilde.github.io/>Burton DeWilde</a>
     </div>
-
   </div>
-
 </footer>

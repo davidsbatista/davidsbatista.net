@@ -2,7 +2,7 @@
 layout: post
 title: Word Embeddings - word2vec, fasttext, GloVe
 date: 2018-02-01 00:00:00
-tags: [word embeddings, word2vec, fasttext, glove]
+tags: word-embeddings word2vec fasttext glove
 categories: [blog]
 comments: true
 disqus_identifier: 20180201

@@ -2,24 +2,17 @@
 layout: post
 title: StanfordNER - training a new model and deploying a web service
 date: 2018-01-23 00:00:00
-tags: [StanfordNER Conditional Random Fields Named-Entity Recognition]
-categories: [blog]
+tags: stanford-NER conditional-random-fields named-entity-recognition
+categories: blog
 comments: true
 disqus_identifier: 20180123
 preview_pic: /assets/images/2018-01-23-stanford_ner.jpg
-description: Using StanfordNER to train a Named-Entity Recognizer and setting up a web service
+description: A walk-through on how to train a new CRF model for Named Entity Recognition using Stanford-NER, description of the features template, evaluation and how expose the learned model over an HTTP endpoint.
 ---
 
 Stanford NER is a named-entity recognizer based on linear chain Conditional Random Field (CRF) sequence models. This post details some of the experiments I've done with it, using a corpus to train a Named-Entity Recognizer: the features I've explored (some undocumented), how to setup a web service exposing the trained model and how to call it from a python script.
 
 # __Stanford NER__
-
-<!--
-<figure>
-  <img style="width: 66%; height: 66%" src="/assets/images/2018-01-23-stanford_ner.jpg">
-  <figcaption>Named Entity Recognition and the Stanford NER</figcaption>
-</figure>
--->
 
 Stanford NER requires Java, I've used [StanfordNER 3.8.0](https://nlp.stanford.edu/software/stanford-ner-2017-06-09.zip), which requires Java v1.8+, so the first thing is to have Java v1.8+ installed and running on your system.
 

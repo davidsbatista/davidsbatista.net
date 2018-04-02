@@ -2,8 +2,8 @@
 layout: post
 title: Active Learning performing better with less training
 date: 2017-12-12 00:00:00
-tags: [active learning]
-categories: [blog]
+tags: active-learning
+categories: blog
 comments: true
 disqus_identifier: 20171212
 preview_pic: /assets/images/2017-12-12-active-learning.png

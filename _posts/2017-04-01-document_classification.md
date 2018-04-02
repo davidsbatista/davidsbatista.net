@@ -4,11 +4,11 @@ title: Document Classification
 comments: true
 disqus_identifier: 20170401
 date: 2017-04-01 00:14:00
-categories: [blog]
-tags: [classification, multi-label, sklearn, tf-idf, word2vec, doc2vec]
+categories: blog
+tags: document-classification multi-label-classification scikit-learn tf-idf word2vec doc2vec pos-tags gensim
 comments: true
 preview_pic: /assets/images/2017-04-01-IMDB-movie-genre-classification.png
-description: An introduction to Document Classification
+description: An introduction to the Document Classification task, in this case in a multi-class and multi-label scenario, proposed solutions include TF-IDF weighted vectors, an average of word2vec words-embeddings and a single vector representation of the document using doc2vec. Includes code using Pipeline and GridSearchCV classes from scikit-learn.
 ---
 
 Classifying a document into a pre-defined category is a common problem, for instance, classifying an email as spam or not spam. In this case there is an instance to be classified into one of two possible classes, i.e. binary classification.
@@ -380,7 +380,7 @@ After loading the data I also split the data into two sets:
 To achieve this I used the [StratifiedShuffleSplit class](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedShuffleSplit.html) which return stratified randomized folds, preserving the percentage of samples for each class.
 
 
-In order to experiment with different features for the text representation and tunning the different parameters of the classifiers I used sklearn [Pipeline]() and [GridSearchCV](). I also use another class, to help transform binary classifiers into multi-label/multi-output classifiers, concretely [OneVsRestClassifier](), this class wraps ups the process of training a classifier for each possible class.
+In order to experiment with different features for the text representation and tuning the different parameters of the classifiers I used sklearn [Pipeline]() and [GridSearchCV](). I also use another class, to help transform binary classifiers into multi-label/multi-output classifiers, concretely [OneVsRestClassifier](), this class wraps ups the process of training a classifier for each possible class.
 
 I considered the following supervise algorithms
 
@@ -572,3 +572,9 @@ Also, word2vec and doc2vec, since they have a much lower dimension, i.e. 300 com
 The full code for this post is available on my github:
 
 [https://github.com/davidsbatista/text-classification](https://github.com/davidsbatista/text-classification)
+
+## __Related posts__
+
+* __[Extracting Relationships between Named-Entities](../../../../../blog/2017/05/08/ReVerb/)__
+
+* __[StanfordNER - training a new model and deploying a web service](../../../../../blog/2018/01/23/StanfordNER/)__
