@@ -4,8 +4,8 @@ title: Named-Entity evaluation metrics based on entity-level
 date: 2018-05-09 00:0:00
 categories: [blog]
 tags: NER evaluation_metrics
-comments: false
-# disqus_identifier: #20180509
+comments: true
+disqus_identifier: 20180509
 preview_pic: /assets/images/2018-05-09-NER_metrics.jpeg
 description: Named-Entity evaluation metrics based on entity-level
 ---
