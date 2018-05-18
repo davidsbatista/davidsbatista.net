@@ -9,9 +9,9 @@ disqus_identifier: 20180509
 preview_pic: /assets/images/2018-05-09-NER_metrics.jpeg
 description: Named-Entity evaluation metrics based on entity-level
 ---
-When you train a NER system the most typically evaluation method is to measure __precision__, __recall__ and __f1-score__ at a token level. These metrics are indeed useful to tune a NER system. But when using the predicted named-entities for downstream tasks, it is more useful evaluate metrics at a full named-entity level. In this post I will go through some metrics that go beyond simple token-level performance.
+When you train a NER system the most typically evaluation method is to measure __precision__, __recall__ and __f1-score__ at a token level. These metrics are indeed useful to tune a NER system. But when using the predicted named-entities for downstream tasks, it is more useful to evaluate with metrics at a full named-entity level. In this post I will go through some metrics that go beyond simple token-level performance.
 
-Note you can find the complete code for this blog post on this repository:
+You can find the complete code associated with this blog post on this repository:
 
 * [https://github.com/davidsbatista/NER-Evaluation](https://github.com/davidsbatista/NER-Evaluation)
 
@@ -153,7 +153,9 @@ Comparing the golden standard annotations with the output of a NER system differ
 </table>
 </center>
 
-Note that considering only this 3 scenarios, and considering everything else wrong, we have a simple classification evaluation that can be measured in terms of false negatives, true positives, false negatives and false positives, and subsequently compute precision, recall and f1-score for each named-entity type.
+Note that considering only this 3 scenarios, and discarding every other possible scenario we have a simple classification evaluation that can be measured in terms of false negatives, true positives, false negatives and false positives, and subsequently compute precision, recall and f1-score for each named-entity type.
+
+But of course we are discarding partial matches, or other scenarios when the NER system gets the named-entity surface string correct but the type wrong, and we might also want to evaluate these scenarios again at a full-entity level.
 
 #### __IV. System assigns the wrong entity type__
 
@@ -294,10 +296,11 @@ Note that considering only this 3 scenarios, and considering everything else wro
 </table>
 </center>
 
+How can we incorporate these described scenarios into evaluation metrics ?
 
 ### __Different Evaluation Schemas__
 
-Throughout the years different NERC forums proposed different evaluation metrics:
+Throughout the years different NER forums proposed different evaluation metrics:
 
 #### __CoNLL: Computational Natural Language Learning__
 
@@ -330,7 +333,7 @@ MUC introduced detailed metrics in an [evaluation considering different categori
 * __Missing (MIS)__   : a golden annotation is not captured by a system;
 * __Spurius (SPU)__   : system produces a response which doesn't exit in the golden annotation;
 
-these metrics already go a beyond the simple strict classification which only considers totally correct entities, and consider partial matching for instance, and are close to cover the scenarios defined above, we just need to find a way to consider the differences - between NER output and golden annotations - based on two axes, the surface string and the entity type.
+these metrics already go a beyond the simple strict classification and consider partial matching for instance. They are also close to cover the scenarios defined in the beginning of this post, we just need to find a way to consider the differences - between NER output and golden annotations - based on two axes, the surface string and the entity type.
 
 An implementation of the MUC evaluation metrics can be found here:
 
