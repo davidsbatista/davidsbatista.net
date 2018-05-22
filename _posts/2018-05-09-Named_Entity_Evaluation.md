@@ -15,6 +15,15 @@ You can find the complete code associated with this blog post on this repository
 
 * [https://github.com/davidsbatista/NER-Evaluation](https://github.com/davidsbatista/NER-Evaluation)
 
+You can find more about Named-Entity Recognition here:
+
+* __[Conditional Random Fields for Sequence Prediction](../../../../../blog/2017/11/13/Conditional_Random_Fields/)__
+
+* __[StanfordNER - training a new model and deploying a web service](../../../../../blog/2018/01/23/StanfordNER/)__
+
+<br>
+
+
 ### __Comparing NER system output and golden standard__
 
 Comparing the golden standard annotations with the output of a NER system different scenarios might occur:
