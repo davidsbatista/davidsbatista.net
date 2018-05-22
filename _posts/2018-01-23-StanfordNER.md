@@ -2,7 +2,7 @@
 layout: post
 title: StanfordNER - training a new model and deploying a web service
 date: 2018-01-23 00:00:00
-tags: stanford-NER conditional-random-fields named-entity-recognition
+tags: stanford-NER NER conditional-random-fields named-entity-recognition
 categories: blog
 comments: true
 disqus_identifier: 20180123

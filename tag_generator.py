@@ -20,6 +20,9 @@ filenames = glob.glob(post_dir + '*md')
 
 total_tags = []
 for filename in filenames:
+    if filename.split("/")[1].startswith("_"):
+        continue
+    print(filename)
     f = open(filename, 'r', encoding="utf8")
     crawl = False
     for line in f:
