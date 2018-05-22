@@ -12,6 +12,14 @@ description: An introduction to Hidden Markov Models, one of the first proposed 
 
 This is the first post, of a series of posts, about sequential supervised learning applied to Natural Language Processing. In this first post I will write about the classical algorithm for sequence learning, the Hidden Markov Model (HMM), explain how it's related with the Naive Bayes Model and it's limitations.
 
+You can find the second and third posts here:
+
+* __[Maximum Entropy Markov Models and Logistic Regression](../../../../../blog/2017/11/12/Maximum_Entropy_Markov_Model/)__
+
+* __[Conditional Random Fields for Sequence Prediction](../../../../../blog/2017/11/13/Conditional_Random_Fields/)__
+
+<br>
+
 ## __Introduction__
 
 The classical problem in Machine Learning is to learn a classifier that can distinguish between two or more classes, i.e., that can accurately predict a class for a new object given training examples of objects already classified.

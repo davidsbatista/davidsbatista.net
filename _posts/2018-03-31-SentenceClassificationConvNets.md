@@ -5,7 +5,7 @@ date: 2018-03-31 00:0:00
 categories: [blog]
 tags: convolutional-neural-networks document-classification deep-learning
 comments: false
-# disqus_identifier: #20180223
+# disqus_identifier: #20180331
 preview_pic: /assets/images/2018-03-31-Kim_cnn-sentence-classification.png
 description: Convolutional Neural Networks for Sentence Classification
 ---
@@ -127,13 +127,11 @@ https://github.com/yoonkim/CNN_sentence
 
 # __Summary__
 
-<!--
 * __convolution__ :
 * __convolution filter__ or __kernel__:
 * __pooling__:
-* feature_maps : the number of feature maps directly controls capacity and depends on the number of available examples and task complexity.
-strides
--->
+* __feature_maps__ : the number of feature maps directly controls capacity and depends on the number of available examples and task complexity.
+* __strides__ :
 
 ## __References__
 

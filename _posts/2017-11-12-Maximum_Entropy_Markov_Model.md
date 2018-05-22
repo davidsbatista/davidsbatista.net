@@ -12,6 +12,12 @@ description: This blog post is an introduction to Maximum Entropy Markov Model, 
 
 This is the second part of a series of posts about sequential supervised learning applied to NLP. It can be seen as a follow up on the previous post, where I tried do explain the relationship between HMM and Naive Bayes. In this post I will try to explain how to build a sequence classifier based on a Logistic Regression classifier, i.e.,  using a discriminative approach.
 
+You can find the first and third posts here:
+
+* __[Hidden Markov Model and Naive Bayes relationship](../../../../../blog/2017/11/11/HHM_and_Naive_Bayes/)__
+
+* __[Conditional Random Fields for Sequence Prediction](../../../../../blog/2017/11/13/Conditional_Random_Fields/)__
+
 <br>
 
 ## __Discriminative vs. Generative Models__

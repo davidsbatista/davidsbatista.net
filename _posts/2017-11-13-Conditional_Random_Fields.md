@@ -12,6 +12,14 @@ description: An introduction to Linear-Chain Conditional Random Fields, explaini
 
 This is the third and (maybe) the last part of a series of posts about sequential supervised learning applied to NLP. In this post I will talk about Conditional Random Fields (CRF), explain what was the main motivation behind the proposal of this model, and make a final comparison between Hidden Markov Models (HMM), Maximum Entropy Markov Models (MEMM) and CRF for sequence prediction.
 
+You can find the first and second posts here:
+
+* __[Hidden Markov Model and Naive Bayes relationship](../../../../../blog/2017/11/11/HHM_and_Naive_Bayes/)__
+
+* __[Maximum Entropy Markov Models and Logistic Regression](../../../../../blog/2017/11/12/Maximum_Entropy_Markov_Model/)__
+
+<br>
+
 ## __Introduction__
 
 CRFs were proposed roughly only year after the Maximum Entropy Markov Models, basically by the same authors. Reading through the original [paper that introduced Conditional Random Fields](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1162&context=cis_papers), one finds at the beginning this sentence:
