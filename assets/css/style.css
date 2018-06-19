@@ -56,18 +56,22 @@ a:hover {
 }
 
 .post-link {
-  color: #303030;
-  webkit-transition: color 0.25s;
-  transition: color 0.25s;
+  color: #0099ff;
+  text-decoration: bold;
+  font-weight: bold;
+  /*webkit-transition: color 0.25s;
+  transition: color 0.25s;*/
+  font-size: 23px;
 }
 .post-link:hover {
   color: #807dba;
   text-decoration: bold;
+  font-size: 23px;
 }
 
 .post-meta {
   color: #818181;
-  font-size: 14px;
+  font-size: 23px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -231,8 +235,8 @@ a:hover {
 .preview-pic img {
   display: block;
   margin: auto!important;
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 33%;
+  max-height: 33%;
   width: auto;
   height: auto;
 }

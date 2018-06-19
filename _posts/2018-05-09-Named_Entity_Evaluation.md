@@ -13,7 +13,7 @@ When you train a NER system the most typically evaluation method is to measure _
 
 You can find the complete code associated with this blog post on this repository:
 
-* [https://github.com/davidsbatista/NER-Evaluation](https://github.com/davidsbatista/NER-Evaluation)
+* __[https://github.com/davidsbatista/NER-Evaluation](https://github.com/davidsbatista/NER-Evaluation)__
 
 You can find more about Named-Entity Recognition here:
 
@@ -325,16 +325,16 @@ The [Language-Independent Named Entity Recognition task](http://www.aclweb.org/a
 
 The ACE challenges use a more complex evaluation metric which include a weighting schema, I will not go into detail here, and just point for the papers about it:
 
-* ["Automatic Content Extraction 2008 Evaluation Plan (ACE08)""](http://www.eng.utah.edu/~cs6961/papers/ACE-2008-description.pdf)
+* __["Automatic Content Extraction 2008 Evaluation Plan (ACE08)""](http://www.eng.utah.edu/~cs6961/papers/ACE-2008-description.pdf)__
 
-* ["The Automatic Content Extraction (ACE) Program Tasks, Data, and Evaluation" ](https://pdfs.semanticscholar.org/0617/dd6924df7a3491c299772b70e90507b195dc.pdf)
+* __["The Automatic Content Extraction (ACE) Program Tasks, Data, and Evaluation" ](https://pdfs.semanticscholar.org/0617/dd6924df7a3491c299772b70e90507b195dc.pdf)__
 
 I kind of gave up on trying to understand results and replicating experiments and baselines from ACE since all the datasets and results are not open and free, so I guess this challenge results and experiments will fade away with time.
 
 
 #### __Message Understanding Conference (MUC)__
 
-MUC introduced detailed metrics in an [evaluation considering different categories of errors](http://www.aclweb.org/anthology/M93-1007), these metrics can be defined as in terms of comparing the response of a system against the golden annotation:
+MUC introduced detailed metrics in an __[evaluation considering different categories of errors](http://www.aclweb.org/anthology/M93-1007)__, these metrics can be defined as in terms of comparing the response of a system against the golden annotation:
 
 * __Correct (COR)__   : both are the same;
 * __Incorrect (INC)__ : the output of a system and the golden annotation don't match;
@@ -346,7 +346,7 @@ these metrics already go a beyond the simple strict classification and consider 
 
 An implementation of the MUC evaluation metrics can be found here:
 
-* [https://github.com/jantrienes/nereval](https://github.com/jantrienes/nereval)
+* __[https://github.com/jantrienes/nereval](https://github.com/jantrienes/nereval)__
 
 
 #### __International Workshop on Semantic Evaluation (SemEval)__
@@ -495,7 +495,7 @@ $\text{Precision} = \frac{COR\ +\  0.5\  \times\  PAR}{ACT} = \frac{TP}{TP+FP}$
 </center>
 
 <center>
-$\text{Recall} = \frac{COR}{POS} = \frac{COR}{ACT} = \frac{TP}{TP+FP}$
+$\text{Recall} = \frac{COR\ +\  0.5\  \times\  PAR}{POS} = \frac{COR}{ACT} = \frac{TP}{TP+FP}$
 </center>
 
 Putting all together:

@@ -1,31 +1,30 @@
 ---
 layout: page
-title: About Me
+title: About
 permalink: /about-me/
 ---
 
-
-<img style="float: left; padding-right: 10px;" align="left"  src="/assets/images/about-me.jpg" alt="about-me.jpg" width="32.5%">
+<img style="float: left; padding-right: 10px;" align="left"  src="/assets/images/about-me.jpg" alt="about-me.jpg" width="40.5%">
 
 Hi! :-)
 
-My name is David, I live in [Berlin] and I love to play with data and extract knowledge from large volumes of data, be it structured or unstructured, numbers or text.
+My name is David, I live in __[Berlin]__ and I love to play with data and extract knowledge from large volumes of data, be it structured or unstructured, numbers or text.
 
-I hold a [Ph.D.] degree in Natural Laguange Processing and Machine Learning, where I explored and proposed new methods for [semantic relationship extraction]. You can see a complete list of my publications as indexed by [Google Schoolar].
+I hold a __[Ph.D.]__ degree in Natural Language Processing and Machine Learning, where I explored and proposed new methods for __[semantic relationship extraction]__. You can see a complete list of my publications as indexed by __[Google Schoolar]__.
 
-<!-- adicionar algo assim: https://soegaardsite.wordpress.com/ -->
+My CV is available for download as <a href="/assets/documents/dsbatista-cv.en.pdf/"><b>a PDF file</b></a>.
 
-<!--<br>-->
-
-<hr style="height:1pt; visibility:hidden;" />
+I occasionally <a href="/archive/"><b>blog</b></a> mostly about Machine Learning and Natural Language Processing.
 
 I'm interested in the following topics:
 
-* Natural Language Processing
-* Information Extraction (i.e., Named-Entity Recognition, Relationship Extraction)
-* Aspect-based Sentiment Analysis
+* Natural Language Processing and Text Analytics
+* Information Extraction tasks such as:
+  * Named-Entity Recognition
+  * Relationship Extraction
+  * Aspect-based Sentiment Analysis
 * Machine Learning
-* Deep Learning
+* Neural Networks / Deep Learning
 
 [Curriculum Vitae]: https://davidsbatista.github.io/about/dsbatista-cv.en.pdf
 [Ph.D.]: http://davidsbatista.net/assets/documents/publications/dsbatista-phd-thesis-2016.pdf
@@ -33,8 +32,10 @@ I'm interested in the following topics:
 [Google Schoolar]: https://scholar.google.de/citations?user=-tRNGd0AAAAJ&hl=en
 [Berlin]: https://www.google.com/maps/d/viewer?mid=19OMZvuXI0bNyCy-tEzsEglB7UmY&hl&ll=52.51602753988408%2C13.316764005371056&z=10
 
-<!--
 
+<!-- adicionar algo assim: https://soegaardsite.wordpress.com/ -->
+
+<!--
 I hold a Ph.D. from [Instituto Superior Técnico] under the supervision of [Professor Mário Jorge Gaspar da Silva]. My dissertation, entitled [Large-Scale Semantic Relationship Extraction for Information Discovery], addressed the problem of extracting [semantic relationships] between named-entities at large-scale.
 
 The proposal consisted developing an [on-line supervised classifier] based on [min-hash] and [locality sensitive hashing], and generating training data for this classifier by a [bootstrapping approach relying on distributional word representations] (i.e. [word embeddings]). This approach is combined in the [TREMoSSo framework].

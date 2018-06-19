@@ -29,7 +29,8 @@ kramdown:
 #lsi: true
 
 # Gems
-plugins: [jekyll-paginate, jekyll-sitemap]
+plugins: [jekyll-sitemap]
 
-paginate: 5
-paginate_path: "blog/p:num"
+#plugins: [jekyll-paginate, jekyll-sitemap]
+#paginate: 5
+#paginate_path: "blog/p:num"
