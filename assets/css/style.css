@@ -71,7 +71,7 @@ a:hover {
 
 .post-meta {
   color: #818181;
-  font-size: 23px;
+  font-size: 16px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -235,8 +235,8 @@ a:hover {
 .preview-pic img {
   display: block;
   margin: auto!important;
-  max-width: 33%;
-  max-height: 33%;
+  max-width: 100%;
+  max-height: 100%;
   width: auto;
   height: auto;
 }
