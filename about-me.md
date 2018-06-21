@@ -12,7 +12,7 @@ My name is David, I live in __[Berlin]__ and I love to play with data and extrac
 
 I hold a __[Ph.D.]__ degree in Natural Language Processing and Machine Learning, where I explored and proposed new methods for __[semantic relationship extraction]__. You can see a complete list of my publications as indexed by __[Google Schoolar]__.
 
-My CV is available for download as <a href="/assets/documents/dsbatista-cv.en.pdf/"><b>a PDF file</b></a>.
+My CV is available for download as <a href="/assets/documents/dsbatista-cv.en.pdf"><b>a PDF file</b></a>.
 
 I occasionally <a href="/archive/"><b>blog</b></a> mostly about Machine Learning and Natural Language Processing.
 
