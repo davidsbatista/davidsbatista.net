@@ -27,7 +27,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  text-decoration: underline;
+  /*text-decoration: underline;*/
 }
 
 /* used in Publications */
@@ -47,11 +47,11 @@ a:hover {
 .site-link {
   font-size: 18px;
   color: #303030;
-  webkit-transition: color 0.25s;
-  transition: color 0.25s;
+  /*webkit-transition: color 0.25s;*/
+  /*transition: color 0.25s;*/
 }
 .site-link:hover {
-  color: #807dba;
+  /*color: #807dba;*/
   text-decoration: bold;
 }
 
@@ -64,8 +64,8 @@ a:hover {
   font-size: 23px;
 }
 .post-link:hover {
-  color: #807dba;
-  text-decoration: bold;
+  /*color: #807dba;*/
+  /*text-decoration: bold;*/
   font-size: 23px;
 }
 
@@ -92,12 +92,12 @@ a:hover {
   border-radius: 7px;
   color: #303030;
   background-color: white;
-  webkit-transition: color 0.25s, background-color 0.25s;
-  transition: color 0.25s, background-color 0.25s;
+  /*webkit-transition: color 0.25s, background-color 0.25s;*/
+  /*transition: color 0.25s, background-color 0.25s;*/
 }
 .nav-link:hover {
-  color: white;
-  background-color: #807dba;
+  /*color: white;*/
+  /*background-color: #807dba;*/
   text-decoration: none;
 }
 
@@ -115,7 +115,7 @@ a:hover {
   z-index: 1;
 }
 .site-footer .site-title {
-  font-size: 24px;
+  font-size: 14px;
 }
 
 
@@ -148,6 +148,7 @@ a:hover {
 .site-nav {
   float: right;
   line-height: 65px;
+  font-weight: bold;
 }
 
 .site-nav .menu-icon { display: none; }
@@ -161,7 +162,7 @@ a:hover {
 /* SITE FOOTER */
 
 .site-footer {
-  border-top: 1px solid #e0e0e0;
+  border-top: 0px solid #e0e0e0;
   border-bottom: 5px solid #303030;
   padding: 15px 0;
   background-color: #f0f0f0;
@@ -175,11 +176,11 @@ a:hover {
   font-size: 18px;
   font-weight: 300;
   letter-spacing: -.5px;
-  margin-bottom: 15px;
+  margin-bottom: 1px;
 }
 
 .footer-top {
-  margin-bottom: 15px;
+  margin-bottom: 1px;
   font-size: 22px;
 }
 .footer-bottom {
@@ -195,7 +196,7 @@ a:hover {
 /* ----------------------------------------------------------*/
 
 .page-content {
-  padding: 30px 0;
+  padding: 8px 0;
   background-color: #ffffff;
 }
 
@@ -411,8 +412,8 @@ header h1 {
 .highlight .nc { color: #445588; font-weight: bold } /* Name.Class */
 .highlight .no { color: #008080 } /* Name.Constant */
 .highlight .ni { color: #800080 } /* Name.Entity */
-.highlight .ne { color: #807dba; font-weight: bold } /* Name.Exception */
-.highlight .nf { color: #807dba; font-weight: bold } /* Name.Function */
+/*.highlight .ne { color: #807dba; font-weight: bold }*/ /* Name.Exception */
+/*.highlight .nf { color: #807dba; font-weight: bold } /* Name.Function */
 .highlight .nn { color: #555555 } /* Name.Namespace */
 .highlight .nt { color: #000080 } /* Name.Tag */
 .highlight .nv { color: #008080 } /* Name.Variable */
@@ -498,7 +499,7 @@ header h1 {
     display: none;
   }
 
-  .site-nav:hover .trigger { display: block; }
+  ./*site-nav:hover .trigger { display: block; }*/
 
   .site-nav .page-link {
     display: block;
@@ -548,7 +549,7 @@ header h1 {
 
 /* Only provide a hover state for linked pagination items */
 a.pagination-item:hover {
-  background-color: #f5f5f5;
+  /*background-color: #f5f5f5;*/
 }
 
 @media (min-width: 30em) {
