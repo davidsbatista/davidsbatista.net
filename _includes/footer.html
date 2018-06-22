@@ -1,7 +1,7 @@
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-top">
-      <a class="site-title site-link" href="{{ site.baseurl }}/">{{ site.title }}</a><br>
+      <center>
       <ul>
         {% if site.email %}
           <li><a class="site-link" href="mailto:{{ site.email }}"><i class="fa fa-envelope-square fa-fw fa-2x"></i></a></li>
@@ -24,10 +24,10 @@
         {% endif %}
 
         <li><a class="site-link" href="{{ "/feed.xml" | prepend: site.baseurl }}"><i class="fa fa-rss-square fa-fw fa-2x"></i></a></li>
+        <br>
+        <!--© 2015-2018 David S. Batista-->
+      </center>
     </div>
-    <div class="footer-bottom">
-      <p>{{ site.description }}</p>
-      © 2017 Powered by Jekyll. Theme initially created by <a href=https://bdewilde.github.io/>Burton DeWilde</a>
-    </div>
+    <div class="footer-bottom"></div>
   </div>
 </footer>
