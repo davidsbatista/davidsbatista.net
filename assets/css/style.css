@@ -24,7 +24,7 @@ body {
 /* link color and decoration*/
 a {
   color: #4292c6;
-  text-decoration: none;
+  font-weight: bold;
 }
 a:hover {
   /*text-decoration: underline;*/
@@ -32,27 +32,13 @@ a:hover {
 
 a.site-link:focus, a.site-link:hover {
     color: #303030;
-    text-decoration: underline;
+    font-weight: bold;
 }
 
 a:focus, a:hover {
     color: #0099ff;
     text-decoration: underline;
 }
-
-/* used in Publications */
-/* ----------------------------------------------------------*/
-
-.row {
-  margin-left: -15px;
-  margin-right: -15px; }
-  .row:before, .row:after {
-    content: " ";
-    display: table; }
-  .row:after {
-    clear: both; }
-
-/* ----------------------------------------------------------*/
 
 .site-link {
   font-size: 18px;
@@ -77,6 +63,8 @@ a:focus, a:hover {
   /*color: #807dba;*/
   /*text-decoration: bold;*/
   font-size: 23px;
+  text-decoration: bold;
+  font-weight: bold;
 }
 
 .post-meta {
@@ -173,7 +161,7 @@ a:focus, a:hover {
 
 .site-footer {
   border-top: 0px solid #e0e0e0;
-  border-bottom: 5px solid #303030;
+  border-bottom: 0px solid #303030;
   padding: 15px 0;
   background-color: #f0f0f0;
 }
@@ -181,6 +169,7 @@ a:focus, a:hover {
 .site-footer .fa-fw {
   text-align: left;
 }
+
 
 .footer-heading {
   font-size: 18px;
@@ -276,7 +265,6 @@ header h1 {
 .post-content { margin: 0 0 30px; }
 
 .post-content > * { margin: 20px 0; }
-
 
 .post-content h1,
 .post-content h2,
@@ -620,8 +608,6 @@ td{
     border:1px solid #000000;
 }
 
-
-
 .mbtablestyle {
         border-collapse: collapse;
 
@@ -629,3 +615,17 @@ td{
         border: 1px solid black;
         }
 }
+
+/* used in "Publications" */
+/* ----------------------------------------------------------*/
+
+.row {
+  margin-left: -15px;
+  margin-right: -15px; }
+  .row:before, .row:after {
+    content: " ";
+    display: table; }
+  .row:after {
+    clear: both; }
+
+/* ----------------------------------------------------------*/
