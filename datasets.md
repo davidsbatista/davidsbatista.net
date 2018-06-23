@@ -7,38 +7,19 @@ This page contain links to list for public datasets used in different NLP tasks,
 
 ## __Relationship Extraction__
 
-I've been keeping track of [public and free datasets for relationship extractions](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets), the repository contains annotated datasets which can be used to train supervised models for the task of semantic relationship extraction.
+I've been keeping track of public and free datasets for semantic relationship extraction, this [github repository](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets) contains annotated datasets which can be used to train supervised models to perform semantic relationship extraction.
 
-##### __Traditional Information Extraction__ <sub><sup>[(link)](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#tie)<sub><sup>
+The datasets are organized into three different groups:
 
-* DBpediaRelations-PT (Portuguese)
-* AImed
-* SemEval 2007
-* SemEval 2010
-* ReRelEM (Portuguese)
-* Wikipedia (generic)
-* Web (generic)
-* BioNLP Shared Task 2011
-* ADE-V2
+* __Traditional Information Extraction__ <sub><sup>[(link)](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#tie)<sub><sup>
 
+* __Open Information Extraction__ <sub><sup>[(link)](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#oie)<sub><sup>
 
-##### __Open Information Extraction__ <sub><sup>[(link)](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#oie)<sub><sup>
-
-* ReVerb
-* ClausIE
-* WEB-500, NYT-500, PENN-100
-* NYT-Business-Articles
-
-##### __Distantly Supervised__ <sub><sup>[(link)](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#ds)<sub><sup>
-
-* NYT-dataset: aligning freebase relations with the New York Times (NYT)
-* [Google's relation-extraction-corpus](https://github.com/google-research-datasets/relation-extraction-corpus) ([description](https://research.googleblog.com/2013/04/50000-lessons-on-how-to-read-relation.html))
-
-<br>
+* __Distantly Supervised__ <sub><sup>[(link)](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#ds)<sub><sup>
 
 ---
 
-## __Lexicons__
+## __Lexicons and Dictionaries__
 
 Several [lexicons](https://github.com/davidsbatista/lexicons) I gathered for different NLP tasks, including lists of names, acronyms and it's extensions, stop-words, overlap of names and toponyms, etc.:
 
