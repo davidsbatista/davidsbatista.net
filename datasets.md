@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Datasets
+title: NLP Datasets
 ---
 
 This page contain links to list for public datasets used in different NLP tasks, I try to keep the lists updated as I found new and interesting datasets.
@@ -11,11 +11,11 @@ I've been keeping track of public and free datasets for semantic relationship ex
 
 The datasets are organized into three different groups:
 
-* __Traditional Information Extraction__ <sub><sup>[(link)](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#tie)<sub><sup>
+* [__Traditional Information Extraction__](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#tie)
 
-* __Open Information Extraction__ <sub><sup>[(link)](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#oie)<sub><sup>
+* [__Open Information Extraction__](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#oie)
 
-* __Distantly Supervised__ <sub><sup>[(link)](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#ds)<sub><sup>
+* [__Distantly Supervised__](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#ds)
 
 ---
 
