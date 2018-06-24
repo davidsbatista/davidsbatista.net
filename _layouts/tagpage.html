@@ -2,7 +2,6 @@
 layout: default
 ---
 <div class="post">
-<h3><i>{{ page.tag }}</i></h3>
 <ul>
 {% for post in site.tags[page.tag] %}
   <li><a href="{{ post.url }}">{{ post.title }}</a> ({{ post.date | date_to_string }})<br>
@@ -12,6 +11,5 @@ layout: default
 {% endfor %}
 </ul>
 </div>
-<hr>
 
 {% include archive.html %}

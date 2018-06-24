@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
-
   {% include head_post.html %}
-
   {% include google_analytics.html %}
-
   <!-- mathjax config similar to math.stackexchange -->
   <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
@@ -20,20 +17,14 @@
   });
   </script>
   <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
-
     <body>
-
     <a name="top"></a>
-
     {% include header.html %}
-
     <div class="page-content">
       <div class="wrap">
       {{ content }}
       </div>
     </div>
-
     {% include footer.html %}
-
     </body>
 </html>
