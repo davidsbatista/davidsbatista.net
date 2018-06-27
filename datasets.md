@@ -21,9 +21,13 @@ The datasets are organized into three different groups:
 
 ## __Named-Entity Recognition__
 
-Named-Entity Recognition datasets organized by different languages, also some are for different domains, currently __Portuguese__, __German__ and __English__:
+Named-Entity Recognition datasets organized by different languages, also some are for different domains:
 
- * [NER-datasets](https://github.com/davidsbatista/NER-datasets)
+* [__Portuguese__](https://github.com/davidsbatista/NER-datasets/blob/master/README.md#pt)
+
+* [__German__](https://github.com/davidsbatista/NER-datasets/blob/master/README.md#de)
+
+* [__English__](https://github.com/davidsbatista/NER-datasets/blob/master/README.md#en)
 
 ---
 
