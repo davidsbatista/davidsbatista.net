@@ -19,6 +19,14 @@ The datasets are organized into three different groups:
 
 ---
 
+## __Named-Entity Recognition__
+
+Named-Entity Recognition datasets organized by different languages, also some are for different domains, currently __Portuguese__, __German__ and __English__:
+
+ * [NER-datasets](https://github.com/davidsbatista/NER-datasets)
+
+---
+
 ## __Lexicons and Dictionaries__
 
 Several [lexicons](https://github.com/davidsbatista/lexicons) I gathered for different NLP tasks, including lists of names, acronyms and it's extensions, stop-words, overlap of names and toponyms, etc.:
@@ -34,7 +42,6 @@ Several [lexicons](https://github.com/davidsbatista/lexicons) I gathered for dif
 * [wikipedia-acronyms.txt](https://github.com/davidsbatista/lexicons/blob/master/wikipedia-acronyms.txt) a list of acronyms and it's possible extensions, extracted from the English Wikipedia.
 
 * [PT-stopwords.txt](https://github.com/davidsbatista/lexicons/blob/master/PT-stopwords.txt) a collections of stop-words for Portuguese.
-
 
 
 <!--
