@@ -547,7 +547,7 @@ Putting all together:
   <tr>
     <td><span style="font-weight:bold">Precision</span></td>
     <td>0.5</td>
-    <td>0.5</td>
+    <td>0.66</td>
     <td>0.5</td>
     <td>0.33</td>
   </tr>
@@ -578,6 +578,8 @@ Note you can find the complete code for this blog post on this repository:
 
 ### __Example__
 
+
+
 ```python
 import nltk
 import sklearn_crfsuite
@@ -586,9 +588,9 @@ from copy import deepcopy
 from collections import defaultdict
 
 from sklearn_crfsuite import metrics
+
 from ner_evaluation import collect_named_entities
 from ner_evaluation import compute_metrics
-from ner_evaluation import compute_metrics_by_type
 ```
 
 ## Train a CRF on the CoNLL 2002 NER Spanish data
@@ -668,8 +670,8 @@ X_test = [sent2features(s) for s in test_sents]
 y_test = [sent2labels(s) for s in test_sents]
 ```
 
-    CPU times: user 1.09 s, sys: 88.7 ms, total: 1.18 s
-    Wall time: 1.18 s
+    CPU times: user 1.12 s, sys: 98.2 ms, total: 1.22 s
+    Wall time: 1.22 s
 
 
 ## Training
@@ -687,8 +689,8 @@ crf = sklearn_crfsuite.CRF(
 crf.fit(X_train, y_train)
 ```
 
-    CPU times: user 34.7 s, sys: 141 ms, total: 34.8 s
-    Wall time: 34.8 s
+    CPU times: user 34.1 s, sys: 197 ms, total: 34.3 s
+    Wall time: 34.4 s
 
 
 ## Performance per label type per token
@@ -772,45 +774,75 @@ compute_metrics(true, pred)
 
 
 
-    {'ent_type': {'actual': 4,
-      'correct': 3,
-      'incorrect': 1,
-      'missed': 0,
-      'partial': 0,
-      'possible': 4,
-      'precision': 0.75,
-      'recall': 0.75,
-      'spurius': 0},
-     'exact_matching': {'actual': 4,
-      'correct': 4,
-      'incorrect': 0,
-      'missed': 0,
-      'partial': 0,
-      'possible': 4,
-      'precision': 1.0,
-      'recall': 1.0,
-      'spurius': 0},
-     'partial_matching': {'actual': 4,
-      'correct': 4,
-      'incorrect': 0,
-      'missed': 0,
-      'partial': 0,
-      'possible': 4,
-      'precision': 1.0,
-      'recall': 1.0,
-      'spurius': 0},
-     'strict': {'actual': 4,
-      'correct': 3,
-      'incorrect': 1,
-      'missed': 0,
-      'partial': 0,
-      'possible': 4,
-      'precision': 0.75,
-      'recall': 0.75,
-      'spurius': 0}}
+    ({'ent_type': {'actual': 4,
+       'correct': 3,
+       'incorrect': 1,
+       'missed': 0,
+       'partial': 0,
+       'possible': 4,
+       'precision': 0.75,
+       'recall': 0.75,
+       'spurius': 0},
+      'strict': {'actual': 4,
+       'correct': 3,
+       'incorrect': 1,
+       'missed': 0,
+       'partial': 0,
+       'possible': 4,
+       'precision': 0.75,
+       'recall': 0.75,
+       'spurius': 0}},
+     {'LOC': {'ent_type': {'correct': 1,
+        'incorrect': 1,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 0},
+       'strict': {'correct': 1,
+        'incorrect': 1,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 0}},
+      'MISC': {'ent_type': {'correct': 1,
+        'incorrect': 0,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 0},
+       'strict': {'correct': 1,
+        'incorrect': 0,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 0}},
+      'ORG': {'ent_type': {'correct': 0,
+        'incorrect': 0,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 0},
+       'strict': {'correct': 0,
+        'incorrect': 0,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 0}},
+      'PER': {'ent_type': {'correct': 1,
+        'incorrect': 0,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 0},
+       'strict': {'correct': 1,
+        'incorrect': 0,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 0}}})
+
+
 
 
 ```python
+to_test = [2,4,12,14]
+```
+
+
+```python
+index = 2
 true_named_entities_type = defaultdict(list)
 pred_named_entities_type = defaultdict(list)
 
@@ -883,45 +915,64 @@ pred_named_entities_type['LOC']
 compute_metrics(true_named_entities_type['LOC'], pred_named_entities_type['LOC'])
 ```
 
-
-
-
-    {'ent_type': {'actual': 2,
-      'correct': 1,
-      'incorrect': 0,
-      'missed': 0,
-      'partial': 0,
-      'possible': 1,
-      'precision': 0.5,
-      'recall': 1.0,
-      'spurius': 1},
-     'exact_matching': {'actual': 2,
-      'correct': 1,
-      'incorrect': 0,
-      'missed': 0,
-      'partial': 0,
-      'possible': 1,
-      'precision': 0.5,
-      'recall': 1.0,
-      'spurius': 1},
-     'partial_matching': {'actual': 2,
-      'correct': 1,
-      'incorrect': 0,
-      'missed': 0,
-      'partial': 0,
-      'possible': 1,
-      'precision': 0.5,
-      'recall': 1.0,
-      'spurius': 1},
-     'strict': {'actual': 2,
-      'correct': 1,
-      'incorrect': 0,
-      'missed': 0,
-      'partial': 0,
-      'possible': 1,
-      'precision': 0.5,
-      'recall': 1.0,
-      'spurius': 1}}
+    ({'ent_type': {'actual': 2,
+       'correct': 1,
+       'incorrect': 0,
+       'missed': 0,
+       'partial': 0,
+       'possible': 1,
+       'precision': 0.5,
+       'recall': 1.0,
+       'spurius': 1},
+      'strict': {'actual': 2,
+       'correct': 1,
+       'incorrect': 0,
+       'missed': 0,
+       'partial': 0,
+       'possible': 1,
+       'precision': 0.5,
+       'recall': 1.0,
+       'spurius': 1}},
+     {'LOC': {'ent_type': {'correct': 1,
+        'incorrect': 0,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 1},
+       'strict': {'correct': 1,
+        'incorrect': 0,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 1}},
+      'MISC': {'ent_type': {'correct': 0,
+        'incorrect': 0,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 0},
+       'strict': {'correct': 0,
+        'incorrect': 0,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 0}},
+      'ORG': {'ent_type': {'correct': 0,
+        'incorrect': 0,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 0},
+       'strict': {'correct': 0,
+        'incorrect': 0,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 0}},
+      'PER': {'ent_type': {'correct': 0,
+        'incorrect': 0,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 0},
+       'strict': {'correct': 0,
+        'incorrect': 0,
+        'missed': 0,
+        'partial': 0,
+        'spurius': 0}}})
 
 
 
@@ -929,20 +980,33 @@ compute_metrics(true_named_entities_type['LOC'], pred_named_entities_type['LOC']
 
 
 ```python
-metrics = {'correct': 0, 'incorrect': 0, 'partial': 0, 'missed': 0, 'spurius': 0, 'possible': 0, 'actual': 0}
-results = {'strict': deepcopy(metrics),
-           'exact_matching': deepcopy(metrics),
-           'partial_matching': deepcopy(metrics),
-           'ent_type': deepcopy(metrics)
-          }
+metrics_results = {'correct': 0, 'incorrect': 0, 'partial': 0,
+                   'missed': 0, 'spurius': 0, 'possible': 0, 'actual': 0}
 
-for true, pred in zip(test_sents_labels, y_pred):
-    tmp_results = compute_metrics(collect_named_entities(true),collect_named_entities(pred))
+# overall results
+results = {'strict': deepcopy(metrics_results),
+           'ent_type': deepcopy(metrics_results)
+           }
+
+# results aggregated by entity type
+evaluation_agg_entities_type = {e: deepcopy(results) for e in ['LOC','PER','ORG','MISC']}
+
+for true_ents, pred_ents in zip(test_sents_labels, y_pred):    
+    # compute results for one message
+    tmp_results, tmp_agg_results = compute_metrics(collect_named_entities(true_ents),collect_named_entities(pred_ents))
+
+    # aggregate overall results
     for eval_schema in results.keys():
-        for metric in metrics.keys():
-            results[eval_schema][metric] +=  tmp_results[eval_schema][metric]
-```
+        for metric in metrics_results.keys():
+            results[eval_schema][metric] += tmp_results[eval_schema][metric]
 
+    # aggregate results by entity type
+    for e_type in ['LOC','PER','ORG','MISC']:
+        for eval_schema in tmp_agg_results[e_type]:
+            for metric in tmp_agg_results[e_type][eval_schema]:
+                evaluation_agg_entities_type[e_type][eval_schema][metric] += tmp_agg_results[e_type][eval_schema][metric]
+
+```
 
 ```python
 results
@@ -954,163 +1018,87 @@ results
     {'ent_type': {'actual': 3518,
       'correct': 2909,
       'incorrect': 564,
-      'missed': 106,
+      'missed': 111,
       'partial': 0,
-      'possible': 3579,
-      'spurius': 45},
-     'exact_matching': {'actual': 3518,
-      'correct': 3274,
-      'incorrect': 199,
-      'missed': 106,
-      'partial': 0,
-      'possible': 3579,
-      'spurius': 45},
-     'partial_matching': {'actual': 3518,
-      'correct': 3274,
-      'incorrect': 0,
-      'missed': 106,
-      'partial': 199,
-      'possible': 3579,
+      'possible': 3584,
       'spurius': 45},
      'strict': {'actual': 3518,
       'correct': 2779,
       'incorrect': 694,
-      'missed': 106,
+      'missed': 111,
       'partial': 0,
-      'possible': 3579,
+      'possible': 3584,
       'spurius': 45}}
 
 
 
-## results over all messages by ent_type
-
 
 ```python
-entity_types = ['LOC', 'PER', 'MISC', 'ORG']
-all_results = compute_results(test_sents_labels, y_pred, entity_types)
-```
-
-
-```python
-all_results['ent_type']
+evaluation_agg_entities_type
 ```
 
 
 
 
-    {'LOC': {'correct': 863,
-      'incorrect': 0,
-      'missed': 124,
-      'partial': 0,
-      'spurius': 66},
-     'MISC': {'correct': 212,
-      'incorrect': 0,
-      'missed': 43,
-      'partial': 0,
-      'spurius': 7},
-     'ORG': {'correct': 1183,
-      'incorrect': 0,
-      'missed': 166,
-      'partial': 0,
-      'spurius': 153},
-     'PER': {'correct': 657,
-      'incorrect': 0,
-      'missed': 46,
-      'partial': 0,
-      'spurius': 17}}
+    {'LOC': {'ent_type': {'actual': 0,
+       'correct': 861,
+       'incorrect': 180,
+       'missed': 32,
+       'partial': 0,
+       'possible': 0,
+       'spurius': 5},
+      'strict': {'actual': 0,
+       'correct': 840,
+       'incorrect': 201,
+       'missed': 32,
+       'partial': 0,
+       'possible': 0,
+       'spurius': 5}},
+     'MISC': {'ent_type': {'actual': 0,
+       'correct': 211,
+       'incorrect': 46,
+       'missed': 33,
+       'partial': 0,
+       'possible': 0,
+       'spurius': 7},
+      'strict': {'actual': 0,
+       'correct': 173,
+       'incorrect': 84,
+       'missed': 33,
+       'partial': 0,
+       'possible': 0,
+       'spurius': 7}},
+     'ORG': {'ent_type': {'actual': 0,
+       'correct': 1181,
+       'incorrect': 231,
+       'missed': 34,
+       'partial': 0,
+       'possible': 0,
+       'spurius': 31},
+      'strict': {'actual': 0,
+       'correct': 1120,
+       'incorrect': 292,
+       'missed': 34,
+       'partial': 0,
+       'possible': 0,
+       'spurius': 31}},
+     'PER': {'ent_type': {'actual': 0,
+       'correct': 656,
+       'incorrect': 107,
+       'missed': 12,
+       'partial': 0,
+       'possible': 0,
+       'spurius': 2},
+      'strict': {'actual': 0,
+       'correct': 646,
+       'incorrect': 117,
+       'missed': 12,
+       'partial': 0,
+       'possible': 0,
+       'spurius': 2}}}
 
 
 
-
-```python
-all_results['strict']
-```
-
-
-
-
-    {'LOC': {'correct': 840,
-      'incorrect': 23,
-      'missed': 124,
-      'partial': 0,
-      'spurius': 66},
-     'MISC': {'correct': 173,
-      'incorrect': 39,
-      'missed': 43,
-      'partial': 0,
-      'spurius': 7},
-     'ORG': {'correct': 1120,
-      'incorrect': 63,
-      'missed': 166,
-      'partial': 0,
-      'spurius': 153},
-     'PER': {'correct': 646,
-      'incorrect': 11,
-      'missed': 46,
-      'partial': 0,
-      'spurius': 17}}
-
-
-
-
-```python
-all_results['exact_matching']
-```
-
-
-
-
-    {'LOC': {'correct': 840,
-      'incorrect': 23,
-      'missed': 124,
-      'partial': 0,
-      'spurius': 66},
-     'MISC': {'correct': 173,
-      'incorrect': 39,
-      'missed': 43,
-      'partial': 0,
-      'spurius': 7},
-     'ORG': {'correct': 1120,
-      'incorrect': 63,
-      'missed': 166,
-      'partial': 0,
-      'spurius': 153},
-     'PER': {'correct': 646,
-      'incorrect': 11,
-      'missed': 46,
-      'partial': 0,
-      'spurius': 17}}
-
-
-
-
-```python
-all_results['partial_matching']
-```
-
-
-
-
-    {'LOC': {'correct': 840,
-      'incorrect': 0,
-      'missed': 124,
-      'partial': 23,
-      'spurius': 66},
-     'MISC': {'correct': 173,
-      'incorrect': 0,
-      'missed': 43,
-      'partial': 39,
-      'spurius': 7},
-     'ORG': {'correct': 1120,
-      'incorrect': 0,
-      'missed': 166,
-      'partial': 63,
-      'spurius': 153},
-     'PER': {'correct': 646,
-      'incorrect': 0,
-      'missed': 46,
-      'partial': 11,
-      'spurius': 17}}
 
 
 ## __References__
