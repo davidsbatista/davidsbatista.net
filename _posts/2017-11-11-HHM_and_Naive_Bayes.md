@@ -107,13 +107,13 @@ This will result in a big table of occurrences of features for all classes in th
 
 ### __Classification__
 
-When given a new sample to classify, and assuming that it contains features $$x_{1}, w_{3}, w_{5}$$, we need to compute, for each class $$y_{i}$$:
+When given a new sample to classify, and assuming that it contains features $$x_{1}, x_{3}, x_{5}$$, we need to compute, for each class $$y_{i}$$:
 
-$$ p(y_{i} \mid x_{1}, w_{3}, w_{5})$$
+$$ p(y_{i} \mid x_{1}, x_{3}, x_{5})$$
 
 This is decomposed into:
 
-$$ p(y_{i} \mid x_{1}, w_{3}, w_{5}) = p(y_{i}) \cdot p(y_{i} \mid x_{1}) \cdot p(y_{i} \mid x_{3}) \cdot p(y_{i} \mid x_{5})$$
+$$ p(y_{i} \mid x_{1}, x_{3}, x_{5}) = p(y_{i}) \cdot p(y_{i} \mid x_{1}) \cdot p(y_{i} \mid x_{3}) \cdot p(y_{i} \mid x_{5})$$
 
 Again, this is calculated for each class $$y_{i}$$, and we assign to the new observed sample the class that has the highest score.
 
