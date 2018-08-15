@@ -30,7 +30,7 @@ The output of this sequence of operations is then typically connected to a fully
 
 ### __Convolutions__
 
-We can think about the input image as a matrix representing each pixel, and a value between 0 and 255 representing the brightness intensity. Let's assume it's a black and white image with just one [__channel__](https://www.wikiwand.com/en/Channel_(digital_image)) representing the grayscale. If you would be processing a colour image, and taking into account the colours one would apply 3 channels following the [__RGB colour mode__](https://www.wikiwand.com/en/RGB_color_model).
+We can think about the input image as a matrix, where each entry represents each pixel, and a value between 0 and 255 representing the brightness intensity. Let's assume it's a black and white image with just one [__channel__](https://www.wikiwand.com/en/Channel_(digital_image)) representing the grayscale. If you would be processing a colour image, and taking into account the colours one would have 3 channels, following the [__RGB colour mode__](https://www.wikiwand.com/en/RGB_color_model).
 
 One way to understand the convolution operation is to imagine placing the __convolution filter__ or __kernel__ on the top of the input image, positioned in a way so that the __kernel__ and the image upper left corners coincide, and then multiplying the values of the input image matrix with the corresponding values in the __convolution filter__.
 
@@ -74,10 +74,9 @@ This process is somehow similar to the convolution described before, but instead
 
  <figure>
    <img style="width: 75%; height: 75%" src="/assets/images/2018-03-31_cnn_pooling.jpg">
-   <figcaption>Example of a pooling operation with stride length of 2. <br> (Image adapted from ...)</figcaption>
+   <figcaption>Example of a pooling operation with stride length of 2. <br> (Image adapted from <a href="https://medium.com/@Aj.Cheng/convolutional-neural-network-d9f69e473feb">AJ Cheng blog</a>)</figcaption>
  </figure>
 
- <!-- image from: https://medium.com/@Aj.Cheng/convolutional-neural-network-d9f69e473feb -->
 
 Why do we downsample the feature maps and simply just don't remove the pooling layers and keep possibly large feature maps? François Chollet in _"Deep Learning with Python"_ summarises it well in this sentence:
 
@@ -89,7 +88,7 @@ The two processes described before i.e.: convolutions and pooling, can been thou
 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2018-03-31-mlp.png">
-  <figcaption>Example of multi-layer perceptron network used to train for classification. <br> (Image adapted from ...)</figcaption>
+  <figcaption>Example of multi-layer perceptron network used to train for classification.</figcaption>
 </figure>
 
 
@@ -138,8 +137,9 @@ An example of a sentence convolution in a vector-concatenation notation:
 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2018-03-31-sentence_convolution-example.png">
-  <figcaption>Example of a sentence convolution with $k$=2 and $l$=3. <br> (Image adapted from ...)</figcaption>
+  <figcaption>Example of a sentence convolution with $k$=2 and dimensional output $l$=3. <br> (Image adapted from <a href="http://u.cs.biu.ac.il/~yogo/">Yoav Goldberg</a> book "Neural Network Methods for NLP")</figcaption>
 </figure>
+
 
 #### __Channels__
 
@@ -188,7 +188,9 @@ These two views can then be combined either by summation pi D pi C pi orbyconcat
 ### __Pooling__
 
 
-## __ConvNets for Sentence Classification code in Keras__
+---
+
+## __Code: ConvNets for Sentence Classification with Keras__
 
 * sentiment classification
 
@@ -207,14 +209,13 @@ https://github.com/yoonkim/CNN_sentence
 <!-- apenas a experienca do Kim, simples, notebook, partes do código, final link pó notebook -->
 
 
+<!--
 ## __ConvNets for NLP - Seminal Works__
 
-<!--
 aqui falar de outros papers onde ConvNet são usadas para outras tarefas, como NER, etc.
--->
 
 Convolutional networks were first introduced to the NLP community in the paper [__Natural Language Processing (almost) from Scratch__](http://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf) by Collobert et al.,
-
+-->
 
 
 # __Summary__
