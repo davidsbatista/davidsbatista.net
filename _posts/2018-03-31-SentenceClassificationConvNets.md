@@ -185,17 +185,23 @@ We can also apply the multiple channels paradigm in text processing as well. For
 
 Applying the convolution over the words will result in $m$ vectors $w$, applying it over the PoS-tags will result also in $m$ vectors, and the same for the shapes, again $m$ vectors. These three different channels can then be combined either by summation:
 
-$p_i = p^{words}_{1:m} + p^{pos}_{1:m} + p^{shapes}_{1:m}$
+<center>
+ $p_i = words_{1:m} + pos_{1:m} + shapes_{1:m}$
+</center>
 
 or by concatenation:
 
-$p_i = [p^{words}_{1:m}:p^{pos}_{1:m}:p^{shapes}_{1:m}]$.
+<center>
+ $p_i = [words_{1:m}:pos_{1:m}:shapes_{1:m}]$.
+</center>
 
-
-
+__NOTE__: each channel can still have different convolutions, for instance, applying different context windows over words, pos-tags or shapes.
 
 ### __Pooling__
 
+The pooling operation is used to combine the vectors resulting from different convolution windows into a single $l$-dimensional vector. This is done again by taking the _max_ or the _average_ value observed in resulting vector from the convolutions. Ideally this vector will capture the most relevant features of the sentence/document.
+
+This vector is then fed further down in the network - hence, the idea that ConvNet itself is just a feature extractor - most probably to a full connected layer to perform prediction.
 
 ---
 
@@ -205,11 +211,6 @@ $p_i = [p^{words}_{1:m}:p^{pos}_{1:m}:p^{shapes}_{1:m}]$.
 
 * question-type classification
 
-<!--
-código original em Theano
-https://github.com/yoonkim/CNN_sentence
--->
-
 ### __Datasets__
 
 ### __Experiments and Results__
@@ -217,20 +218,6 @@ https://github.com/yoonkim/CNN_sentence
 <!--
 https://machinelearningmastery.com/develop-n-gram-multichannel-convolutional-neural-network-sentiment-analysis/
 -->
-
-
-
-<!-- apenas a experienca do Kim, simples, notebook, partes do código, final link pó notebook -->
-
-
-<!--
-## __ConvNets for NLP - Seminal Works__
-
-aqui falar de outros papers onde ConvNet são usadas para outras tarefas, como NER, etc.
-
-Convolutional networks were first introduced to the NLP community in the paper [__Natural Language Processing (almost) from Scratch__](http://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf) by Collobert et al.,
--->
-
 
 # __Summary__
 
