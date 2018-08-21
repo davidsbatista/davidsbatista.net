@@ -143,7 +143,7 @@ An example of a sentence convolution in a vector-concatenation notation:
 
 #### __Channels__
 
-In the introduction above I assumed we were processing a black and white image, and therefore we have one matrix representing the grayscale intensity of each pixel. With the [__RGB colour mode__](https://www.wikiwand.com/en/RGB_color_model) each pixel would be a combination of three intensity values instead, one for each of Red, Green and Blue components, and such representation would be stored in three different matrices, providing a different characteristics or view of the image, which is referred to as a [__Channel__](https://www.wikiwand.com/en/Channel_(digital_image)). It's common to apply a different set of filters to each channel, and then combine the three resulting vectors into a single vector.
+In the introduction above I assumed we were processing a black and white image, and therefore we have one matrix representing the grayscale intensity of each pixel. With the [__RGB colour mode__](https://www.wikiwand.com/en/RGB_color_model) each pixel would be a combination of three intensity values instead, one for each of Red, Green and Blue components, and such representation would be stored in three different matrices, providing different characteristics or view of the image, referred to as a [__Channel__](https://www.wikiwand.com/en/Channel_(digital_image)). It's common to apply a different set of filters to each channel, and then combine the three resulting vectors into a single vector.
 
 We can also apply the multiple channels paradigm in text processing as well. For example, for a given phrase or window of text, one channel could be the sequence of words, another channel the sequence of corresponding POS tags, and a third one the shape of the words:
 
@@ -157,6 +157,7 @@ We can also apply the multiple channels paradigm in text processing as well. For
 </style>
 <table class="tg">
   <tr>
+    <th>Word:</th>
     <th class="tg-hgcj">The</th>
     <th class="tg-hgcj">plane</th>
     <th class="tg-hgcj">lands</th>
@@ -164,6 +165,7 @@ We can also apply the multiple channels paradigm in text processing as well. For
     <th class="tg-amwm">Lisbon</th>
   </tr>
   <tr>
+    <th>PoS-tag:</th>
     <td class="tg-hgcj">DET</td>
     <td class="tg-hgcj">NOUN</td>
     <td class="tg-hgcj">VERB</td>
@@ -171,6 +173,7 @@ We can also apply the multiple channels paradigm in text processing as well. For
     <td class="tg-amwm">NOUN</td>
   </tr>
   <tr>
+    <th>Shape:</th>
     <td class="tg-hgcj">Xxx</td>
     <td class="tg-hgcj">xxxx</td>
     <td class="tg-hgcj">xxxx</td>
@@ -180,9 +183,15 @@ We can also apply the multiple channels paradigm in text processing as well. For
 </table>
 </center>
 
-Applying the convolution over the words will result in $m$ vectors, applying it over the POS-tags will result also result in $m$ vectors, and the same for the shapes, again $m$ vectors.
+Applying the convolution over the words will result in $m$ vectors $w$, applying it over the PoS-tags will result also in $m$ vectors, and the same for the shapes, again $m$ vectors. These three different channels can then be combined either by summation:
 
-These two views can then be combined either by summation pi D pi C pi orbyconcatenationpi DŒpiwIpit .
+$p_i = p^{words}_{1:m} + p^{pos}_{1:m} + p^{shapes}_{1:m}$
+
+or by concatenation:
+
+$p_i = [p^{words}_{1:m}:p^{pos}_{1:m}:p^{shapes}_{1:m}]$.
+
+
 
 
 ### __Pooling__
@@ -201,10 +210,15 @@ código original em Theano
 https://github.com/yoonkim/CNN_sentence
 -->
 
-
 ### __Datasets__
 
 ### __Experiments and Results__
+
+<!--
+https://machinelearningmastery.com/develop-n-gram-multichannel-convolutional-neural-network-sentiment-analysis/
+-->
+
+
 
 <!-- apenas a experienca do Kim, simples, notebook, partes do código, final link pó notebook -->
 
