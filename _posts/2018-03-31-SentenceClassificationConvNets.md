@@ -195,7 +195,7 @@ or by concatenation:
  $p_i = [words_{1:m}:pos_{1:m}:shapes_{1:m}]$.
 </center>
 
-__NOTE__: each channel can still have different convolutions, for instance, applying different context windows over words, pos-tags or shapes.
+__NOTE__: each channel can still have different convolutions that read the source document using different kernel sizes, for instance, applying different context windows over words, pos-tags or shapes.
 
 ### __Pooling__
 
