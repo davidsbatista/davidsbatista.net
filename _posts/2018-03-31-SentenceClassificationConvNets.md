@@ -205,21 +205,44 @@ This vector is then fed further down in the network - hence, the idea that ConvN
 
 ---
 
-## __Code: ConvNets for Sentence Classification with Keras__
+### __Convolutional Neural Networks for Sentence Classification__
 
-* sentiment classification
+I did a quick experiment, based on the paper by Yoon Kim, implementing the 4 ConvNets models he used to perform sentence classification.
 
-* question-type classification
+- __CNN-rand__: all words are randomly initialized and then modified during training
 
-### __Datasets__
+- __CNN-static__: pre-trained vectors with all the words— including the unknown ones that are randomly initialized—kept static and only the other parameters of the model are learned
 
-### __Experiments and Results__
+- __CNN-non-static__: same as CNN-static but word vectors are fine-tuned
+
+- __CNN-multichannel__: model with two sets of word vectors. Each set of vectors is treated as a channel and each filter is applied
+
+Let's just first quickly look at how these different models look like in as a computational graph. The first three (i.e., CNN-rand, CNN-static and CNN-non-static) look pretty much the same:
+
+<figure>
+  <img style="width: 100%; height: 100%" src="/assets/images/2018-03-31-SentenceClassificationConvNets-no_multi_channel.svg">
+  <figcaption></figcaption>
+</figure>
+
+
+The CNN-multichannel model uses two embedding layers, in one channel the embeddings are updated, in the second they remain static. It's exactly the same network as above but duplicated and adding an extra layer do concatenate both results into a single vector:
+
+<figure>
+  <img style="width: 100%; height: 100%" src="/assets/images/2018-03-31-SentenceClassificationConvNets-multi_channel.svg">
+  <figcaption></figcaption>
+</figure>
 
 <!--
-https://machinelearningmastery.com/develop-n-gram-multichannel-convolutional-neural-network-sentiment-analysis/
+#### __Datasets__
+* sentiment classification
+* question-type classification
 -->
 
-# __Summary__
+#### __Experiments and Results__
+
+---
+
+## __Summary__
 
 <!--Yoav Goldberg-->
 
@@ -240,6 +263,6 @@ The CNN layer’s responsibility is to extract meaningful sub-structures that ar
 
 * [__"Deep Learning" by Adam Gibson, Josh Patterson (O'Reilly Media, Inc. 2017)__](https://www.oreilly.com/library/view/deep-learning/9781491924570/)
 
-* [__"Neural Network Methods for Natural Language Processing" by Yoav Goldberg (Morgan & Claypool Publishers 2017)__](http://www.cs.biu.ac.il/~yogo/)
+* __["Neural Network Methods for Natural Language Processing"](http://www.morganclaypoolpublishers.com/catalog_Orig/product_info.php?products_id=1056) by [Yoav Goldberg](http://www.cs.biu.ac.il/~yogo/) (Morgan & Claypool Publishers 2017)__
 
-* [__"Deep Learning with Python" by François Chollet (Manning Publications 2017)__](https://github.com/fchollet)
+* __["Deep Learning with Python"](https://www.manning.com/books/deep-learning-with-python) by [François Chollet](https://github.com/fchollet) (Manning Publications 2017)__
