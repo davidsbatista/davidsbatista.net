@@ -30,7 +30,7 @@ The output of this sequence of operations is then typically connected to a fully
 
 ### __Convolutions__
 
-We can think about the input image as a matrix representing each pixel, and a value between 0 and 255 representing the brightness intensity. Let's assume it's a black and white image with just one [__channel__](https://www.wikiwand.com/en/Channel_(digital_image)) representing the grayscale. If you would be processing a colour image, and taking into account the colours one would apply 3 channels following the [__RGB colour mode__](https://www.wikiwand.com/en/RGB_color_model).
+We can think about the input image as a matrix, where each entry represents each pixel, and a value between 0 and 255 representing the brightness intensity. Let's assume it's a black and white image with just one [__channel__](https://www.wikiwand.com/en/Channel_(digital_image)) representing the grayscale. If you would be processing a colour image, and taking into account the colours one would have 3 channels, following the [__RGB colour mode__](https://www.wikiwand.com/en/RGB_color_model).
 
 One way to understand the convolution operation is to imagine placing the __convolution filter__ or __kernel__ on the top of the input image, positioned in a way so that the __kernel__ and the image upper left corners coincide, and then multiplying the values of the input image matrix with the corresponding values in the __convolution filter__.
 
@@ -74,10 +74,9 @@ This process is somehow similar to the convolution described before, but instead
 
  <figure>
    <img style="width: 75%; height: 75%" src="/assets/images/2018-03-31_cnn_pooling.jpg">
-   <figcaption>Example of a pooling operation with stride length of 2. <br> (Image adapted from ...)</figcaption>
+   <figcaption>Example of a pooling operation with stride length of 2. <br> (Image adapted from <a href="https://medium.com/@Aj.Cheng/convolutional-neural-network-d9f69e473feb">AJ Cheng blog</a>)</figcaption>
  </figure>
 
- <!-- image from: https://medium.com/@Aj.Cheng/convolutional-neural-network-d9f69e473feb -->
 
 Why do we downsample the feature maps and simply just don't remove the pooling layers and keep possibly large feature maps? François Chollet in _"Deep Learning with Python"_ summarises it well in this sentence:
 
@@ -89,7 +88,7 @@ The two processes described before i.e.: convolutions and pooling, can been thou
 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2018-03-31-mlp.png">
-  <figcaption>Example of multi-layer perceptron network used to train for classification. <br> (Image adapted from ...)</figcaption>
+  <figcaption>Example of multi-layer perceptron network used to train for classification.</figcaption>
 </figure>
 
 
@@ -138,12 +137,13 @@ An example of a sentence convolution in a vector-concatenation notation:
 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2018-03-31-sentence_convolution-example.png">
-  <figcaption>Example of a sentence convolution with $k$=2 and $l$=3. <br> (Image adapted from ...)</figcaption>
+  <figcaption>Example of a sentence convolution with $k$=2 and dimensional output $l$=3. <br> (Image adapted from <a href="http://u.cs.biu.ac.il/~yogo/">Yoav Goldberg</a> book "Neural Network Methods for NLP")</figcaption>
 </figure>
+
 
 #### __Channels__
 
-In the introduction above I assumed we were processing a black and white image, and therefore we have one matrix representing the grayscale intensity of each pixel. With the [__RGB colour mode__](https://www.wikiwand.com/en/RGB_color_model) each pixel would be a combination of three intensity values instead, one for each of Red, Green and Blue components, and such representation would be stored in three different matrices, providing a different characteristics or view of the image, which is referred to as a [__Channel__](https://www.wikiwand.com/en/Channel_(digital_image)). It's common to apply a different set of filters to each channel, and then combine the three resulting vectors into a single vector.
+In the introduction above I assumed we were processing a black and white image, and therefore we have one matrix representing the grayscale intensity of each pixel. With the [__RGB colour mode__](https://www.wikiwand.com/en/RGB_color_model) each pixel would be a combination of three intensity values instead, one for each of Red, Green and Blue components, and such representation would be stored in three different matrices, providing different characteristics or view of the image, referred to as a [__Channel__](https://www.wikiwand.com/en/Channel_(digital_image)). It's common to apply a different set of filters to each channel, and then combine the three resulting vectors into a single vector.
 
 We can also apply the multiple channels paradigm in text processing as well. For example, for a given phrase or window of text, one channel could be the sequence of words, another channel the sequence of corresponding POS tags, and a third one the shape of the words:
 
@@ -157,6 +157,7 @@ We can also apply the multiple channels paradigm in text processing as well. For
 </style>
 <table class="tg">
   <tr>
+    <th>Word:</th>
     <th class="tg-hgcj">The</th>
     <th class="tg-hgcj">plane</th>
     <th class="tg-hgcj">lands</th>
@@ -164,6 +165,7 @@ We can also apply the multiple channels paradigm in text processing as well. For
     <th class="tg-amwm">Lisbon</th>
   </tr>
   <tr>
+    <th>PoS-tag:</th>
     <td class="tg-hgcj">DET</td>
     <td class="tg-hgcj">NOUN</td>
     <td class="tg-hgcj">VERB</td>
@@ -171,6 +173,7 @@ We can also apply the multiple channels paradigm in text processing as well. For
     <td class="tg-amwm">NOUN</td>
   </tr>
   <tr>
+    <th>Shape:</th>
     <td class="tg-hgcj">Xxx</td>
     <td class="tg-hgcj">xxxx</td>
     <td class="tg-hgcj">xxxx</td>
@@ -180,44 +183,67 @@ We can also apply the multiple channels paradigm in text processing as well. For
 </table>
 </center>
 
-Applying the convolution over the words will result in $m$ vectors, applying it over the POS-tags will result also result in $m$ vectors, and the same for the shapes, again $m$ vectors.
+Applying the convolution over the words will result in $m$ vectors $w$, applying it over the PoS-tags will result also in $m$ vectors, and the same for the shapes, again $m$ vectors. These three different channels can then be combined either by summation:
 
-These two views can then be combined either by summation pi D pi C pi orbyconcatenationpi DŒpiwIpit .
+<center>
+ $p_i = words_{1:m} + pos_{1:m} + shapes_{1:m}$
+</center>
 
+or by concatenation:
+
+<center>
+ $p_i = [words_{1:m}:pos_{1:m}:shapes_{1:m}]$.
+</center>
+
+__NOTE__: each channel can still have different convolutions that read the source document using different kernel sizes, for instance, applying different context windows over words, pos-tags or shapes.
 
 ### __Pooling__
 
+The pooling operation is used to combine the vectors resulting from different convolution windows into a single $l$-dimensional vector. This is done again by taking the _max_ or the _average_ value observed in resulting vector from the convolutions. Ideally this vector will capture the most relevant features of the sentence/document.
 
-## __ConvNets for Sentence Classification code in Keras__
+This vector is then fed further down in the network - hence, the idea that ConvNet itself is just a feature extractor - most probably to a full connected layer to perform prediction.
 
+---
+
+### __Convolutional Neural Networks for Sentence Classification__
+
+I did a quick experiment, based on the paper by Yoon Kim, implementing the 4 ConvNets models he used to perform sentence classification.
+
+- __CNN-rand__: all words are randomly initialized and then modified during training
+
+- __CNN-static__: pre-trained vectors with all the words— including the unknown ones that are randomly initialized—kept static and only the other parameters of the model are learned
+
+- __CNN-non-static__: same as CNN-static but word vectors are fine-tuned
+
+- __CNN-multichannel__: model with two sets of word vectors. Each set of vectors is treated as a channel and each filter is applied
+
+Let's just first quickly look at how these different models look like in as a computational graph. The first three (i.e., CNN-rand, CNN-static and CNN-non-static) look pretty much the same:
+
+<figure>
+  <img style="width: 100%; height: 100%" src="/assets/images/2018-03-31-SentenceClassificationConvNets-no_multi_channel.svg">
+  <figcaption></figcaption>
+</figure>
+
+
+The CNN-multichannel model uses two embedding layers, in one channel the embeddings are updated, in the second they remain static. It's exactly the same network as above but duplicated and adding an extra layer do concatenate both results into a single vector:
+
+<figure>
+  <img style="width: 100%; height: 100%" src="/assets/images/2018-03-31-SentenceClassificationConvNets-multi_channel.svg">
+  <figcaption></figcaption>
+</figure>
+
+#### __Experiments and Results__
+
+<!--
+#### __Datasets__
 * sentiment classification
-
 * question-type classification
-
-<!--
-código original em Theano
-https://github.com/yoonkim/CNN_sentence
+https://github.com/davidsbatista/sentence-classification-neural-networks
 -->
 
+---
 
-### __Datasets__
-
-### __Experiments and Results__
-
-<!-- apenas a experienca do Kim, simples, notebook, partes do código, final link pó notebook -->
-
-
-## __ConvNets for NLP - Seminal Works__
-
-<!--
-aqui falar de outros papers onde ConvNet são usadas para outras tarefas, como NER, etc.
--->
-
-Convolutional networks were first introduced to the NLP community in the paper [__Natural Language Processing (almost) from Scratch__](http://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf) by Collobert et al.,
-
-
-
-# __Summary__
+## __Summary__
 
 <!--Yoav Goldberg-->
 
@@ -238,6 +264,6 @@ The CNN layer’s responsibility is to extract meaningful sub-structures that ar
 
 * [__"Deep Learning" by Adam Gibson, Josh Patterson (O'Reilly Media, Inc. 2017)__](https://www.oreilly.com/library/view/deep-learning/9781491924570/)
 
-* [__"Neural Network Methods for Natural Language Processing" by Yoav Goldberg (Morgan & Claypool Publishers 2017)__](http://www.cs.biu.ac.il/~yogo/)
+* __["Neural Network Methods for Natural Language Processing"](http://www.morganclaypoolpublishers.com/catalog_Orig/product_info.php?products_id=1056) by [Yoav Goldberg](http://www.cs.biu.ac.il/~yogo/) (Morgan & Claypool Publishers 2017)__
 
-* [__"Deep Learning with Python" by François Chollet (Manning Publications 2017)__](https://github.com/fchollet)
+* __["Deep Learning with Python"](https://www.manning.com/books/deep-learning-with-python) by [François Chollet](https://github.com/fchollet) (Manning Publications 2017)__
