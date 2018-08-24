@@ -232,13 +232,14 @@ The CNN-multichannel model uses two embedding layers, in one channel the embeddi
   <figcaption></figcaption>
 </figure>
 
+#### __Experiments and Results__
+
 <!--
 #### __Datasets__
 * sentiment classification
 * question-type classification
+https://github.com/davidsbatista/sentence-classification-neural-networks
 -->
-
-#### __Experiments and Results__
 
 ---
 
