@@ -7,11 +7,9 @@ permalink: /archive/
 <div class="previews">  
   {% for post in site.posts %}
   <div class="preview">
-
     <h1 class="post-title">
       <a class="post-link" href="{{ post.url }}">{{ post.title }}</a>
     </h1>
-
     <div class="preview-content">
       <div class="preview-excerpt">
         <div class="post-meta">
@@ -39,7 +37,7 @@ permalink: /archive/
   {% endfor %}
 </div>
 
-
+<!--
 <div class="pagination">
   {% if paginator.next_page %}
     <a class="nav-link" href="/blog/p{{ paginator.next_page }}/">&#8592; previous</a>
@@ -52,3 +50,4 @@ permalink: /archive/
     {% endif %}
   {% endif %}
 </div>
+-->
