@@ -4,13 +4,17 @@ title: Convolutional Neural Networks for Text Classification
 date: 2018-03-31 00:0:00
 categories: [blog]
 tags: convolutional-neural-networks document-classification deep-learning
-comments: false
-# disqus_identifier: #20180331
+comments: True
+disqus_identifier: #20180331
 preview_pic: /assets/images/2018-03-31-Kim_cnn-sentence-classification.png
 description: Convolutional Neural Networks for Sentence Classification
 ---
 
 Convolutional Neural Networks (ConvNets) have in the past years shown break-through results in some NLP tasks, one particular task is sentence classification, i.e., classifying short phrases (i.e., around 20~50 tokens), into a set of pre-defined categories. In this post I will explain how ConvNets can be applied to classifying short-sentences and how to easily implemented them in Keras.
+
+You can find the complete code associated with this blog post on this repository:
+
+[https://github.com/davidsbatista/ConvNets-for-sentence-classification](https://github.com/davidsbatista/ConvNets-for-sentence-classification)
 
 # __Convolutional Neural Networks__
 
@@ -232,31 +236,32 @@ The CNN-multichannel model uses two embedding layers, in one channel the embeddi
   <figcaption></figcaption>
 </figure>
 
-#### __Experiments and Results__
+---
 
-<!--
-#### __Datasets__
-* sentiment classification
-* question-type classification
-https://github.com/davidsbatista/sentence-classification-neural-networks
--->
+# __Experiments and Results__
+
+I applied the implemented models on same of the datasets that Kim reported, but I could not get exactly the same results, first his results were reported over, I believe a Tensorflow implementation, and then there is the issue of how the datasets are pre-processed, i.e., tokenised, cleaned, etc.; that will always impact the results.
+
+Another issue which puzzles me is that all those experiments only take into consideration the accuracy. Since the class samples are not uniformly distributed across the different classes I think this is the wrong way to evaluate a classifier.
+
+All the code for the models and experiments is available here:
+
+[https://github.com/davidsbatista/ConvNets-for-sentence-classification](https://github.com/davidsbatista/ConvNets-for-sentence-classification)
 
 ---
 
 ## __Summary__
 
-<!--Yoav Goldberg-->
+The CNN is just a feature-extraction architecture, alone itself is not useful, but is the fist building block of a larger network. It needs to be trained together with a classification layer in order to produce some usefull results.
 
-The CNN is in essence a feature-extracting architecture. It does not constitute a standalone, useful network on its own, but rather is meant to be integrated into a larger network, and to be trained to work in tandem with it in order to produce an end result.
+As Yoav Goldberg summarises it:
 
-The CNN layer’s responsibility is to extract meaningful sub-structures that are useful for the overall prediction task at hand. A convolutional neural network is designed to identify indicative local predictors in a large structure, and to combine them to produce a fixed size vector representation of the structure, capturing the local aspects that are most informative for the prediction task at hand. In the NLP case shown here the convolutional architecture will identify $n$-grams that are predictive for the task at hand, without the need to pre-specify an embedding vector for each possible ngram.
+_"The CNN layer’s responsibility is to extract meaningful sub-structures that are useful for the overall prediction task at hand. A convolutional neural network is designed to identify indicative local predictors in a large structure, and to combine them to produce a fixed size vector representation of the structure, capturing the local aspects that are most informative for the prediction task at hand. In the NLP case the convolutional architecture will identify $n$-grams that are predictive for the task at hand, without the need to pre-specify an embedding vector for each possible ngram."_
 
-
-* __convolution__ :
-* __convolution filter__ or __kernel__:
-* __pooling__:
+* __convolution__ : an operation which applies a filter to a fixed size window.
+* __convolution filter__ or __kernel__: a template matrix which is used in the convolution operation.
+* __pooling__: combines the vectors resulting from different convolution windows into a single $l$-dimensional vector.
 * __feature_maps__ : the number of feature maps directly controls capacity and depends on the number of available examples and task complexity.
-* __strides__ :
 
 ## __References__
 
