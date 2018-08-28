@@ -4,8 +4,8 @@ title: Convolutional Neural Networks for Text Classification
 date: 2018-03-31 00:0:00
 categories: [blog]
 tags: convolutional-neural-networks document-classification deep-learning
-comments: True
-disqus_identifier: #20180331
+comments: true
+disqus_identifier: 20180331
 preview_pic: /assets/images/2018-03-31-Kim_cnn-sentence-classification.png
 description: Convolutional Neural Networks for Sentence Classification
 ---
