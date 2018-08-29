@@ -385,5 +385,5 @@ helper1.score_summary(sort_by='max_score')
 </table>
 </div>
 
-The full code for this blog post is available in this [notebook](https://github.com/davidsbatista/notebooks/blob/master/hyperparameter-across-models.ipynb).
+The full code for this blog post is available in this [notebook](https://github.com/davidsbatista/machine-learning-notebooks/blob/master/hyperparameter-across-models.ipynb).
 
