@@ -1,6 +1,6 @@
 ---
 layout: page
-title: NLP Datasets
+title: Datasets
 ---
 
 This page contain links to list for public datasets used in different NLP tasks, I try to keep the lists updated as I found new and interesting datasets.

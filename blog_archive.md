@@ -19,7 +19,8 @@ permalink: /archive/
           <div class="post-tags">
             <i class="fa fa-tags"></i>
             {% for tag in post.tags %}
-              <span>{{tag}}</span>
+              <!--<span>{{tag}}</span>-->
+              <span><a href="/tag/{{ tag }}"><code class="highligher"><nobr>{{ tag }}</nobr></code></a></span>
             {% endfor %}
           </div>
         </div>
