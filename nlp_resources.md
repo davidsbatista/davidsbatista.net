@@ -11,11 +11,20 @@ I personally like to have  them in my library :)
 
 ---
 
+#### [__"Neural Network Methods for Natural Language Processing"__](https://www.amazon.de/gp/product/1627052984/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=1627052984&linkId=cb3b0b4cc45ef3511d9eb92db8d34445)
+
+<p>
+<a href="https://www.amazon.de/gp/product/1627052984/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=1627052984&linkId=cb3b0b4cc45ef3511d9eb92db8d34445"><img style="float: left; margin: 0px 15px 15px 0px;" alt="Neural Network Methods for Natural Language Processing" src="/assets/images/resources/neural_networks_for_nlp.jpg" height="220" width="165"></a>
+I would recommend this book to anyone who is not a beginner and wants to make the jump from "classic NLP", i.e.: exploring hand-made features together with SVMs, HMM, CRFs and alike and wants to have a overview of how neural networks can be applied to several NLP tasks. It takes a very good overview on how neural networks took over NLP from the 2012/2013 up until 2016. It first covers the basics on neural networks and then slowly goes explains how they can be used to solve different NLP tasks, starting with more simple ones and going into specific ones, it contains many references to papers that at the time made the first breakthroughs on using neural networks for NLP.
+</p>
+
+---
+
 #### [__Introduction to Information Retrieval__](https://www.amazon.de/gp/product/0521865719/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=0521865719&linkId=e0be3edb9bb39b70057277871991e239)
 
 <p>
 <a href="https://www.amazon.de/gp/product/0521865719/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=0521865719&linkId=e0be3edb9bb39b70057277871991e239"><img style="float: left; margin: 0px 15px 15px 0px;" alt="Introduction to Information Retrieval" src="/assets/images/resources/information_retrieval.jpg" height="200" width="150"></a>
-I started my journey on NLP and Machine Learning back in 2007 with Information Retrieval, and more precisely geographic information retrieval. This books is a great start before you make a jump into more advanced topics. It covers subject related to indexing and retrieving documents and goes into great detail on the algorithms and techniques behind the scenes on a document search engine. It also has some Introduction to some machine learning algorithms like Naïve Bayes and Support Vector Machines.
+I started my journey on NLP and Machine Learning back in 2007 with Information Retrieval, more precisely Geographic Information Retrieval. This book is a great start before you  jump into more advanced topics. It covers subjects related to indexing and retrieving documents and goes into great detail on the algorithms and techniques behind the scenes on a document search engine. It also covers some machine learning algorithms like Naïve Bayes and Support Vector Machines, and how they can be used for document retrieval.
 </p>
 
 <br>
@@ -43,19 +52,6 @@ This is a long time classic, it as a very good overview of the classic algorithm
 </p>
 
 <br><br><br><br><br><br>
-
-
-
----
-
-#### [__"Neural Network Methods for Natural Language Processing"__](https://www.amazon.de/gp/product/1627052984/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=1627052984&linkId=cb3b0b4cc45ef3511d9eb92db8d34445)
-
-<p>
-<img style="float: left; margin: 0px 15px 15px 0px;" alt="Neural Network Methods for Natural Language Processing" src="/assets/images/resources/neural_networks_for_nlp.jpg" height="200" width="150">
-I would recommend this book to anyone who is not a beginner and wants to make the jump from "classic NLP", using hand-made features together with SVMs, CRFs and alike and wants to have a overview of how neural networks can be applied to several NLP tasks.
-</p>
-
-<br><br><br><br>
 
 ---
 
