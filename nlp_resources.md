@@ -11,7 +11,7 @@ I personally like to have  them in my library :)
 
 ---
 
-#### [__"Neural Network Methods for Natural Language Processing"__](https://www.amazon.de/gp/product/1627052984/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=1627052984&linkId=cb3b0b4cc45ef3511d9eb92db8d34445)
+#### [__Neural Network Methods for Natural Language Processing__](https://www.amazon.de/gp/product/1627052984/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=1627052984&linkId=cb3b0b4cc45ef3511d9eb92db8d34445)
 
 <p>
 <a href="https://www.amazon.de/gp/product/1627052984/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=1627052984&linkId=cb3b0b4cc45ef3511d9eb92db8d34445"><img style="float: left; margin: 0px 15px 15px 0px;" alt="Neural Network Methods for Natural Language Processing" src="/assets/images/resources/neural_networks_for_nlp.jpg" height="220" width="165"></a>
@@ -31,7 +31,7 @@ I started my journey on NLP and Machine Learning back in 2007 with Information R
 
 ---
 
-#### [__"Foundations of Natural Language Processing"__](https://www.amazon.de/gp/product/0262133601/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=0262133601&linkId=0e799bb4a95288a9de606a1044370fe6)
+#### [__Foundations of Natural Language Processing__](https://www.amazon.de/gp/product/0262133601/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=0262133601&linkId=0e799bb4a95288a9de606a1044370fe6)
 
 
 <p>
@@ -44,7 +44,7 @@ This is a long time classic, it as a very good overview of the classic algorithm
 
 ---
 
-#### [__"Speech and Language Processing"__](https://www.amazon.de/gp/product/0135041961/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=0135041961&linkId=2ee1a241eaa8c0e03d0606300fb4a5bf)
+#### [__Speech and Language Processing__](https://www.amazon.de/gp/product/0135041961/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=0135041961&linkId=2ee1a241eaa8c0e03d0606300fb4a5bf)
 
 <p>
 <img style="float: left; margin: 0px 15px 15px 0px;" alt="Speech and Language Processing" src="/assets/images/resources/speech_and_lang_process.jpg" height="200" width="150">
@@ -55,7 +55,7 @@ This is a long time classic, it as a very good overview of the classic algorithm
 
 ---
 
-#### [__"The Elements of Statistical Learning"__](https://www.amazon.de/gp/product/0387848576/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=0387848576&linkId=f7302f889a30df6f4779c8533d853603)
+#### [__The Elements of Statistical Learning__](https://www.amazon.de/gp/product/0387848576/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=0387848576&linkId=f7302f889a30df6f4779c8533d853603)
 
 <p>
 <img style="float: left; margin: 0px 15px 15px 0px;" alt="The Elements of Statistical Learning" src="/assets/images/resources/elements_of_statistical_learning.jpg" height="200" width="150">
@@ -66,7 +66,7 @@ All the statistical bases to understand machine learning.
 
 ---
 
-#### [__"Deep Learning"__](https://www.amazon.de/gp/product/0262035618/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=0262035618&linkId=fb7fdd87f9c4faece3e6f6a38656ce8e)
+#### [__Deep Learning__](https://www.amazon.de/gp/product/0262035618/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=0262035618&linkId=fb7fdd87f9c4faece3e6f6a38656ce8e)
 
 <p>
 <img style="float: left; margin: 0px 15px 15px 0px;" alt="Deep learning" src="/assets/images/resources/deep_learning.jpg" height="200" width="150">
@@ -77,7 +77,7 @@ This book goes in very detail explaining every architecture of different neural 
 
 ---
 
-#### [__"Deep Learning with Python"__](https://www.amazon.de/gp/product/1617294438/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=1617294438&linkId=de0d0a823eecc7882b525ff339f56f65)
+#### [__Deep Learning with Python__](https://www.amazon.de/gp/product/1617294438/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=1617294438&linkId=de0d0a823eecc7882b525ff339f56f65)
 
 <p>
 <img style="float: left; margin: 0px 15px 15px 0px;" alt="Deep Learning with Python" src="/assets/images/resources/Chollet-DLP-HI.png" height="200" width="150">
