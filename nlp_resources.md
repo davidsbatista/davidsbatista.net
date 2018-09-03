@@ -36,10 +36,10 @@ I started my journey on NLP and Machine Learning back in 2007 with Information R
 
 <p>
 <img style="float: left; margin: 0px 15px 15px 0px;" alt="Foundations of Natural Language Processing" src="/assets/images/resources/foundations_of_statistical_nlp.jpg" height="200" width="150">
-This is a long time classic, it as a very good overview of the classic algorithms for NLP tasks.
+This is book is the classic :) It was published in 1999 so all the content is before the Machine Learning hype during the 2000s and later (and currently) the Deep Learning hype. All the methods are very clearly detailed and explained. It starts with simple but very important concepts related with word counts, collocations, Zipf's Law, etc. It dives into mathematical foundations around probability and information theory and shows how one can use Markov Models for sequence tagging. It also introduces the concepts of Probabilistic Context Free Grammars and Parsing.
 </p>
 
-<br><br><br><br><br><br>
+<br>
 
 
 ---
