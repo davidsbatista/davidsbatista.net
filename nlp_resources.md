@@ -16,7 +16,25 @@ I personally like to have  them in my library :)
 <p>
 <a href="https://www.amazon.de/gp/product/1627052984/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=1627052984&linkId=cb3b0b4cc45ef3511d9eb92db8d34445"><img style="float: left; margin: 0px 15px 15px 0px;" alt="Neural Network Methods for Natural Language Processing" src="/assets/images/resources/neural_networks_for_nlp.jpg" height="220" width="165"></a>
 I would recommend this book to anyone who is not a beginner and wants to make the jump from "classic NLP", i.e.: exploring hand-made features together with SVMs, HMM, CRFs and alike and wants to have a overview of how neural networks can be applied to several NLP tasks. It takes a very good overview on how neural networks took over NLP from the 2012/2013 up until 2016. It first covers the basics on neural networks and then slowly goes explains how they can be used to solve different NLP tasks, starting with more simple ones and going into specific ones, it contains many references to papers that at the time made the first breakthroughs on using neural networks for NLP.
+
+<br>
+
+<a href="https://www.amazon.de/gp/product/1627052984/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=1627052984&linkId=cb3b0b4cc45ef3511d9eb92db8d34445">Available at Amazon</a>
 </p>
+
+---
+
+#### [__Deep Learning with Python__](https://www.amazon.de/gp/product/1617294438/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=1617294438&linkId=de0d0a823eecc7882b525ff339f56f65)
+
+<p>
+<img style="float: left; margin: 0px 15px 15px 0px;" alt="Deep Learning with Python" src="/assets/images/resources/Chollet-DLP-HI.png" height="220" width="150">
+
+This is a hands-on book on Keras written by the creator of Keras himself François Chollet. It starts with a quick overview over what Machine Learning explaining the basics in such a way that the non-mathematical person can understand the concepts behind it. I then continues through with examples of simple regressions problems and also binary and multi-class classification.
+It contains then full chapters dedicated to dedicated to image and another dedicated to text and sequence processing, and also more advanced topics such as neural network fine tuning and generative models. I would suggest this book to programmers who want to get started with neural networks, specially using Keras.
+</p>
+
+
+
 
 ---
 
@@ -71,15 +89,4 @@ All the statistical bases to understand machine learning.
 <p>
 <img style="float: left; margin: 0px 15px 15px 0px;" alt="Deep learning" src="/assets/images/resources/deep_learning.jpg" height="200" width="150">
 This book goes in very detail explaining every architecture of different neural networks. If you really want to go in the details this is the one.
-</p>
-
-<br><br><br><br><br><br>
-
----
-
-#### [__Deep Learning with Python__](https://www.amazon.de/gp/product/1617294438/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=1617294438&linkId=de0d0a823eecc7882b525ff339f56f65)
-
-<p>
-<img style="float: left; margin: 0px 15px 15px 0px;" alt="Deep Learning with Python" src="/assets/images/resources/Chollet-DLP-HI.png" height="200" width="150">
-This is a complete hands-on book on Keras written by the main author. It starts with the basic and goes through all the different examples.
 </p>
