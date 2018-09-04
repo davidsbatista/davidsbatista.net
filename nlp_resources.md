@@ -26,10 +26,6 @@ https://www.apache.org/foundation/contributing.html
 <p>
 <a href="https://www.amazon.de/gp/product/1627052984/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=1627052984&linkId=cb3b0b4cc45ef3511d9eb92db8d34445"><img style="float: left; margin: 0px 15px 15px 0px;" alt="Neural Network Methods for Natural Language Processing" src="/assets/images/resources/neural_networks_for_nlp.jpg" height="220" width="165"></a>
 I would recommend this book to anyone who is not a beginner and wants to make the jump from "classic NLP", i.e.: exploring hand-made features together with SVMs, HMM, CRFs and alike and wants to have a overview of how neural networks can be applied to several NLP tasks. It takes a very good overview on how neural networks took over NLP from the 2012/2013 up until 2016. It first covers the basics on neural networks and then slowly goes explains how they can be used to solve different NLP tasks, starting with more simple ones and going into specific ones, it contains many references to papers that at the time made the first breakthroughs on using neural networks for NLP.
-
-<br>
-
-<a href="https://www.amazon.de/gp/product/1627052984/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=1627052984&linkId=cb3b0b4cc45ef3511d9eb92db8d34445">Available at Amazon</a>
 </p>
 
 ---
@@ -67,9 +63,9 @@ I would dare to say that this is the current neural networks "bible", it goes in
 This is book is the classic :) It was published in 1999 so all the content is before the Machine Learning hype during the 2000s and later (and currently) the Deep Learning hype. All the methods are very clearly detailed and explained. It starts with simple but very important concepts related with word counts, collocations, Zipf's Law, etc. It dives into mathematical foundations around probability and information theory and shows how one can use Markov Models for sequence tagging. It also introduces the concepts of Probabilistic Context Free Grammars and Parsing.
 </p>
 
----
-
 <br>
+
+---
 
 #### [__Introduction to Information Retrieval__](https://www.amazon.de/gp/product/0521865719/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=davidsbatista-21&creative=6742&linkCode=as2&creativeASIN=0521865719&linkId=e0be3edb9bb39b70057277871991e239)
 
@@ -93,6 +89,8 @@ https://nlp.stanford.edu/IR-book/information-retrieval-book.html -->
 
 This is, I would say one of the main reference for machine learning from the statistical point of view. The book is also kind of a classic going in it's 2nd Edition. It's considered a very complete reference book, one of the authors is Prof. Tibshirani, who proposed the LASSO regularization technique. It uses some mathematical statistics avoiding complicated proofs to explain machine learning concepts. It describes popular machine algorithms such as Logistic Regressions, SVMs, Random Forests, etc.; but each is developed only after the appropriate statistical framework has already been introduced.
 </p>
+
+<br>
 
 ---
 
