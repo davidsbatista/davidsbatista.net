@@ -44,7 +44,28 @@ Sensitivity= true positives/(true positive + false negative)
 Specificity=true negatives/(true negative + false positives)
 
 
+## ROC Curves and Precision-Recall Curves
+
+ROC Curves summarize the trade-off between the true positive rate and false positive rate for a predictive model using different probability thresholds.
+
+Precision-Recall curves summarize the trade-off between the true positive rate and the positive predictive value for a predictive model using different probability thresholds.
+
+ROC curves are appropriate when the observations are balanced between each class, whereas precision-recall curves are appropriate for imbalanced datasets.
+
+
+A common way to compare models that predict probabilities for two-class problems us to use a ROC curve.
+
+
+What Are ROC Curves?
+A useful tool when predicting the probability of a binary outcome is the Receiver Operating Characteristic curve, or ROC curve.
+
+It is a plot of the false positive rate (x-axis) versus the true positive rate (y-axis) for a number of different candidate threshold values between 0.0 and 1.0. Put another way, it plots the false alarm rate versus the hit rate.
+
+
 <!--
+Two diagnostic tools that help in the interpretation of probabilistic forecast for binary (two-class) classification predictive modeling problems are ROC Curves and Precision-Recall curves.
+
+https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks
 
 https://machinelearningmastery.com/roc-curves-and-precision-recall-curves-for-classification-in-python/
 
