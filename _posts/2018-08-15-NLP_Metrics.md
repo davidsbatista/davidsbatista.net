@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Evaluation Metrics for NLP (and other domains)
+title: Evaluation Metrics
 date: 2018-08-19 00:0:00
 categories: blog
 tags: evaluation_metrics imbalanced_data
@@ -14,7 +14,7 @@ I wrote this blog post with the intention to review and compare some evaluation 
 
 # __Introduction__
 
-When making a prediction for a binary or two-class classification problem, there are two types of errors that we could make.
+When making a prediction for a two-class classification problem, the following types of errors can be made by a classifier:
 
 - __False Positive (FP)__: predict an event when there was no event.
 - __False Negative (FN)__: predict no event when in fact there was an event.
@@ -27,7 +27,7 @@ When making a prediction for a binary or two-class classification problem, there
 
 Accuracy simply measures the number of correct predicted samples over the total number of samples. For instance, if the classifier is 90% correct, it means that out of 100 instance it correctly predicts the class for 90 of them.
 
-$$ accuracy = \frac{nr. correct \; predictions}{nr. total \; predictions} = \frac{TP+TN}{TP+TN+FP+FN}$$
+$$ \textrm{accuracy} = \frac{\textrm{nr. correct predictions}}{\textrm{nr. total predictions}} = \frac{\textrm{TP+TN}}{\textrm{TP+TN+FP+FN}}$$
 
 This can be misleading if the number of samples per class in your problem is unbalanced. Having a dataset with two classes only, where the first class is 90% of the data, and the second completes the remaining 10%. If the classifier predicts every sample as belonging to the first class, the accuracy reported will be of 90% but this classifier is in practice useless.
 
@@ -52,11 +52,11 @@ We will see further ahead how to get the best out of these two metrics, using Pr
 
 Typically these two metrics are combined together in a metric called $F_{1}$ (i.e., harmonic mean of precision and recall), which eases comparison of different systems, and problems with many classes. They are defined as:
 
-$$ Precision = \frac{TP}{TP+FP}$$  
+$$ \textrm{Precision} = \frac{\textrm{TP}}{\textrm{TP+FP}}$$  
 
-$$ Recall = \frac{TP}{TP+FN}$$
+$$ \textrm{Recall} = \frac{\textrm{TP}}{\textrm{TP+FN}}$$
 
-$$ F_{1} = 2 \times\frac{Precision \times Recall}{Precision + Recall}$$
+$$ F_{1} = 2 \times\frac{\textrm{Precision} \times \textrm{Recall}}{\textrm{Precision} + \textrm{Recall}}$$
 
 
 Note that you need to measure this for every possible class in your dataset. So, __Precision__ and __Recall__ metrics are appropriate when you are dealing with imbalanced datasets.
@@ -67,19 +67,20 @@ Note that you need to measure this for every possible class in your dataset. So,
 
 These two metrics are somehow related to __Precision__ and __Recall__, and although not often, I saw them being used a couple of times in NLP-related problems:
 
-$$ Sensitivity = \frac{TP}{TP+FP}$$
+$$ \textrm{Sensitivity} = \frac{\textrm{TP}}{\textrm{TP+FP}}$$
 
-$$ Specificity = \frac{TN}{TN+FP}$$
+$$ \textrm{Specificity} = \frac{\textrm{TN}}{\textrm{TN+FP}}$$
 
-__Sensitivity__: is the same as recall, defined above.
+__Sensitivity__: is the same as recall, defined above, can be tought of as the extent to which actual positives are not overlooked, so false negatives are few.
 
-__Specificity__: also called the true negative rate, measures the proportion of actual negatives that are correctly identified as such.
+__Specificity__: also called the true negative rate, measures the proportion of actual negatives that are correctly identified as such, i.e., is the extent to which actual negatives are classified as such (so false positives are few).
 
-<!--
-Equivalently, in medical tests sensitivity is the extent to which actual positives are not overlooked (so false negatives are few), and specificity is the extent to which actual negatives are classified as such (so false positives are few). Thus a highly sensitive test rarely overlooks an actual positive (for example, showing "nothing bad" despite something bad existing); a highly specific test rarely registers a positive classification for anything that is not the target of testing (for example, finding one bacterial species and mistaking it for another closely related one that is the true target); and a test that is highly sensitive and highly specific does both, so it "rarely overlooks a thing that it is looking for" and it "rarely mistakes anything else for that thing." Because most medical tests do not have sensitivity and specificity values above 99%, "rarely" does not equate to certainty. But for practical reasons, tests with sensitivity and specificity values above 90% have high credibility, albeit usually no certainty, in differential diagnosis.
+Sensitivity therefore quantifies the avoiding of false negatives, and specificity does the same for false positives.
 
-Sensitivity therefore quantifies the avoiding of false negatives, and specificity does the same for false positives. For any test, there is usually a trade-off between the measures – for instance, in airport security since testing of passengers is for potential threats to safety, scanners may be set to trigger alarms on low-risk items like belt buckles and keys (low specificity), in order to increase the probability of identifying dangerous objects and minimize the risk of missing objects that do pose a threat (high sensitivity).
--->
+There some scenarios where focusing on one of these two might be important, e.g:
+
+- Sensitivity: the percentage of sick people who are correctly identified as having the condition.
+- Specificity: the percentage of healthy people who are correctly identified as not having the condition.
 
 ---
 
@@ -87,11 +88,9 @@ Sensitivity therefore quantifies the avoiding of false negatives, and specificit
 
 ## __Receiver Operating Characteristic (ROC) Curves__
 
-While defining the metrics above, I assumed that we are directly given the predictions of each class. But it might be the case that we have the probability for each class instead, and it can allows to calibrate the threshold on how to interpret the probabilities.
+While defining the metrics above, I assumed that we are directly given the predictions of each class. But it might be the case that we have the probability for each class instead, which then allows to calibrate the threshold on how to interpret the probabilities. Does it belong to positive class if it's greater than 0.5 or 0.3 ?
 
-By calibrating a threshold, a balance __precision__ and __recall__ or between __sensitivity__ and __specificity__ can be set.
-
-The curve is essentially a plot where of false positive rate (x-axis) versus the true positive rate (y-axis) for a number of different candidate threshold values between 0.0 and 1.0. An operator may plot the ROC curve and choose a threshold that gives a desirable balance between the false positives and false negatives.
+The curve is essentially a plot of false positive rate (x-axis) versus the true positive rate (y-axis) for a number of different candidate threshold values between 0.0 and 1.0. An operator may plot the ROC curve and choose a threshold that gives a desirable balance between the false positives and false negatives.
 
 
 x-axis
@@ -130,7 +129,7 @@ A precision-recall curve is a plot of the precision (y-axis) and the recall (x-a
 
 The no-skill line is defined by the total number of positive cases divide by the total number of positive and negative cases. For a dataset with an equal number of positive and negative cases, this is a straight line at 0.5. Points above this line show skill.
 
-A model with perfect skill is depicted as a point at [1.0,1.0]. A skilful model is represented by a curve that bows towards [1.0,1.0] above the flat line of no skill.
+A model with perfect skill is depicted as a point at [1.0,1.0]. A skillful model is represented by a curve that bows towards [1.0,1.0] above the flat line of no skill.
 
 There are also composite scores that attempt to summarize the precision and recall; three examples include:
 
@@ -140,6 +139,10 @@ Area Under Curve: like the AUC, summarizes the integral or an approximation of t
 In terms of model selection, F1 summarizes model skill for a specific probability threshold, whereas average precision and area under curve summarize the skill of a model across thresholds, like ROC AUC.
 
 This makes precision-recall and a plot of precision vs. recall and summary measures useful tools for binary classification problems that have an imbalance in the observations for each class.
+
+
+By calibrating a threshold, a balance __precision__ and __recall__ or between __sensitivity__ and __specificity__ can be set.
+
 -->
 
 
@@ -165,18 +168,61 @@ If you have an imbalanced dataset __accuracy__ can give you false assumptions re
 ROC curves are appropriate when the observations are balanced between each class, whereas precision-recall curves are appropriate for imbalanced datasets.
 
 
-Accuracy              Overall performance of model
-Precision             How accurate the positive predictions are
-Recall/Sensitivity	  Coverage of actual positive sample
-Specificity	          Coverage of actual negative sample
-F1 score	            Hybrid metric useful for unbalanced classes
+<center>
+<table class="greyGridTable">
+<thead>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accuracy</td>
+<td>$$\frac{\textrm{TP+TN}}{\textrm{TP+TN+FP+FN}}$$</td>
+<td>Overall performance of model</td>
+</tr>
+<tr>
+<td>Precision</td>
+<td>$$\frac{\textrm{TP}}{\textrm{TP+FP}}$$  </td>
+<td>How accurate the positive predictions are</td>
+</tr>
+<tr>
+<td>Recall/Sensitivity</td>
+<td>$$\frac{\textrm{TP}}{\textrm{TP+FN}}$$</td>
+<td>Coverage of actual positive sample</td>
+</tr>
+<tr>
+<td>Specificity</td>
+<td>$$\frac{\textrm{TN}}{\textrm{TN+FP}}$$</td>
+<td>Coverage of actual negative sample</td>
+</tr>
+<tr>
+<td>$$F_{1}$$</td>
+<td>$$2 \times\frac{\textrm{Precision} \times \textrm{Precision}}{\textrm{Precision} + \textrm{Precision}}$$</td>
+<td>A measure combining Precision and Recall</td>
+</tr>
+</tbody>
+</table>
+</center>
+
+<!--
+TODO
+
+True Positive Rate
+False Positive Rate
+-->
 
 
 ### References
 
 - [https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks)
 
-https://machinelearningmastery.com/roc-curves-and-precision-recall-curves-for-classification-in-python
+- [https://machinelearningmastery.com/roc-curves-and-precision-recall-curves-for-classification-in-python](https://machinelearningmastery.com/roc-curves-and-precision-recall-curves-for-classification-in-python)
+
+- [https://www.wikiwand.com/en/Sensitivity_and_specificity](https://www.wikiwand.com/en/Sensitivity_and_specificity)
+
 
 <!--
 https://machinelearningmastery.com/how-to-score-probability-predictions-in-python/
