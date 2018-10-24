@@ -1,16 +1,22 @@
 ---
 layout: post
-title: Evaluation Metrics
+title: Evaluation Metrics, ROC-Curves and imbalanced datasets
 date: 2018-08-19 00:0:00
 categories: blog
-tags: evaluation_metrics imbalanced_data
+tags: evaluation_metrics imbalanced_data classification
 #comments: true
 #disqus_identifier: 20180819
-#preview_pic: /assets/images/2018-05-09-NER_metrics.jpeg
+preview_pic: /assets/images/2018-08-19-ROC-Curve.png
 description: This blog post describes some evaluation metrics used in NLP, it points out where we should use each one of them and the advantages and disadvantages of each.
 ---
 
-I wrote this blog post with the intention to review and compare some evaluation metrics typically used in NLP tasks, the goal was to review them in detail.
+I wrote this blog post with the intention to review and compare some evaluation metrics typically used for classification tasks, and how they should be used depending on the the dataset. I also show how one can tune the probability thresholds for the particularly metrics.
+
+You can find the complete code associated with this blog post on this repository:
+
+* __[https://github.com/davidsbatista/machine-learning-notebooks/](https://github.com/davidsbatista/machine-learning-notebooks/blob/master/ROC-Curve-vs-Precision-Recall-Curve.ipynb)__
+
+
 
 # __Introduction__
 
@@ -90,82 +96,137 @@ There some scenarios where focusing on one of these two might be important, e.g:
 
 While defining the metrics above, I assumed that we are directly given the predictions of each class. But it might be the case that we have the probability for each class instead, which then allows to calibrate the threshold on how to interpret the probabilities. Does it belong to positive class if it's greater than 0.5 or 0.3 ?
 
-The curve is essentially a plot of false positive rate (x-axis) versus the true positive rate (y-axis) for a number of different candidate threshold values between 0.0 and 1.0. An operator may plot the ROC curve and choose a threshold that gives a desirable balance between the false positives and false negatives.
+The curve is a plot of _false positive rate_ (x-axis) versus the _true positive rate_ (y-axis) for a number of different candidate threshold values between 0.0 and 1.0. An operator may plot the ROC curve and choose a threshold that gives a desirable balance between the false positives and false negatives.
 
 
-x-axis
-======
-The false positive rate is also referred to as the inverted specificity where specificity is the total number of true negatives divided by the sum of the number of true negatives and false positives.
+* x-axis: the false positive rate is also referred to as the inverted specificity where specificity is the total number of true negatives divided by the sum of the number of true negatives and false positives.
 
-False Positive Rate = False Positives / (False Positives + True Negatives)
+$$\textrm{False Positive Rate} = \frac{\textrm{FP}}{\textrm{FP+TN}}$$
+
+* y-axis: the true positive rate is calculated as the number of true positives divided by the sum of the number of true positives and the number of false negatives. It describes how good the model is at predicting the positive class when the actual outcome is positive.
+
+$$\textrm{True Positive Rate} = \frac{\textrm{TP}}{\textrm{TP+FN}}$$
 
 
-y-axis (Precision)
-==================
-The true positive rate is calculated as the number of true positives divided by the sum of the number of true positives and the number of false negatives. It describes how good the model is at predicting the positive class when the actual outcome is positive.
-
-True Positive Rate = True Positives / (True Positives + False Negatives)
-
-<!--
-A skilful model will assign a higher probability to a randomly chosen real positive occurrence than a negative occurrence on average. This is what we mean when we say that the model has skill. Generally, skilful models are represented by curves that bow up to the top left of the plot.
-
-A model with no skill is represented at the point [0.5, 0.5]. A model with no skill at each threshold is represented by a diagonal line from the bottom left of the plot to the top right and has an AUC of 0.0.
-
-A model with perfect skill is represented at a point [0.0 ,1.0]. A model with perfect skill is represented by a line that travels from the bottom left of the plot to the top left and then across the top to the top right.
-
-An operator may plot the ROC curve for the final model and choose a threshold that gives a desirable balance between the false positives and false negatives.
--->
-
+_NOTE_: remember that both the False Positive Rate and the True Positive Rate are calculated for different probability thresholds.
 
 
 ## __Precision-Recall Curve__
 
-As shown before when one has imbalanced classes, precision and recall are better metrics than accuracy, in the same way, for imbalanced datasets a precision-recall curve is more suitable as ROC curve.
+As shown before when one has imbalanced classes, precision and recall are better metrics than accuracy, in the same way, for imbalanced datasets a Precision-Recall curve is more suitable than a ROC curve.
 
-<!--
-Key to the calculation of precision and recall is that the calculations do not make use of the true negatives. It is only concerned with the correct prediction of the minority class, class 1.
-
-A precision-recall curve is a plot of the precision (y-axis) and the recall (x-axis) for different thresholds, much like the ROC curve.
+A Precision-Recall curve is a plot of the __Precision__ (y-axis) and the __Recall__ (x-axis) for different thresholds, much like the ROC curve. Note that in computing precision and recall there is never a use of the true negatives, these measures only consider correct predictions
 
 The no-skill line is defined by the total number of positive cases divide by the total number of positive and negative cases. For a dataset with an equal number of positive and negative cases, this is a straight line at 0.5. Points above this line show skill.
 
-A model with perfect skill is depicted as a point at [1.0,1.0]. A skillful model is represented by a curve that bows towards [1.0,1.0] above the flat line of no skill.
+---
+<br>
 
-There are also composite scores that attempt to summarize the precision and recall; three examples include:
-
-F score or F1 score: that calculates the harmonic mean of the precision and recall (harmonic mean because the precision and recall are ratios).
-Average precision: that summarizes the weighted increase in precision with each change in recall for the thresholds in the precision-recall curve.
-Area Under Curve: like the AUC, summarizes the integral or an approximation of the area under the precision-recall curve.
-In terms of model selection, F1 summarizes model skill for a specific probability threshold, whereas average precision and area under curve summarize the skill of a model across thresholds, like ROC AUC.
-
-This makes precision-recall and a plot of precision vs. recall and summary measures useful tools for binary classification problems that have an imbalance in the observations for each class.
+## __Pratical Example__
 
 
-By calibrating a threshold, a balance __precision__ and __recall__ or between __sensitivity__ and __specificity__ can be set.
+### Let's first generate a 2 class imbalanced dataset
+```python
+X, y = make_classification(n_samples=10000, n_classes=2, weights=[0.95,0.05], random_state=42)
+trainX, testX, trainy, testy = train_test_split(X, y, test_size=0.2, random_state=2)
+```
 
--->
+### Train a model for classification
+
+```python
+model = LogisticRegression()
+model.fit(trainX, trainy)
+predictions = model.predict(testX)
+```
+
+### Comparing the Accuracy vs. Precision-Recall with imbalanced data
+
+
+```python
+accuracy = accuracy_score(testy, predictions)
+print('Accuracy: %.3f' % accuracy)
+```
+
+    Accuracy: 0.957
 
 
 
-__NOTE__: In both cases the area under the curve (AUC) can be used as a summary of the model skill.
+```python
+print(classification_report(testy, predictions))
+```
+
+                 precision    recall  f1-score   support
+
+              0       0.96      0.99      0.98      1884
+              1       0.73      0.41      0.53       116
+
+    avg / total       0.95      0.96      0.95      2000
+
+
+
+### ROC Curve vs. Precision-Recall Curve with imbalenced data
+
+
+```python
+probs = model.predict_proba(testX)
+probs = probs[:, 1]
+```
+
+
+```python
+fpr, tpr, thresholds = roc_curve(testy, probs)
+pyplot.plot([0, 1], [0, 1], linestyle='--')
+pyplot.plot(fpr, tpr, marker='.')
+pyplot.show()
+auc_score = roc_auc_score(testy, probs)
+print('AUC: %.3f' % auc_score)
+```
+
+
+![png](/assets/images/2018-08-19-ROC-Curve.png)
+
+
+    AUC: 0.920
+
+
+# Precision-Recall curve
+
+
+```python
+precision, recall, thresholds = precision_recall_curve(testy, probs)
+auc_score = auc(recall, precision)
+```
+
+
+```python
+pyplot.plot([0, 1], [0.5, 0.5], linestyle='--')
+pyplot.plot(recall, precision, marker='.')
+pyplot.show()
+print('AUC: %.3f' % auc_score)
+```
+
+
+![png](/assets/images/2018-08-19-Precision-Recall-Curve.png)
+
+
+    AUC: 0.577
 
 
 
 
 
-
-
-
+---
+<br>
 
 ## __Summary__
 
 If you have an imbalanced dataset __accuracy__ can give you false assumptions regarding the classifier's performance, it's better to rely on __precision__ and __recall__, in the same way a Precision-Recall curve is better to calibrate the probability threshold in an imbalanced class scenario as a ROC curve.
 
-- __ROC Curves__: summarize the trade-off between the true positive rate and false positive rate for a predictive model using different probability thresholds.
+- __ROC Curves__: summarise the trade-off between the true positive rate and false positive rate for a predictive model using different probability thresholds.
 
-- __Precision-Recall curves__: summarize the trade-off between the true positive rate and the positive predictive value for a predictive model using different probability thresholds.
+- __Precision-Recall curves__: summarise the trade-off between the true positive rate and the positive predictive value for a predictive model using different probability thresholds.
 
-ROC curves are appropriate when the observations are balanced between each class, whereas precision-recall curves are appropriate for imbalanced datasets.
+ROC curves are appropriate when the observations are balanced between each class, whereas precision-recall curves are appropriate for imbalanced datasets. In both cases the area under the curve (AUC) can be used as a summary of the model performance.
 
 
 <center>
@@ -201,7 +262,7 @@ ROC curves are appropriate when the observations are balanced between each class
 <tr>
 <td>$$F_{1}$$</td>
 <td>$$2 \times\frac{\textrm{Precision} \times \textrm{Precision}}{\textrm{Precision} + \textrm{Precision}}$$</td>
-<td>A measure combining Precision and Recall</td>
+<td>Harmonic mean of Precision and Recall</td>
 </tr>
 </tbody>
 </table>
@@ -209,7 +270,6 @@ ROC curves are appropriate when the observations are balanced between each class
 
 <!--
 TODO
-
 True Positive Rate
 False Positive Rate
 -->
@@ -217,12 +277,11 @@ False Positive Rate
 
 ### References
 
-- [https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks)
+- [CS 229 - Machine Learning (tips and tricks cheatsheet)](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks)
 
-- [https://machinelearningmastery.com/roc-curves-and-precision-recall-curves-for-classification-in-python](https://machinelearningmastery.com/roc-curves-and-precision-recall-curves-for-classification-in-python)
+- [ROC Curves and Precision-Recall Curves for Classification](https://machinelearningmastery.com/roc-curves-and-precision-recall-curves-for-classification-in-python)
 
-- [https://www.wikiwand.com/en/Sensitivity_and_specificity](https://www.wikiwand.com/en/Sensitivity_and_specificity)
-
+- [Sensitivity and Specificity (Wikipedia)](https://www.wikiwand.com/en/Sensitivity_and_specificity)
 
 <!--
 https://machinelearningmastery.com/how-to-score-probability-predictions-in-python/

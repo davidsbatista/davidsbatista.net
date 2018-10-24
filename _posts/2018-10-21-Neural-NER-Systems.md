@@ -3,7 +3,7 @@ layout: post
 title: Named-Entity Recognition based on Neural Networks
 date: 2018-10-22 00:0:00
 categories: blog
-tags: NER
+tags: NER neural_networks
 #comments: true
 #disqus_identifier: 20180819
 #preview_pic: /assets/images/2018-05-09-NER_metrics.jpeg
@@ -15,21 +15,26 @@ Recently (i.e., since 2015 onwards) new methods to perform named-entity recognit
 
 ## __Linear Sequence Models__
 
+- Independent assumptions with window features
+
+- Hidden Markov Models
+
+- Maximum Entropy Markov Models
+
+- Conditional Random Fields
 
 
 
 ## __Neural Sequence Labelling Models__
 
-"Bidirectional LSTM-CRF Models for Sequence Tagging" (2015)
-paper: https://arxiv.org/pdf/1508.01991v1.pdf
+["Bidirectional LSTM-CRF Models for Sequence Tagging" (2015)](https://arxiv.org/pdf/1508.01991v1.pdf)
 
 - no char-level Embeddings
 - combined neural networks with hand-crafted features
 
 ---
 
-"Named Entity Recognition with Bidirectional LSTM-CNNs" (2016)
-paper: https://www.aclweb.org/anthology/Q16-1026
+["Named Entity Recognition with Bidirectional LSTM-CNNs" (2016)](https://www.aclweb.org/anthology/Q16-1026)
 
 - do not uses CRF on top
 - external knowledge: char-type, capitalization and lexical features, NER
@@ -38,8 +43,7 @@ paper: https://www.aclweb.org/anthology/Q16-1026
 ---
 
 
-"Neural Architectures for Named Entity Recognition" (2016)
-paper: http://www.aclweb.org/anthology/N16-1030
+["Neural Architectures for Named Entity Recognition" (2016)](http://www.aclweb.org/anthology/N16-1030)
 code:  https://github.com/Hironsan/anago
        https://github.com/achernodub/bilstm-cnn-crf-tagger
        https://github.com/glample/tagger
@@ -48,9 +52,8 @@ code:  https://github.com/Hironsan/anago
 
 ---
 
+["End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF" (2016)](http://www.aclweb.org/anthology/P16-1101)
 
-"End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF" (2016)
-paper: http://www.aclweb.org/anthology/P16-1101
 code:  https://github.com/achernodub/bilstm-cnn-crf-tagger
 
 1) For each word, char-level representation is computed by the CNN with char embeddings as input
