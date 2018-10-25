@@ -4,8 +4,8 @@ title: Evaluation Metrics, ROC-Curves and imbalanced datasets
 date: 2018-08-19 00:0:00
 categories: blog
 tags: evaluation_metrics imbalanced_data classification
-#comments: true
-#disqus_identifier: 20180819
+comments: true
+disqus_identifier: 20180819
 preview_pic: /assets/images/2018-08-19-ROC-Curve.png
 description: This blog post describes some evaluation metrics used in NLP, it points out where we should use each one of them and the advantages and disadvantages of each.
 ---

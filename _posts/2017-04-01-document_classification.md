@@ -5,7 +5,7 @@ comments: true
 disqus_identifier: 20170401
 date: 2017-04-01 00:14:00
 categories: blog
-tags: document-classification multi-label-classification scikit-learn tf-idf word2vec doc2vec pos-tags gensim
+tags: document-classification multi-label-classification scikit-learn tf-idf word2vec doc2vec pos-tags gensim classification
 comments: true
 preview_pic: /assets/images/2017-04-01-IMDB-movie-genre-classification.png
 description: An introduction to the Document Classification task, in this case in a multi-class and multi-label scenario, proposed solutions include TF-IDF weighted vectors, an average of word2vec words-embeddings and a single vector representation of the document using doc2vec. Includes code using Pipeline and GridSearchCV classes from scikit-learn.
