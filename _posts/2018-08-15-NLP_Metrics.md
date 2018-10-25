@@ -266,12 +266,6 @@ ROC curves are appropriate when the observations are balanced between each class
 </table>
 </center>
 
-<!--
-TODO
-True Positive Rate
-False Positive Rate
--->
-
 
 ### __References__
 
@@ -280,6 +274,10 @@ False Positive Rate
 - [ROC Curves and Precision-Recall Curves for Classification](https://machinelearningmastery.com/roc-curves-and-precision-recall-curves-for-classification-in-python)
 
 - [Sensitivity and Specificity (Wikipedia)](https://www.wikiwand.com/en/Sensitivity_and_specificity)
+
+- [The Precision-Recall Plot Is More Informative
+than the ROC Plot When Evaluating Binary
+Classifiers on Imbalanced Datasets](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0118432)
 
 <!--
 https://machinelearningmastery.com/how-to-score-probability-predictions-in-python/
