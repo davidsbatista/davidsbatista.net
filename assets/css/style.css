@@ -635,15 +635,17 @@ table.blueTable {
   border: 1px solid #1C6EA4;
   background-color: #EEEEEE;
   width: 100%;
-  text-align: left;
+  text-align: center;
   border-collapse: collapse;
+  vertical-align: middle;
 }
 table.blueTable td, table.blueTable th {
   border: 1px solid #AAAAAA;
   padding: 3px 2px;
 }
 table.blueTable tbody td {
-  font-size: 13px;
+  font-size: 16px;
+  font-weight: bold;
 }
 table.blueTable tr:nth-child(even) {
   background: #D0E4F5;
@@ -660,6 +662,7 @@ table.blueTable thead th {
   font-weight: bold;
   color: #FFFFFF;
   border-left: 2px solid #D0E4F5;
+  text-align: center;
 }
 table.blueTable thead th:first-child {
   border-left: none;

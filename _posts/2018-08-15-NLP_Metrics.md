@@ -99,11 +99,11 @@ While defining the metrics above, I assumed that we are directly given the predi
 The curve is a plot of _false positive rate_ (x-axis) versus the _true positive rate_ (y-axis) for a number of different candidate threshold values between 0.0 and 1.0. An operator may plot the ROC curve and choose a threshold that gives a desirable balance between the false positives and false negatives.
 
 
-* x-axis: the false positive rate is also referred to as the inverted specificity where specificity is the total number of true negatives divided by the sum of the number of true negatives and false positives.
+* __x-axis__: the false positive rate is also referred to as the inverted specificity where specificity is the total number of true negatives divided by the sum of the number of true negatives and false positives.
 
 $$\textrm{False Positive Rate} = \frac{\textrm{FP}}{\textrm{FP+TN}}$$
 
-* y-axis: the true positive rate is calculated as the number of true positives divided by the sum of the number of true positives and the number of false negatives. It describes how good the model is at predicting the positive class when the actual outcome is positive.
+* __y-axis__: the true positive rate is calculated as the number of true positives divided by the sum of the number of true positives and the number of false negatives. It describes how good the model is at predicting the positive class when the actual outcome is positive.
 
 $$\textrm{True Positive Rate} = \frac{\textrm{TP}}{\textrm{TP+FN}}$$
 
@@ -116,8 +116,6 @@ _NOTE_: remember that both the False Positive Rate and the True Positive Rate ar
 As shown before when one has imbalanced classes, precision and recall are better metrics than accuracy, in the same way, for imbalanced datasets a Precision-Recall curve is more suitable than a ROC curve.
 
 A Precision-Recall curve is a plot of the __Precision__ (y-axis) and the __Recall__ (x-axis) for different thresholds, much like the ROC curve. Note that in computing precision and recall there is never a use of the true negatives, these measures only consider correct predictions
-
-The no-skill line is defined by the total number of positive cases divide by the total number of positive and negative cases. For a dataset with an equal number of positive and negative cases, this is a straight line at 0.5. Points above this line show skill.
 
 ---
 <br>
@@ -230,7 +228,7 @@ ROC curves are appropriate when the observations are balanced between each class
 
 
 <center>
-<table class="greyGridTable">
+<table class="blueTable">
 <thead>
 <tr>
 <th>Metric</th>
@@ -260,7 +258,7 @@ ROC curves are appropriate when the observations are balanced between each class
 <td>Coverage of actual negative sample</td>
 </tr>
 <tr>
-<td>$$F_{1}$$</td>
+<td>F1-score</td>
 <td>$$2 \times\frac{\textrm{Precision} \times \textrm{Precision}}{\textrm{Precision} + \textrm{Precision}}$$</td>
 <td>Harmonic mean of Precision and Recall</td>
 </tr>
@@ -275,7 +273,7 @@ False Positive Rate
 -->
 
 
-### References
+### __References__
 
 - [CS 229 - Machine Learning (tips and tricks cheatsheet)](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks)
 
