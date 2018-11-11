@@ -11,6 +11,19 @@ preview_pic: /assets/images/2018-02-01-word-embeddings.jpg
 
 Word embeddings are the technique that made possible all the latest achievements in NLP using neural networks. In this blog post I will review three popular techniques to generate word embeddings: skip-gram, glove and fasttext.
 
+## Embeddings
+
+"Deep contextualized word representations" (2018)
+paper: http://aclweb.org/anthology/N18-1202
+code:  https://github.com/Hironsan/anago
+
+
+"Enriching Word Vectors with Subword Information"
+paper: http://aclweb.org/anthology/Q17-1010
+code:  https://github.com/facebookresearch/fastText
+
+
+
 # __Word2Vec: Skip-Gram__
 
 * A neural network with a single hidden layer which won't be used for the for the task we trained it on;
