@@ -10,7 +10,7 @@ preview_pic: /assets/images/2018-10-21-CNN-Char-Embeddings.png
 description: This blog post review some of the recent proposed methods to perform named-entity recognition using neural networks.
 ---
 
-Recently (i.e., at the time of this writing since 2015~2016 onwards) new methods to perform sequence labelling tasks based on Neural Networks start to be proposed/published, I will try in this blog post to do a quick recap of these new methods, understanding their architectures and pointing out what each technique brought new or different to the already knew methods.
+Recently (i.e., at the time of this writing since 2015~2016 onwards) new methods to perform sequence labelling tasks based on neural networks started to be proposed/published, I will try in this blog post to do a quick recap of these new methods, understanding their architectures and pointing out what each technique brought new or different to the already knew methods.
 
 
 # __Introduction__
@@ -21,7 +21,7 @@ Another example, is named-entity recognition, in which, again, each $$x_{i}$$ de
 
 # __Linear Sequence Models__
 
-Classical approaches - i.e., prior to the neural networks revolution in NLP - to deal with this tasks involved methods which made
+Classical approaches - i.e., prior to the neural networks revolution in NLP - to deal with these tasks involved methods which made
 independent assumptions, that is, the tag decision for each word depends only on the surrounding words and not on previous classified words.
 
 Then methods that take into consideration the sequence structure, i.e., the tag given to the previous classified word(s) is considered when deciding the tag to give to the following word.
@@ -36,7 +36,7 @@ You can read more about these last methods here:
 
 But recently, methods based on neural networks started succeed and are nowadays state-of-the-art in mostly NLP sequence prediction tasks.
 
-Most of this methods combine not one simple neural network but several neural networks working in tandem. One important architecture common to all recent methods is recurrent neural network (RNN).
+Most of this methods combine not one simple neural network but several neural networks working in tandem, i.e., combining different architectures. One important architecture common to all recent methods is recurrent neural network (RNN).
 
 A RNN introduces the connection between the previous hidden state and current hidden state, and therefore a recurrent layer weight parameters. This recurrent layer is designed to store history information. When reading through a sequence of words, the input and output layers have:
 
@@ -47,31 +47,35 @@ A RNN introduces the connection between the previous hidden state and current hi
   - represents a probability distribution over labels at time $$t$$
   - same dimensionality as size of labels.
 
+__TODO__: imagem de uma RNN
+
 However, in most proposed techniques, the RNN is replaced by a Long short-term memory (LSTM), where hidden layer updates are replaced by purpose-built memory cells. As a result, they may be better at finding and exploiting long range dependencies in the data.
 
-<!--
-Basically, a LSTM unit is composed of three multiplicative gates which control the proportions of information to forget and to pass on to the next time step.
--->
+__TODO__: imagem de uma LSTM, e uma curta descrição
+<!-- Basically, a LSTM unit is composed of three multiplicative gates which control the proportions of information to forget and to pass on to the next time step. -->
+
+Another architecture that is combined with LSTMs in the works described in this post is __[Convolutional Neural Networks](../../../../../blog/2018/03/31/SentenceClassificationConvNets/)__.
+
 
 # __Neural Sequence Labelling Models__
 
-I will go through 4 papers which propose neural network architectures to perform NLP sequence labelling tasks such as NER, chunking, or POS-tagging, I will focus only on the architectures proposed and detailed them, and leave out of the datasets or scores
+The first ever work to try to use try to LSTMs for the task of Named Entity Recognition was published back in 2003:
 
-<!--
-One of the first methods to try to use LSTMS for the task of NER
-Named Entity Recognition with Long Short-Term Memory James Hammerton
-http://www.aclweb.org/anthology/W03-0426
--->
+- [Named Entity Recognition with Long Short-Term Memory (James Hammerton 2003)](http://www.aclweb.org/anthology/W03-0426)
 
-- ["Bidirectional LSTM-CRF Models for Sequence Tagging" (2015)](https://arxiv.org/pdf/1508.01991v1.pdf)
+but lack of computational power led to small and not expressive models, and therefore result behind the other methods at that time.
 
-- ["Named Entity Recognition with Bidirectional LSTM-CNNs" (2016)](https://www.aclweb.org/anthology/Q16-1026)
+But I will presented four more recent papers which propose neural network architectures to perform NLP sequence labelling tasks such as NER, chunking, or POS-tagging, I will focus only on the architectures proposed and detailed them, and leave out of the datasets or scores
 
-- ["Neural Architectures for Named Entity Recognition" (2016)](http://www.aclweb.org/anthology/N16-1030)
+- [Bidirectional LSTM-CRF Models for Sequence Tagging (Huang et. al 2015)](https://arxiv.org/pdf/1508.01991v1.pdf)
 
-- ["End-to-end Sequence Labelling via Bi-directional LSTM-CNNs-CRF" (2016)](http://www.aclweb.org/anthology/P16-1101)
+- [Named Entity Recognition with Bidirectional LSTM-CNNs (Chiu and Nichols 2016)](https://www.aclweb.org/anthology/Q16-1026)
 
-At time this writing there are already new proposed methods, published in 2017 and 2018, but I will leave these for another blog post, a for now try to learn understand something from these :-)
+- [Neural Architectures for Named Entity Recognition (Lample et. al 2016)](http://www.aclweb.org/anthology/N16-1030)
+
+- [End-to-end Sequence Labelling via Bi-directional LSTM-CNNs-CRF (Ma and Hovy 2016)](http://www.aclweb.org/anthology/P16-1101)
+
+At time this writing there are already new proposed methods, published in 2017 and 2018, but I will leave these for another blog post, for now I just wanted to dissect and understand something from the ones listed above :-)
 
 ---
 
@@ -91,24 +95,21 @@ This bidirectional-LSTM architecture is then combined with a CRF layer at the to
 
 <figure>
   <img style="width: 55%; height: 55%" src="/assets/images/2018-10-21_A_bi-LSTM-CRF_model.png">
-  <figcaption>A bi-LSTM-CRF model.</figcaption>
+  <figcaption><b>TODO: descrever</b></figcaption>
 </figure>
 
 <!--
-
 Evaluate them in three sequence tagging task:
-
 - Penn TreeBank (PTB) POS tagging
 - CoNLL 2000 chunking
 - CoNLL 2003 named entity tagging
 -->
 
-
 <br>
 
 ### __Features and Embeddings__
 
-Word embeddings are combined with hand-crafted features: spelling (e.g.: capitalization, punctuation, word patters, etc.) and context (e.g: uni-, bi- and tri-gram features). The embeddings used are those produced by [Collobert et al., 2011]() which has 130K vocabulary size and each word corresponds to a 50-dimensional embedding vector.
+Word embeddings are combined with hand-crafted features: spelling (e.g.: capitalization, punctuation, word patters, etc.) and context (e.g: uni-, bi- and tri-gram features). The embeddings used are those produced by [Collobert et al., 2011]((http://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf)) which has 130K vocabulary size and each word corresponds to a 50-dimensional embedding vector.
 
 __Features connection tricks__: inputs of networks include both word, spelling and context features, however, the authors suggest direct connections from spelling and context features to outputs accelerate training and they result in very similar tagging accuracy, when comparing without direct connections. That is, in my understanding, the vector representing the hand-crafted features are passed directly to the CRF and are not passed through the bidirectional-LSTM
 
@@ -121,7 +122,7 @@ __Features connection tricks__: inputs of networks include both word, spelling a
 
 ## __Summary__
 
-In essence, I guess, one can see this architecture as using the output of the bi-LSTM, a vector representation of a word, together with spelling and context hand-crafted features, and all these features are passed to a CRF layer.
+In essence, one can see this architecture as using the output of the bi-LSTM, vector representations for each word in a sentence, together with a vector of features derived from spelling and context hand-crafted rules, these vectors are concatenated and passed to a CRF layer.
 
 
 <br>
@@ -132,7 +133,7 @@ In essence, I guess, one can see this architecture as using the output of the bi
 
 ### __Architecture__
 
-The authors propose a hybrid model combining bi-directional LSTMs with a CNNs that learns both character- and word-level features. The proposed system uses words-embeddings, additional hand-crafted word features, and CNN-extracted character-level features. These extracted features of each word are fed into a bidirectional-LSTM.
+The authors propose a hybrid model combining bi-directional LSTMs with CNNs which learns both character- and word-level features. The proposed system uses words-embeddings, additional hand-crafted word features, and CNN-extracted character-level features. All these extracted features, for each word, are fed into a bidirectional-LSTM.
 
 <figure>
   <img style="width: 42.5%; height: 42.5%" src="/assets/images/2018-10-21-CNN-Char-Embeddings.png">
@@ -148,7 +149,7 @@ The output vector of each LSTM (i.e., forward and backward) at each time step is
 
 <br>
 
-Character-level features are induced by a Convolutional Neural Network (CNN) architecture, which has been successfully applied to Spanish and Portuguese NER [(Santos et al., 2015)](Santos et al., 2015) and German POS-tagging [(Labeau et al., 2015)](Labeau et al., 2015). For each word a convolution and a max layer are applied to extract a new feature vector from the per-character feature vectors such as character embeddings and character type.
+Character-level features are induced by a Convolutional Neural Network (CNN) architecture, which has been successfully applied to Spanish and Portuguese NER [(Santos et al., 2015)](http://www.anthology.aclweb.org/W/W15/W15-3904.pdf) and German POS-tagging [(Labeau et al., 2015)](http://www.aclweb.org/anthology/D15-1025). For each word a convolution and a max layer are applied to extract a new feature vector from the per-character feature vectors such as character embeddings and character type.
 
 <figure>
   <img style="width: 42.5%; height: 42.5%" src="/assets/images/2018-10-21-bi-directional-LSTM-with-CNN-chars.png">
@@ -159,7 +160,7 @@ Character-level features are induced by a Convolutional Neural Network (CNN) arc
 
 ### __Features and Embeddings__
 
-__Word Embeddings__: 50-dimensional word embeddings [(Collobert et al. 2011)](Collobert et al. 2011), all words are lower-cased, embeddings are allowed to be modified during training.
+__Word Embeddings__: 50-dimensional word embeddings [(Collobert et al. 2011)](http://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf), all words are lower-cased, embeddings are allowed to be modified during training.
 
 __Character Embeddings__: randomly initialized a lookup table with values drawn from a uniform distribution with range [−0.5,0.5] to output a character embedding of 25 dimensions. Two special tokens are added: PADDING and UNKNOWN.
 
@@ -174,6 +175,11 @@ __Lexicons__: partial lexicon matches using a list of known named-entities from 
 ## __Summary__
 
 The authors explore several features: word embeddings, word shape features, character-level features and lexical features. The character-level features are extracted with a CNN. All these features are then concatenated, passed through a bi-LSTM and each time step is decoded by a linear layer and a log-softmax layer into log-probabilities for each tag category. At inference time they use the Viterbi algorithm to select the sequence that maximizes the score all possible tag-sequences.
+
+<!--
+CoNLL-2003
+OntoNotes 5.0
+-->
 
 
 ---
@@ -195,14 +201,14 @@ I will just focus on the first model, which follows a similar architecture as th
 
 <figure>
   <img style="width: 42.5%; height: 42.5%" src="/assets/images/2018-10-21-neural-arch.png">
-  <figcaption></figcaption>
+  <figcaption><b>TODO: descrever</b></figcaption>
 </figure>
 
 <!--
 Our models are designed to capture two intuitions. First, since names often consist of multiple tokens, reasoning jointly over tagging decisions for each to- ken is important. We compare two models here, (i) a bidirectional LSTM with a sequential conditional random layer above it (LSTM-CRF; §2), and (ii) a new model that constructs and labels chunks of input sentences using an algorithm inspired by transition-based parsing with states represented by stack LSTMs (S-LSTM; §3). Second, token-level evidence for “being a name” includes both orthographic evidence (what does the word being tagged as a name look like?) and distributional evidence (where does the word being tagged tend to occur in a corpus?). To capture orthographic sensitivity, we use character-based word representation model (Ling et al., 2015b) to capture distributional sensitivity, we combine these representations with distributional representations (Mikolov et al., 2013b). Our word representations combine both of these, and dropout training is used to encourage the model to learn to trust both sources of evidence (§4).
 -->
 
-Tagging decisions are not modeled independently, we model them jointly using a Conditional Random Field (CRF) [(Lafferty et al., 2001)](Lafferty et al., 2001). The parameters of this model are thus the matrix of bigram compatibility scores $A$, and the parameters that give rise to the matrix $P$, namely the parameters of the bidirectional LSTM, the linear feature weights, and the word embeddings.
+The tagging decisions are not modeled independently, and are instead modeled jointly using a CRF [(Lafferty et al., 2001)](https://repository.upenn.edu/cgi/viewcontent.cgi?article=116). The parameters of this model are thus the matrix of bigram compatibility scores $A$, and the parameters that give rise to the matrix $P$, namely the parameters of the bidirectional LSTM, the linear feature weights, and the word embeddings.
 
 
 ### __Embeddings__
@@ -215,14 +221,14 @@ The rational behinds this idea is that many languages have orthographic or morph
 
 <figure>
   <img style="width: 42.5%; height: 42.5%" src="/assets/images/2018-10-21-nerual-arch-char-embeddings.png">
-  <figcaption></figcaption>
+  <figcaption><b>TODO: descrever</b></figcaption>
 </figure>
 
 A character lookup table is initialized randomly containing an embedding for every character. The character embeddings corresponding to every character in a word are given in direct and reverse order to a bidirectional-LSTM. The embedding for a word derived from its characters is the concatenation of its forward and backward representations from the bidirectional-LSTM. The hidden dimension of the forward and backward character LSTMs are 25 each.
 
 #### __Word Embeddings__
 
-This character-level representation is then concatenated with a word-level representation from pre-trained word embeddings. Embeddings are pre-trained using skip-n-gram [(Ling et al., 2015)]((Ling et al., 2015)), a variation of skip-gram that accounts for word order.
+This character-level representation is then concatenated with a word-level representation from pre-trained word embeddings. Embeddings are pre-trained using skip-n-gram [(Ling et al., 2015)](http://www.aclweb.org/anthology/D15-1161), a variation of skip-gram that accounts for word order.
 
 These embeddings are fine-tuned during training, and the authors claim that using pre-trained over randomly initialized ones results in performance improvements.
 
@@ -235,13 +241,27 @@ This model is relatively simple, the authors use no hand-crafted features, just 
 
 The embeddings for word each word in a sentence are then passed through a forward and backward LSTM, and the output for each word is then fed into a CRF layer.
 
+<!--
+named entity recognition
+CoNLL-2002 and CoNLL2003 datasets
+named entity labels for English, Spanish, German and Dutch.
+
+All datasets contain four different types of named entities: locations, persons, organizations, and miscellaneous entities that do not belong in any of the three previous categories.
+
+Although POS tags were made available for all datasets, we did not include them in our models.
+
+We did not perform any dataset preprocessing, apart from replacing every digit with a zero in the English NER dataset.
+-->
+
+
+
+
 ## __Implementations__
 
 - [https://github.com/glample/tagger](https://github.com/glample/tagger)
-- [https://github.com/clab/stack-lstm-ner](https://github.com/clab/stack-lstm-ner)
 - [https://github.com/Hironsan/anago](https://github.com/Hironsan/anago)
 - [https://github.com/achernodub/bilstm-cnn-crf-tagger](https://github.com/achernodub/bilstm-cnn-crf-tagger)
-
+<!--- [https://github.com/clab/stack-lstm-ner](https://github.com/clab/stack-lstm-ner)-->
 
 ---
 
@@ -255,7 +275,7 @@ The embeddings for word each word in a sentence are then passed through a forwar
 This proposed system is very similar to the previous one. The authors use convolutional neural networks (CNNs) to encode character-level information of a word into its character-level representation. Then combine character- and word-level representations and feed them into bi-directional LSTM (BLSTM) to model context information of each word. Finally, the output vectors of BLSTM are fed to the CRF layer to jointly decode the best label sequence.
 <figure>
   <img style="width: 42.5%; height: 42.5%" src="/assets/images/2018-10-21_end_to_ent2.png">
-  <figcaption></figcaption>
+  <figcaption><b>TODO: descrever</b></figcaption>
 </figure>
 
 
@@ -263,11 +283,11 @@ This proposed system is very similar to the previous one. The authors use convol
 
 #### __Character Embeddings__
 
-The CNN is similar to the one in [Chiu and Nichols (2015)](Chiu and Nichols (2015)), the second system presented, except that they use only character embeddings as the inputs to CNN, without any character type features. A dropout layer is applied before character embeddings are input to CNN.
+The CNN is similar to the one in [Chiu and Nichols (2015)](https://www.aclweb.org/anthology/Q16-1026), the second system presented, except that they use only character embeddings as the inputs to CNN, without any character type features. A dropout layer is applied before character embeddings are input to CNN.
 
 <figure>
   <img style="width: 42.5%; height: 42.5%" src="/assets/images/2018-10-21_end_to_ent1.png">
-  <figcaption></figcaption>
+  <figcaption><b>TODO: descrever</b></figcaption>
 </figure>
 
 #### __Word Embeddings__
@@ -279,6 +299,37 @@ The word embeddings are the publicly available GloVe 100-dimensional embeddings 
 
 This model follows basically the same architecture as the one presented before, being the only architecture change the fact that they use CNN to generate word-level char-embeddings instead of an LSTM.
 
+<!--
+POS Tagging. For English POS tagging, we use
+the Wall Street Journal (WSJ) portion of Penn
+Treebank (PTB) (Marcus et al., 1993), which contains
+45 different POS tags. In order to compare
+with previous work, we adopt the standard
+splits — section 0–18 as training data, section 19–
+21 as development data and section 22–24 as test
+data (Manning, 2011; Søgaard, 2011).
+NER. For NER, We perform experiments on
+the English data from CoNLL 2003 shared
+task (Tjong Kim Sang and De Meulder, 2003).
+This data set contains four different types of
+named entities: PERSON, LOCATION, ORGANIZATION,
+and MISC. We use the BIOES tagging
+scheme instead of standard BIO2, as previous
+studies have reported meaningful improvement
+with this scheme (Ratinov and Roth, 2009;
+Dai et al., 2015; Lample et al., 2016).
+The corpora statistics are shown in Table 2. We
+did not perform any pre-processing for data sets,
+leaving our system truly end-to-end.
+-->
+
+
+
+
+
+
+
+
 
 ## __Implementations__
 
@@ -287,63 +338,135 @@ This model follows basically the same architecture as the one presented before, 
 
 ---
 
-<br><br><br>
+<br>
 
-## __Comparison Table__
+## __Comparative Summary__
 
-[https://docs.google.com/spreadsheets/d/1sr5GRNnWfAVFNlniQrrhBYbpYBGz9-MUpSSoDBIh74A/edit#gid=0](https://docs.google.com/spreadsheets/d/1sr5GRNnWfAVFNlniQrrhBYbpYBGz9-MUpSSoDBIh74A/edit#gid=0)
+In the following table I try to summarize the main characteristics of each of the models
 
+<table class="blueTable">
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>Features</th>
+<th>Architecture Resume</th>
+<th>Structured Tagging</th>
+<th>Embeddings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(Huang et. al 2015)</td>
+<td>Yes</td>
+<td>
+bi-LSTM output vectors +
+<br>
+features vectors connected to CRF</td>
+<td>CRF</td>
+<td>Collobert et al. 2011
+<br>
+pre-trained
+<br>
+50-dimensions</td>
+</tr>
+<tr>
+<td>(Chiu and Nichols 2016)</td>
+<td>Yes</td>
+
+
+<td>
 <!--
-- “Bidirectional LSTM-CRF Models for Sequence Tagging” (2015)
-- “Named Entity Recognition with Bidirectional LSTM-CNNs” (2016)
-- “Neural Architectures for Named Entity Recognition” (2016)
-- “End-to-end Sequence Labelling via Bi-directional LSTM-CNNs-CRF” (2016)
+word embeddings + features vector passed through a bi-LSTM the outupt at each time step of the bi-LSTM is added and then is decoded
 -->
+</td>
+<td>
+<!--
+time step in the bi-LSTM is decoded by a linear layer and a log-softmax layer into log-probabilities for each tag category
+Viterbi algorithm the tag sequence that maximizes the score all possible tag-sequences.-->
+</td>
 
+
+<td>
+- Collobert et al. 2011
+<br>
+- char-level embeddings
+<br>
+extracted with a CNN</td>
+</tr>
+<tr>
+<td>(Lample et. al 2016)</td>
+<td>No</td>
+<td>
+chars and word embeddings
+<br>
+input for the bi-LSTM
+<br>
+output vectors are fed to the CRF layer to  jointly decode the best label sequence
+</td>
+<td>CRF</td>
+<td>
+- char-level embeddings
+<br>
+extracted with a bi-LSTM
+<br>
+- pre-trained word embeddings
+<br>
+with skip-n-gram</td>
+</tr>
+<tr>
+<td>(Ma and Hovy 2016)</td>
+<td>No</td>
+<td>
+chars and word embeddings
+<br>
+input for the bi-LSTM
+<br>
+output vectors are fed to the CRF layer to  jointly decode the best label sequence
+</td>
+<td>CRF</td>
+<td>
+- char embeddings extracted with a CNN
+<br>
+- word embeddings: GloVe 100-dimensions</td>
+</tr>
+</tbody>
+</table>
 
 ---
 
 ## __References__
 
 <!--
-
 https://www.lewuathe.com/machine%20learning/crf/conditional-random-field.html
-
-(Santos et al., 2015) http://www.anthology.aclweb.org/W/W15/W15-3904.pdf
-(Labeau et al., 2015) http://www.aclweb.org/anthology/D15-1025
-(Ling et al., 2015) http://www.aclweb.org/anthology/D15-1161
-
 -->
 
-- ["Natural Language Processing (Almost) from Scratch" (2011)](http://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf)
+- [Bidirectional LSTM-CRF Models for Sequence Tagging (Huang et. al 2015)](https://arxiv.org/pdf/1508.01991v1.pdf)
 
-- ["Bidirectional LSTM-CRF Models for Sequence Tagging" (2015)](https://arxiv.org/pdf/1508.01991v1.pdf)
+- [Named Entity Recognition with Bidirectional LSTM-CNNs (Chiu and Nichols 2016)](https://www.aclweb.org/anthology/Q16-1026)
 
-- ["A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition"](https://www.robots.ox.ac.uk/~vgg/rg/papers/hmm.pdf)
+- [Neural Architectures for Named Entity Recognition (Lample et. al 2016)](https://www.aclweb.org/anthology/N16-1030)
+
+- [End-to-end Sequence Labelling via Bi-directional LSTM-CNNs-CRF (Ma and Hovy 2016)](http://www.aclweb.org/anthology/P16-1101)
+
+- [A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition](https://www.robots.ox.ac.uk/~vgg/rg/papers/hmm.pdf)
 
 - [Hugo Larochelle on-line lessons - Neural networks [4.1] : Training CRFs - loss function](https://www.youtube.com/watch?v=6dpGB60Q1Ts)
 
 - [Blog article: CRF Layer on the Top of BiLSTM - 1 to 8](https://createmomo.github.io/)
 
+- [Not All Contexts Are Created Equal: Better Word Representations with Variable Attention (Ling et al., 2015)](http://www.aclweb.org/anthology/D15-1161)
 
+- [Non-lexical neural architecture for fine-grained POS Tagging (Labeau et al., 2015)](http://www.aclweb.org/anthology/D15-1025)
 
+- [Boosting Named Entity Recognition with Neural Character Embeddings (Santos et al., 2015)](http://www.anthology.aclweb.org/W/W15/W15-3904.pdf)
 
+- [Natural Language Processing (Almost) from Scratch (2011)](http://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf)
 
+---
 
+<br><br>
 
-
-
-
-
-
-
-
-
-
-
-
-<!--
-#### __Why a Conditional Random Field (CRF) at the top?__
+### __Extra: Why a Conditional Random Field (CRF) at the top?__
 
 Having independent classification decisions is limiting when there are strong dependencies across output labels, since you decide which label for a word independently from the previous given tags.
 
@@ -423,4 +546,3 @@ the parameters $$\theta$$ correspond to the _transition_ and _emission_ matrices
 $$\textrm{score} = \sum_{i=0}^{n} \textrm{T}_{y_i,y_{i+1}} + \sum_{i=1}^{n} \textrm{P}_{i,y_i}$$
 
 a linear-chain sequence CRF model, models only interactions between two successive labels, i.e bi-gram interactions, therefore one can find the sequence $$y$$ maximizing the __score__ function above by adopting the Viterbi algorithm (Rabiner, 1989).
--->
