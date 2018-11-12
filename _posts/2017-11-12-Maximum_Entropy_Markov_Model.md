@@ -158,9 +158,7 @@ to 1 across each row.
 
 ### __Training and Decoding__
 
-From the original paper:
-
-"In what follows, we will split $$P(s \mid s', O)$$ into $$\mid S \mid$$ separately trained transition functions $$ P_{s'} ( S \mid o) = P(s \mid s', O)$$. Each of these functions is given by an exponential model"
+Taken from the original paper: "In what follows, we will split $$P(s \mid s', O)$$ into $$\mid S \mid$$ separately trained transition functions $$ P_{s'} ( S \mid o) = P(s \mid s', O)$$. Each of these functions is given by an exponential model"
 
 THE MEMM trains one logistic regression per state transition, normalised locally. The original MEMM paper, published in 2000, used a generalized iterative scaling (GIS) algorithm to fit the multinomial logistic regression, that is finding the perfect weights according to the training data. That algorithm has been largely surpassed by gradient-based methods such as L-BFGS.
 

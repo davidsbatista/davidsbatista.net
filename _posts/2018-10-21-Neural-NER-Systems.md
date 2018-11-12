@@ -109,7 +109,7 @@ Evaluate them in three sequence tagging task:
 
 ### __Features and Embeddings__
 
-Word embeddings are combined with hand-crafted features: spelling (e.g.: capitalization, punctuation, word patters, etc.) and context (e.g: uni-, bi- and tri-gram features). The embeddings used are those produced by [Collobert et al., 2011]((http://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf)) which has 130K vocabulary size and each word corresponds to a 50-dimensional embedding vector.
+Word embeddings are combined with hand-crafted features: spelling (e.g.: capitalization, punctuation, word patters, etc.) and context (e.g: uni-, bi- and tri-gram features). The embeddings used are those produced by [Collobert et al., 2011](http://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf) which has 130K vocabulary size and each word corresponds to a 50-dimensional embedding vector.
 
 __Features connection tricks__: inputs of networks include both word, spelling and context features, however, the authors suggest direct connections from spelling and context features to outputs accelerate training and they result in very similar tagging accuracy, when comparing without direct connections. That is, in my understanding, the vector representing the hand-crafted features are passed directly to the CRF and are not passed through the bidirectional-LSTM
 
@@ -375,14 +375,19 @@ pre-trained
 
 
 <td>
-<!--
-word embeddings + features vector passed through a bi-LSTM the outupt at each time step of the bi-LSTM is added and then is decoded
--->
+word embeddings + features vector
+<br>
+input to a bi-LSTM the output
+<br>
+at each time step is decoded by a
+<br>
+linear layer and a log-softmax layer
+<br>
+into log-probabilities for each tag category
+<br>
 </td>
 <td>
-<!--
-time step in the bi-LSTM is decoded by a linear layer and a log-softmax layer into log-probabilities for each tag category
-Viterbi algorithm the tag sequence that maximizes the score all possible tag-sequences.-->
+Sentence-level log-likelihood
 </td>
 
 

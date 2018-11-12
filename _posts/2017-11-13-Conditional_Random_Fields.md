@@ -32,7 +32,7 @@ The main motivation for this proposal is the so called Label Bias Problem occurr
 
 ### __Label Bias Problem in MEMMs__
 
-Recalling how the transition probabilities are computed in a MEMM model, from the previous post, we learned that the probability of the next state is only dependent on the observation (i.e., the sequence of words) and the previous state, that is, we have exponential model for each state to tell us the conditional probability of the next states:
+Recalling how the transition probabilities are computed in a MEMM model, from the previous post, we learned that the probability of the next state is only dependent on the observation (i.e., the sequence of words) and the previous state, that is, we have an exponential model for each state to tell us the conditional probability of the next states:
 
 <figure>
   <img style="width: 25%; height: 25%" src="/assets/images/2017-11-13-HMM.png">
