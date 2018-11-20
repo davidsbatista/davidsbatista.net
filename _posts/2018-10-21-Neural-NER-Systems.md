@@ -182,6 +182,12 @@ OntoNotes 5.0
 -->
 
 
+## __Implementations__
+
+- [https://github.com/kamalkraj/Named-Entity-Recognition-with-Bidirectional-LSTM-CNNs](https://github.com/kamalkraj/Named-Entity-Recognition-with-Bidirectional-LSTM-CNNs)
+
+
+
 ---
 
 <br>
