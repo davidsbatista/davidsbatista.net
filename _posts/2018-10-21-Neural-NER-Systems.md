@@ -46,11 +46,11 @@ A RNN introduces the connection between the previous hidden state and current hi
   - represents a probability distribution over labels at time $$t$$
   - same dimensionality as size of labels.
 
-__TODO__: imagem de uma RNN
+<!--__TODO__: imagem de uma RNN-->
 
 However, in most proposed techniques, the RNN is replaced by a Long short-term memory (LSTM), where hidden layer updates are replaced by purpose-built memory cells. As a result, they may be better at finding and exploiting long range dependencies in the data.
 
-__TODO__: imagem de uma LSTM, e uma curta descrição
+<!--__TODO__: imagem de uma LSTM, e uma curta descrição-->
 <!-- Basically, a LSTM unit is composed of three multiplicative gates which control the proportions of information to forget and to pass on to the next time step. -->
 
 Another architecture that is combined with LSTMs in the works described in this post is __[Convolutional Neural Networks](../../../../../blog/2018/03/31/SentenceClassificationConvNets/)__.
