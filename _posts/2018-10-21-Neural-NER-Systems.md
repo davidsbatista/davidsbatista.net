@@ -286,7 +286,7 @@ The embeddings for word each word in a sentence are then passed through a forwar
 This system is very similar to the previous one. The authors use a Convolutional Neural Networks (CNN) to encode character-level information of a word into its character-level representation. Then combine character- and word-level representations and feed them into bidirectional LSTM to model context information of each word. Finally, the output vectors of BLSTM are fed to the CRF layer to jointly decode the best label sequence.
 <figure>
   <img style="width: 42.5%; height: 42.5%" src="/assets/images/2018-10-21_end_to_ent2.png">
-  <figcaption><b>Model Architecture.</b> <br>(Image taken from (Ma and Hovy 2016))</figcaption>
+  <figcaption><b>Model Architecture.</b> <br>(Image taken from Ma and Hovy 2016)</figcaption>
 </figure>
 
 
@@ -298,7 +298,7 @@ The CNN is similar to the one in [Chiu and Nichols (2015)](https://www.aclweb.or
 
 <figure>
   <img style="width: 42.5%; height: 42.5%" src="/assets/images/2018-10-21_end_to_ent1.png">
-  <figcaption><b>Character-embeddings Architecture.</b> <br>(Image taken from (Ma and Hovy 2016))</figcaption>
+  <figcaption><b>Character-embeddings Architecture.</b> <br>(Image taken from Ma and Hovy 2016)</figcaption>
 </figure>
 
 #### __Word Embeddings__
@@ -454,32 +454,44 @@ output vectors are fed to the CRF layer to  jointly decode the best label sequen
 
 <br><br>
 
-### __Extra: Why a Conditional Random Field (CRF) at the top?__
+### __Extra: Why a Conditional Random Field at the top?__
 
-Having independent classification decisions is limiting when there are strong dependencies across output labels, since you decide which label for a word independently from the previous given tags.
+Having independent classification decisions is limiting when there are strong dependencies across output labels, since you decide the label for a word independently from the previous given tags.
 
 For sequence labeling or general structured prediction tasks, it is beneficial to consider the correlations between labels in neighborhoods and jointly decode the best chain of labels for a given input sentence:
 
-- NER is one such task, since the”"grammar” that characterizes interpretable sequences of tags imposes several hard constraints, e.g.: I-PER cannot follow B-LOC that would be impossible to model with independence assumptions.
+- NER is one such task, since interpretable sequences of tags have constraints, e.g.: I-PER cannot follow B-LOC that would be impossible to model with independence assumptions;
 
-- Another example, in POS tagging an adjective is more likely to be followed by a noun than a verb;
+- Another example is in POS tagging, an adjective is more likely to be followed by a noun than a verb;
 
-The idea of using a CRF at the top is to model tagging decisions jointly. This means that the CRF layer could add constrains to the final predicted labels ensuring they are valid. The constrains are learned by the CRF layer automatically based on the annotated samples during the training process.
+The idea of using a CRF at the top is to model tagging decisions jointly, that is the probability of a given label to a word depends on the features associated to that word (i.e., final word embedding) and the assigned tag the word before.
+
+This means that the CRF layer could add constrains to the final predicted labels ensuring they are valid. The constrains are learned by the CRF layer automatically based on the annotated samples during the training process.
 
 
 #### __Emission score matrix__
 
-The output of the LSTM is given as input to the CRF layer, that is, a matrix $\textrm{P}$ with the scores of the LSTM of size $n \times k$, where $n$ is the number of words in the sentence and $k$ is the possible number of labels that each word can have, $\textrm{P}_{i,j}$ is the score of the $j^{th}$ tag of the $i^{th}$ word in the sentence.
+The output of the LSTM is given as input to the CRF layer, that is, a matrix $\textrm{P}$ with the scores of the LSTM of size $n \times k$, where $n$ is the number of words in the sentence and $k$ is the possible number of labels that each word can have, $\textrm{P}_{i,j}$ is the score of the $j^{th}$ tag of the $i^{th}$ word in the sentence. In the image below the matrix would be the concatenation of the yellow blocks coming out of each LSTM.
 
-__TODO__ desenhar as matriz ligada ao CRF
+<figure>
+  <img style="width: 50%; height: 50%" src="/assets/images/2018-10-21_LSTM_CRF_matrix.png">
+  <figcaption><b>CRF Input Matrix</b> <br>(Image taken from https://createmomo.github.io/)</figcaption>
+</figure>
+
 
 #### __Transition matrix__
 
 $$\textrm{T}$$ is a matrix of transition scores such that $$\textrm{P}_{i,j}$$ represents the score of a transition from the tag $$i$$ to tag $$j$$. Two extra tags are added, $y_{0}$ and $y_{n}$ are the _start_ and _end_ tags of a sentence, that we add to the set of possible tags, $\textrm{T}$ is therefore a square matrix of size $\textrm{k}+2$.
 
-__TODO__ desenhar as matriz
+
+<figure>
+  <img style="width: 72.5%; height: 72.5%" src="/assets/images/2018-10-21_transition_matrix.png">
+  <figcaption><b>CRF State Transition Matrix</b> <br>(Image taken from https://eli5.readthedocs.io sklearn tutorial)</figcaption>
+</figure>
 
 #### __Score of a prediction__
+
+
 
 For a given sequence of predictions for a sequence of words $$x$$:
 
@@ -487,13 +499,13 @@ $$\textrm{y} = (y_{1},y_{2},\dots,y_{n})$$
 
 we can compute it's score based on the _emission_ and _transition_ matrices:
 
-$$\textrm{score} = \sum_{i=0}^{n} \textrm{T}_{y_i,y_{i+1}} + \sum_{i=1}^{n} \textrm{P}_{i,y_i}$$
+$$\textrm{score}(y) = \sum_{i=0}^{n} \textrm{T}_{y_i,y_{i+1}} + \sum_{i=1}^{n} \textrm{P}_{i,y_i}$$
 
 so the score of a sequence of predictions is, for each word, the sum of the transition from the current assigned tag $$y_i$$ to next assigned tag $$y_{i+1}$$ plus the probability given by the LSTM to the tag assigned for the current word $$i$$.
 
 #### __Training: parameter estimation__
 
-During training, assign a probability to each tag but maximizing the probability of the correct tag $$y$$ sequence among all the other possible tag sequences.
+During training, we assign a probability to each tag but maximizing the probability of the correct tag $$y$$ sequence among all the other possible tag sequences.
 
 This is modeled by applying a softmax over all the possible taggings $$y$$:
 
