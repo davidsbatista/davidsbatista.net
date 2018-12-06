@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Word Embeddings - word2vec, fasttext, GloVe
-date: 2018-02-01 00:00:00
+date: 2018-12-06 00:00:00
 tags: word-embeddings word2vec fasttext glove
 categories: [blog]
-comments: true
-disqus_identifier: 20180201
-preview_pic: /assets/images/2018-02-01-word-embeddings.jpg
+#comments: true
+# disqus_identifier: 20181206
+preview_pic: /assets/images/2018-12-06-word-embeddings.jpg
 ---
 
 Word embeddings are the technique that made possible all the latest achievements in NLP using neural networks. In this blog post I will review three popular techniques to generate word embeddings: skip-gram, glove and fasttext.
@@ -23,6 +23,17 @@ paper: http://aclweb.org/anthology/Q17-1010
 code:  https://github.com/facebookresearch/fastText
 
 
+<!--
+
+https://www.reddit.com/r/MachineLearning/comments/9nfqxz/r_bert_pretraining_of_deep_bidirectional/
+
+http://ruder.io/word-embeddings-2017/
+
+https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html
+
+https://jalammar.github.io/illustrated-bert/
+
+-->
 
 # __Word2Vec: Skip-Gram__
 
@@ -58,6 +69,8 @@ https://pixabay.com/en/users/terimakasih0-624267/
 
 
 # __Experiments__
+
+<!--
 
 I wanted to explore embeddings for Portuguese with news articles that I've been crawling since the days I started my PhD, by luck the [small script](https://github.com/davidsbatista/publico.pt-news-scrapper) I wrote a few years ago, still works and it's running, triggered by a crontab, on some remote server fetching daily portuguese news articles  :)
 
@@ -131,3 +144,5 @@ A quick way to inspect the generated tokens is to run the following line, which 
 {% highlight bash %}
 cat news_articles_clean.txt | tr ' ' '\n' | sort | uniq -c | sort -gr > tokens_counts.txt
 {% endhighlight bash %}
+
+-->
