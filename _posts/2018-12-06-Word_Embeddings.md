@@ -1,42 +1,34 @@
 ---
 layout: post
-title: Word Embeddings - word2vec, fasttext, GloVe
+title: Word Embeddings - a review
 date: 2018-12-06 00:00:00
-tags: word-embeddings word2vec fasttext glove
+tags: word-embeddings word2vec fasttext glove ELMo BERT language-models character-embeddings character-language_models
 categories: [blog]
 #comments: true
 # disqus_identifier: 20181206
 preview_pic: /assets/images/2018-12-06-word-embeddings.jpg
 ---
 
-Word embeddings are the technique that made possible all the latest achievements in NLP using neural networks. In this blog post I will review three popular techniques to generate word embeddings: skip-gram, glove and fasttext.
+Since the work of [Mikolov et al., 2013](https://arxiv.org/pdf/1301.3781.pdf) was published and the software package _word2vec_ was made public available a new era in NLP started on which word embeddings, also referred to as word vectors, play a crucial role. Word embeddings can capture many different properties of a word and become the de-facto standard to replace feature engineering in NLP tasks.
 
-## Embeddings
+Since that milestone many new embeddings methods were proposed some which go down to the character level, and others that take into consideration even language models. I will try in this blog post to review some of these methods, and point out their main characteristics.
 
-"Deep contextualized word representations" (2018)
-paper: http://aclweb.org/anthology/N18-1202
-code:  https://github.com/Hironsan/anago
-
-
-"Enriching Word Vectors with Subword Information"
-paper: http://aclweb.org/anthology/Q17-1010
-code:  https://github.com/facebookresearch/fastText
-
+## __Introduction__
 
 <!--
-
-https://www.reddit.com/r/MachineLearning/comments/9nfqxz/r_bert_pretraining_of_deep_bidirectional/
-
-http://ruder.io/word-embeddings-2017/
-
-https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html
-
-https://jalammar.github.io/illustrated-bert/
-
+https://www.aaai.org/Papers/JAIR/Vol37/JAIR-3705.pdf
 -->
 
-# __Word2Vec: Skip-Gram__
 
+## __Word level__
+
+### __Skip-Gram__
+
+Introduced by (Mikolov et al., 2013) was the first popular embeddings method for NLP tasks. The paper itself is hard to understand, and many details are left over but essential the model is a neural network with a single hidden layer.
+
+The embeddings are actually the weights of the hidden layer in the neural network.
+
+<!--
 * A neural network with a single hidden layer which won't be used for the for the task we trained it on;
 
 * Goal is to find good embeddings, i.e., learn the weights of the hidden layer;
@@ -50,27 +42,96 @@ https://jalammar.github.io/illustrated-bert/
 * We’ll train the neural network to do this by feeding it word pairs found in our training documents. The below example shows some of the training samples (word pairs) we would take from the sentence “The quick brown fox jumps over the lazy dog.” I’ve used a small window size of 2 just for the example. The word highlighted in blue is the input word.
 
 * The network is going to learn the statistics from the number of times each pairing shows up. So, for example, the network is probably going to get many more training samples of (“Soviet”, “Union”) than it is of (“Soviet”, “Sasquatch”). When the training is finished, if you give it the word “Soviet” as input, then it will output a much higher probability for “Union” or “Russia” than it will for “Sasquatch”.
-
-
-<!--
-stochastic gradient descent
-backward propagation
-
-picture by:
-
-https://pixabay.com/en/users/terimakasih0-624267/
-
 -->
 
-# __GloVe__
-
-
-# __fasttext__
-
-
-# __Experiments__
+## __GloVe__
 
 <!--
+http://text2vec.org/glove.html#linguistic_regularities
+http://mlexplained.com/2018/04/29/paper-dissected-glove-global-vectors-for-word-representation-explained/
+-->
+
+---
+
+<br>
+
+# __Subword-level embeddings__
+
+<!--
+Can handle OOV handling
+-->
+
+## __fasttext__
+
+<!--
+
+"Enriching Word Vectors with Subword Information"
+paper: http://aclweb.org/anthology/Q17-1010
+code:  https://github.com/facebookresearch/fastText
+
+stochastic gradient descent
+backward propagation
+picture by:
+https://pixabay.com/en/users/terimakasih0-624267/
+-->
+
+---
+
+<br>
+
+# __Language Model based embeddings__
+
+### __Contextual String Embeddings for Sequence Labeling__
+
+<!--
+http://alanakbik.github.io/talks/ML_Meetup_2018.pdf
+-->
+
+### __ELMo__
+
+<!--
+"Deep contextualized word representations" (2018)
+paper: http://aclweb.org/anthology/N18-1202
+code:  https://github.com/Hironsan/anago
+-->
+
+### __BERT__
+
+<!--
+https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html
+https://jalammar.github.io/illustrated-bert/
+https://www.reddit.com/r/MachineLearning/comments/9nfqxz/r_bert_pretraining_of_deep_bidirectional/
+-->
+
+<!--
+Another choice for using pre-trained embeddings that integrate character information is to leverage a state-of-the-art language model (Jozefowicz et al., 2016) [14] trained on a large in-domain corpus, e.g. the 1 Billion Word Benchmark (a pre-trained Tensorflow model can be found here). While language modelling has been found to be useful for different tasks as auxiliary objective (Rei, 2017) [15], pre-trained language model embeddings have also been used to augment word embeddings (Peters et al., 2017) [16]. As we start to better understand how to pre-train and initialize our models, pre-trained language model embeddings are poised to become more effective. They might even supersede word2vec as the go-to choice for initializing word embeddings by virtue of having become more expressive and easier to train due to better frameworks and more computational resources over the last years.
+-->
+
+---
+
+<br>
+
+
+
+## __Summary__
+
+<!--
+- Multi-sense embeddings: embeddings fail to capture polisemy
+not being able to capture multiple senses of words, word embeddings also fail to capture the meanings of phrases and multi-word expressions, which can be a function of the meaning of their constituent words, or have an entirely new meaning.
+
+refer evaluation
+
+
+
+
+
+
+
+<!--
+
+## __Experiments__
+
+Probably better to be another post?
 
 I wanted to explore embeddings for Portuguese with news articles that I've been crawling since the days I started my PhD, by luck the [small script](https://github.com/davidsbatista/publico.pt-news-scrapper) I wrote a few years ago, still works and it's running, triggered by a crontab, on some remote server fetching daily portuguese news articles  :)
 
@@ -146,3 +207,10 @@ cat news_articles_clean.txt | tr ' ' '\n' | sort | uniq -c | sort -gr > tokens_c
 {% endhighlight bash %}
 
 -->
+
+## __References__
+
+- ["Efficient Estimation of Word Representations in Vector Space" Mikolov et al. (2013)](https://arxiv.org/pdf/1301.3781.pdf)
+- ["GloVe: Global Vectors for Word Representation" Pennington et al. (2014) ](https://www.aclweb.org/anthology/D14-1162)
+- [Word embeddings in 2017: Trends and future directions](http://ruder.io/word-embeddings-2017/)
+- [McCormick, C. (2016, April 19). Word2Vec Tutorial - The Skip-Gram Model](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
