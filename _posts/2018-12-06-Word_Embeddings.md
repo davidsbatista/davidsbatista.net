@@ -2,7 +2,7 @@
 layout: post
 title: Word Embeddings - a review
 date: 2018-12-06 00:00:00
-tags: word-embeddings word2vec fasttext glove ELMo BERT language-models character-embeddings character-language_models
+tags: word-embeddings word2vec fasttext glove ELMo BERT language-models character-embeddings character-language-models
 categories: [blog]
 #comments: true
 # disqus_identifier: 20181206
@@ -20,9 +20,9 @@ https://www.aaai.org/Papers/JAIR/Vol37/JAIR-3705.pdf
 -->
 
 
-## __Word level__
+#### [Efficient Estimation of Word Representations in Vector Space (2013)](https://arxiv.org/pdf/1301.3781.pdf)
 
-### __Skip-Gram__
+<!-- http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/ -->
 
 Introduced by (Mikolov et al., 2013) was the first popular embeddings method for NLP tasks. The paper itself is hard to understand, and many details are left over but essential the model is a neural network with a single hidden layer.
 
@@ -44,36 +44,41 @@ The embeddings are actually the weights of the hidden layer in the neural networ
 * The network is going to learn the statistics from the number of times each pairing shows up. So, for example, the network is probably going to get many more training samples of (“Soviet”, “Union”) than it is of (“Soviet”, “Sasquatch”). When the training is finished, if you give it the word “Soviet” as input, then it will output a much higher probability for “Union” or “Russia” than it will for “Sasquatch”.
 -->
 
-## __GloVe__
+- code: [https://code.google.com/archive/p/word2vec/](https://code.google.com/archive/p/word2vec/)
+
+<br>
+
+
+### [GloVe: Global Vectors for Word Representation (2014)](https://www.aclweb.org/anthology/D14-1162)
 
 <!--
 http://text2vec.org/glove.html#linguistic_regularities
 http://mlexplained.com/2018/04/29/paper-dissected-glove-global-vectors-for-word-representation-explained/
 -->
 
----
+- code: [https://nlp.stanford.edu/projects/glove/](https://nlp.stanford.edu/projects/glove/)
 
 <br>
 
-# __Subword-level embeddings__
+
+### [Enriching Word Vectors with Subword Information (2017)](http://aclweb.org/anthology/Q17-1010)
 
 <!--
-Can handle OOV handling
+Subword-level embeddings: Can handle OOV handling
+
+- stochastic gradient descent
+- backward propagation
+- picture by:
+- https://pixabay.com/en/users/terimakasih0-624267/
 -->
 
-## __fasttext__
+- code: [https://github.com/facebookresearch/fastText](https://github.com/facebookresearch/fastTex)
 
-<!--
+<br>
 
-"Enriching Word Vectors with Subword Information"
-paper: http://aclweb.org/anthology/Q17-1010
-code:  https://github.com/facebookresearch/fastText
+The models presented before have a fundamental problem which is they generate the same embedding for the same word in different contexts, for example:
 
-stochastic gradient descent
-backward propagation
-picture by:
-https://pixabay.com/en/users/terimakasih0-624267/
--->
+__TODO__: dar um exemplo ilustrativo
 
 ---
 
@@ -81,21 +86,111 @@ https://pixabay.com/en/users/terimakasih0-624267/
 
 # __Language Model based embeddings__
 
-### __Contextual String Embeddings for Sequence Labeling__
+Contextualized words embeddings aim at capturing word semantics in different contexts to address the issue of polysemous and the context-dependent nature of words.
+
+It models the probability distribution of the next character in the sequence given a sequence of previous characters.
+
+
+<figure>
+  <img style="width: 65%; height: 65%" src="/assets/images/2018-12-06-general_word_language_model.jpg">
+  <figcaption><br> (taken from )</figcaption>
+</figure>
+
 
 <!--
-http://alanakbik.github.io/talks/ML_Meetup_2018.pdf
+
+http://karpathy.github.io/2015/05/21/rnn-effectiveness/
+
+Char-level language models
+
+Neural character-level language modeling. We base our proposed embeddings on recent advances in neural language modeling (LM) that have allowed language to be modeled as distributions over se- quences of characters instead of words (Sutskever et al., 2011; Graves, 2013; Kim et al., 2015). Recent work has shown that by learning to predict the next character on the basis of previous characters, such models learn internal representations that capture syntactic and semantic properties: even though trained without an explicit notion of word and sentence boundaries, they have been shown to generate grammat- ically correct text, including words, subclauses, quotes and sentences (Sutskever et al., 2014; Graves, 2013; Karpathy et al., 2015). More recently, Radford et al. (2017) showed that individual neurons in a large LSTM-LM can be attributed to specific semantic functions, such as predicting sentiment, without explicitly trained on a sentiment label set.
+We show that an appropriate selection of hidden states from such a language model can be utilized to generate word-level embeddings that are highly effective in downstream sequence labeling tasks.
+
 -->
 
-### __ELMo__
+
+### [__Deep contextualized word representations (2018)__](https://aclweb.org/anthology/N18-1202)
+
+The main idea of the Embeddings from Language Models (ELMo) can be divided into two main tasks, first we train an LSTM-based language model on some corpus, and then we use the hidden states of the LSTM for each token to generate a vector representation of each word.
+
+
 
 <!--
-"Deep contextualized word representations" (2018)
-paper: http://aclweb.org/anthology/N18-1202
-code:  https://github.com/Hironsan/anago
+http://mlexplained.com/2018/06/15/paper-dissected-deep-contextualized-word-representations-explained/
 -->
 
-### __BERT__
+<!--
+1. Train an LSTM-based language model on some large corpus
+
+- One trick that this paper uses is to train a language model with reversed sentences that the authors call the “backward” language model. For anyone familiar
+  with using deep learning for NLP, this is the same idea as using Bidirectional LSTMs for sentence classification. So for the above example, assuming the real next word is “mat”, the backward model would take the sequence
+
+- Furthermore, instead of using a single-layer LSTM, this paper uses a stacked, multi-layer LSTM. Whereas a single-layer LSTM would take the sequence of words as input, a multi-layer LSTM trains multiple LSTMs to take the output sequence of the LSTM in the previous layer as input (of course, the first layer takes the sequence of words as input). This is best illustrated in the following illustration:
+
+
+- by training an L-layer LSTM based forward and backward language model, we are able to obtain 2L different representations for each word, $L$ represents the number of stacked LSTMS, each one outputs a vectors;
+
+- If we add the original word vectors, we have 2L + 1 vectors that can be used to compute the context representation of every word.
+
+2. Use the hidden states of the LSTM for each token to compute a vector representation of each word
+
+The above language model can be trained in a completely task-agnostic and unsupervised manner. In ELMo, the part that is task specific is the combination of the task-agnostic representations.
+
+
+Concretely, ELMos use a pre-trained, multi-layer, bi-directional, LSTM-based language model and extract the hidden state of each layer for the input sequence of words. Then, they compute a weighted sum of those hidden states to obtain an embedding for each word. The weight of each hidden state is task-dependent and is learned.
+-->
+
+
+<br>
+
+
+### [__Contextual String Embeddings for Sequence Labeling__ (2018)](https://aclweb.org/anthology/C18-1139)
+
+<!-- http://alanakbik.github.io/talks/ML_Meetup_2018.pdf -->
+
+The authors propose a contextualized character-level word embedding which captures word meaning in context and therefore produce different embeddings for polysemous words depending on their context. It model words and context as sequences of characters, which aids in handling rare and misspelled words and captures subword structures such as prefixes and endings.
+
+
+#### __Character-level Language Model__
+
+Characters are the atomic units of language model, allowing text to be treated as a sequence of characters passed to an LSTM which at each point in the sequence is trained to predict the next character, meaning that the _model has a hidden state for each character in the sequence_.
+
+__TODO__: formula
+
+Train a forward and a backward model character language model. Essentially the character-level language model is just 'tuning' the hidden states of the LSTM based on reading lots of sequences of characters.
+
+
+#### __Extracting Word Representations__
+
+From this forward-backward LM, the authors concatenate the following hidden character states for each word:
+
+- from the fLM, we extract the output hidden state after the last character in the word. Since the fLM is trained to predict likely continuations of the sentence after this character, the hidden state encodes semantic-syntactic information of the sentence up to this point, including the word itself.
+
+- from the bLM, we extract the output hidden state before the word’s first character from the bLM to capture semantic- syntactic information from the end of the sentence to this character.
+
+Both output hidden states are concatenated to form the final embedding and capture the semantic-syntactic information of the word itself as well as its surrounding context.
+
+<figure>
+  <img style="width: 50%; height: 50%" src="/assets/images/2018-12-06-character_lm_for_word_embedding.png">
+  <figcaption><br> (taken from )</figcaption>
+</figure>
+
+Formally, let the individual word-strings begin at character inputs with indices $$t0, t1, . . . , tn$$ then we define contextual string embeddings of these words as:
+
+__TODO__: formula
+
+The embeddings can then be used for other downstream tasks such as named-entity recognition.
+
+<figure>
+  <img style="width: 50%; height: 50%" src="/assets/images/2018-12-06-character_lm_for_sequence_labelling.png">
+  <figcaption><br> (taken from )</figcaption>
+</figure>
+
+
+
+<br>
+
+### [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding (2018)](https://arxiv.org/pdf/1810.04805.pdf)
 
 <!--
 https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html
@@ -109,17 +204,41 @@ Another choice for using pre-trained embeddings that integrate character informa
 
 ---
 
+
+
+
 <br>
 
-
-
 ## __Summary__
+
 
 <!--
 - Multi-sense embeddings: embeddings fail to capture polisemy
 not being able to capture multiple senses of words, word embeddings also fail to capture the meanings of phrases and multi-word expressions, which can be a function of the meaning of their constituent words, or have an entirely new meaning.
-
 refer evaluation
+-->
+
+
+
+
+
+<br>
+
+## __References__
+
+- ["Efficient Estimation of Word Representations in Vector Space" Mikolov et al. (2013)](https://arxiv.org/pdf/1301.3781.pdf)
+- ["GloVe: Global Vectors for Word Representation" Pennington et al. (2014) ](https://www.aclweb.org/anthology/D14-1162)
+- [Word embeddings in 2017: Trends and future directions](http://ruder.io/word-embeddings-2017/)
+- [McCormick, C. (2016, April 19). Word2Vec Tutorial - The Skip-Gram Model](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
+- [The Unreasonable Effectiveness of Recurrent Neural Networks](http://karpathy.github.io/2015/05/21/rnn-effectiveness)
+
+
+
+
+
+
+
+
 
 
 
@@ -207,10 +326,3 @@ cat news_articles_clean.txt | tr ' ' '\n' | sort | uniq -c | sort -gr > tokens_c
 {% endhighlight bash %}
 
 -->
-
-## __References__
-
-- ["Efficient Estimation of Word Representations in Vector Space" Mikolov et al. (2013)](https://arxiv.org/pdf/1301.3781.pdf)
-- ["GloVe: Global Vectors for Word Representation" Pennington et al. (2014) ](https://www.aclweb.org/anthology/D14-1162)
-- [Word embeddings in 2017: Trends and future directions](http://ruder.io/word-embeddings-2017/)
-- [McCormick, C. (2016, April 19). Word2Vec Tutorial - The Skip-Gram Model](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
