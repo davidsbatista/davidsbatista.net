@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Word Embeddings - a review
+title: Word Embeddings and Language Models
 date: 2018-12-06 00:00:00
 tags: word-embeddings word2vec fasttext glove ELMo BERT language-models character-embeddings character-language-models
 categories: [blog]
@@ -54,6 +54,9 @@ The embeddings are actually the weights of the hidden layer in the neural networ
 <!--
 http://text2vec.org/glove.html#linguistic_regularities
 http://mlexplained.com/2018/04/29/paper-dissected-glove-global-vectors-for-word-representation-explained/
+https://arxiv.org/pdf/1411.2738v4.pdf
+http://www.offconvex.org/2016/02/14/word-embeddings-2/
+http://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html
 -->
 
 - code: [https://nlp.stanford.edu/projects/glove/](https://nlp.stanford.edu/projects/glove/)
@@ -63,14 +66,7 @@ http://mlexplained.com/2018/04/29/paper-dissected-glove-global-vectors-for-word-
 
 ### [Enriching Word Vectors with Subword Information (2017)](http://aclweb.org/anthology/Q17-1010)
 
-<!--
-Subword-level embeddings: Can handle OOV handling
-
-- stochastic gradient descent
-- backward propagation
-- picture by:
-- https://pixabay.com/en/users/terimakasih0-624267/
--->
+<!-- Subword-level embeddings: Can handle OOV handling -->
 
 - code: [https://github.com/facebookresearch/fastText](https://github.com/facebookresearch/fastTex)
 
@@ -84,9 +80,11 @@ __TODO__: dar um exemplo ilustrativo
 
 <br>
 
-# __Language Model based embeddings__
+## __Contextualised Word-Embeddings__
 
-Contextualized words embeddings aim at capturing word semantics in different contexts to address the issue of polysemous and the context-dependent nature of words.
+Contextualised words embeddings aim at capturing word semantics in different contexts to address the issue of polysemous and the context-dependent nature of words.
+
+#### __Language Models__
 
 It models the probability distribution of the next character in the sequence given a sequence of previous characters.
 
@@ -108,47 +106,98 @@ We show that an appropriate selection of hidden states from such a language mode
 
 -->
 
+<!--
 
-### [__Deep contextualized word representations (2018)__](https://aclweb.org/anthology/N18-1202)
+
+
+
+ELMo embeddings: https://arxiv.org/pdf/1802.05365.pdf (from AllenNLP)
+Learn a language model from bi-LSTM (using two layers, i.e., 2-stacked LSTM), extracting the hidden state of each layer; (token-based not char-based)
+Compute a weighted sum of those hidden states to obtain an embedding for each word. The weight of each hidden state is task-dependent and is learned for each (NLP downstream) task and normalized using the softmax function.
+NOTE: I see some relatedness with the attention mechanisms, embeddings are fixed but are weighted according to the end-task;
+AllenNLP https://allennlp.org/models
+
+-->
+
+
+
+
+
+
+
+
+### [__ELMo: Deep contextualized word representations (2018)__](https://aclweb.org/anthology/N18-1202)
 
 The main idea of the Embeddings from Language Models (ELMo) can be divided into two main tasks, first we train an LSTM-based language model on some corpus, and then we use the hidden states of the LSTM for each token to generate a vector representation of each word.
 
+#### __Language Model__
 
+There are some important details on how this language model is trained. The language model is trained by reading the sentences both forward and backward. That is, in essence there are two language models, one that learns to predict the next word given the past words and another that learns to predict the past words given the future words.
 
-<!--
-http://mlexplained.com/2018/06/15/paper-dissected-deep-contextualized-word-representations-explained/
--->
+Another detail is that the authors instead of using a single-layer LSTM, they use a stacked, multi-layer LSTM. A single-layer LSTM takes the sequence of words as input, as multi-layer LSTM takes the output sequence of the previous LSTM-layer as input, the authors also mention the use of residual connections between the LSTM layers. In the paper the authors also show that the different layers of the LSTM language model learns different characteristics of language.
 
-<!--
-1. Train an LSTM-based language model on some large corpus
+<figure>
+  <img style="width: 85%; height: 85%" src="/assets/images/2018-12-06-ELMo_language_models.png">
+  <figcaption><br>Image taken from Shuntaro Yada slides</figcaption>
+</figure>
 
-- One trick that this paper uses is to train a language model with reversed sentences that the authors call the “backward” language model. For anyone familiar
-  with using deep learning for NLP, this is the same idea as using Bidirectional LSTMs for sentence classification. So for the above example, assuming the real next word is “mat”, the backward model would take the sequence
+Training $L$-layer LSTM forward and backward language mode generates $$2\ \times \ L$$ different vector representations for each word, $L$ represents the number of stacked LSTMs, each one outputs a vector. Adding another vector representation of the word, trained on some external resources, or just a random embedding, we end up with $$2\ \times \ L + 1$$ vectors that can be used to compute the context representation of every word.
 
-- Furthermore, instead of using a single-layer LSTM, this paper uses a stacked, multi-layer LSTM. Whereas a single-layer LSTM would take the sequence of words as input, a multi-layer LSTM trains multiple LSTMs to take the output sequence of the LSTM in the previous layer as input (of course, the first layer takes the sequence of words as input). This is best illustrated in the following illustration:
+The parameters for the token representations and the softmax layer are shared by the forward and backward language model, while the LSTMs parameters (hidden state, gate, memory) are separate.
 
+ELMo is a tasks specific combination of the intermediate layer representations in a bidirectional Language Model (biLM). That is, given a pre-trained biLM and a supervised architecture for a target NLP task, the end task model learns a linear combination of the layer representations.
 
-- by training an L-layer LSTM based forward and backward language model, we are able to obtain 2L different representations for each word, $L$ represents the number of stacked LSTMS, each one outputs a vectors;
+The language model described above is completely task-agnostic, and is trained in an unsupervised manner.
 
-- If we add the original word vectors, we have 2L + 1 vectors that can be used to compute the context representation of every word.
+#### __Task-specific__
 
-2. Use the hidden states of the LSTM for each token to compute a vector representation of each word
+The second part of the model consists in using the hidden states generated by the LSTM for each token to compute a vector representation of each word, the detail here is that this is done in a specific context, with a given end task.
 
-The above language model can be trained in a completely task-agnostic and unsupervised manner. In ELMo, the part that is task specific is the combination of the task-agnostic representations.
+Concretely, in ELMo, each word representation is computed with a concatenation and a weighted sum:
 
+$$ ELMo_k = \gamma^{task} \sum_{j=0}^{L} s_j^{task} h_{k,j}^{LM} $$
 
-Concretely, ELMos use a pre-trained, multi-layer, bi-directional, LSTM-based language model and extract the hidden state of each layer for the input sequence of words. Then, they compute a weighted sum of those hidden states to obtain an embedding for each word. The weight of each hidden state is task-dependent and is learned.
--->
+- the scalar parameter $$\gamma^{task}$$ allows the task model to scale the entire ELMo vector
+- $$s_j^{task}$$ are softmax-normalized weights and
+- the indices $$k$$ and $$j$$ correspond to the index of the word and the index of the layer from which the hidden state is being extracted from.
+
+For example, $$h_{k,j}$$ is the output of the $$j$$-th LSTM for the word $$k$$. $$s_j$$ is the weight of $$h_{k,j}$$ in computing the representation for $$k$$.
+
+<figure>
+  <img style="width: 85%; height: 85%" src="/assets/images/2018-12-06-ELMo_task_specific.png">
+  <figcaption><br>Image taken from Shuntaro Yada slides</figcaption>
+</figure>
+
+In practice ELMo embeddings could replace existing word embeddings, the authors however recommend to concatenate ELMos with context-independent word embeddings such as GloVe, fasttext, or character-based embeddings before inputting them into the task-specific model.
+
+ELMo is flexible in the sense that it can be used with any model barely changing it, meaning it can work with existing systems or architectures.
+
+<figure>
+  <img style="width: 75%; height: 75%" src="/assets/images/2018-12-06-ELMo_overview.png">
+  <figcaption><br>Image taken from Shuntaro Yada slides</figcaption>
+</figure>
+
+We can see this models as more of a function that given a sentence outputs $$k$$ vectors for each word, where $$k$$ is the number of layers in the language model. In contrast, the classical embedding methods one gets the embedding of a word by performing a lookup operation on a matrix.
+
+In resume, ELMos train a multi-layer, bi-directional, LSTM-based language model, and extract the hidden state of each layer for the input sequence of words. Then, they compute a weighted sum of those hidden states to obtain an embedding for each word. The weight of each hidden state is task-dependent and is learned.
+
+#### __Links__
+
+- code: [https://github.com/allenai/allennlp/blob/master/tutorials/how_to/elmo.md](https://github.com/allenai/allennlp/blob/master/tutorials/how_to/elmo.md)
+
+- models: [https://allennlp.org/models](https://allennlp.org/models)
+
+- [Deep Contextualized Word Representations : Matthew Peters @ NAACL-HLT 2018](https://vimeo.com/277672840)
+
+- the images were taken/adapted from [Shuntaro Yada](https://shuntaroy.com/) great [slides](https://www.slideshare.net/shuntaroy/a-review-of-deep-contextualized-word-representations-peters-2018)
 
 
 <br>
 
 
-### [__Contextual String Embeddings for Sequence Labeling__ (2018)](https://aclweb.org/anthology/C18-1139)
+### [__Contextual String Embeddings for Sequence Labelling__ (2018)](https://aclweb.org/anthology/C18-1139)
 
-<!-- http://alanakbik.github.io/talks/ML_Meetup_2018.pdf -->
-
-The authors propose a contextualized character-level word embedding which captures word meaning in context and therefore produce different embeddings for polysemous words depending on their context. It model words and context as sequences of characters, which aids in handling rare and misspelled words and captures subword structures such as prefixes and endings.
+The authors propose a contextualised character-level word embedding which captures word meaning in context and therefore produce different embeddings for polysemous words depending on their context. It model words and context as sequences of characters, which aids in handling rare and misspelled words and captures subword structures such as prefixes and endings.
 
 
 #### __Character-level Language Model__
@@ -187,15 +236,63 @@ The embeddings can then be used for other downstream tasks such as named-entity 
 </figure>
 
 
+In essence, this model learns two character-based language models: forward and backward. An Embedding for a word is then constructed by feeding a word - character by character - into the the two language-models (forward and backward) and keeping the two last states (i.e., last character and first character) as two word vectors, these are then concatenated.
+
+In the experiments described on the paper the authors concatenated the word vector generated before with yet another word vector from [fastText]() an then apply a Embeddings->LSTM->CRF architecture for several sequence labelling tasks, e.g.: NER, chunking, PoS-tagging.
+
+#### __Links__
+
+- code: [https://github.com/zalandoresearch/flair](https://github.com/zalandoresearch/flair)
+
 
 <br>
 
 ### [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding (2018)](https://arxiv.org/pdf/1810.04805.pdf)
 
+BERT, or Bidirectional Encoder Representations from Transformers, is essentially a new method of training language models.
+
+Pre-trained word representations, as seen in this blog post, can be __context-free__ (i.e., word2vec, GloVe, fastText), meaning that a single word representation is generated for each word in the vocabulary, or can also be __contextual__ (i.e., ELMo and Flair), on which the word representation depends on the context where that word occurs, meaning that the same word in different contexts can have different representations.
+
+Contextual representations can further be __unidirectional__ or __bidirectional__. Note, even if a language model is trained forward or backward, is still considered unidirectional since the prediction of future words (or characters) is only based on past seen data.
+
+In the sentence: _"The cat sits on the mat"_, the unidirectional representation of _"sits"_ is only based on _"The cat"_ but not on _"on the mat"_. Previous works train two representations for each word (or character), one left-to-right and one right-to-left, and then concatenate them together to a have a single representation for whatever downstream task.
+
+
+BERT represents _"sits"_ using both its left and right context — _"The cat xxx on the mat"_ based on a simple approach, masking out 15% of the words in the input, run the entire sequence through a multi-layer bidirectional Transformer encoder, and then predict only the masked words.
+
+#### __Multi-layer bidirectional Transformer encoder__
+
 <!--
+Transduction architecture
+https://machinelearningmastery.com/transduction-in-machine-learning/
+-->
+
+<!--
+Two main problems solved by the Transformer:
+
+One is the sequential nature of RNNs. z_i  depends on z_{i-1} , meaning it is impossible to compute z_i  and z_{i-1}  in parallel. The ability to process inputs in parallel is very important in deep learning since we normally use GPUs which work far better for parallel inputs.
+
+The other is the difficulty of learning long-range dependencies in the network. I’ll explain what I mean by “long-range dependencies” in more detail in the next section, but the basic idea is that machine translation requires the model to understand the relationship between various words in both the source and target sentences.
+
+-->
+
+
+
+
+#### __Links__
+
+code: https://github.com/google-research/bert
+
+<!--
+https://www.youtube.com/watch?v=rMQMHA-uv_E
 https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html
 https://jalammar.github.io/illustrated-bert/
 https://www.reddit.com/r/MachineLearning/comments/9nfqxz/r_bert_pretraining_of_deep_bidirectional/
+
+https://arxiv.org/pdf/1706.03762.pdf
+https://github.com/tensorflow/tensor2tensor
+
+
 -->
 
 <!--
@@ -231,15 +328,6 @@ refer evaluation
 - [Word embeddings in 2017: Trends and future directions](http://ruder.io/word-embeddings-2017/)
 - [McCormick, C. (2016, April 19). Word2Vec Tutorial - The Skip-Gram Model](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
 - [The Unreasonable Effectiveness of Recurrent Neural Networks](http://karpathy.github.io/2015/05/21/rnn-effectiveness)
-
-
-
-
-
-
-
-
-
 
 
 
