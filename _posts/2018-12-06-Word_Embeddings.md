@@ -265,7 +265,29 @@ BERT represents _"sits"_ using both its left and right context — _"The cat xxx
 <!--
 Transduction architecture
 https://machinelearningmastery.com/transduction-in-machine-learning/
+
+http://mlexplained.com/2017/12/29/attention-is-all-you-need-explained/
 -->
+
+
+<!--
+Attention Mechanism
+https://www.youtube.com/watch?v=XrZ_Y4koV5A&feature=youtu.be&t=249
+
+https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html
+
+-->
+
+
+The Transformer follows the encoder-decoder architecture of neural machine translation models. The difference is that it gets rid of RNNs and uses a different network for the encoder and decoder instead.
+
+Dependencies encoded by hidden states of a RNN/LSTM, the Transformer tries to learn these dependencies using the Attention Mechanism. Concretely, it processes all the tokens in parallel and learns to “attend” over only the relevant information. The advantage of this approach becomes clearer when we see it visually:
+
+__TODO__: picture
+
+
+In order to better understand Multi-Head Attention, we need to revisit and reinterpret the attention mechanism.
+
 
 <!--
 Two main problems solved by the Transformer:
@@ -284,6 +306,19 @@ The other is the difficulty of learning long-range dependencies in the network. 
 code: https://github.com/google-research/bert
 
 <!--
+
+https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270
+
+https://guillaumegenthial.github.io/sequence-to-sequence.html
+https://www.youtube.com/watch?v=Keqep_PKrY8
+
+https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html
+
+https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html
+
+
+http://nlp.seas.harvard.edu/2018/04/03/attention.html#encoder-and-decoder-stacks
+
 https://www.youtube.com/watch?v=rMQMHA-uv_E
 https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html
 https://jalammar.github.io/illustrated-bert/
