@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Word Embeddings and Language Models
+title: Contextualized Word Representations
 date: 2018-12-06 00:00:00
 tags: word-embeddings word2vec fasttext glove ELMo BERT language-models character-embeddings character-language-models
 categories: [blog]
@@ -14,6 +14,10 @@ Since the work of [Mikolov et al., 2013](https://arxiv.org/pdf/1301.3781.pdf) wa
 Since that milestone many new embeddings methods were proposed some which go down to the character level, and others that take into consideration even language models. I will try in this blog post to review some of these methods, and point out their main characteristics.
 
 ## __Introduction__
+
+<!--
+Word Embeddings and Language Models
+-->
 
 <!--
 https://www.aaai.org/Papers/JAIR/Vol37/JAIR-3705.pdf
@@ -87,7 +91,6 @@ Contextualised words embeddings aim at capturing word semantics in different con
 #### __Language Models__
 
 It models the probability distribution of the next character in the sequence given a sequence of previous characters.
-
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2018-12-06-general_word_language_model.jpg">
@@ -245,6 +248,10 @@ In the experiments described on the paper the authors concatenated the word vect
 - code: [https://github.com/zalandoresearch/flair](https://github.com/zalandoresearch/flair)
 
 
+
+
+
+
 <br>
 
 ### [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding (2018)](https://arxiv.org/pdf/1810.04805.pdf)
@@ -257,45 +264,40 @@ Contextual representations can further be __unidirectional__ or __bidirectional_
 
 In the sentence: _"The cat sits on the mat"_, the unidirectional representation of _"sits"_ is only based on _"The cat"_ but not on _"on the mat"_. Previous works train two representations for each word (or character), one left-to-right and one right-to-left, and then concatenate them together to a have a single representation for whatever downstream task.
 
-
 BERT represents _"sits"_ using both its left and right context — _"The cat xxx on the mat"_ based on a simple approach, masking out 15% of the words in the input, run the entire sequence through a multi-layer bidirectional Transformer encoder, and then predict only the masked words.
 
 #### __Multi-layer bidirectional Transformer encoder__
 
-<!--
-Transduction architecture
-https://machinelearningmastery.com/transduction-in-machine-learning/
+The Multi-layer bidirectional Transformer aka Transformer was first introduced in the [Attention is All You Need](https://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf) paper. It follows the encoder-decoder architecture of machine translation models, but  it replaces the RNNs by a different network architecture.
 
-http://mlexplained.com/2017/12/29/attention-is-all-you-need-explained/
--->
+The Transformer tries to learn the dependencies encoded by hidden states of a RNN using an Attention Mechanism. RNNs handle dependencies by being stateful, i.e., the current state encodes the information they needed to decide on how to process subsequent tokens.
 
+This means that RNNs need to keep the state while processing all the words, and this becomes a problem for long-range dependencies between words. The attention mechanism has somehow mitigated this problem but it still remains an obstacle to high-performance machine translation.
+
+The Transformer tries to directly learn these dependencies using the attention mechanism only and it also learns intra-dependencies between the input tokens, and between output tokens. This achieved with a key component, the __Multi-Head Attention block__, which has an attention mechanism
+defined by the authors as __Scaled Dot-Product Attention__.
+
+<figure>
+  <img style="width: 50%; height: 50%" src="/assets/images/2018-12-06-attention_path_length.png">
+  <figcaption><br> (taken from http://mlexplained.com/2017/12/29/attention-is-all-you-need-explained/)</figcaption>
+</figure>
+
+To improve the expressiveness of the model, instead of computing a single attention pass over the values, the Multi-Head Attention computes multiple attention weighted sums, i.e., it uses several attention layers stacked together with different linear transformations of the same input.
+
+- The Overall Architecture
+- Encoder
+- Decoder
+
+This is just a very brief explanation of what the Transformer is, please check the following links for a detailed description:
+
+- [http://mlexplained.com/2017/12/29/attention-is-all-you-need-explained/](http://mlexplained.com/2017/12/29/attention-is-all-you-need-explained/)
+- [https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
+- [http://nlp.seas.harvard.edu/2018/04/03/attention.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
 
 <!--
 Attention Mechanism
 https://www.youtube.com/watch?v=XrZ_Y4koV5A&feature=youtu.be&t=249
-
 https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html
-
--->
-
-
-The Transformer follows the encoder-decoder architecture of neural machine translation models. The difference is that it gets rid of RNNs and uses a different network for the encoder and decoder instead.
-
-Dependencies encoded by hidden states of a RNN/LSTM, the Transformer tries to learn these dependencies using the Attention Mechanism. Concretely, it processes all the tokens in parallel and learns to “attend” over only the relevant information. The advantage of this approach becomes clearer when we see it visually:
-
-__TODO__: picture
-
-
-In order to better understand Multi-Head Attention, we need to revisit and reinterpret the attention mechanism.
-
-
-<!--
-Two main problems solved by the Transformer:
-
-One is the sequential nature of RNNs. z_i  depends on z_{i-1} , meaning it is impossible to compute z_i  and z_{i-1}  in parallel. The ability to process inputs in parallel is very important in deep learning since we normally use GPUs which work far better for parallel inputs.
-
-The other is the difficulty of learning long-range dependencies in the network. I’ll explain what I mean by “long-range dependencies” in more detail in the next section, but the basic idea is that machine translation requires the model to understand the relationship between various words in both the source and target sentences.
-
 -->
 
 
@@ -303,31 +305,18 @@ The other is the difficulty of learning long-range dependencies in the network. 
 
 #### __Links__
 
-code: https://github.com/google-research/bert
+code: [https://github.com/google-research/bert](https://github.com/google-research/bert)
 
 <!--
-
 https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270
 
 https://guillaumegenthial.github.io/sequence-to-sequence.html
 https://www.youtube.com/watch?v=Keqep_PKrY8
 
-https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html
-
-https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html
-
-
-http://nlp.seas.harvard.edu/2018/04/03/attention.html#encoder-and-decoder-stacks
-
 https://www.youtube.com/watch?v=rMQMHA-uv_E
 https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html
 https://jalammar.github.io/illustrated-bert/
 https://www.reddit.com/r/MachineLearning/comments/9nfqxz/r_bert_pretraining_of_deep_bidirectional/
-
-https://arxiv.org/pdf/1706.03762.pdf
-https://github.com/tensorflow/tensor2tensor
-
-
 -->
 
 <!--
