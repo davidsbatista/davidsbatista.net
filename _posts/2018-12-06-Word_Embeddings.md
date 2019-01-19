@@ -270,42 +270,54 @@ BERT represents _"sits"_ using both its left and right context — _"The cat xxx
 
 The Multi-layer bidirectional Transformer aka Transformer was first introduced in the [Attention is All You Need](https://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf) paper. It follows the encoder-decoder architecture of machine translation models, but  it replaces the RNNs by a different network architecture.
 
-The Transformer tries to learn the dependencies encoded by hidden states of a RNN using an Attention Mechanism. RNNs handle dependencies by being stateful, i.e., the current state encodes the information they needed to decide on how to process subsequent tokens.
+The Transformer tries to learn the dependencies, typically encoded by the hidden states of a RNN, using just an Attention Mechanism. RNNs handle dependencies by being stateful, i.e., the current state encodes the information they needed to decide on how to process subsequent tokens.
 
 This means that RNNs need to keep the state while processing all the words, and this becomes a problem for long-range dependencies between words. The attention mechanism has somehow mitigated this problem but it still remains an obstacle to high-performance machine translation.
 
-The Transformer tries to directly learn these dependencies using the attention mechanism only and it also learns intra-dependencies between the input tokens, and between output tokens. This achieved with a key component, the __Multi-Head Attention block__, which has an attention mechanism
-defined by the authors as __Scaled Dot-Product Attention__.
+The Transformer tries to directly learn these dependencies using the attention mechanism only and it also learns intra-dependencies between the input tokens, and between output tokens. This is done by relying on a key component, the __Multi-Head Attention block__, which has an attention mechanism defined by the authors as the __Scaled Dot-Product Attention__.
 
 <figure>
-  <img style="width: 50%; height: 50%" src="/assets/images/2018-12-06-attention_path_length.png">
-  <figcaption><br> (taken from http://mlexplained.com/2017/12/29/attention-is-all-you-need-explained/)</figcaption>
+  <img style="width: 50%; height: 50%" src="/assets/images/2018-12-06-transformer_attention.png">
+  <figcaption><br> (taken from "Attention Is All You Need")</figcaption>
 </figure>
 
 To improve the expressiveness of the model, instead of computing a single attention pass over the values, the Multi-Head Attention computes multiple attention weighted sums, i.e., it uses several attention layers stacked together with different linear transformations of the same input.
 
-- The Overall Architecture
-- Encoder
-- Decoder
+<figure>
+  <img style="width: 35%; height: 35%" src="/assets/images/2018-12-06-attention_path_length.png">
+  <figcaption><br> (taken from http://mlexplained.com/2017/12/29/attention-is-all-you-need-explained/)</figcaption>
+</figure>
 
-This is just a very brief explanation of what the Transformer is, please check the following links for a detailed description:
+The main key feature of the Transformer is therefore that instead of encoding dependencies in the hidden state, directly expresses them by attending to various parts of the input.
+
+The architecture of the Transformer is composed of two main modules, an encoder and a decoder:
+
+<figure>
+  <img style="width: 40%; height: 40%" src="/assets/images/2018-12-06-transformer_encoding_decoding_arch.png">
+  <figcaption><br> (taken from "Attention Is All You Need")</figcaption>
+</figure>
+
+
+An important sub-layer in the decoder, which is a modification of the Multi-Head Attention network, called the “masked multi-head attention” network.
+This network attends over the previous decoder states, so plays a similar role to the decoder hidden state in traditional machine translation architectures. The reason there is a mask is that the inputs to the decoder are the outputs of the decoder at previous time steps, and need to be constrained so that the output at position i  only depend on outputs that come before i . This is more of a technical detail than a key architectural feature.
+
+Since this network cannot naturally make use of the position of the words in the input sequence, these need to be encoded, the positional encoding operation after the input explicitly encode the relative/absolute positions of the inputs as vectors and are then added to the input embeddings.
+
+This is just a very brief explanation of what the Transformer is, please check the original paper and following links for a more detailed description:
 
 - [http://mlexplained.com/2017/12/29/attention-is-all-you-need-explained/](http://mlexplained.com/2017/12/29/attention-is-all-you-need-explained/)
 - [https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
 - [http://nlp.seas.harvard.edu/2018/04/03/attention.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
 
-<!--
-Attention Mechanism
-https://www.youtube.com/watch?v=XrZ_Y4koV5A&feature=youtu.be&t=249
-https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html
--->
-
-
-
-
 #### __Links__
 
 code: [https://github.com/google-research/bert](https://github.com/google-research/bert)
+
+
+<!--
+Attention Mechanism
+https://www.youtube.com/watch?v=XrZ_Y4koV5A&feature=youtu.be&t=249
+-->
 
 <!--
 https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270
