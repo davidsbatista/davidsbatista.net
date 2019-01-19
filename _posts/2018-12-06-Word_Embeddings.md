@@ -297,9 +297,9 @@ The architecture of the Transformer is composed of two main modules, an encoder 
   <figcaption><br> (taken from "Attention Is All You Need")</figcaption>
 </figure>
 
-
-An important sub-layer in the decoder, which is a modification of the Multi-Head Attention network, called the “masked multi-head attention” network.
-This network attends over the previous decoder states, so plays a similar role to the decoder hidden state in traditional machine translation architectures. The reason there is a mask is that the inputs to the decoder are the outputs of the decoder at previous time steps, and need to be constrained so that the output at position i  only depend on outputs that come before i . This is more of a technical detail than a key architectural feature.
+<!--
+The decoder is very similar to the encoder but has one additional sub-layer, which is a modification of the Multi-Head Attention network, called the “masked multi-head attention” network. This network attends over the previous decoder states, so plays a similar role to the decoder hidden state in traditional machine translation architectures. The reason there is a mask is that the inputs to the decoder are the outputs of the decoder at previous time steps, and need to be constrained so that the output at position i  only depend on outputs that come before i . This is more of a technical detail than a key architectural feature.
+-->
 
 Since this network cannot naturally make use of the position of the words in the input sequence, these need to be encoded, the positional encoding operation after the input explicitly encode the relative/absolute positions of the inputs as vectors and are then added to the input embeddings.
 
