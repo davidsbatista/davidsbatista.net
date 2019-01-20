@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Contextualized Word Representations
+title: Language Models and Contextualised Word Embeddings
 date: 2018-12-06 00:00:00
 tags: word-embeddings word2vec fasttext glove ELMo BERT language-models character-embeddings character-language-models
 categories: [blog]
@@ -266,7 +266,7 @@ In the sentence: _"The cat sits on the mat"_, the unidirectional representation 
 
 BERT represents _"sits"_ using both its left and right context — _"The cat xxx on the mat"_ based on a simple approach, masking out 15% of the words in the input, run the entire sequence through a multi-layer bidirectional Transformer encoder, and then predict only the masked words.
 
-#### __Multi-layer bidirectional Transformer encoder__
+### __Multi-layer bidirectional Transformer encoder__
 
 The Multi-layer bidirectional Transformer aka Transformer was first introduced in the [Attention is All You Need](https://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf) paper. It follows the encoder-decoder architecture of machine translation models, but  it replaces the RNNs by a different network architecture.
 
@@ -290,18 +290,12 @@ To improve the expressiveness of the model, instead of computing a single attent
 
 The main key feature of the Transformer is therefore that instead of encoding dependencies in the hidden state, directly expresses them by attending to various parts of the input.
 
-The architecture of the Transformer is composed of two main modules, an encoder and a decoder:
+The Transformer in an encoder and a decoder scenario
 
 <figure>
   <img style="width: 40%; height: 40%" src="/assets/images/2018-12-06-transformer_encoding_decoding_arch.png">
   <figcaption><br> (taken from "Attention Is All You Need")</figcaption>
 </figure>
-
-<!--
-The decoder is very similar to the encoder but has one additional sub-layer, which is a modification of the Multi-Head Attention network, called the “masked multi-head attention” network. This network attends over the previous decoder states, so plays a similar role to the decoder hidden state in traditional machine translation architectures. The reason there is a mask is that the inputs to the decoder are the outputs of the decoder at previous time steps, and need to be constrained so that the output at position i  only depend on outputs that come before i . This is more of a technical detail than a key architectural feature.
--->
-
-Since this network cannot naturally make use of the position of the words in the input sequence, these need to be encoded, the positional encoding operation after the input explicitly encode the relative/absolute positions of the inputs as vectors and are then added to the input embeddings.
 
 This is just a very brief explanation of what the Transformer is, please check the original paper and following links for a more detailed description:
 
@@ -309,9 +303,43 @@ This is just a very brief explanation of what the Transformer is, please check t
 - [https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
 - [http://nlp.seas.harvard.edu/2018/04/03/attention.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
 
-#### __Links__
 
-code: [https://github.com/google-research/bert](https://github.com/google-research/bert)
+## __Masked Language Model__
+
+BERT uses the Transformer encoder to learn a language model.
+
+The input to the Transformer is a sequence of tokens, which are passed to an embeddeding layer and then processed by the Transformer network. The output is a sequence of vectors, in which each vector corresponds to an input token.
+
+
+<figure>
+  <img style="width: 65%; height: 65%" src="/assets/images/2018-12-06-transformer_arch.png">
+  <figcaption><br> (taken from https://www.lyrn.ai/2018/11/07/explained-bert-state-of-the-art-language-model-for-nlp/)</figcaption>
+</figure>
+
+As explained above this language model is what one could considered a bi-directional model, but some defend that you should be instead called non-directional.
+
+The bi-directional/non-directional property in BERT comes from masking 15% of the words in a sentence, and forcing the model to learn how to use information from the entire sentence to deduce what words are missing.
+
+The original Transformer is adapted so that the loss function only considers the prediction of masked values and ignores the prediction of the non-masked words. The prediction of the output words requires:
+
+- Adding a classification layer on top of the encoder output.
+
+- Multiplying the output vectors by the embedding matrix, transforming them into the vocabulary dimension.
+
+- Calculating the probability of each word in the vocabulary with softmax.
+
+
+<figure>
+  <img style="width: 65%; height: 65%" src="/assets/images/2018-12-06-transformer_mll.png">
+  <figcaption><br> (taken from )</figcaption>
+</figure>
+
+
+## __Fine Tuning to specific tasks__
+
+- As I mentioned earlier, the BERT encoder produces a sequence of hidden states. For classification tasks, this sequence ultimately needs to be reduced to a single vector. There are multiple ways of converting this sequence to a single vector representation of a sentence. One is max/mean pooling. Another is applying attention. The authors, however, opt to go with a much simpler method: simply taking the hidden state corresponding to the first token.
+
+- In Named Entity Recognition (NER), the software receives a text sequence and is required to mark the various types of entities (Person, Organization, Date, etc) that appear in the text. Using BERT, a NER model can be trained by feeding the output vector of each token into a classification layer that predicts the NER label.
 
 
 <!--
@@ -320,20 +348,20 @@ https://www.youtube.com/watch?v=XrZ_Y4koV5A&feature=youtu.be&t=249
 -->
 
 <!--
-https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270
-
 https://guillaumegenthial.github.io/sequence-to-sequence.html
 https://www.youtube.com/watch?v=Keqep_PKrY8
-
 https://www.youtube.com/watch?v=rMQMHA-uv_E
-https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html
 https://jalammar.github.io/illustrated-bert/
-https://www.reddit.com/r/MachineLearning/comments/9nfqxz/r_bert_pretraining_of_deep_bidirectional/
+
 -->
 
-<!--
-Another choice for using pre-trained embeddings that integrate character information is to leverage a state-of-the-art language model (Jozefowicz et al., 2016) [14] trained on a large in-domain corpus, e.g. the 1 Billion Word Benchmark (a pre-trained Tensorflow model can be found here). While language modelling has been found to be useful for different tasks as auxiliary objective (Rei, 2017) [15], pre-trained language model embeddings have also been used to augment word embeddings (Peters et al., 2017) [16]. As we start to better understand how to pre-train and initialize our models, pre-trained language model embeddings are poised to become more effective. They might even supersede word2vec as the go-to choice for initializing word embeddings by virtue of having become more expressive and easier to train due to better frameworks and more computational resources over the last years.
--->
+#### __Links__
+
+- [google research blog post](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)
+- [github repository](https://github.com/google-research/bert)
+- [a blog post from www.lyrn.ai](https://www.lyrn.ai/2018/11/07/explained-bert-state-of-the-art-language-model-for-nlp/)
+- [discussion on reddit with one of the authors](https://www.reddit.com/r/MachineLearning/comments/9nfqxz/r_bert_pretraining_of_deep_bidirectional/)
+
 
 ---
 
