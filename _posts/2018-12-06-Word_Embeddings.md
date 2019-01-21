@@ -11,59 +11,46 @@ preview_pic: /assets/images/2018-12-06-word-embeddings.jpg
 
 Since the work of [Mikolov et al., 2013](https://arxiv.org/pdf/1301.3781.pdf) was published and the software package _word2vec_ was made public available a new era in NLP started on which word embeddings, also referred to as word vectors, play a crucial role. Word embeddings can capture many different properties of a word and become the de-facto standard to replace feature engineering in NLP tasks.
 
-Since that milestone many new embeddings methods were proposed some which go down to the character level, and others that take into consideration even language models. I will try in this blog post to review some of these methods, and point out their main characteristics.
+Since that milestone many new embeddings methods were proposed some which go down to the character level, and others that take into consideration even language models. I will try in this blog post to review some of these methods, but focusing on the most recent word embeddings which are based on language models and take into consideration the context of a word.
 
 ## __Introduction__
 
-<!--
-Word Embeddings and Language Models
--->
+This blog post consists of two parts, the first one, which is mainly pointers, simply refers to the _classic word embeddings_ techniques, which can also be seen as classic word embeddings, they can also be seen as _static word embeddings_ since the same word will always have the same representation regardless of the context where it occurs.
 
-<!--
-https://www.aaai.org/Papers/JAIR/Vol37/JAIR-3705.pdf
--->
+The second part, introduces 3 news word embeddings techniques that take into consideration the context of the word, and can be seen as _dynamic word embeddings_ techniques, most of these techniques make use of some language model to help modeling the representation of a word.
 
+## __Classic Word Embeddings__
 
 #### [Efficient Estimation of Word Representations in Vector Space (2013)](https://arxiv.org/pdf/1301.3781.pdf)
 
-<!-- http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/ -->
+Introduced by (Mikolov et al., 2013) was the first popular embeddings method for NLP tasks. The paper itself is hard to understand, and many details are left over, but essentially the model is a neural network with a single hidden layer, and the embeddings are actually the weights of the hidden layer in the neural network. An important aspect is how to train this network in an efficient way, and then is when negative sampling comes into play.
 
-Introduced by (Mikolov et al., 2013) was the first popular embeddings method for NLP tasks. The paper itself is hard to understand, and many details are left over but essential the model is a neural network with a single hidden layer.
+I will not go into detail regarding this one, as the number of tutorials, implementations and resources regarding this technique is abundant in the net, and I will just rather leave some pointers.
 
-The embeddings are actually the weights of the hidden layer in the neural network.
+#### __Links__
+- [McCormick, C. (2016, April 19). Word2Vec Tutorial - The Skip-Gram Model.](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
+- [McCormick, C. (2017, January 11). Word2Vec Tutorial Part 2 - Negative Sampling.](http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/)
+- [word2vec Parameter Learning Explained, Xin Rong](https://arxiv.org/pdf/1411.2738.pdf)
+- [https://code.google.com/archive/p/word2vec/](https://code.google.com/archive/p/word2vec/)
+- [Stanford NLP with Deep Learning: Lecture 2 - Word Vector Representations: word2vec](https://www.youtube.com/watch?v=ERibwqs9p38)
 
-<!--
-* A neural network with a single hidden layer which won't be used for the for the task we trained it on;
-
-* Goal is to find good embeddings, i.e., learn the weights of the hidden layer;
-
-* The weights of the hidden layer are the word vector, aka embeddings;
-
-* The neural network is trained to given a specific word in the middle of a sentence (i.e., the input word) pick one random word out of the words in a defined context window of the input word, and compute the probability of every word in the vocabulary being the random picked word.
-
-* The output probabilities are going to relate to how likely it is find each vocabulary word nearby our input word. For example, if you gave the trained network the input word “Soviet”, the output probabilities are going to be much higher for words like “Union” and “Russia” than for unrelated words like “watermelon” and “kangaroo”.
-
-* We’ll train the neural network to do this by feeding it word pairs found in our training documents. The below example shows some of the training samples (word pairs) we would take from the sentence “The quick brown fox jumps over the lazy dog.” I’ve used a small window size of 2 just for the example. The word highlighted in blue is the input word.
-
-* The network is going to learn the statistics from the number of times each pairing shows up. So, for example, the network is probably going to get many more training samples of (“Soviet”, “Union”) than it is of (“Soviet”, “Sasquatch”). When the training is finished, if you give it the word “Soviet” as input, then it will output a much higher probability for “Union” or “Russia” than it will for “Sasquatch”.
--->
-
-- code: [https://code.google.com/archive/p/word2vec/](https://code.google.com/archive/p/word2vec/)
 
 <br>
 
 
 ### [GloVe: Global Vectors for Word Representation (2014)](https://www.aclweb.org/anthology/D14-1162)
 
-<!--
-http://text2vec.org/glove.html#linguistic_regularities
-http://mlexplained.com/2018/04/29/paper-dissected-glove-global-vectors-for-word-representation-explained/
-https://arxiv.org/pdf/1411.2738v4.pdf
-http://www.offconvex.org/2016/02/14/word-embeddings-2/
-http://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html
--->
+I will also give a brief overview of this work since there is also abundant resources on-line. It was published shortly after the _skip-gram_ technique and essentially it starts to make an observation that shallow window-based methods suffer from the disadvantage that they do not operate directly on the co-occurrence statistics of the corpus. Window-based models, like skip-gram, scan context windows across the entire corpus and fail to take advantage of the vast amount of repetition in the data.
 
-- code: [https://nlp.stanford.edu/projects/glove/](https://nlp.stanford.edu/projects/glove/)
+Count models, like GloVe, learn the vectors by essentially doing some sort of dimensionality reduction on the co-occurrence counts matrix. They start by constructing a matrix with counts of word co-occurrence information, each row tells how often does a word occur with every other word in some defined context-size in a large corpus. This matrix is then factorize, resulting in a lower dimension matrix, where each row is some vector representation for each word.
+
+
+The dimensionality reduction is typically done by minimizing a some kind of 'reconstruction loss' that finds lower-dimension representations of the original matrix and which can explain most of the variance in the original high-dimensional matrix.
+
+- [GloVe project at Stanford](https://nlp.stanford.edu/projects/glove/)
+- [Good summarization on text2vec.org](http://text2vec.org/glove.html)
+- [Stanford NLP with Deep Learning: Lecture 3 GloVe - Global Vectors for Word Representation](https://www.youtube.com/watch?v=ASn7ExxLZws)
+- [Paper Dissected: 'Glove: Global Vectors for Word Representation' Explained](http://mlexplained.com/2018/04/29/paper-dissected-glove-global-vectors-for-word-representation-explained)
 
 <br>
 
@@ -72,15 +59,26 @@ http://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html
 
 <!-- Subword-level embeddings: Can handle OOV handling -->
 
-- code: [https://github.com/facebookresearch/fastText](https://github.com/facebookresearch/fastTex)
+- [https://github.com/facebookresearch/fastText](https://github.com/facebookresearch/fastTex)
 
 <br>
 
-The models presented before have a fundamental problem which is they generate the same embedding for the same word in different contexts, for example:
+The models presented before have a fundamental problem which is they generate the same embedding for the same word in different contexts, for example, given the word _bank_ although it will have the same representation it can have different meanings:
 
-__TODO__: dar um exemplo ilustrativo
+- "I deposited 100 EUR in the bank."
+- "She was enjoying the sunset o the left bank of the river."
+
+
+Other interesting articles regarding word2vec and GloVe:
+
+- [king - man + woman is queen; but why?](http://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html)
+
+
 
 ---
+
+
+
 
 <br>
 
@@ -108,25 +106,6 @@ Neural character-level language modeling. We base our proposed embeddings on rec
 We show that an appropriate selection of hidden states from such a language model can be utilized to generate word-level embeddings that are highly effective in downstream sequence labeling tasks.
 
 -->
-
-<!--
-
-
-
-
-ELMo embeddings: https://arxiv.org/pdf/1802.05365.pdf (from AllenNLP)
-Learn a language model from bi-LSTM (using two layers, i.e., 2-stacked LSTM), extracting the hidden state of each layer; (token-based not char-based)
-Compute a weighted sum of those hidden states to obtain an embedding for each word. The weight of each hidden state is task-dependent and is learned for each (NLP downstream) task and normalized using the softmax function.
-NOTE: I see some relatedness with the attention mechanisms, embeddings are fixed but are weighted according to the end-task;
-AllenNLP https://allennlp.org/models
-
--->
-
-
-
-
-
-
 
 
 ### [__ELMo: Deep contextualized word representations (2018)__](https://aclweb.org/anthology/N18-1202)
@@ -320,48 +299,35 @@ As explained above this language model is what one could considered a bi-directi
 
 The bi-directional/non-directional property in BERT comes from masking 15% of the words in a sentence, and forcing the model to learn how to use information from the entire sentence to deduce what words are missing.
 
-The original Transformer is adapted so that the loss function only considers the prediction of masked values and ignores the prediction of the non-masked words. The prediction of the output words requires:
+The original Transformer is adapted so that the loss function only considers the prediction of masked words and ignores the prediction of the non-masked words. The prediction of the output words requires:
 
 - Adding a classification layer on top of the encoder output.
-
-- Multiplying the output vectors by the embedding matrix, transforming them into the vocabulary dimension.
-
+- An embedding matrix, transforming the output vectors into the vocabulary dimension.
 - Calculating the probability of each word in the vocabulary with softmax.
 
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2018-12-06-transformer_mll.png">
-  <figcaption><br> (taken from )</figcaption>
+  <figcaption><br> (taken from https://www.lyrn.ai/2018/11/07/explained-bert-state-of-the-art-language-model-for-nlp/)</figcaption>
 </figure>
 
+BRET is also trained in a Next Sentence Prediction (NSP), in which the model receives pairs of sentences as input and has to learn to predict if the second sentence in the pair is the subsequent sentence in the original document or not.
 
-## __Fine Tuning to specific tasks__
-
-- As I mentioned earlier, the BERT encoder produces a sequence of hidden states. For classification tasks, this sequence ultimately needs to be reduced to a single vector. There are multiple ways of converting this sequence to a single vector representation of a sentence. One is max/mean pooling. Another is applying attention. The authors, however, opt to go with a much simpler method: simply taking the hidden state corresponding to the first token.
-
-- In Named Entity Recognition (NER), the software receives a text sequence and is required to mark the various types of entities (Person, Organization, Date, etc) that appear in the text. Using BERT, a NER model can be trained by feeding the output vector of each token into a classification layer that predicts the NER label.
-
+To use BERT for a sequence labelling task, for instance a NER model, this model can be trained by feeding the output vector of each token into a classification layer that predicts the NER label.
 
 <!--
 Attention Mechanism
-https://www.youtube.com/watch?v=XrZ_Y4koV5A&feature=youtu.be&t=249
--->
-
-<!--
+https://www.youtube.com/watch?v=XrZ_Y4koV5A
 https://guillaumegenthial.github.io/sequence-to-sequence.html
-https://www.youtube.com/watch?v=Keqep_PKrY8
-https://www.youtube.com/watch?v=rMQMHA-uv_E
-https://jalammar.github.io/illustrated-bert/
-
 -->
 
 #### __Links__
 
-- [google research blog post](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)
-- [github repository](https://github.com/google-research/bert)
-- [a blog post from www.lyrn.ai](https://www.lyrn.ai/2018/11/07/explained-bert-state-of-the-art-language-model-for-nlp/)
-- [discussion on reddit with one of the authors](https://www.reddit.com/r/MachineLearning/comments/9nfqxz/r_bert_pretraining_of_deep_bidirectional/)
-
+- [Open Sourcing BERT: State-of-the-Art Pre-training for Natural Language Processing](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)
+- [https://github.com/google-research/bert](https://github.com/google-research/bert)
+- [BERT – State of the Art Language Model for NLP (www.lyrn.ai)](https://www.lyrn.ai/2018/11/07/explained-bert-state-of-the-art-language-model-for-nlp/)
+- [Reddit: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://www.reddit.com/r/MachineLearning/comments/9nfqxz/r_bert_pretraining_of_deep_bidirectional/)
+- [The Illustrated BERT, ELMo, and co. (How NLP Cracked Transfer Learning)](https://jalammar.github.io/illustrated-bert/)
 
 ---
 
@@ -372,12 +338,23 @@ https://jalammar.github.io/illustrated-bert/
 
 ## __Summary__
 
+In a time lenght of about 10 years Word Embeddings revolutionized the way cetrain NLP tasks can be solved with Neural Networks.
 
 <!--
 - Multi-sense embeddings: embeddings fail to capture polisemy
 not being able to capture multiple senses of words, word embeddings also fail to capture the meanings of phrases and multi-word expressions, which can be a function of the meaning of their constituent words, or have an entirely new meaning.
 refer evaluation
 -->
+
+
+<!--
+ELMo embeddings: https://arxiv.org/pdf/1802.05365.pdf (from AllenNLP)
+Learn a language model from bi-LSTM (using two layers, i.e., 2-stacked LSTM), extracting the hidden state of each layer; (token-based not char-based)
+Compute a weighted sum of those hidden states to obtain an embedding for each word. The weight of each hidden state is task-dependent and is learned for each (NLP downstream) task and normalized using the softmax function.
+NOTE: I see some relatedness with the attention mechanisms, embeddings are fixed but are weighted according to the end-task;
+AllenNLP https://allennlp.org/models
+-->
+
 
 
 
