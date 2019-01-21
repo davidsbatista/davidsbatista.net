@@ -15,9 +15,9 @@ Since that milestone many new embeddings methods were proposed some which go dow
 
 ## __Introduction__
 
-This blog post consists of two parts, the first one, which is mainly pointers, simply refers to the _classic word embeddings_ techniques, which can also be seen as classic word embeddings, they can also be seen as _static word embeddings_ since the same word will always have the same representation regardless of the context where it occurs.
+This blog post consists of two parts, the first one, which is mainly pointers, simply refers to the __classic word embeddings__ techniques, which can also be seen as classic word embeddings, they can also be seen as _static word embeddings_ since the same word will always have the same representation regardless of the context where it occurs.
 
-The second part, introduces 3 news word embeddings techniques that take into consideration the context of the word, and can be seen as _dynamic word embeddings_ techniques, most of these techniques make use of some language model to help modeling the representation of a word.
+The second part, introduces 3 news word embeddings techniques that take into consideration the context of the word, and can be seen as __dynamic word embeddings__ techniques, most of these techniques make use of some language model to help modeling the representation of a word.
 
 ## __Classic Word Embeddings__
 
@@ -34,7 +34,7 @@ I will not go into detail regarding this one, as the number of tutorials, implem
 - [https://code.google.com/archive/p/word2vec/](https://code.google.com/archive/p/word2vec/)
 - [Stanford NLP with Deep Learning: Lecture 2 - Word Vector Representations: word2vec](https://www.youtube.com/watch?v=ERibwqs9p38)
 
-
+---
 <br>
 
 
@@ -44,29 +44,34 @@ I will also give a brief overview of this work since there is also abundant reso
 
 Count models, like GloVe, learn the vectors by essentially doing some sort of dimensionality reduction on the co-occurrence counts matrix. They start by constructing a matrix with counts of word co-occurrence information, each row tells how often does a word occur with every other word in some defined context-size in a large corpus. This matrix is then factorize, resulting in a lower dimension matrix, where each row is some vector representation for each word.
 
-
 The dimensionality reduction is typically done by minimizing a some kind of 'reconstruction loss' that finds lower-dimension representations of the original matrix and which can explain most of the variance in the original high-dimensional matrix.
 
+#### __Links__
 - [GloVe project at Stanford](https://nlp.stanford.edu/projects/glove/)
 - [Good summarization on text2vec.org](http://text2vec.org/glove.html)
 - [Stanford NLP with Deep Learning: Lecture 3 GloVe - Global Vectors for Word Representation](https://www.youtube.com/watch?v=ASn7ExxLZws)
 - [Paper Dissected: 'Glove: Global Vectors for Word Representation' Explained](http://mlexplained.com/2018/04/29/paper-dissected-glove-global-vectors-for-word-representation-explained)
 
+---
 <br>
+
 
 
 ### [Enriching Word Vectors with Subword Information (2017)](http://aclweb.org/anthology/Q17-1010)
 
 <!-- Subword-level embeddings: Can handle OOV handling -->
 
+#### __Links__
 - [https://github.com/facebookresearch/fastText](https://github.com/facebookresearch/fastTex)
 
+---
 <br>
+
 
 The models presented before have a fundamental problem which is they generate the same embedding for the same word in different contexts, for example, given the word _bank_ although it will have the same representation it can have different meanings:
 
-- "I deposited 100 EUR in the bank."
-- "She was enjoying the sunset o the left bank of the river."
+- "I deposited 100 EUR in the __bank__."
+- "She was enjoying the sunset o the left __bank__ of the river."
 
 
 Other interesting articles regarding word2vec and GloVe:
@@ -173,6 +178,7 @@ In resume, ELMos train a multi-layer, bi-directional, LSTM-based language model,
 
 - the images were taken/adapted from [Shuntaro Yada](https://shuntaroy.com/) great [slides](https://www.slideshare.net/shuntaroy/a-review-of-deep-contextualized-word-representations-peters-2018)
 
+---
 
 <br>
 
@@ -226,7 +232,9 @@ In the experiments described on the paper the authors concatenated the word vect
 
 - code: [https://github.com/zalandoresearch/flair](https://github.com/zalandoresearch/flair)
 
+<br>
 
+---
 
 
 
