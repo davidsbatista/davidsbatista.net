@@ -5,7 +5,7 @@ date: 2018-12-06 00:00:00
 tags: word-embeddings word2vec fasttext glove ELMo BERT language-models character-embeddings character-language-models
 categories: [blog]
 #comments: true
-# disqus_identifier: 20181206
+#disqus_identifier: 20181206
 preview_pic: /assets/images/2018-12-06-word-embeddings.jpg
 ---
 
@@ -81,31 +81,39 @@ The dimensionality reduction is typically done by minimizing a some kind of 'rec
 
 ### [Enriching Word Vectors with Subword Information (2017)](http://aclweb.org/anthology/Q17-1010)
 
-<!-- Subword-level embeddings: Can handle OOV handling -->
+One drawback of the two approaches presented before is the fact that they don't handle out-of-vocabulary.
+
+The work of [Bojanowski et al, 2017](http://aclweb.org/anthology/Q17-1010) introduced the concept of subword-level embeddings, based on the skip-gram model, but where each word is represented as a bag of character $$n$$-grams.
+
+<figure>
+  <img style="width: 50%; height: 50%" src="/assets/images/2018-12-06-fasttext-logo-color-web.png">
+  <figcaption><br>Image taken from https://fasttext.cc/</figcaption>
+</figure>
+
+A vector representation is associated to each character $$n$$-gram, and words are represented as the sum of these representations. This allows the model to compute word representations for words that did not appear in the training data.
+
+Each word $w$ is represented as a bag of character $n$-gram, plus a special boundary symbols _\<_ and _\>_ at the beginning and end of words, plus the word $w$ itself in the set of its $n$-grams.
+
+Taking the word _where_ and $n = 3$ as an example, it will be represented by the character $n$-grams: \< wh, whe, her, ere, re \> and the special sequence \< where \>.
 
 #### __Links__
-- [https://github.com/facebookresearch/fastText](https://github.com/facebookresearch/fastTex)
+- [https://github.com/facebookresearch/fastText](https://github.com/facebookresearch/fastText)
+- [Library for efficient text classification and representation learning](https://fasttext.cc/)
 
 ---
 <br>
 
+
+#### __Static Word Embeddings fail to capture polysemy__
 
 The models presented before have a fundamental problem which is they generate the same embedding for the same word in different contexts, for example, given the word _bank_ although it will have the same representation it can have different meanings:
 
 - "I deposited 100 EUR in the __bank__."
 - "She was enjoying the sunset o the left __bank__ of the river."
 
-
-Other interesting articles regarding word2vec and GloVe:
-
-- [king - man + woman is queen; but why?](http://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html)
-
-
+In the methods presented before, the word representation for __bank__ would always be the same regardless if it appears in the context of geography or economics. In the next part of the post we will see how new embedding techniques capture polysemy.
 
 ---
-
-
-
 
 <br>
 
@@ -115,11 +123,11 @@ Contextualised words embeddings aim at capturing word semantics in different con
 
 #### __Language Models__
 
-It models the probability distribution of the next character in the sequence given a sequence of previous characters.
+Language models compute the probability distribution of the next word in a sequence given the sequence of previous words.
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2018-12-06-general_word_language_model.jpg">
-  <figcaption><br> (taken from )</figcaption>
+  <figcaption><br> (taken from http://torch.ch/blog/2016/07/25/nce.html)</figcaption>
 </figure>
 
 
@@ -133,6 +141,10 @@ Neural character-level language modeling. We base our proposed embeddings on rec
 We show that an appropriate selection of hidden states from such a language model can be utilized to generate word-level embeddings that are highly effective in downstream sequence labeling tasks.
 
 -->
+
+---
+
+<br>
 
 
 ### [__ELMo: Deep contextualized word representations (2018)__](https://aclweb.org/anthology/N18-1202)
@@ -207,7 +219,7 @@ In resume, ELMos train a multi-layer, bi-directional, LSTM-based language model,
 
 ### [__Contextual String Embeddings for Sequence Labelling__ (2018)](https://aclweb.org/anthology/C18-1139)
 
-The authors propose a contextualised character-level word embedding which captures word meaning in context and therefore produce different embeddings for polysemous words depending on their context. It model words and context as sequences of characters, which aids in handling rare and misspelled words and captures subword structures such as prefixes and endings.
+The authors propose a contextualized character-level word embedding which captures word meaning in context and therefore produce different embeddings for polysemous words depending on their context. It model words and context as sequences of characters, which aids in handling rare and misspelled words and captures subword structures such as prefixes and endings.
 
 
 #### __Character-level Language Model__
@@ -368,7 +380,7 @@ https://guillaumegenthial.github.io/sequence-to-sequence.html
 
 ## __Summary__
 
-In a time lenght of about 10 years Word Embeddings revolutionized the way cetrain NLP tasks can be solved with Neural Networks.
+In a time span of about 10 years Word Embeddings revolutionized the way almost all NLP tasks can be solved with Neural Networks.
 
 <!--
 - Multi-sense embeddings: embeddings fail to capture polisemy
@@ -397,8 +409,9 @@ AllenNLP https://allennlp.org/models
 - ["Efficient Estimation of Word Representations in Vector Space" Mikolov et al. (2013)](https://arxiv.org/pdf/1301.3781.pdf)
 - ["GloVe: Global Vectors for Word Representation" Pennington et al. (2014) ](https://www.aclweb.org/anthology/D14-1162)
 - [Word embeddings in 2017: Trends and future directions](http://ruder.io/word-embeddings-2017/)
-- [McCormick, C. (2016, April 19). Word2Vec Tutorial - The Skip-Gram Model](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
+- [king - man + woman is queen; but why?](http://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html)
 - [The Unreasonable Effectiveness of Recurrent Neural Networks](http://karpathy.github.io/2015/05/21/rnn-effectiveness)
+
 
 
 
