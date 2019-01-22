@@ -15,15 +15,31 @@ Since that milestone many new embeddings methods were proposed some which go dow
 
 ## __Introduction__
 
-This blog post consists of two parts, the first one, which is mainly pointers, simply refers to the __classic word embeddings__ techniques, which can also be seen as classic word embeddings, they can also be seen as _static word embeddings_ since the same word will always have the same representation regardless of the context where it occurs.
+This blog post consists of two parts, the first one, which is mainly pointers, simply refers to the __classic word embeddings__ techniques, which can also be seen as classic word embeddings, they can also be seen as _static word embeddings_ since the same word will always have the same representation regardless of the context where it occurs. I quickly introduce three embeddings techniques:
 
-The second part, introduces 3 news word embeddings techniques that take into consideration the context of the word, and can be seen as __dynamic word embeddings__ techniques, most of these techniques make use of some language model to help modeling the representation of a word.
+- __Skip-Gram (aka Word2Vec)__
+- __Glove__
+- __fastText__
+
+The second part, introduces 3 news word embeddings techniques that take into consideration the context of the word, and can be seen as __dynamic word embeddings__ techniques, most of these techniques make use of some language model to help modeling the representation of a word. I try to describe three contextual embeddings techniques:
+
+- __ELMO__
+- __FlairEmbeddings__
+- __BRET__
 
 ## __Classic Word Embeddings__
 
 #### [Efficient Estimation of Word Representations in Vector Space (2013)](https://arxiv.org/pdf/1301.3781.pdf)
 
-Introduced by (Mikolov et al., 2013) was the first popular embeddings method for NLP tasks. The paper itself is hard to understand, and many details are left over, but essentially the model is a neural network with a single hidden layer, and the embeddings are actually the weights of the hidden layer in the neural network. An important aspect is how to train this network in an efficient way, and then is when negative sampling comes into play.
+Introduced by (Mikolov et al., 2013) was the first popular embeddings method for NLP tasks. The paper itself is hard to understand, and many details are left over, but essentially the model is a neural network with a single hidden layer, and the embeddings are actually the weights of the hidden layer in the neural network.
+
+<figure>
+  <img style="width: 85%; height: 85%" src="/assets/images/2018-12-06-skip_gram_net_arch.png">
+  <figcaption><br>Image taken from http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/</figcaption>
+</figure>
+
+
+An important aspect is how to train this network in an efficient way, and then is when negative sampling comes into play.
 
 I will not go into detail regarding this one, as the number of tutorials, implementations and resources regarding this technique is abundant in the net, and I will just rather leave some pointers.
 
@@ -44,10 +60,16 @@ I will also give a brief overview of this work since there is also abundant reso
 
 Count models, like GloVe, learn the vectors by essentially doing some sort of dimensionality reduction on the co-occurrence counts matrix. They start by constructing a matrix with counts of word co-occurrence information, each row tells how often does a word occur with every other word in some defined context-size in a large corpus. This matrix is then factorize, resulting in a lower dimension matrix, where each row is some vector representation for each word.
 
+<figure>
+  <img style="width: 85%; height: 85%" src="/assets/images/2018-12-06-glove-matrix-factorisation-5.jpg">
+  <figcaption><br>Image taken from http://building-babylon.net/2015/07/29/glove-global-vectors-for-word-representations/</figcaption>
+</figure>
+
 The dimensionality reduction is typically done by minimizing a some kind of 'reconstruction loss' that finds lower-dimension representations of the original matrix and which can explain most of the variance in the original high-dimensional matrix.
 
 #### __Links__
 - [GloVe project at Stanford](https://nlp.stanford.edu/projects/glove/)
+- [Building Babylon: Global Vectors for Word Representations](http://building-babylon.net/2015/07/29/glove-global-vectors-for-word-representations/)
 - [Good summarization on text2vec.org](http://text2vec.org/glove.html)
 - [Stanford NLP with Deep Learning: Lecture 3 GloVe - Global Vectors for Word Representation](https://www.youtube.com/watch?v=ASn7ExxLZws)
 - [Paper Dissected: 'Glove: Global Vectors for Word Representation' Explained](http://mlexplained.com/2018/04/29/paper-dissected-glove-global-vectors-for-word-representation-explained)
