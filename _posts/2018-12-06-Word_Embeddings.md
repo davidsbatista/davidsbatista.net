@@ -123,24 +123,18 @@ Contextualised words embeddings aim at capturing word semantics in different con
 
 #### __Language Models__
 
-Language models compute the probability distribution of the next word in a sequence given the sequence of previous words.
+Language models compute the probability distribution of the next word in a sequence given the sequence of previous words. LSTMs become a popular neural network architecture to learn this probabilities. The figure below shows how an LSTM can be trained to learn a language model.
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2018-12-06-general_word_language_model.jpg">
-  <figcaption><br> (taken from http://torch.ch/blog/2016/07/25/nce.html)</figcaption>
+  <figcaption><br> Image taken from http://torch.ch/blog/2016/07/25/nce.html</figcaption>
 </figure>
 
+A sequence of words or sentence is fed into an LSTM word by word, the previous word along with the internal state of the LSTM are used to predict the next possible word.
 
-<!--
+But it's also possible to go on level below and build a character-level language model. [Andrej Karpathy blog post](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) about char-level language model shows some interesting examples.
 
-http://karpathy.github.io/2015/05/21/rnn-effectiveness/
-
-Char-level language models
-
-Neural character-level language modeling. We base our proposed embeddings on recent advances in neural language modeling (LM) that have allowed language to be modeled as distributions over se- quences of characters instead of words (Sutskever et al., 2011; Graves, 2013; Kim et al., 2015). Recent work has shown that by learning to predict the next character on the basis of previous characters, such models learn internal representations that capture syntactic and semantic properties: even though trained without an explicit notion of word and sentence boundaries, they have been shown to generate grammat- ically correct text, including words, subclauses, quotes and sentences (Sutskever et al., 2014; Graves, 2013; Karpathy et al., 2015). More recently, Radford et al. (2017) showed that individual neurons in a large LSTM-LM can be attributed to specific semantic functions, such as predicting sentiment, without explicitly trained on a sentiment label set.
-We show that an appropriate selection of hidden states from such a language model can be utilized to generate word-level embeddings that are highly effective in downstream sequence labeling tasks.
-
--->
+This is short a very short intro on language models, but they are the backbone of the upcoming techniques/papers that complete this blog post.
 
 ---
 
@@ -153,9 +147,9 @@ The main idea of the Embeddings from Language Models (ELMo) can be divided into 
 
 #### __Language Model__
 
-There are some important details on how this language model is trained. The language model is trained by reading the sentences both forward and backward. That is, in essence there are two language models, one that learns to predict the next word given the past words and another that learns to predict the past words given the future words.
+The language model is trained by reading the sentences both forward and backward. That is, in essence there are two language models, one that learns to predict the next word given the past words and another that learns to predict the past words given the future words.
 
-Another detail is that the authors instead of using a single-layer LSTM, they use a stacked, multi-layer LSTM. A single-layer LSTM takes the sequence of words as input, as multi-layer LSTM takes the output sequence of the previous LSTM-layer as input, the authors also mention the use of residual connections between the LSTM layers. In the paper the authors also show that the different layers of the LSTM language model learns different characteristics of language.
+Another detail is that the authors, instead of using a single-layer LSTM, they use a stacked multi-layer LSTM. A single-layer LSTM takes the sequence of words as input, as multi-layer LSTM takes the output sequence of the previous LSTM-layer as input, the authors also mention the use of residual connections between the LSTM layers. In the paper the authors also show that the different layers of the LSTM language model learns different characteristics of language.
 
 <figure>
   <img style="width: 85%; height: 85%" src="/assets/images/2018-12-06-ELMo_language_models.png">
@@ -243,7 +237,7 @@ Both output hidden states are concatenated to form the final embedding and captu
 
 <figure>
   <img style="width: 50%; height: 50%" src="/assets/images/2018-12-06-character_lm_for_word_embedding.png">
-  <figcaption><br> (taken from )</figcaption>
+  <figcaption><br> Image taken from ...</figcaption>
 </figure>
 
 Formally, let the individual word-strings begin at character inputs with indices $$t0, t1, . . . , tn$$ then we define contextual string embeddings of these words as:
@@ -254,7 +248,7 @@ The embeddings can then be used for other downstream tasks such as named-entity 
 
 <figure>
   <img style="width: 50%; height: 50%" src="/assets/images/2018-12-06-character_lm_for_sequence_labelling.png">
-  <figcaption><br> (taken from )</figcaption>
+  <figcaption><br> Image taken from ...</figcaption>
 </figure>
 
 
@@ -299,14 +293,14 @@ The Transformer tries to directly learn these dependencies using the attention m
 
 <figure>
   <img style="width: 50%; height: 50%" src="/assets/images/2018-12-06-transformer_attention.png">
-  <figcaption><br> (taken from "Attention Is All You Need")</figcaption>
+  <figcaption><br> Image taken from "Attention Is All You Need"</figcaption>
 </figure>
 
 To improve the expressiveness of the model, instead of computing a single attention pass over the values, the Multi-Head Attention computes multiple attention weighted sums, i.e., it uses several attention layers stacked together with different linear transformations of the same input.
 
 <figure>
   <img style="width: 35%; height: 35%" src="/assets/images/2018-12-06-attention_path_length.png">
-  <figcaption><br> (taken from http://mlexplained.com/2017/12/29/attention-is-all-you-need-explained/)</figcaption>
+  <figcaption><br> Image taken from http://mlexplained.com/2017/12/29/attention-is-all-you-need-explained/</figcaption>
 </figure>
 
 The main key feature of the Transformer is therefore that instead of encoding dependencies in the hidden state, directly expresses them by attending to various parts of the input.
@@ -315,7 +309,7 @@ The Transformer in an encoder and a decoder scenario
 
 <figure>
   <img style="width: 40%; height: 40%" src="/assets/images/2018-12-06-transformer_encoding_decoding_arch.png">
-  <figcaption><br> (taken from "Attention Is All You Need")</figcaption>
+  <figcaption><br> Image taken from "Attention Is All You Need"</figcaption>
 </figure>
 
 This is just a very brief explanation of what the Transformer is, please check the original paper and following links for a more detailed description:
@@ -334,7 +328,7 @@ The input to the Transformer is a sequence of tokens, which are passed to an emb
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2018-12-06-transformer_arch.png">
-  <figcaption><br> (taken from https://www.lyrn.ai/2018/11/07/explained-bert-state-of-the-art-language-model-for-nlp/)</figcaption>
+  <figcaption><br> Image taken from https://www.lyrn.ai/2018/11/07/explained-bert-state-of-the-art-language-model-for-nlp/</figcaption>
 </figure>
 
 As explained above this language model is what one could considered a bi-directional model, but some defend that you should be instead called non-directional.
@@ -350,7 +344,7 @@ The original Transformer is adapted so that the loss function only considers the
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2018-12-06-transformer_mll.png">
-  <figcaption><br> (taken from https://www.lyrn.ai/2018/11/07/explained-bert-state-of-the-art-language-model-for-nlp/)</figcaption>
+  <figcaption><br> Image taken from https://www.lyrn.ai/2018/11/07/explained-bert-state-of-the-art-language-model-for-nlp/</figcaption>
 </figure>
 
 BRET is also trained in a Next Sentence Prediction (NSP), in which the model receives pairs of sentences as input and has to learn to predict if the second sentence in the pair is the subsequent sentence in the original document or not.
