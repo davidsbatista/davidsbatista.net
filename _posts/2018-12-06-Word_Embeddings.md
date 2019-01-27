@@ -349,12 +349,6 @@ BRET is also trained in a Next Sentence Prediction (NSP), in which the model rec
 
 To use BERT for a sequence labelling task, for instance a NER model, this model can be trained by feeding the output vector of each token into a classification layer that predicts the NER label.
 
-<!--
-Attention Mechanism
-https://www.youtube.com/watch?v=XrZ_Y4koV5A
-https://guillaumegenthial.github.io/sequence-to-sequence.html
--->
-
 #### __Links__
 
 - [Open Sourcing BERT: State-of-the-Art Pre-training for Natural Language Processing](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)
@@ -372,122 +366,27 @@ https://guillaumegenthial.github.io/sequence-to-sequence.html
 
 ## __Summary__
 
-In a time span of about 10 years Word Embeddings revolutionized the way almost all NLP tasks can be solved with Neural Networks.
+In a time span of about 10 years Word Embeddings revolutionized the way almost all NLP tasks can be solved, essentially by replacing the feature extraction/engineering by embeddings which are then feed as input to different neural networks architectures.
 
+The most popular models started around 2013 with the word2vec package, but a few years before there were already some results in the famous work of Collobert et, al 2011 [Natural Language Processing (Almost) from Scratch](http://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf) which I did not mentioned above.
 
-<!--
-- Multi-sense embeddings: embeddings fail to capture polisemy
-not being able to capture multiple senses of words, word embeddings also fail to capture the meanings of phrases and multi-word expressions, which can be a function of the meaning of their constituent words, or have an entirely new meaning.
-refer evaluation
--->
+Nevertheless these techniques, along with GloVe and fastText, generate static embeddings which are unable to capture polysemy, i.e the same word having different meanings. Typically these techniques generate a matrix that can be plugged in into the current neural network model and is used to perform a look up operation, mapping a word to a vector.
 
-<!--
-We can see look at this model as more of a function that given a sentence outputs $$k$$ vectors for each word, where $$k$$ is the number of layers in the language model. In contrast, the classical embedding methods one gets the embedding of a word by performing a lookup operation on a matrix.
--->
-
-
-<!--
-ELMo embeddings: https://arxiv.org/pdf/1802.05365.pdf (from AllenNLP)
-Learn a language model from bi-LSTM (using two layers, i.e., 2-stacked LSTM), extracting the hidden state of each layer; (token-based not char-based)
-Compute a weighted sum of those hidden states to obtain an embedding for each word. The weight of each hidden state is task-dependent and is learned for each (NLP downstream) task and normalized using the softmax function.
-NOTE: I see some relatedness with the attention mechanisms, embeddings are fixed but are weighted according to the end-task;
-AllenNLP https://allennlp.org/models
--->
-
+Recently other methods which rely on language models and also provide a mechanism of having embeddings computed dynamically as a sentence or a sequence of tokens is being processed.
 
 <br>
 
 ## __References__
 
-- ["Efficient Estimation of Word Representations in Vector Space" Mikolov et al. (2013)](https://arxiv.org/pdf/1301.3781.pdf)
-- ["GloVe: Global Vectors for Word Representation" Pennington et al. (2014) ](https://www.aclweb.org/anthology/D14-1162)
-- [Word embeddings in 2017: Trends and future directions](http://ruder.io/word-embeddings-2017/)
-- [king - man + woman is queen; but why?](http://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html)
-- [The Unreasonable Effectiveness of Recurrent Neural Networks](http://karpathy.github.io/2015/05/21/rnn-effectiveness)
-
-
-
-
-
-
-
-<!--
-
-## __Experiments__
-
-Probably better to be another post?
-
-I wanted to explore embeddings for Portuguese with news articles that I've been crawling since the days I started my PhD, by luck the [small script](https://github.com/davidsbatista/publico.pt-news-scrapper) I wrote a few years ago, still works and it's running, triggered by a crontab, on some remote server fetching daily portuguese news articles  :)
-
-Crawling text from the web is always tricky and it involves lots of cleaning, and plus I wanted a clean dataset to learn embeddings, I explicitly removed punctuation and normalized all words to lowercase. In order to do this I used a mix of sed and python, as shown below:
-
-Using python replace all HTML entities by it's corresponding mappings into plain text:
-{% highlight bash %}
-python3 -c 'import html, sys; [print(html.unescape(l), end="") for l in sys.stdin]'
-{% endhighlight bash %}
-
-Next remove all HTML tags
-{% highlight bash %}
-sed s/"<[^>]*>"/""/g
-{% endhighlight bash %}
-
-I also used python to convert everything to lowercase, since `tr` command could not properly hand some characters
-{% highlight bash %}
-python3 -c 'import sys; [print(l.lower(), end="") for l in sys.stdin]' \
-{% endhighlight bash %}
-
-Remove ticks, parenthesis, quotation marks, parenthesis, etc.
-{% highlight bash %}
-sed s/"['\"\(\)\`”′″‴«»„”“‘’]"/""/g
-{% endhighlight bash %}
-
-Remove punctuation "glued" to last character of a word/token
-{% highlight bash %}
-sed s/"\(\w\)[\.,:;\!?\"\/+]\s"/"\1 "/g
-{% endhighlight bash %}
-
-Replace two or more consecutive spaces by just one
-{% highlight bash %}
-tr -s " "
-{% endhighlight bash %}
-
-
-Putting it all together in a single script:
-
-{% highlight bash %}
-cat news_aricles | cut --complement -f1,2,3 $1 \
-| tr '\t' '\n' \
-| python3 -c 'import html, sys; [print(html.unescape(l), end="") for l in sys.stdin]' \
-| sed s/"<[^>]*>"/""/g \
-| python3 -c 'import sys; [print(l.lower(), end="") for l in sys.stdin]' \
-| tr -s " " \
-| sed s/"['\"\(\)\`”′″‴«»„”“‘’º]"/""/g \
-| sed s/"\(\w\)[\.,:;\!?\"\/+]\s"/"\1 "/g \
-| sed s/"\["/""/g \
-| sed s/"\]"/""/g \
-| sed -e 's/\.//g' \
-| sed s/" - "/" "/g \
-| sed s/" — "/" "/g \
-| sed s/" — "/" "/g \
-| sed s/" — "/" "/g \
-| sed s/" – "/" "/g \
-| sed s/" – "/" "/g \
-| sed s/" , "/" "/g \
-| sed s/" \/ "/" "/g \
-| sed s/"-,"/""/g \
-| sed s/"—,"/""/g \
-| sed s/"–,"/""/g \
-| sed s/"--"/""/g \
-| sed s/"\(\w\)[\.,:;\!?\"\/+]\s"/"\1 "/g \
-| tr -s " " > news_articles_clean.txt;
-{% endhighlight bash %}
-
-The script takes as input a text file with a news article per line, including title, date, category, etc.; it takes only the text fields (i.e., title, lead, news text) and generates a file where each line consists of a title, a lead of a news text. All the tokens are in lower case and there is no punctuation.
-
-A quick way to inspect the generated tokens is to run the following line, which it will output all the tokens in the file ordered by frequency of occurrence:
-
-{% highlight bash %}
-cat news_articles_clean.txt | tr ' ' '\n' | sort | uniq -c | sort -gr > tokens_counts.txt
-{% endhighlight bash %}
-
--->
+- [Efficient Estimation of Word Representations in Vector Space (2013)](https://arxiv.org/pdf/1301.3781.pdf)
+- [McCormick, C. (2016, April 19). Word2Vec Tutorial - The Skip-Gram Model.](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
+- [McCormick, C. (2017, January 11). Word2Vec Tutorial Part 2 - Negative Sampling.](http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/)
+- [word2vec Parameter Learning Explained, Xin Rong](https://arxiv.org/pdf/1411.2738.pdf)
+- [GloVe: Global Vectors for Word Representation (2014)](https://www.aclweb.org/anthology/D14-1162)
+- [Enriching Word Vectors with Subword Information (2017)](http://aclweb.org/anthology/Q17-1010)
+- [ELMo: Deep contextualized word representations (2018)__](https://aclweb.org/anthology/N18-1202)
+- [Contextual String Embeddings for Sequence Labelling__ (2018)](https://aclweb.org/anthology/C18-1139)
+- [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding (2018)](https://arxiv.org/pdf/1810.04805.pdf)
+- [https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
+- [http://nlp.seas.harvard.edu/2018/04/03/attention.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
+- [Open Sourcing BERT: State-of-the-Art Pre-training for Natural Language Processing](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)
