@@ -97,7 +97,7 @@ Each word $w$ is represented as a bag of character $n$-gram, plus a special boun
 Taking the word _where_ and $n = 3$ as an example, it will be represented by the character $n$-grams: 
 
 <center>
-\< wh, whe, her, ere, re \> and the special sequence \< where \>.
+< wh, whe, her, ere, re > and the special sequence < where >.
 </center>
 
 #### __Links__
