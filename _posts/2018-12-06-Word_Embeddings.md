@@ -15,13 +15,13 @@ Since that milestone many new embeddings methods were proposed some which go dow
 
 ## __Introduction__
 
-This blog post consists of two parts, the first one, which is mainly pointers, simply refers to the __classic word embeddings__ techniques, which can also be seen as classic word embeddings, they can also be seen as _static word embeddings_ since the same word will always have the same representation regardless of the context where it occurs. I quickly introduce three embeddings techniques:
+This blog post consists of two parts, the first one, which is mainly pointers, simply refers to the __classic word embeddings__ techniques, which can also be seen as _static word embeddings_ since the same word will always have the same representation regardless of the context where it occurs. I quickly introduce three embeddings techniques:
 
 - __Skip-Gram (aka Word2Vec)__
 - __Glove__
 - __fastText__
 
-The second part, introduces 3 news word embeddings techniques that take into consideration the context of the word, and can be seen as __dynamic word embeddings__ techniques, most of these techniques make use of some language model to help modeling the representation of a word. I try to describe three contextual embeddings techniques:
+The second part, introduces three news word embeddings techniques that take into consideration the context of the word, and can be seen as __dynamic word embeddings__ techniques, most of which make use of some language model to help modeling the representation of a word. I try to describe three contextual embeddings techniques:
 
 - __ELMO__
 - __FlairEmbeddings__
