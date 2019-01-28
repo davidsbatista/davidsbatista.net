@@ -25,7 +25,7 @@ The second part, introduces 3 news word embeddings techniques that take into con
 
 - __ELMO__
 - __FlairEmbeddings__
-- __BRET__
+- __BERT__
 
 ## __Classic Word Embeddings__
 
