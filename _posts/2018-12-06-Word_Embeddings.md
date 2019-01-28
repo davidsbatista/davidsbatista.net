@@ -138,7 +138,7 @@ A sequence of words is fed into an LSTM word by word, the previous word along wi
 
 But it's also possible to go one level below and build a character-level language model. [Andrej Karpathy blog post](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) about char-level language model shows some interesting examples.
 
-This is short a very short intro on language models, but they are the backbone of the upcoming techniques/papers that complete this blog post.
+This is a very short, quick and dirty introduction on language models, but they are the backbone of the upcoming techniques/papers that complete this blog post.
 
 ---
 
