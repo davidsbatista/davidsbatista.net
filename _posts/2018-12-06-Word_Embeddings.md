@@ -31,7 +31,7 @@ The second part, introduces three news word embeddings techniques that take into
 
 #### [Efficient Estimation of Word Representations in Vector Space (2013)](https://arxiv.org/pdf/1301.3781.pdf)
 
-Introduced by (Mikolov et al., 2013) was the first popular embeddings method for NLP tasks. The paper itself is hard to understand, and many details are left over, but essentially the model is a neural network with a single hidden layer, and the embeddings are actually the weights of the hidden layer in the neural network.
+Introduced by Mikolov et al., 2013 it was the first popular embeddings method for NLP tasks. The paper itself is hard to understand, and many details are left over, but essentially the model is a neural network with a single hidden layer, and the embeddings are actually the weights of the hidden layer in the neural network.
 
 <figure>
   <img style="width: 85%; height: 85%" src="/assets/images/2018-12-06-skip_gram_net_arch.png">
@@ -94,7 +94,9 @@ A vector representation is associated to each character $$n$$-gram, and words ar
 
 Each word $w$ is represented as a bag of character $n$-gram, plus a special boundary symbols _\<_ and _\>_ at the beginning and end of words, plus the word $w$ itself in the set of its $n$-grams.
 
-Taking the word _where_ and $n = 3$ as an example, it will be represented by the character $n$-grams: \< wh, whe, her, ere, re \> and the special sequence \< where \>.
+Taking the word _where_ and $n = 3$ as an example, it will be represented by the character $n$-grams: 
+
+\< wh, whe, her, ere, re \> and the special sequence \< where \>.
 
 #### __Links__
 - [https://github.com/facebookresearch/fastText](https://github.com/facebookresearch/fastText)
