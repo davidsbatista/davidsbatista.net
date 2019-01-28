@@ -2,7 +2,7 @@
 layout: post
 title: Language Models and Contextualised Word Embeddings
 date: 2018-12-06 00:00:00
-tags: word-embeddings word2vec fasttext glove ELMo BERT language-models character-embeddings character-language-models
+tags: word-embeddings word2vec fasttext glove ELMo BERT language-models character-embeddings character-language-models neural-networks
 categories: [blog]
 #comments: true
 #disqus_identifier: 20181206
