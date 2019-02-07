@@ -259,7 +259,7 @@ ROC curves are appropriate when the observations are balanced between each class
 </tr>
 <tr>
 <td>F1-score</td>
-<td>$$2 \times\frac{\textrm{Precision} \times \textrm{Precision}}{\textrm{Precision} + \textrm{Precision}}$$</td>
+<td>$$2 \times\frac{\textrm{Precision} \times \textrm{Recall}}{\textrm{Precision} + \textrm{Recall}}$$</td>
 <td>Harmonic mean of Precision and Recall</td>
 </tr>
 </tbody>
