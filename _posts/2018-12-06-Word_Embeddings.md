@@ -2,10 +2,10 @@
 layout: post
 title: Language Models and Contextualised Word Embeddings
 date: 2018-12-06 00:00:00
-tags: word-embeddings word2vec fasttext glove ELMo BERT language-models character-embeddings character-language-models
+tags: word-embeddings word2vec fasttext glove ELMo BERT language-models character-embeddings character-language-models neural-networks
 categories: [blog]
-#comments: true
-#disqus_identifier: 20181206
+comments: true
+disqus_identifier: 20181206
 preview_pic: /assets/images/2018-12-06-word-embeddings.jpg
 ---
 
@@ -15,23 +15,23 @@ Since that milestone many new embeddings methods were proposed some which go dow
 
 ## __Introduction__
 
-This blog post consists of two parts, the first one, which is mainly pointers, simply refers to the __classic word embeddings__ techniques, which can also be seen as classic word embeddings, they can also be seen as _static word embeddings_ since the same word will always have the same representation regardless of the context where it occurs. I quickly introduce three embeddings techniques:
+This blog post consists of two parts, the first one, which is mainly pointers, simply refers to the __classic word embeddings__ techniques, which can also be seen as _static word embeddings_ since the same word will always have the same representation regardless of the context where it occurs. I quickly introduce three embeddings techniques:
 
 - __Skip-Gram (aka Word2Vec)__
 - __Glove__
 - __fastText__
 
-The second part, introduces 3 news word embeddings techniques that take into consideration the context of the word, and can be seen as __dynamic word embeddings__ techniques, most of these techniques make use of some language model to help modeling the representation of a word. I try to describe three contextual embeddings techniques:
+The second part, introduces three news word embeddings techniques that take into consideration the context of the word, and can be seen as __dynamic word embeddings__ techniques, most of which make use of some language model to help modeling the representation of a word. I try to describe three contextual embeddings techniques:
 
 - __ELMO__
 - __FlairEmbeddings__
-- __BRET__
+- __BERT__
 
 ## __Classic Word Embeddings__
 
 #### [Efficient Estimation of Word Representations in Vector Space (2013)](https://arxiv.org/pdf/1301.3781.pdf)
 
-Introduced by (Mikolov et al., 2013) was the first popular embeddings method for NLP tasks. The paper itself is hard to understand, and many details are left over, but essentially the model is a neural network with a single hidden layer, and the embeddings are actually the weights of the hidden layer in the neural network.
+Introduced by Mikolov et al., 2013 it was the first popular embeddings method for NLP tasks. The paper itself is hard to understand, and many details are left over, but essentially the model is a neural network with a single hidden layer, and the embeddings are actually the weights of the hidden layer in the neural network.
 
 <figure>
   <img style="width: 85%; height: 85%" src="/assets/images/2018-12-06-skip_gram_net_arch.png">
@@ -94,7 +94,11 @@ A vector representation is associated to each character $$n$$-gram, and words ar
 
 Each word $w$ is represented as a bag of character $n$-gram, plus a special boundary symbols _\<_ and _\>_ at the beginning and end of words, plus the word $w$ itself in the set of its $n$-grams.
 
-Taking the word _where_ and $n = 3$ as an example, it will be represented by the character $n$-grams: \< wh, whe, her, ere, re \> and the special sequence \< where \>.
+Taking the word _where_ and $n = 3$ as an example, it will be represented by the character $n$-grams: 
+
+<center>
+< wh, whe, her, ere, re > and the special sequence < where >.
+</center>
 
 #### __Links__
 - [https://github.com/facebookresearch/fastText](https://github.com/facebookresearch/fastText)
@@ -134,7 +138,7 @@ A sequence of words is fed into an LSTM word by word, the previous word along wi
 
 But it's also possible to go one level below and build a character-level language model. [Andrej Karpathy blog post](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) about char-level language model shows some interesting examples.
 
-This is short a very short intro on language models, but they are the backbone of the upcoming techniques/papers that complete this blog post.
+This is a very short, quick and dirty introduction on language models, but they are the backbone of the upcoming techniques/papers that complete this blog post.
 
 ---
 
