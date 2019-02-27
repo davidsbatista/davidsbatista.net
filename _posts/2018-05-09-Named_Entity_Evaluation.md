@@ -46,10 +46,10 @@ Comparing the golden standard annotations with the output of a NER system differ
     <th class="tg-c3ow" colspan="2"><span style="font-weight:bold">System Prediction</span></th>
   </tr>
   <tr>
-    <td class="tg-7btt">Entity Type</td>
     <td class="tg-7btt">Surface String</td>
-    <td class="tg-c3ow"><span style="font-weight:bold">Entity Type</span></td>
+    <td class="tg-7btt">Entity Type</td>    
     <td class="tg-c3ow"><span style="font-weight:bold">Surface String</span></td>
+    <td class="tg-c3ow"><span style="font-weight:bold">Entity Type</span></td>
   </tr>
   <tr>
     <td class="tg-us36">in</td>
@@ -87,10 +87,10 @@ Comparing the golden standard annotations with the output of a NER system differ
     <th class="tg-c3ow" colspan="2"><span style="font-weight:bold">System Prediction</span></th>
   </tr>
   <tr>
-    <td class="tg-7btt">Entity Type</td>
     <td class="tg-7btt">Surface String</td>
-    <td class="tg-c3ow"><span style="font-weight:bold">Entity Type</span></td>
+    <td class="tg-7btt">Entity Type</td>
     <td class="tg-c3ow"><span style="font-weight:bold">Surface String</span></td>
+    <td class="tg-c3ow"><span style="font-weight:bold">Entity Type</span></td>
   </tr>
   <tr>
     <td class="tg-us36">an</td>
@@ -130,10 +130,10 @@ Comparing the golden standard annotations with the output of a NER system differ
     <th class="tg-c3ow" colspan="2"><span style="font-weight:bold">System Prediction</span></th>
   </tr>
   <tr>
-    <td class="tg-7btt">Entity Type</td>
     <td class="tg-7btt">Surface String</td>
-    <td class="tg-c3ow"><span style="font-weight:bold">Entity Type</span></td>
+    <td class="tg-7btt">Entity Type</td>    
     <td class="tg-c3ow"><span style="font-weight:bold">Surface String</span></td>
+    <td class="tg-c3ow"><span style="font-weight:bold">Entity Type</span></td>    
   </tr>
   <tr>
     <td class="tg-us36">in</td>
@@ -175,10 +175,10 @@ But of course we are discarding partial matches, or other scenarios when the NER
     <th class="tg-c3ow" colspan="2"><span style="font-weight:bold">System Prediction</span></th>
   </tr>
   <tr>
-    <td class="tg-7btt">Entity Type</td>
     <td class="tg-7btt">Surface String</td>
-    <td class="tg-c3ow"><span style="font-weight:bold">Entity Type</span></td>
+    <td class="tg-7btt">Entity Type</td>    
     <td class="tg-c3ow"><span style="font-weight:bold">Surface String</span></td>
+    <td class="tg-c3ow"><span style="font-weight:bold">Entity Type</span></td>    
   </tr>
   <tr>
     <td class="tg-us36">I</td>
@@ -230,10 +230,10 @@ But of course we are discarding partial matches, or other scenarios when the NER
     <th class="tg-c3ow" colspan="2"><span style="font-weight:bold">System Prediction</span></th>
   </tr>
   <tr>
-    <td class="tg-7btt">Entity Type</td>
     <td class="tg-7btt">Surface String</td>
-    <td class="tg-c3ow"><span style="font-weight:bold">Entity Type</span></td>
+    <td class="tg-7btt">Entity Type</td>    
     <td class="tg-c3ow"><span style="font-weight:bold">Surface String</span></td>
+    <td class="tg-c3ow"><span style="font-weight:bold">Entity Type</span></td>    
   </tr>
   <tr>
     <td class="tg-us36">Unless</td>
@@ -273,10 +273,10 @@ But of course we are discarding partial matches, or other scenarios when the NER
     <th class="tg-c3ow" colspan="2"><span style="font-weight:bold">System Prediction</span></th>
   </tr>
   <tr>
-    <td class="tg-7btt">Entity Type</td>
     <td class="tg-7btt">Surface String</td>
-    <td class="tg-c3ow"><span style="font-weight:bold">Entity Type</span></td>
+    <td class="tg-7btt">Entity Type</td>    
     <td class="tg-c3ow"><span style="font-weight:bold">Surface String</span></td>
+    <td class="tg-c3ow"><span style="font-weight:bold">Entity Type</span></td>    
   </tr>
   <tr>
     <td class="tg-us36">Unless</td>
@@ -374,10 +374,10 @@ each of these ways to measure the performance accounts for correct, incorrect, p
   </tr>
   <tr>
     <td></td>
-    <td><span style="font-weight:bold">Entity Type</span></td>
     <td><span style="font-weight:bold">Surface String</span></td>
-    <td><span style="font-weight:bold">Entity Type</span></td>
+    <td><span style="font-weight:bold">Entity Type</span></td>    
     <td><span style="font-weight:bold">Surface String</span></td>
+    <td><span style="font-weight:bold">Entity Type</span></td>    
     <td><span class="text-center" style="font-weight:bold">Type</span></td>
     <td><span class="text-center" style="font-weight:bold">Partial</span></td>
     <td><span class="text-center" style="font-weight:bold">Exact</span></td>
