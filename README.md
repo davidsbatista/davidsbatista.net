@@ -5,7 +5,7 @@ My personal homepage and blog at:
 http://www.davidsbatista.net/
 
 to run with jekyll own webserver
-  1. `rvm use ruby-2.1.2`
+  1. `rvm use ruby-2.4.2`
   2. `jekyll serve`
 
 using apache:
