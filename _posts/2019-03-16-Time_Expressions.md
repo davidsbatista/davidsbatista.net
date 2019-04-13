@@ -44,15 +44,15 @@ Time normalization ([Verhagen et al. 2007](http://www.aclweb.org/anthology/S07-1
 
 ## __Evaluation Challenges__
 
-- __SemEval 2007 Task 15__
+- __SemEval 2007 Task 15: TempEval-1__
    - [http://nlp.cs.swarthmore.edu/semeval/tasks/index.php](https://web.archive.org/web/20080420071035/http://nlp.cs.swarthmore.edu/semeval/tasks/index.php)
    - [paper](https://www.aclweb.org/anthology/S07-1014)
 
-- __SemEval 2010 Task 13__:
+- __SemEval 2010 Task 13: TempEval-2__
     - [http://semeval2.fbk.eu/semeval2.php?location=tasks-short](http://semeval2.fbk.eu/semeval2.php?location=tasks-short)
     - [paper](https://www.aclweb.org/anthology/S10-1010)
 
-- __SemEval 2013 Task 11__:
+- __SemEval 2013 Task 11: TempEval-3__
    - [https://www.cs.york.ac.uk/semeval-2013/task1/index.html](https://www.cs.york.ac.uk/semeval-2013/task1/index.html)
    - [paper](http://www.aclweb.org/anthology/S/S13/S13-2001.pdf)
 
@@ -76,29 +76,45 @@ Several datasets and approaches were proposed to tackle the task of mapping a ti
 
 <!--
 http://nlpprogress.com/english/temporal_processing.html
-
 https://dbs.ifi.uni-heidelberg.de/files/Team/jannik/publications/fischer-stroetgen_temporal-expressions-in-literary-corpora_dh2015_final_2015-03-01.pdf
-
 -->
 
 ---
 <br>
 
-## __Systems__
+
+## __TIMEX normalisation: systems and approaches__
+
 
 - __CogCompTime: A Tool for Understanding Time in Natural Language (2018)__ [paper](http://aclweb.org/anthology/D18-2013)
 
+- __A Baseline Temporal Tagger for all Languages (2015)__ [paper](https://aclweb.org/anthology/D/D15/D15-1063.pdf) [code](https://github.com/HeidelTime/heideltime)
+
+- __A synchronous context free grammar for time normalisation (2013)__ [paper](http://www.aclweb.org/anthology/D13-1078)
+
+- __SUTIME: A Library for Recognizing and Normalizing Time Expressions__ [paper](https://nlp.stanford.edu/pubs/lrec2012-sutime.pdf) [code](https://nlp.stanford.edu/software/sutime.html)
+
+- __Parsing Time: Learning to Interpret Time Expressions (2012)__ [paper](https://aclanthology.info/pdf/N/N12/N12-1049.pdf)
+
 - __TIMEN: An Open Temporal Expression Normalisation Resource (2012)__ [paper](http://lrec.elra.info/proceedings/lrec2012/pdf/128_Paper.pdf)
 
-- __A synchronous context free grammar for time normalization (2013)__ [paper](http://www.aclweb.org/anthology/D13-1078)
+- __EVENT AND TEMPORAL EXPRESSION EXTRACTION FROM RAW TEXT: FIRST STEP TOWARDS A TEMPORALLY AWARE SYSTEM (2010)__ [paper](https://www.researchgate.net/profile/Naushad_UzZaman/publication/220233264_Event_and_Temporal_Expression_Extraction_from_Raw_Text_First_Step_towards_a_Temporally_Aware_System/links/004635384b4c1f3793000000.pdf)
 
-- __A Baseline Temporal Tagger for all Languages (2015)__ [paper](https://aclweb.org/anthology/D/D15/D15-1063.pdf) [code](https://github.com/HeidelTime/heideltime)
+- __Edinburgh-LTG: TempEval-2 System Description (2010)__ [paper](https://www.aclweb.org/anthology/S10-1074)
+
+
+
+
+
+
+
 
 
 <br><br><br><br>
 
 ## __References__
 
+- [Temporal expression extraction with extensive feature type selection and a posteriori label adjustment](https://www.sciencedirect.com/science/article/pii/S0169023X15000725)
 - Towards Task-Based Temporal Extraction and Recognition.pdf
 - [1] ([Verhagen et al. 2007](http://www.aclweb.org/anthology/S07-1014))
 - [2] http://ucrel.lancs.ac.uk/publications/cl2003/papers/pustejovsky.pdf
