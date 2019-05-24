@@ -62,6 +62,8 @@ Time normalization ([Verhagen et al. 2007](http://www.aclweb.org/anthology/S07-1
 
 ## __Datasets__
 
+<!-- see: https://web.archive.org/web/20130727183253/http://www.timexportal.info/corpora -->
+
 Several datasets and approaches were proposed to tackle the task of mapping a time expression into it's formal representation. Most of this datasets however have two principal characteristics, they are target at he English language and are part of the newswire or wikipedia domain.
 
 - ### __English__
