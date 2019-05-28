@@ -73,7 +73,7 @@ Note that you need to measure this for every possible class in your dataset. So,
 
 These two metrics are somehow related to __Precision__ and __Recall__, and although not often, I saw them being used a couple of times in NLP-related problems:
 
-$$ \textrm{Sensitivity} = \frac{\textrm{TP}}{\textrm{TP+FP}}$$
+$$ \textrm{Sensitivity} = \frac{\textrm{TP}}{\textrm{TP+FN}}$$
 
 $$ \textrm{Specificity} = \frac{\textrm{TN}}{\textrm{TN+FP}}$$
 
