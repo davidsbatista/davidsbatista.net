@@ -86,7 +86,6 @@ including Portuguese.
 From the paper "shared repository of large-text resources for creating word
 vectors, including pre-processed corpora and pre-trained vectors for a range
 of frameworks and configurations. This will facilitate reuse, rapid
-experimentation, and replicability of results".
-
-The repository contains different types of embedding for many languages, including
-embeddings based on the Portuguese CoNLL17 corpus.
+experimentation, and replicability of results". The repository contains different 
+types of embedding for many languages, including embeddings based on the 
+Portuguese CoNLL17 corpus.
