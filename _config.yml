@@ -29,7 +29,9 @@ kramdown:
 #lsi: true
 
 # Gems
-plugins: [jekyll-sitemap]
+plugins: [jekyll-sitemap, jemoji]
+emoji:
+  src: "https://github.githubassets.com/images/icons/"
 
 #plugins: [jekyll-paginate, jekyll-sitemap]
 #paginate: 5

@@ -691,3 +691,10 @@ table.blueTable tfoot .links a{
   padding: 2px 8px;
   border-radius: 5px;
 }
+
+img.emoji {
+    display: inline;
+    height: 1em;
+    width: 1em;
+    margin-bottom: 0.25em;
+}
