@@ -9,8 +9,8 @@ to run with jekyll own webserver
   2. `jekyll serve`
 
 using apache:
-  1. run tag_generator.py
-  2. jekyll build -d /var/www/html/blog/
+  1. `run tag_generator.py`
+  2. `jekyll build -d /var/www/html/blog/`
 
 
 Add-ons:

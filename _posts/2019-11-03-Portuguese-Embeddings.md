@@ -4,8 +4,8 @@ title: Portuguese Word Embeddings
 date: 2019-11-03 00:00:00
 tags: embeddings word-embeddings gensim fasttext word2vec portuguese
 categories: [blog]
-# comments: true
-# disqus_identifier: 20190904
+comments: true
+disqus_identifier: 20191103
 preview_pic: /assets/images/2019-11-03-pt-embeddings.jpg
 ---
 
