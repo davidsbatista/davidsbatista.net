@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The Attention Mechanism
+title: The Attention Mechanism in Natural Language Processing
 date: 2020-01-25 00:00:00
 tags: attention nlp seq2seq
 categories: [blog]
@@ -24,7 +24,7 @@ vector in the original seq2seq model for machine translation
 
 ### __The 'classical' seq2seq__
 
-The seq2seq model is composed of main components:
+The seq2seq model is composed of two main components:
 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2020-01-25-seq2seq.jpeg">
@@ -66,8 +66,9 @@ specially for long sentences.
 ### __seq2seq with Attention__
 
 This was one of the motivations by [Bahdanau et al. 2015](https://arxiv.org/pdf/1409.0473.pdf),
-which proposed a similar architecture with a crucial improvement: "_The new
-architecture consists of a bidirectional RNN as an encoder and a decoder that
+which proposed a similar architecture with a crucial improvement:
+
+"_The new architecture consists of a bidirectional RNN as an encoder and a decoder that
 emulates searching through a source sentence during decoding a translation_"
 
 The encoder is now a bidirectional recurrent network with a forward hidden state
@@ -84,8 +85,8 @@ through the source sentence, done through the __attention mechanism__.
 </figure>
 
 They propose to replace the fixed-length context vector by a another context
-vector $c_{i}$ which is a sum of hidden states of the input sequence, weighted by
-alignment scores.
+vector $c_{i}$ which is a sum of the hidden states of the input sequence, weighted
+by alignment scores.
 
 $$p(y_{t} | {y_{1}, \dots , y_{t-1}}, c) = g(y_{t−1}, s_{t}, c)$$
 
@@ -93,16 +94,49 @@ where $s_{i}$ is the hidden state for time $i$, computed by:
 
 $$s_{i} = f(s_{i−1}, y_{i−1}, c_{i})$$
 
-the probability is conditioned on a distinct context vector c_{i} for each
-target word $y$.
+the probability is conditioned on a distinct context vector c_{i} for each target
+word $y$.
 
 ### __Context Vector__
 
+How to compute the context vector $$c_{i}$$ ?
+
+The context vector depends $$c_{i}$$ depends on a sequence of annotations to which
+an encoder maps the input sentence. Each annotation contains information about
+the whole input sequence with a strong focus on the parts surrounding the $$i_{th}$$
+word of the input sequence. These annotations are simple the concatenation
+of the two states from the forward and backward RNN/LSTM from the encoder for
+each word in the input, h_{j}.
+
 <!--
-The context vector ci is, then, computed as a weighted sum of these annotations hi
-:
+We obtain an annotation for each word xj by concatenating the forward hidden state
+and the backward one from the encoder.
+In this way, the annotation hj contains the summaries of both the preceding
+words and the following words
 -->
 
+- __NOTE__ if you are interesting in this kind of mechanism check how the flair
+embeddings generate from character embeddings en embedding for a word, there's
+a similar idea there.
+
+The context vector $c_{i}$ is computed as a weighted sum of these
+annotations $h_{i}$:
+
+
+$$c_{i} = \sum_{j=1}^{T_{x}} \alpha_{ij}h_{j}$$
+
+
+The weight $\alpha_{ij}$ of each annotation $h_{j}$ is computed by:
+
+$$\alpha_{ij} = \text{softmax}(e_{ij}) \ \ \ \ \text{where} \ \ \ \  e_{ij} = a(s_{i-1,h_{j}})$$
+
+$a$ is an alignment model which scores how well the inputs around position $j$ and
+the output at position $i$ match. The score is based on the RNN hidden state $s_{i−1}$
+(just before emitting $y_{i}$) and the $j_{th}$ annotation $h_{j}$ of the input sentence
+
+$$a(s_{i-1},h_{j}) = \mathbf{v}_a^\top \tanh(\mathbf{W}_{a}\ s_{i-1} + \mathbf{U}_{a}\ {h}_j)$$
+
+where both $\mathbf{v}_a$ and $\mathbf{W}_a$ are weight matrices to be learned in the alignment model.
 
 <!--
 Instead of $s_{t}$ (the hidden state at time t), the new model uses now $s_{i}$,
