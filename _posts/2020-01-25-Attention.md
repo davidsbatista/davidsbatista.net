@@ -65,8 +65,9 @@ specially for long sentences.
 
 ### __seq2seq with Attention__
 
-This was one of the motivations by [Bahdanau et al. 2015](https://arxiv.org/pdf/1409.0473.pdf),
-which proposed a similar architecture with a crucial improvement:
+The fixed size context-vector bottleneck was one of the main motivations by
+[Bahdanau et al. 2015](https://arxiv.org/pdf/1409.0473.pdf), which proposed a
+similar architecture with a crucial improvement:
 
 "_The new architecture consists of a bidirectional RNN as an encoder and a decoder that
 emulates searching through a source sentence during decoding a translation_"
@@ -76,8 +77,8 @@ and a backward one. A simple concatenation of two represents the encoder state.
 The motivation is to include both the preceding and following words in the
 annotation of one word.
 
-Another key element in the decoder is that now it's equipped with some sort of search
-through the source sentence, done through the __attention mechanism__.
+Another key element in the decoder is that now it's equipped with some sort of
+search through the source sentence, done through the __attention mechanism__.
 
 <figure>
   <img style="width: 40%; height: 40%" src="/assets/images/2020-01-25-seq2seq_with_attention.png">
@@ -85,8 +86,8 @@ through the source sentence, done through the __attention mechanism__.
 </figure>
 
 They propose to replace the fixed-length context vector by a another context
-vector $c_{i}$ which is a sum of the hidden states of the input sequence, weighted
-by alignment scores.
+vector $c_{i}$ which is a sum of the hidden states of the input sequence,
+weighted by alignment scores.
 
 $$p(y_{t} | {y_{1}, \dots , y_{t-1}}, c) = g(y_{t−1}, s_{t}, c)$$
 
@@ -94,8 +95,8 @@ where $s_{i}$ is the hidden state for time $i$, computed by:
 
 $$s_{i} = f(s_{i−1}, y_{i−1}, c_{i})$$
 
-the probability is conditioned on a distinct context vector c_{i} for each target
-word $y$.
+the probability is conditioned on a distinct context vector $c_{i}$ for each
+target word $y$.
 
 ### __Context Vector__
 
@@ -106,7 +107,7 @@ an encoder maps the input sentence. Each annotation contains information about
 the whole input sequence with a strong focus on the parts surrounding the $$i_{th}$$
 word of the input sequence. These annotations are simple the concatenation
 of the two states from the forward and backward RNN/LSTM from the encoder for
-each word in the input, h_{j}.
+each word in the input, $h_{j}$.
 
 <!--
 We obtain an annotation for each word xj by concatenating the forward hidden state
@@ -116,7 +117,7 @@ words and the following words
 -->
 
 - __NOTE__ if you are interesting in this kind of mechanism check how the flair
-embeddings generate from character embeddings en embedding for a word, there's
+embeddings generate from character embeddings an embedding for a word, there's
 a similar idea there.
 
 The context vector $c_{i}$ is computed as a weighted sum of these
@@ -170,6 +171,18 @@ https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html
 -->
 
 ## __Document-Level Classification Example__
+
+
+<!--
+
+https://github.com/AnubhavGupta3377/Text-Classification-Models-Pytorch/tree/master/Model_Seq2Seq_Attention
+
+https://github.com/prakashpandey9/Text-Classification-Pytorch/tree/master/models
+
+https://towardsdatascience.com/nlp-learning-series-part-3-attention-cnn-and-what-not-for-text-classification-4313930ed566
+
+->
+
 
 <!--
 Attention-Based Bidirectional Long Short-Term Memory Networks for Relation Classification
@@ -230,4 +243,15 @@ https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html
 EMNLP 2015: "effective approaches to attention-based neural machine translation
 https://vimeo.com/162101582
 
+
+https://ruder.io/deep-learning-nlp-best-practices/index.html#attention
+
+
+self-attention, two-way attention, key-value-predict models and hierarchical attention
+
+https://medium.com/@joealato/attention-in-nlp-734c6fa9d983
+
 -->
+
+
+
