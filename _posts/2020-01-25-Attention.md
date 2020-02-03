@@ -56,8 +56,19 @@ is computed as:
 
 $$p(y_{t} | {y_{1}, \dots , y_{t-1}}, c) = g(y_{t−1}, s_{t}, c)$$
 
-where, $g$ is a nonlinear function that outputs the probability of y_{t},
-s_{t} is the hidden state, and $c$ the context vector.
+where, $g$ is a nonlinear function that outputs the probability of $y_{t}$,
+$s_{t}$ is the value of the hidden state of the current position, and $c$ the
+context vector.
+
+In the simplest seq2seq decoder we use only the last output of the encoder. This
+last output is sometimes called the context vector as it encodes context from
+the entire sequence. This context vector is used as the initial hidden
+state of the decoder.
+
+At every step of decoding, the decoder is given an input token and hidden state.
+The initial input token is the start-of-string <SOS> token, and the first
+hidden state is the context vector (the encoder’s last hidden state).
+
 
 The fixed size context-vector needs to contain a good summary of the meaning of
 the whole source sentence, being this fixed-size vector one big bottleneck,
@@ -69,8 +80,9 @@ The fixed size context-vector bottleneck was one of the main motivations by
 [Bahdanau et al. 2015](https://arxiv.org/pdf/1409.0473.pdf), which proposed a
 similar architecture with a crucial improvement:
 
-"_The new architecture consists of a bidirectional RNN as an encoder and a decoder that
-emulates searching through a source sentence during decoding a translation_"
+"_The new architecture consists of a bidirectional RNN as an encoder and a
+decoder that emulates searching through a source sentence during decoding
+a translation_"
 
 The encoder is now a bidirectional recurrent network with a forward hidden state
 and a backward one. A simple concatenation of two represents the encoder state.
