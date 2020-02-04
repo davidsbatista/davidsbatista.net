@@ -6,19 +6,23 @@ tags: attention nlp seq2seq
 categories: [blog]
 comments: false
 disqus_identifier: 2020125
-preview_pic: # /assets/images/2019-11-03-pt-embeddings.jpg
+preview_pic: /assets/images/2020-01-25-seq2seq_with_attention.png
 ---
 
 The __Attention__ mechanism is now an established
 
 
-## __Introduction__: origins in the seq2seq model
+## __Introduction__
 
-To the best of my knowledge the first of the attention mechanism
-was first presented in _"Neural Machine Translation by Jointly Learning to Align and Translate"_
-at ICLR 2015 ([Bahdanau et al. 2015](https://arxiv.org/pdf/1409.0473.pdf))
+To the best of my knowledge the attention mechanism was first presented in
+_"Neural Machine Translation by Jointly Learning to Align and Translate"_
+at ICLR 2015 ([Bahdanau et al. 2015](https://arxiv.org/pdf/1409.0473.pdf)).
 
-In the paper the authors propose to tackle the problem of a fixed-length context
+This was proposed in the context of machine translation, where given a sentence
+in one language, the model has to produce a translation for that sentence in
+another language.
+
+In the paper, the authors propose to tackle the problem of a fixed-length context
 vector in the original seq2seq model for machine translation
 ([Cho et al., 2014](https://www.aclweb.org/anthology/D14-1179/))
 
@@ -31,6 +35,8 @@ The seq2seq model is composed of two main components:
   <figcaption>Figure 1: A seq2seq model composed of an encoder and decoder.</figcaption>
 </figure>
 
+
+
 The __encoder__ reads the input sentence, a sequence of vectors $x = (x_{1}, \dots , x_{T})$,
 into a fixed-length vector $c$. Typical approaches are RNN or LSTMs such that:
 
@@ -41,15 +47,19 @@ $$ c = q\ (h_{1}, \dotsc, h_{T}) $$
 where $h_{t}$ is a hidden state at time $t$, and $c$ is a vector generated from
 the sequence of the hidden states, and $f$ and $q$ are some nonlinear functions.
 
+At every time-step $t$ the encoder produces a hidden state $h_{t}$, and the
+generated context vector is modelled according to all hidden states.
+
+
 
 The __decoder__ is trained to predict the next word $$y_{t}$$ given the context
-vector $$c$$ and all the previously predict words $\\{y_{1}, \dots , y_{t-1}\\}$.
-the decoder defines a probability over the translation $${\bf y}$$ by decomposing
-the joint probability into the ordered conditionals:
+vector $$c$$ and all the previously predict words $\\{y_{1}, \dots , y_{t-1}\\}$,
+it defines a probability over the translation $${\bf y}$$ by decomposing
+the joint probability:
 
 $$p({\bf y}) = \prod\limits_{i=1}^{x} p(y_{t} | {y_{1}, \dots , y_{t-1}}, c)$$
 
-where $\bf y = \\{y_{1}, \dots , y_{t}\\}$. That is the probability of a
+where $\bf y = \\{y_{1}, \dots , y_{t}\\}$. In other words, the probability of a
 translation sequence is calculated by computing the conditional probability
 of each word given the previous words. With an LSTM/RNN each conditional probability
 is computed as:
@@ -60,88 +70,93 @@ where, $g$ is a nonlinear function that outputs the probability of $y_{t}$,
 $s_{t}$ is the value of the hidden state of the current position, and $c$ the
 context vector.
 
-In the simplest seq2seq decoder we use only the last output of the encoder. This
-last output is sometimes called the context vector as it encodes context from
-the entire sequence. This context vector is used as the initial hidden
-state of the decoder.
+In a simple seq2seq model, the last output of the LSTM/RNN is the context vector,
+encoding context from the entire sequence. This context vector is used as the
+initial hidden state of the decoder.
 
-At every step of decoding, the decoder is given an input token and hidden state.
-The initial input token is the start-of-string <SOS> token, and the first
-hidden state is the context vector (the encoder’s last hidden state).
+At every step of decoding, the decoder is given an input token and (the previous)
+hidden state. The initial input token is the start-of-string <SOS> token, and
+the first hidden state is the context vector (the encoder’s last hidden state).
+
+So, the fixed size context-vector needs to contain a good summary of the meaning
+of the whole source sentence, being this one big bottleneck, specially for long
+sentences.
 
 
-The fixed size context-vector needs to contain a good summary of the meaning of
-the whole source sentence, being this fixed-size vector one big bottleneck,
-specially for long sentences.
+
 
 ### __seq2seq with Attention__
 
 The fixed size context-vector bottleneck was one of the main motivations by
 [Bahdanau et al. 2015](https://arxiv.org/pdf/1409.0473.pdf), which proposed a
-similar architecture with a crucial improvement:
+similar architecture but with a crucial improvement:
 
 "_The new architecture consists of a bidirectional RNN as an encoder and a
 decoder that emulates searching through a source sentence during decoding
 a translation_"
 
-The encoder is now a bidirectional recurrent network with a forward hidden state
-and a backward one. A simple concatenation of two represents the encoder state.
-The motivation is to include both the preceding and following words in the
-annotation of one word.
+The encoder is now a bidirectional recurrent network with a forward and backward
+hidden states. A simple concatenation of the two represents the encoder state
+at any given position in the sentence. The motivation is to include both the
+preceding and following words in the annotation of one word.
 
-Another key element in the decoder is that now it's equipped with some sort of
-search through the source sentence, done through the __attention mechanism__.
+The other key element, and the most important on, is that the decoder is now
+equipped with some sort of search, allowing it to look at the whole source
+sentence when it needs to produce an output word, the __attention mechanism__.
 
 <figure>
   <img style="width: 40%; height: 40%" src="/assets/images/2020-01-25-seq2seq_with_attention.png">
-  <figcaption>Figure 2: A seq2seq model composed of an encoder and decoder.</figcaption>
+  <figcaption>Figure 2: The attention mechanism in a seq2seq model. Taken from Bahdanau et al. 2015.</figcaption>
 </figure>
 
-They propose to replace the fixed-length context vector by a another context
-vector $c_{i}$ which is a sum of the hidden states of the input sequence,
+The Figure 2 above gives a good overview of this new mechanism. To produce the
+output word at time $y_{t}$ the decoder uses the last hidden state from the
+decoder - one can thing about this as some sort of representation of the already
+produced words - and a dynamically computed context vector based on the input
+sequence.
+
+The authors proposed to replace the fixed-length context vector by a another
+context vector $c_{i}$ which is a sum of the hidden states of the input sequence,
 weighted by alignment scores.
 
-$$p(y_{t} | {y_{1}, \dots , y_{t-1}}, c) = g(y_{t−1}, s_{t}, c)$$
+Note that now the probability of each output word is conditioned on a distinct
+context vector $c_{i}$ for each target word $y$.
+
+The new decoder is then defined as:
+
+$$p(y_{t} | {y_{1}, \dots , y_{t-1}}, c) = g(y_{t−1}, s_{i}, c)$$
 
 where $s_{i}$ is the hidden state for time $i$, computed by:
 
 $$s_{i} = f(s_{i−1}, y_{i−1}, c_{i})$$
 
-the probability is conditioned on a distinct context vector $c_{i}$ for each
-target word $y$.
+that is, a new hidden state for $i$ depends on the previous hidden state,
+the representation of the word generated by the previous state and the
+context vector for position $i$. The remaining question now is, how to compute
+the context vector $$c_{i}$$ ?
+
 
 ### __Context Vector__
 
-How to compute the context vector $$c_{i}$$ ?
+The context vector $c_{i}$ is a sum of the hidden states of the input sequence,
+weighted by alignment scores. Each word in the input sequence is represented by
+a concatenation of the two (i.e., forward and backward) RNNs hidden states,
+let's call them annotations.
 
-The context vector depends $$c_{i}$$ depends on a sequence of annotations to which
-an encoder maps the input sentence. Each annotation contains information about
-the whole input sequence with a strong focus on the parts surrounding the $$i_{th}$$
-word of the input sequence. These annotations are simple the concatenation
-of the two states from the forward and backward RNN/LSTM from the encoder for
-each word in the input, $h_{j}$.
+Each annotation contains information about the whole input sequence with a
+strong focus on the parts surrounding the $$i_{th}$$ word in the input sequence.
 
-<!--
-We obtain an annotation for each word xj by concatenating the forward hidden state
-and the backward one from the encoder.
-In this way, the annotation hj contains the summaries of both the preceding
-words and the following words
--->
-
-- __NOTE__ if you are interesting in this kind of mechanism check how the flair
-embeddings generate from character embeddings an embedding for a word, there's
-a similar idea there.
-
-The context vector $c_{i}$ is computed as a weighted sum of these
-annotations $h_{i}$:
-
+The context vector $c_{i}$ is computed as a weighted sum of these annotations:
 
 $$c_{i} = \sum_{j=1}^{T_{x}} \alpha_{ij}h_{j}$$
 
-
 The weight $\alpha_{ij}$ of each annotation $h_{j}$ is computed by:
 
-$$\alpha_{ij} = \text{softmax}(e_{ij}) \ \ \ \ \text{where} \ \ \ \  e_{ij} = a(s_{i-1,h_{j}})$$
+$$\alpha_{ij} = \text{softmax}(e_{ij})$$
+
+where:
+
+$$e_{ij} = a(s_{i-1,h_{j}})$$
 
 $a$ is an alignment model which scores how well the inputs around position $j$ and
 the output at position $i$ match. The score is based on the RNN hidden state $s_{i−1}$
@@ -151,38 +166,50 @@ $$a(s_{i-1},h_{j}) = \mathbf{v}_a^\top \tanh(\mathbf{W}_{a}\ s_{i-1} + \mathbf{U
 
 where both $\mathbf{v}_a$ and $\mathbf{W}_a$ are weight matrices to be learned in the alignment model.
 
+
+The alignment model in the paper is described as feed forward neural network
+whose weight matrices $\mathbf{v}_a$ and $\mathbf{W}_a$ are learned jointly
+together with the whole graph/network.
+
+The authors note:
+
+"_The probability_ $\alpha_{ij}h_{j}$ _reflects the importance of the annotation_
+$h_{j}$ _with respect to the previous hidden state_ $s_{i−1}$ _in deciding the
+next state_ $s_{i}$ _and generating_ $y_{i}$. _Intuitively, this implements a
+mechanism of attention in the decoder._
+
+### __Wrap Up__
+
+<figure>
+  <img style="width: 75%; height: 75%" src="/assets/images/2020-01-25-attention_seq2seq_context.jpg">
+  <figcaption>Figure 3: </figcaption>
+</figure>
+
+
+<figure>
+  <img style="width: 75%; height: 75%" src="/assets/images/2020-01-25-attention_seq2seq_context_with_attention.jpg">
+  <figcaption>Figure 4: </figcaption>
+</figure>
+
+
+### __Other attention mechanisms/functions__
+
 <!--
-Instead of $s_{t}$ (the hidden state at time t), the new model uses now $s_{i}$,
-
-So this new proposal - __attention__ - uses a context vector to attend to all words
-in the source sentence.
--->
-
-
-<!--
-Other attention mechanisms/functions
-
 "Effective Approaches to Attention-based Neural Machine Translation"
 https://www.aclweb.org/anthology/D15-1166/
 -->
 
 
-
-
-
 ---
 
-## __Seq2Sequence Example__
+### __Seq2Sequence Example__
 
 <!--
-
 ToDo: usar o exemplo e fazer uma tradução com português?
-
 https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html
-
 -->
 
-## __Document-Level Classification Example__
+## __Attention in Document-Level Classification tasks__
 
 
 <!--
@@ -244,7 +271,9 @@ https://www.aclweb.org/anthology/P16-2034.pdf
 
 ## __References__
 
-- [1] [An Introductory Survey on Attention Mechanisms in NLP Problems](https://link.springer.com/chapter/10.1007/978-3-030-29513-4_31) ([arXiv.org version](https://arxiv.org/pdf/1811.05544.pdf))([presentation slides](https://www.iclr.cc/archive/www/lib/exe/fetch.php%3Fmedia=iclr2015:bahdanau-iclr2015.pdf))
+- [1] [An Introductory Survey on Attention Mechanisms in NLP Problems](https://link.springer.com/chapter/10.1007/978-3-030-29513-4_31) ([arXiv.org version](https://arxiv.org/pdf/1811.05544.pdf))
+
+- [2] [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf)  ([slides](https://www.iclr.cc/archive/www/lib/exe/fetch.php%3Fmedia=iclr2015:bahdanau-iclr2015.pdf))
 
 
 - __Figure 1__ taken from https://towardsdatascience.com/understanding-encoder-decoder-sequence-to-sequence-model-679e04af4346)
