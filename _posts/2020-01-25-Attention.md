@@ -222,16 +222,13 @@ https://towardsdatascience.com/nlp-learning-series-part-3-attention-cnn-and-what
 
 ->
 
-
 <!--
 Attention-Based Bidirectional Long Short-Term Memory Networks for Relation Classification
 https://www.aclweb.org/anthology/P16-2034.pdf
 
 Attention-based LSTM for Aspect-level Sentiment Classification
 https://www.aclweb.org/anthology/D16-1058.pdf
-
-
-## __Sequence Labelling Example__
+-->
 
 <!--
 
@@ -250,23 +247,18 @@ Example applied to document/sentence level classification task
 
 # [32, 150, 256]  x [32, 256, 1]  same shape as before
 
-
 -->
 
 
+
+
+## __Attention in Sequence Labelling Example__
 
 <!--
-## Examples applied to doc-level tasks:
-
-Attention-based LSTM for Aspect-level Sentiment Classification
-https://www.aclweb.org/anthology/D16-1058.pdf
-
-
-Attention-Based Bidirectional Long Short-Term Memory Networks for
-Relation Classification
-https://www.aclweb.org/anthology/P16-2034.pdf
-
+https://arxiv.org/pdf/1810.13097.pdf
 -->
+
+
 
 
 ## __References__
