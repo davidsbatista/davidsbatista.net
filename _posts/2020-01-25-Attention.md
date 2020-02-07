@@ -197,6 +197,10 @@ mechanism of attention in the decoder._
 <!--
 "Effective Approaches to Attention-based Neural Machine Translation"
 https://www.aclweb.org/anthology/D15-1166/
+
+slides
+https://nlp.stanford.edu/~lmthang/data/papers/emnlp15_attn.pptx
+
 -->
 
 
@@ -208,6 +212,13 @@ https://www.aclweb.org/anthology/D15-1166/
 ToDo: usar o exemplo e fazer uma tradução com português?
 https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html
 -->
+
+
+
+
+
+
+
 
 ## __Attention in Document-Level Classification tasks__
 
@@ -255,8 +266,38 @@ Example applied to document/sentence level classification task
 ## __Attention in Sequence Labelling Example__
 
 <!--
+
+
 https://arxiv.org/pdf/1810.13097.pdf
+
+
+https://www.groundai.com/project/a-survey-on-deep-learning-for-named-entity-recognition/1
+
+https://chywang.github.io/papers/apweb2018.pdf
+
+https://ieeexplore.ieee.org/abstract/document/8372007
+https://booksc.xyz/book/70658753/270c16
+
 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
