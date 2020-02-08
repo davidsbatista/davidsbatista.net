@@ -178,31 +178,42 @@ $h_{j}$ _with respect to the previous hidden state_ $s_{i−1}$ _in deciding the
 next state_ $s_{i}$ _and generating_ $y_{i}$. _Intuitively, this implements a
 mechanism of attention in the decoder._
 
-### __Wrap Up__
+### __Resume__
+
+It's now useful to review again visually the attention mechanism and compare it
+against the fixed-length context vector. The pictures below were made by
+[Nelson Zhao](https://github.com/NELSONZHAO) and hopefully will help understand
+clearly the difference between the two encoder-decoder approaches.
 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2020-01-25-attention_seq2seq_context.jpg">
-  <figcaption>Figure 3: </figcaption>
+  <figcaption>Figure 3: Encoder-Decoder with fixed-context vector (https://zhuanlan.zhihu.com/p/37290775)</figcaption>
 </figure>
 
 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2020-01-25-attention_seq2seq_context_with_attention.jpg">
-  <figcaption>Figure 4: </figcaption>
+  <figcaption>Figure 4: Ecnoder-Decoder with attention mechanism (https://zhuanlan.zhihu.com/p/37290775)</figcaption>
 </figure>
 
 
-### __Other attention mechanisms/functions__
+### __Extensions to the classical attention mechanism__
 
-<!--
-"Effective Approaches to Attention-based Neural Machine Translation"
-https://www.aclweb.org/anthology/D15-1166/
+[Luong et al.](https://www.aclweb.org/anthology/D15-1166/) proposed other
+mechanisms of attentions, more specifically, alternative functions to compute the
+alignment score:
 
-slides
-https://nlp.stanford.edu/~lmthang/data/papers/emnlp15_attn.pptx
 
--->
+<figure>
+  <img style="width: 55%; height: 55%" src="/assets/images/2020-01-25-alignment_scores.png">
+  <figcaption>Figure 5: </figcaption>
+</figure>
 
+NOTE: the _concat_ is the same as in ([Bahdanau et al. 2015](https://arxiv.org/pdf/1409.0473.pdf).
+But, most importantly, instead of a weighted average over all the source hidden
+states, they proposed a mechanism of local attention which focus only on a small
+subset of the source positions per target word instead of attending to all words
+on the source for each target word.
 
 ---
 
@@ -212,8 +223,6 @@ https://nlp.stanford.edu/~lmthang/data/papers/emnlp15_attn.pptx
 ToDo: usar o exemplo e fazer uma tradução com português?
 https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html
 -->
-
-
 
 
 
@@ -306,25 +315,25 @@ https://booksc.xyz/book/70658753/270c16
 
 - [1] [An Introductory Survey on Attention Mechanisms in NLP Problems](https://link.springer.com/chapter/10.1007/978-3-030-29513-4_31) ([arXiv.org version](https://arxiv.org/pdf/1811.05544.pdf))
 
-- [2] [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf)  ([slides](https://www.iclr.cc/archive/www/lib/exe/fetch.php%3Fmedia=iclr2015:bahdanau-iclr2015.pdf))
+- [2] [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf) ([slides](https://www.iclr.cc/archive/www/lib/exe/fetch.php%3Fmedia=iclr2015:bahdanau-iclr2015.pdf))
 
+- [3] [Effective Approaches to Attention-based Neural Machine Translation](https://www.aclweb.org/anthology/D15-1166/) ([slides](https://nlp.stanford.edu/~lmthang/data/papers/emnlp15_attn.pptx))
+
+- ["Attention, Attention" in Lil'Log](https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html)
 
 - __Figure 1__ taken from https://towardsdatascience.com/understanding-encoder-decoder-sequence-to-sequence-model-679e04af4346)
 
+- __Figure 2__ taken from https://towardsdatascience.com/understanding-encoder-decoder-sequence-to-sequence-model-679e04af4346)
+
+- __Figure 3__ taken from https://towardsdatascience.com/understanding-encoder-decoder-sequence-to-sequence-model-679e04af4346)
+
+- __Figure 4 and 5__ taken from Nelson Zhao [blog's post](https://zhuanlan.zhihu.com/p/37290775)
+
 <!--
-https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html
-
-EMNLP 2015: "effective approaches to attention-based neural machine translation
-https://vimeo.com/162101582
-
-
 https://ruder.io/deep-learning-nlp-best-practices/index.html#attention
 
-
 self-attention, two-way attention, key-value-predict models and hierarchical attention
-
 https://medium.com/@joealato/attention-in-nlp-734c6fa9d983
-
 -->
 
 
