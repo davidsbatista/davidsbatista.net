@@ -4,7 +4,7 @@ title: The Attention Mechanism in Natural Language Processing - seq2seq
 date: 2020-01-25 00:00:00
 tags: attention nlp seq2seq machine-translation neural-networks recurrent-neural-networks LSTM GRU RNN
 categories: [blog]
-comments: false
+comments: true
 disqus_identifier: 2020125
 preview_pic: /assets/images/2020-01-25-seq2seq_with_attention.png
 ---
