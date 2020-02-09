@@ -2,7 +2,7 @@
 layout: post
 title: The Attention Mechanism in Natural Language Processing - seq2seq
 date: 2020-01-25 00:00:00
-tags: attention nlp seq2seq machine-translation neural-networks
+tags: attention nlp seq2seq machine-translation neural-networks recurrent-neural-networks LSTM GRU RNN
 categories: [blog]
 comments: false
 disqus_identifier: 2020125
@@ -11,9 +11,10 @@ preview_pic: /assets/images/2020-01-25-seq2seq_with_attention.png
 
 The __Attention__ mechanism is now an established technique in many NLP tasks.
 I've heard about it often, but wanted to go a bit more deep and understand
-the details. In this first blog post - planed to publish a few more regarding
-__attention__ - I make an introduction the first proposal of attention mechanism,
-as applied to the task of neural machine translation.
+the details. In this first blog post - since I plan to publish a few more blog posts
+regarding the __attention__ subject - I make an introduction by focusing in the
+first proposal of attention mechanism, as applied to the task of neural machine
+translation.
 
 
 ## __Introduction__
@@ -27,22 +28,25 @@ in one language, the model has to produce a translation for that sentence in
 another language.
 
 In the paper, the authors propose to tackle the problem of a fixed-length context
-vector in the original seq2seq model for machine translation
+vector in the original __seq2seq__ model for machine translation
 ([Cho et al., 2014](https://www.aclweb.org/anthology/D14-1179/))
 
-### __The 'classical' seq2seq__
+### __The _classical_ Sequence-to-Sequence model__
 
-The seq2seq model is composed of two main components:
+The model is composed of two main components: an encoder, and a decoder.
+
+<br>
 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2020-01-25-seq2seq.jpeg">
   <figcaption>Figure 1: A seq2seq model composed of an encoder and decoder.</figcaption>
 </figure>
 
-
+<br>
 
 The __encoder__ reads the input sentence, a sequence of vectors $x = (x_{1}, \dots , x_{T})$,
-into a fixed-length vector $c$. Typical approaches are RNN or LSTMs such that:
+into a fixed-length vector $c$. The __encoder__ is a recurrent neural network,
+typical approaches are GRU or LSTMs such that:
 
 $$h_{t} = f\ (x_{t}, h_{t−1})$$
 
@@ -54,7 +58,7 @@ the sequence of the hidden states, and $f$ and $q$ are some nonlinear functions.
 At every time-step $t$ the encoder produces a hidden state $h_{t}$, and the
 generated context vector is modelled according to all hidden states.
 
-
+<br>
 
 The __decoder__ is trained to predict the next word $$y_{t}$$ given the context
 vector $$c$$ and all the previously predict words $\\{y_{1}, \dots , y_{t-1}\\}$,
@@ -65,8 +69,8 @@ $$p({\bf y}) = \prod\limits_{i=1}^{x} p(y_{t} | {y_{1}, \dots , y_{t-1}}, c)$$
 
 where $\bf y = \\{y_{1}, \dots , y_{t}\\}$. In other words, the probability of a
 translation sequence is calculated by computing the conditional probability
-of each word given the previous words. With an LSTM/RNN each conditional probability
-is computed as:
+of each word given the previous words. With an LSTM/GRU each conditional
+probability is computed as:
 
 $$p(y_{t} | {y_{1}, \dots , y_{t-1}}, c) = g(y_{t−1}, s_{t}, c)$$
 
@@ -74,9 +78,9 @@ where, $g$ is a nonlinear function that outputs the probability of $y_{t}$,
 $s_{t}$ is the value of the hidden state of the current position, and $c$ the
 context vector.
 
-In a simple seq2seq model, the last output of the LSTM/RNN is the context vector,
-encoding context from the entire sequence. This context vector is used as the
-initial hidden state of the decoder.
+In a simple __seq2seq__ model, the last output of the LSTM/GRU is the context
+vector, encoding context from the entire sequence. This context vector is then
+used as the initial hidden state of the decoder.
 
 At every step of decoding, the decoder is given an input token and (the previous)
 hidden state. The initial input token is the start-of-string <SOS> token, and
@@ -86,10 +90,15 @@ So, the fixed size context-vector needs to contain a good summary of the meaning
 of the whole source sentence, being this one big bottleneck, specially for long
 sentences.
 
+<figure>
+  <img style="width: 75%; height: 75%" src="/assets/images/2020-01-25-seq2seq_long_sentences.png">
+  <figcaption>Figure 2: A seq2seq model performance by sentence length.</figcaption>
+</figure>
+
+<br>
 
 
-
-### __seq2seq with Attention__
+### __Sequence-to-Sequence model with Attention__
 
 The fixed size context-vector bottleneck was one of the main motivations by
 [Bahdanau et al. 2015](https://arxiv.org/pdf/1409.0473.pdf), which proposed a
@@ -100,11 +109,12 @@ decoder that emulates searching through a source sentence during decoding
 a translation_"
 
 The encoder is now a bidirectional recurrent network with a forward and backward
-hidden states. A simple concatenation of the two represents the encoder state
-at any given position in the sentence. The motivation is to include both the
-preceding and following words in the annotation of one word.
+hidden states. A simple concatenation of the two hidden states represents the
+encoder state at any given position in the sentence. The motivation is to
+include both the preceding and following words in the representation/annotation
+of an input word.
 
-The other key element, and the most important on, is that the decoder is now
+The other key element, and the most important one, is that the decoder is now
 equipped with some sort of search, allowing it to look at the whole source
 sentence when it needs to produce an output word, the __attention mechanism__.
 
@@ -245,11 +255,11 @@ forthcoming blog posts.
 
 - __Figure 1__ taken from [towardsdatascience](https://towardsdatascience.com/understanding-encoder-decoder-sequence-to-sequence-model-679e04af4346)
 
-- __Figure 2__ taken from [Bahdanau et al. 2015](https://arxiv.org/pdf/1409.0473.pdf)
+- __Figure 2 and 3__ taken from [Bahdanau et al. 2015](https://arxiv.org/pdf/1409.0473.pdf)
 
-- __Figure 3 and 4__ taken from Nelson Zhao [blog's post](https://zhuanlan.zhihu.com/p/37290775)
+- __Figure 4 and 5__ taken from Nelson Zhao [blog's post](https://zhuanlan.zhihu.com/p/37290775)
 
-- __Figure 5__ taken from [Luong et al.](https://www.aclweb.org/anthology/D15-1166/)
+- __Figure 6__ taken from [Luong et al.](https://www.aclweb.org/anthology/D15-1166/)
 
 
 
