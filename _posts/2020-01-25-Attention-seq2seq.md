@@ -125,7 +125,7 @@ sentence when it needs to produce an output word, the __attention mechanism__.
 
 The Figure 2 above gives a good overview of this new mechanism. To produce the
 output word at time $y_{t}$ the decoder uses the last hidden state from the
-decoder - one can thing about this as some sort of representation of the already
+decoder - one can think about this as some sort of representation of the already
 produced words - and a dynamically computed context vector based on the input
 sequence.
 
@@ -207,7 +207,7 @@ clearly the difference between the two encoder-decoder approaches.
 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2020-01-25-attention_seq2seq_context_with_attention.jpg">
-  <figcaption>Figure 4: Ecnoder-Decoder with attention mechanism <br> (https://zhuanlan.zhihu.com/p/37290775)</figcaption>
+  <figcaption>Figure 4: Encoder-Decoder with attention mechanism <br> (https://zhuanlan.zhihu.com/p/37290775)</figcaption>
 </figure>
 
 
