@@ -1,6 +1,6 @@
 title: "David S. Batista"
 #tagline: ""
-description: "Ph.D., Natural Language Processing, Machine Learning, Big-Data"
+description: "Ph.D., Natural Language Processing, Machine Learning"
 baseurl: ""
 url: "http://www.davidsbatista.net/"
 email: dsbatista@gmail.com
@@ -26,13 +26,24 @@ kramdown:
   enable_coderay: false
   input: GFM
 
-#lsi: true
+plugins:
+  - jemoji
+  - jekyll-paginate-v2
+  - jekyll-sitemap
 
-# Gems
-plugins: [jekyll-sitemap, jemoji]
 emoji:
   src: "https://github.githubassets.com/images/icons/"
 
-#plugins: [jekyll-paginate, jekyll-sitemap]
+# Pagination Settings
+pagination:
+  enabled: false 
+  per_page: 5 
+  offset: 2
+  permalink: '/blog/:num/'
+  title: ':title - page :num of :max'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
+
 #paginate: 5
 #paginate_path: "blog/p:num"
