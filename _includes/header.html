@@ -14,9 +14,18 @@
         </svg>
       </a>
       <div class="trigger">
+        <!--
+            page.autogen is populated by the pagination logic for all pages
+            that are automatically created by the gem. Check for non-existence
+            to exclude pagination pages from site.pages iterators
+
+            for some reason 'page.title = "David S. Batista"' was also being
+            displayed
+        -->
         {% assign site_pages = site.pages | sort: 'title' %}
         {% for page in site_pages %}
-          {% if page.title and page.title != "404: Page not found" and page.category != 'tag' %}
+          {% if page.title and page.title != "404: Page not found" and page.title != "David S. Batista"
+             and page.category != 'tag' and page.autogen == nil %}
             <a class="site-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
           {% endif %}
         {% endfor %}

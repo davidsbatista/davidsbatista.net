@@ -17,6 +17,8 @@ markdown: kramdown
 permalink: pretty
 #excerpt_separator: <!--more-->
 
+indexpage: about
+
 kramdown:
   auto_ids: true
   footnote_nr: 1
@@ -36,9 +38,11 @@ emoji:
 
 # Pagination Settings
 pagination:
-  enabled: false 
-  per_page: 5 
-  offset: 2
+  enabled: true
+  debug: true
+  collection: 'posts'
+  per_page: 2
+  offset: 0
   permalink: '/blog/:num/'
   title: ':title - page :num of :max'
   limit: 0
