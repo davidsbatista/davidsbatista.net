@@ -69,5 +69,4 @@ I graduated from [Faculty of Sciences], [University of Lisbon], and between 2005
 [bootstrapping approach relying on distributional word representations]: http://www.emnlp2015.org/proceedings/EMNLP/pdf/EMNLP056.pdf
 [Large-Scale Semantic Relationship Extraction for Information Discovery]:  http://davidsbatista.github.io/publications/dsbatista-phd-thesis-2016.pdf
 [TREMoSSo framework]: https://github.com/davidsbatista/TREMoSSo
-
 -->
