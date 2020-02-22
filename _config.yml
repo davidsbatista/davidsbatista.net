@@ -13,11 +13,7 @@ researchgate: David_Batista4
 timezone: Europe/Berlin
 
 markdown: kramdown
-#markdown: redcarpet
 permalink: pretty
-#excerpt_separator: <!--more-->
-
-indexpage: about
 
 kramdown:
   auto_ids: true
@@ -41,13 +37,13 @@ pagination:
   enabled: true
   debug: true
   collection: 'posts'
-  per_page: 2
+  trail:
+    before: 2 # The number of links before the current page
+    after: 2  # The number of links after the current page
+  per_page: 8
   offset: 0
   permalink: '/blog/:num/'
   title: ':title - page :num of :max'
   limit: 0
   sort_field: 'date'
   sort_reverse: true
-
-#paginate: 5
-#paginate_path: "blog/p:num"
