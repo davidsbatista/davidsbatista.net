@@ -34,7 +34,7 @@ emoji:
 
 # Pagination Settings
 pagination:
-  enabled: true
+  enabled: false
   debug: true
   collection: 'posts'
   trail:
