@@ -1,4 +1,4 @@
-# website
+# Jekyll::blog
 
 My personal homepage and blog at:
 
@@ -13,6 +13,7 @@ using apache:
   2. `jekyll build -d /var/www/html/blog/`
 
 
-Add-ons:
+Plugins and add-ons:
 
+- paginate: https://github.com/sverrirs/jekyll-paginate-v2
 - tags: http://longqian.me/2017/02/09/github-jekyll-tag/
