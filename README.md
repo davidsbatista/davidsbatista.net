@@ -10,7 +10,7 @@ to run with jekyll own webserver
 
 using apache:
   1. `python run tag_generator.py`
-  2. `jekyll build -d /var/www/html/blog/`
+  2. `export GEM_HOME=/home/dsbatista/gems; jekyll build -d /var/www/html/blog/`
 
 
 Plugins and add-ons:
