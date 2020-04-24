@@ -48,7 +48,7 @@ Precision and Recall are two metrics computed for each class. They can be easily
 When the robot finishes, regarding the good apples, precision and recall means:
 
 - __Precision__: number of good apples picked out of all the apples picked out;
-- __Recall__:    number of good apples picked out of all the apples in the basket;
+- __Recall__:    number of good apples picked out of all the good apples in the basket;
 
 __Precision__ is about exactness, classifying only one instance correctly yields 100% precision, but a very low recall, it tells us how well the system identifies samples from a given class.
 
@@ -65,7 +65,7 @@ $$ \textrm{Recall} = \frac{\textrm{TP}}{\textrm{TP+FN}}$$
 $$ F_{1} = 2 \times\frac{\textrm{Precision} \times \textrm{Recall}}{\textrm{Precision} + \textrm{Recall}}$$
 
 
-Note that you need to measure this for every possible class in your dataset. So, __Precision__ and __Recall__ metrics are appropriate when you are dealing with imbalanced datasets.
+Note that you need to measure this for every possible class in your dataset. So, __Precision__ and __Recall__ metrics are appropriate when you are dealing with imbalanced classes.
 
 ---
 
@@ -113,7 +113,7 @@ _NOTE_: remember that both the False Positive Rate and the True Positive Rate ar
 
 ## __Precision-Recall Curve__
 
-As shown before when one has imbalanced classes, precision and recall are better metrics than accuracy, in the same way, for imbalanced datasets a Precision-Recall curve is more suitable than a ROC curve.
+As shown before when one has imbalanced classes, precision and recall are better metrics than accuracy, in the same way, for imbalanced classes a Precision-Recall curve is more suitable than a ROC curve.
 
 A Precision-Recall curve is a plot of the __Precision__ (y-axis) and the __Recall__ (x-axis) for different thresholds, much like the ROC curve. Note that in computing precision and recall there is never a use of the true negatives, these measures only consider correct predictions
 
