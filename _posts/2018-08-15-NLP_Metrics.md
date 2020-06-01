@@ -279,6 +279,8 @@ ROC curves are appropriate when the observations are balanced between each class
 than the ROC Plot When Evaluating Binary
 Classifiers on Imbalanced Datasets](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0118432)
 
+- [Neptune.Ai - F1 Score vs ROC AUC vs Accuracy vs PR AUC: Which Evaluation Metric Should You Choose?](https://neptune.ai/blog/f1-score-accuracy-roc-auc-pr-auc)
+
 <!--
 https://machinelearningmastery.com/how-to-score-probability-predictions-in-python/
 -->
