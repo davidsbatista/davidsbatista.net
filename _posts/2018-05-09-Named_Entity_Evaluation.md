@@ -340,7 +340,7 @@ MUC introduced detailed metrics in an __[evaluation considering different catego
 * __Incorrect (INC)__ : the output of a system and the golden annotation don't match;
 * __Partial (PAR)__   : system and the golden annotation are somewhat "similar" but not the same;
 * __Missing (MIS)__   : a golden annotation is not captured by a system;
-* __Spurius (SPU)__   : system produces a response which doesn't exit in the golden annotation;
+* __Spurius (SPU)__   : system produces a response which doesn't exist in the golden annotation;
 
 these metrics already go a beyond the simple strict classification and consider partial matching for instance. They are also close to cover the scenarios defined in the beginning of this post, we just need to find a way to consider the differences - between NER output and golden annotations - based on two axes, the surface string and the entity type.
 
@@ -374,10 +374,10 @@ each of these ways to measure the performance accounts for correct, incorrect, p
   </tr>
   <tr>
     <td></td>
-    <td><span style="font-weight:bold">Surface String</span></td>
-    <td><span style="font-weight:bold">Entity Type</span></td>    
-    <td><span style="font-weight:bold">Surface String</span></td>
-    <td><span style="font-weight:bold">Entity Type</span></td>    
+    <td><span style="font-weight:bold">Entity Type</span></td>
+    <td><span style="font-weight:bold">Surface String</span></td>    
+    <td><span style="font-weight:bold">Entity Type</span></td>
+    <td><span style="font-weight:bold">Surface String</span></td>    
     <td><span class="text-center" style="font-weight:bold">Type</span></td>
     <td><span class="text-center" style="font-weight:bold">Partial</span></td>
     <td><span class="text-center" style="font-weight:bold">Exact</span></td>
