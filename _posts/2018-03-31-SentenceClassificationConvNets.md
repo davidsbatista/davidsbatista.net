@@ -55,18 +55,6 @@ An input image can be convolved with multiple convolution kernels at once, creat
 
 <br>
 
-<!--
-Rectified Linear Units (ReLU)
-ReLU is something usually encountered when discussing CNNs, it scared us a bit in the beginning since we didn’t quite understand what it meant, but it is actually not especially hard.
-
-It is a layer that usually comes directly after each convolution layer, in order to introduce nonlinearity in the system, since the calculations in the convolution layers are linear (just element wise multiplications and summations). Nonlinear functions such as tanh and sigmoids were used for this in the past, but ReLU layers were found to work better since they train a lot faster without making significant difference to the accuracy. The ReLU layer simply applies the function
-
-f(x) = max(0,x)
-
-to all the values in the input volume, which basically mean that it changes all negative values to 0. The different activation functions looks like this
- -->
-
-
 
 ### __Pooling__
 
@@ -108,40 +96,40 @@ This was a briefly description of the ConvNet architecture when applied to image
 
 In the case of NLP tasks, i.e., when applied to text instead of images, we have a 1 dimensional array representing the text. Here the architecture of the ConvNets is changed to 1D convolutional-and-pooling operations.
 
-One of the most typically tasks in NLP where ConvNet are used is sentence classification, that is, classifying a sentence into a set of pre-determined categories by considering $n$-grams, i.e. it's words or sequence of words, or also characters or sequence of characters.
+One of the most typically tasks in NLP where ConvNet are used is sentence classification, that is, classifying a sentence into a set of pre-determined categories by considering $$n$$-grams, i.e. it's words or sequence of words, or also characters or sequence of characters.
 
 
 ### __1-D Convolutions over text__
 
-Given a sequence of words $w_{1:n} = w_{1}, \ldots, w_{n}$, where each is associated with an embedding vector of dimension $d$. A 1D convolution of width-$k$ is the result of moving a sliding-window of size $k$ over the sentence, and applying the same __convolution filter__ or __kernel__ to each window in the sequence, i.e., a dot-product between the concatenation of the embedding vectors in a given window and a weight vector $u$, which is then often followed by a non-linear activation function $g$.
+Given a sequence of words $$w_{1:n} = w_{1}, \ldots, w_{n}$$, where each is associated with an embedding vector of dimension $$d$$. A 1D convolution of width-$$k$$ is the result of moving a sliding-window of size $$k$$ over the sentence, and applying the same __convolution filter__ or __kernel__ to each window in the sequence, i.e., a dot-product between the concatenation of the embedding vectors in a given window and a weight vector $$u$$, which is then often followed by a non-linear activation function $$g$$.
 
-Considering a window of words $w_{i}, \ldots, w_{i+k}$ the concatenated vector of the $i$th window is then:
+Considering a window of words $$w_{i}, \ldots, w_{i+k}$$ the concatenated vector of the $$i$$th window is then:
 
 <center>
-$x_{i} = [w_{i}, w_{i+1}, \ldots, w_{i+k}] \in R^{\ k\ \times\  d}$
+$$x_{i} = [w_{i}, w_{i+1}, \ldots, w_{i+k}] \in R^{\ k\ \times\  d}$$
 </center>
 
-The __convolution filter__ is applied to each window, resulting in scalar values $r_{i}$, each for the $i$th window:
+The __convolution filter__ is applied to each window, resulting in scalar values $$r_{i}$$, each for the $$i$$th window:
 
 <center>
-$r_{i} = g(x_{i} \cdot u) \in R$
+$$r_{i} = g(x_{i} \cdot u) \in R$$
 </center>
 
-In practice one typically applies more filters, $u_{1}, \ldots, u_{l}$, which can then be represented as a vector multiplied by a matrix $U$ and with an addition of a bias term $b$:
+In practice one typically applies more filters, $$u_{1}, \ldots, u_{l}$$, which can then be represented as a vector multiplied by a matrix $$U$$ and with an addition of a bias term $$b$$:
 
 <center>
-$\text{r}_{i} = g(x_{i} \cdot U + b)$
+$$\text{r}_{i} = g(x_{i} \cdot U + b)$$
 
 <br><br>
 
-with $\text{r}_{i} \in R^{l},\ \ \ x_{i} \in R^{\ k\ \times\  d},\ \ \  U \in R^{\ k\ \cdot\  d \ \times l}\ \ \  \text{and}\ \ \  b \in R^{l}$
+with $$\text{r}_{i} \in R^{l},\ \ \ x_{i} \in R^{\ k\ \times\  d},\ \ \  U \in R^{\ k\ \cdot\  d \ \times l}\ \ \  \text{and}\ \ \  b \in R^{l}$$
 </center>
 
 An example of a sentence convolution in a vector-concatenation notation:
 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2018-03-31-sentence_convolution-example.png">
-  <figcaption>Example of a sentence convolution with $k$=2 and dimensional output $l$=3. <br> (Image adapted from <a href="http://u.cs.biu.ac.il/~yogo/">Yoav Goldberg</a> book "Neural Network Methods for NLP")</figcaption>
+  <figcaption>Example of a sentence convolution with $$k$$=2 and dimensional output $$l$$=3. <br> (Image adapted from <a href="http://u.cs.biu.ac.il/~yogo/">Yoav Goldberg</a> book "Neural Network Methods for NLP")</figcaption>
 </figure>
 
 
@@ -187,23 +175,23 @@ We can also apply the multiple channels paradigm in text processing as well. For
 </table>
 </center>
 
-Applying the convolution over the words will result in $m$ vectors $w$, applying it over the PoS-tags will result also in $m$ vectors, and the same for the shapes, again $m$ vectors. These three different channels can then be combined either by summation:
+Applying the convolution over the words will result in $$m$$ vectors $$w$$, applying it over the PoS-tags will result also in $$m$$ vectors, and the same for the shapes, again $$m$$ vectors. These three different channels can then be combined either by summation:
 
 <center>
- $p_i = words_{1:m} + pos_{1:m} + shapes_{1:m}$
+ $$p_i = words_{1:m} + pos_{1:m} + shapes_{1:m}$$
 </center>
 
 or by concatenation:
 
 <center>
- $p_i = [words_{1:m}:pos_{1:m}:shapes_{1:m}]$.
+ $$p_i = [words_{1:m}:pos_{1:m}:shapes_{1:m}]$$.
 </center>
 
 __NOTE__: each channel can still have different convolutions that read the source document using different kernel sizes, for instance, applying different context windows over words, pos-tags or shapes.
 
 ### __Pooling__
 
-The pooling operation is used to combine the vectors resulting from different convolution windows into a single $l$-dimensional vector. This is done again by taking the _max_ or the _average_ value observed in resulting vector from the convolutions. Ideally this vector will capture the most relevant features of the sentence/document.
+The pooling operation is used to combine the vectors resulting from different convolution windows into a single $$l$$-dimensional vector. This is done again by taking the _max_ or the _average_ value observed in resulting vector from the convolutions. Ideally this vector will capture the most relevant features of the sentence/document.
 
 This vector is then fed further down in the network - hence, the idea that ConvNet itself is just a feature extractor - most probably to a full connected layer to perform prediction.
 
@@ -252,15 +240,15 @@ All the code for the models and experiments is available here:
 
 ## __Summary__
 
-The CNN is just a feature-extraction architecture, alone itself is not useful, but is the fist building block of a larger network. It needs to be trained together with a classification layer in order to produce some usefull results.
+The CNN is just a feature-extraction architecture, alone itself is not useful, but is the fist building block of a larger network. It needs to be trained together with a classification layer in order to produce some useful results.
 
 As Yoav Goldberg summarises it:
 
-_"The CNN layer’s responsibility is to extract meaningful sub-structures that are useful for the overall prediction task at hand. A convolutional neural network is designed to identify indicative local predictors in a large structure, and to combine them to produce a fixed size vector representation of the structure, capturing the local aspects that are most informative for the prediction task at hand. In the NLP case the convolutional architecture will identify $n$-grams that are predictive for the task at hand, without the need to pre-specify an embedding vector for each possible ngram."_
+_"The CNN layer’s responsibility is to extract meaningful sub-structures that are useful for the overall prediction task at hand. A convolutional neural network is designed to identify indicative local predictors in a large structure, and to combine them to produce a fixed size vector representation of the structure, capturing the local aspects that are most informative for the prediction task at hand. In the NLP case the convolutional architecture will identify $$n$$-grams that are predictive for the task at hand, without the need to pre-specify an embedding vector for each possible ngram."_
 
 * __convolution__ : an operation which applies a filter to a fixed size window.
 * __convolution filter__ or __kernel__: a template matrix which is used in the convolution operation.
-* __pooling__: combines the vectors resulting from different convolution windows into a single $l$-dimensional vector.
+* __pooling__: combines the vectors resulting from different convolution windows into a single $$l$$-dimensional vector.
 * __feature_maps__ : the number of feature maps directly controls capacity and depends on the number of available examples and task complexity.
 
 ## __References__

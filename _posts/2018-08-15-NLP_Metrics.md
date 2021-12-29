@@ -43,7 +43,7 @@ With imbalanced classes, it’s easy to get a high accuracy without actually mak
 
 ## __Precision and Recall__
 
-Precision and Recall are two metrics computed for each class. They can be easily explained through an example, imagine that we want to evaluate how well does a robot selects good apples from rotten apples There are $m$ good apples and $n$ rotten apples in a basket. A robot looks into the basket and picks out all the good apples, leaving the rotten apples behind, but is not perfect and could sometimes mistake a rotten apple for a good apple orange.
+Precision and Recall are two metrics computed for each class. They can be easily explained through an example, imagine that we want to evaluate how well does a robot selects good apples from rotten apples There are $$m$$ good apples and $$n$$ rotten apples in a basket. A robot looks into the basket and picks out all the good apples, leaving the rotten apples behind, but is not perfect and could sometimes mistake a rotten apple for a good apple orange.
 
 When the robot finishes, regarding the good apples, precision and recall means:
 
@@ -56,7 +56,7 @@ __Recall__ is about completeness, classifying all instances as positive yields 1
 
 We will see further ahead how to get the best out of these two metrics, using Precision-Recall curves.
 
-Typically these two metrics are combined together in a metric called $F_{1}$ (i.e., harmonic mean of precision and recall), which eases comparison of different systems, and problems with many classes. They are defined as:
+Typically these two metrics are combined together in a metric called $$F_{1}$$ (i.e., harmonic mean of precision and recall), which eases comparison of different systems, and problems with many classes. They are defined as:
 
 $$ \textrm{Precision} = \frac{\textrm{TP}}{\textrm{TP+FP}}$$  
 
@@ -77,7 +77,7 @@ $$ \textrm{Sensitivity} = \frac{\textrm{TP}}{\textrm{TP+FN}}$$
 
 $$ \textrm{Specificity} = \frac{\textrm{TN}}{\textrm{TN+FP}}$$
 
-__Sensitivity__: is the same as recall, defined above, can be tought of as the extent to which actual positives are not overlooked, so false negatives are few.
+__Sensitivity__: is the same as recall, defined above, can be seen as the extent to which actual positives are not overlooked, so false negatives are few.
 
 __Specificity__: also called the true negative rate, measures the proportion of actual negatives that are correctly identified as such, i.e., is the extent to which actual negatives are classified as such (so false positives are few).
 

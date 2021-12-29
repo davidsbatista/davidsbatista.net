@@ -1,4 +1,4 @@
-# Jekyll::blog
+### Jekyll::blog
 
 My personal homepage and blog at:
 
@@ -13,7 +13,12 @@ using apache:
   2. `export GEM_HOME=/home/dsbatista/gems; jekyll build -d /var/www/html/blog/`
 
 
-Plugins and add-ons:
+### How to Use Jekyll on macOS Catalina with RVM 
+
+- Check https://nickymarino.com/2020/06/13/jekyll-server-rvm-macos/
+
+
+### Plugins and add-ons:
 
 - paginate: https://github.com/sverrirs/jekyll-paginate-v2
 - tags: http://longqian.me/2017/02/09/github-jekyll-tag/

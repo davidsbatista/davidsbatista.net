@@ -467,12 +467,12 @@ Then precision/recall/f1-score are calculated for each different evaluation sche
 
 Number of gold-standard annotations contributing to the final score
 <center>
-$\text{POSSIBLE} (POS) = COR + INC + PAR + MIS = TP + FN $
+$$\text{POSSIBLE} (POS) = COR + INC + PAR + MIS = TP + FN $$
 </center>
 
 Number of annotations produced by the NER system:
 <center>
-$\text{ACTUAL} (ACT) = COR + INC + PAR + SPU = TP + FP$
+$$\text{ACTUAL} (ACT) = COR + INC + PAR + SPU = TP + FP$$
 </center>
 
 Then we can compute precision/recall/f1-score, where roughly describing __precision__ is the percentage of correct named-entities found by the NER system, and __recall__ is the percentage of the named-entities in the golden annotations that are retrieved by the NER system. This is computed in two different ways depending wether we want an __exact match__ (i.e., _strict_ and _exact_ ) or a __partial match__ (i.e., _partial_ and _type_) scenario:
@@ -480,22 +480,22 @@ Then we can compute precision/recall/f1-score, where roughly describing __precis
 #### __Exact Match__ (i.e., _strict_ and _exact_ )
 
 <center>
-$\text{Precision} = \frac{COR}{ACT} = \frac{TP}{TP+FP}$
+$$\text{Precision} = \frac{COR}{ACT} = \frac{TP}{TP+FP}$$
 </center>
 
 <center>
-$\text{Recall} = \frac{COR}{POS} = \frac{TP}{TP+FN}$
+$$\text{Recall} = \frac{COR}{POS} = \frac{TP}{TP+FN}$$
 </center>
 
 
 #### __Partial Match__ (i.e., _partial_ and _type_)
 
 <center>
-$\text{Precision} = \frac{COR\ +\  0.5\  \times\  PAR}{ACT} = \frac{TP}{TP+FP}$
+$$\text{Precision} = \frac{COR\ +\  0.5\  \times\  PAR}{ACT} = \frac{TP}{TP+FP}$$
 </center>
 
 <center>
-$\text{Recall} = \frac{COR\ +\  0.5\  \times\  PAR}{POS} = \frac{COR}{ACT} = \frac{TP}{TP+FP}$
+$$\text{Recall} = \frac{COR\ +\  0.5\  \times\  PAR}{POS} = \frac{COR}{ACT} = \frac{TP}{TP+FP}$$
 </center>
 
 Putting all together:

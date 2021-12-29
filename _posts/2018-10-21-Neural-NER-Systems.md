@@ -179,7 +179,7 @@ __Additional Char Features__ A lookup table was used to output a 4-dimensional v
 
 __Additional Word Features__: each words is tagged as _allCaps_, _upperInitial_, _lowercase_, _mixedCaps_, _noinfo_.
 
-__Lexicons__: partial lexicon matches using a list of known named-entities from DBpedia. The list is then used to perform $n$-gram matches against the words. A match is successful when the $n$-gram matches the prefix or suffix of an entry and is at least half the length of the entry.
+__Lexicons__: partial lexicon matches using a list of known named-entities from DBpedia. The list is then used to perform $$n$$-gram matches against the words. A match is successful when the $$n$$-gram matches the prefix or suffix of an entry and is at least half the length of the entry.
 
 <br>
 
@@ -471,7 +471,7 @@ This means that the CRF layer could add constrains to the final predicted labels
 
 #### __Emission score matrix__
 
-The output of the LSTM is given as input to the CRF layer, that is, a matrix $\textrm{P}$ with the scores of the LSTM of size $n \times k$, where $n$ is the number of words in the sentence and $k$ is the possible number of labels that each word can have, $\textrm{P}_{i,j}$ is the score of the $j^{th}$ tag of the $i^{th}$ word in the sentence. In the image below the matrix would be the concatenation of the yellow blocks coming out of each LSTM.
+The output of the LSTM is given as input to the CRF layer, that is, a matrix $$\textrm{P}$$ with the scores of the LSTM of size $$n \times k$$, where $$n$$ is the number of words in the sentence and $$k$$ is the possible number of labels that each word can have, $$\textrm{P}_{i,j}$$ is the score of the $$j^{th}$$ tag of the $$i^{th}$$ word in the sentence. In the image below the matrix would be the concatenation of the yellow blocks coming out of each LSTM.
 
 <figure>
   <img style="width: 50%; height: 50%" src="/assets/images/2018-10-21_LSTM_CRF_matrix.png">
@@ -481,7 +481,7 @@ The output of the LSTM is given as input to the CRF layer, that is, a matrix $\t
 
 #### __Transition matrix__
 
-$$\textrm{T}$$ is a matrix of transition scores such that $$\textrm{P}_{i,j}$$ represents the score of a transition from the tag $$i$$ to tag $$j$$. Two extra tags are added, $y_{0}$ and $y_{n}$ are the _start_ and _end_ tags of a sentence, that we add to the set of possible tags, $\textrm{T}$ is therefore a square matrix of size $\textrm{k}+2$.
+$$\textrm{T}$$ is a matrix of transition scores such that $$\textrm{P}_{i,j}$$ represents the score of a transition from the tag $$i$$ to tag $$j$$. Two extra tags are added, $$y_{0}$$ and $$y_{n}$$ are the _start_ and _end_ tags of a sentence, that we add to the set of possible tags, $$\textrm{T}$$ is therefore a square matrix of size $$\textrm{k}+2$$.
 
 
 <figure>
@@ -507,7 +507,7 @@ so the score of a sequence of predictions is, for each word, the sum of the tran
 
 During training, we assign a probability to each tag but maximizing the probability of the correct tag $$y$$ sequence among all the other possible tag sequences.
 
-This is modeled by applying a softmax over all the possible taggings $$y$$:
+This is modelled by applying a softmax over all the possible taggings $$y$$:
 
 $$\textrm{p(y|X)} = \frac{e^{score(X,y)}}{\sum\limits_{y' \in Y({x})} e^{score(X,y')}}$$
 
