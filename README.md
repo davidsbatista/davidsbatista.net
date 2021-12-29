@@ -10,7 +10,7 @@ to run with jekyll own webserver
 
 using apache:
   1. `python tag_generator.py` (create tag/ if doesn't exist)
-  2. `export GEM_HOME=/home/dsbatista/gems; jekyll build -d /var/www/html/blog/`
+  2. `jekyll build -d jekyll build -d /var/www/davidsbatista.net`
 
 
 ### How to Use Jekyll on macOS Catalina with RVM 
