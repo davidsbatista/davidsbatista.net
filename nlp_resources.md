@@ -3,6 +3,62 @@ layout: page
 title: Resources
 ---
 
+This page contains link to useful NLP resources: [NLP datasets](#datasets) and [books](#books). The datasets link to my [github page](https://github.com/davidsbatista) where I share datasets for named-entity recognition and relationship extraction tasks, plus some lexicons and dictionaries which I constructed during my PhD/Research time.
+
+I also list some [books](#books) which I think are a good starting point to learn more about Natural Language Processing and how to apply Machine learning to NLP tasks. Most of this books and tutorials are nice to have around, so that you can quickly clarify any doubts or review how a certain algorithm or technique works. I personally like to have them at hand :)
+
+
+---
+
+# __Datasets__
+
+#### __Relationship Extraction__
+
+I've been keeping track of public and free datasets for semantic relationship extraction, this [github repository](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets) contains annotated datasets which can be used to train supervised models to perform semantic relationship extraction.
+
+The datasets are organized into three different groups:
+
+* [__Traditional Information Extraction__](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#tie)
+
+* [__Open Information Extraction__](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#oie)
+
+* [__Distantly Supervised__](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#ds)
+
+---
+
+#### __Named-Entity Recognition__
+
+Named-Entity Recognition datasets organised by different languages, also some are for different domains:
+
+* [__Portuguese__](https://github.com/davidsbatista/NER-datasets/tree/master/Portuguese)
+
+* [__German__](https://github.com/davidsbatista/NER-datasets/blob/master/README.md#de)
+
+* [__Dutch__](https://github.com/davidsbatista/NER-datasets/blob/master/README.md#nl)
+
+* [__French__](https://github.com/davidsbatista/NER-datasets/blob/master/README.md#fr)
+
+* [__English__](https://github.com/davidsbatista/NER-datasets/blob/master/README.md#en)
+
+---
+
+#### __Lexicons and Dictionaries__
+
+Several [lexicons](https://github.com/davidsbatista/lexicons) I gathered for different NLP tasks, including lists of names, acronyms and it's extensions, stop-words, overlap of names and toponyms, etc.:
+
+* [NomesLex-PT](https://github.com/davidsbatista/lexicons/blob/master/NomesLex-PT.zip) a lexicon of Portuguese person names made up of 2,027 first names and 8,019 surnames.
+
+* [names-surnames-NL-UK-IT-PT-ES.zip](https://github.com/davidsbatista/lexicons/blob/master/names-surnames-NL-UK-IT-PT-ES.zip) a list of names and surnames for Dutch, English, Portuguese and Spanish.
+
+* [publico-cargos.txt](https://github.com/davidsbatista/lexicons/blob/master/publico-cargos.txt) a list of Portuguese noun quantifiers, i.e., words that occur before a proper noun, gathered from the on-line newspaper publico.pt.
+
+* [publico-acronyms.txt](https://github.com/davidsbatista/lexicons/blob/master/publico-acronyms.txt) a list of acronyms and it's possible extensions, extracted from a collection of Portuguese news gathered from the on-line newspaper publico.pt.
+
+* [wikipedia-acronyms.txt](https://github.com/davidsbatista/lexicons/blob/master/wikipedia-acronyms.txt) a list of acronyms and it's possible extensions, extracted from the English Wikipedia.
+
+* [PT-stopwords.txt](https://github.com/davidsbatista/lexicons/blob/master/PT-stopwords.txt) a collections of stop-words for Portuguese.
+
+
 Learning about Natural Language Processing and Machine Learning is a continuous task, but there is always a starting point, where one learn the basics and the most common algorithms to solve some tasks.
 
 Here I list some resources to learn more about Natural Language Processing, Machine learning and related areas. Most of this books/tutorials are things always nice to have around, and that you can quickly consult and clarify any doubts or review how certain algorithm or technique works.I personally like to have them at hand :)
@@ -20,6 +76,12 @@ https://www.apache.org/foundation/contributing.html
 -->
 
 ---
+
+
+
+# __Books__
+
+Learning about Natural Language Processing is a continuous task, which appears not to have an end, but, there is always a starting point where one learns the problem definitions and the common algorithms to solve them.
 
 #### [__Neural Network Methods for Natural Language Processing__](https://www.morganclaypool.com/doi/abs/10.2200/S00762ED1V01Y201703HLT037)
 
