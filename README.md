@@ -5,17 +5,20 @@ My personal homepage and blog at:
 http://www.davidsbatista.net/
 
 to run with jekyll own webserver
-  1. `rvm use ruby-2.4.4`
-  2. `jekyll serve`
+  1. `source /Users/dsbatista/.rvm/scripts/rvm`
+  2. `rvm list`
+  2. `rvm use ruby-x.x.x`
+  3. `jekyll serve`
 
 using apache:
   1. `python tag_generator.py` (create tag/ if doesn't exist)
   2. `jekyll build -d jekyll build -d /var/www/davidsbatista.net`
 
 
-### How to Use Jekyll on macOS Catalina with RVM 
+### How to iuse Jekyll on macOS 
 
-- Check https://nickymarino.com/2020/06/13/jekyll-server-rvm-macos/
+- https://www.youtube.com/watch?v=UKB9ylw0G4U
+- https://nickymarino.com/2020/06/13/jekyll-server-rvm-macos/
 
 
 ### Plugins and add-ons:
