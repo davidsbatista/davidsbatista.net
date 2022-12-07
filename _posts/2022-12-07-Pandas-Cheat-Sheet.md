@@ -16,7 +16,7 @@ I will just use a blog post to keep track of typical operations I need to do ove
 
 #### Remove columns from a DataFrame
 
-    df_rels_in_scope.drop(['ent1','ent2','label'], axis=1)
+	df_rels_in_scope.drop(['ent1','ent2','label'], axis=1)
 
 #### Rename columns names with a dictionary
 
@@ -25,9 +25,8 @@ I will just use a blog post to keep track of typical operations I need to do ove
 #### Add a new column by applying a function to other columns
 
 	def replace_arg(arg_type_str):
-	if arg_type_str is None:
-	    return None
-	else:
+	    if arg_type_str is None:
+	        return None
 	    return re.sub(r'[0-9]+','',arg_type_str)
 
 	norm_arg = df_bookings_only.apply(lambda row: replace_arg(row.arg_type), axis=1)
