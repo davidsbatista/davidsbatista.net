@@ -699,3 +699,8 @@ img.emoji {
     width: 1em;
     margin-bottom: 0.25em;
 }
+
+.js-line-number {
+  display: none;
+}
+
