@@ -12,7 +12,7 @@ I have experience in both research and industry and I enjoy working on solutions
 
 I hold a Ph.D. in Natural Language Processing where I explored and __[proposed methods for semantic relationship extraction]__. You can see a complete list of my __[publications]__  and my detailed __[Curriculum Vitae]__.
 
-I'm also the creator and maintainer of __[Politiquices.PT]__ a semantic graph connected with Wikidata, which allows to explore political interactions of support and opposition based on archived news articles from the past 25 years.
+I'm also the creator and maintainer of __[Politiquices.PT]__ a semantic graph connected with Wikidata, which allows exploring political interactions of support and opposition based on archived news articles from the past 25 years.
 
 I occasionally write <a href="/posts/"><b>blog posts</b></a> mostly about Software Engineering, Natural Language Processing and Machine Learning. I have a strong interest in the following topics:
 
