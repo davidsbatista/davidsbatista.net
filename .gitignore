@@ -1,1 +1,3 @@
 _site/*
+tag/*
+.DS_Store
