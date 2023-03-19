@@ -15,7 +15,7 @@ A collection of several SPARQL queries to WikiData. Those are queries over diffe
 
 __Get the "known as" for legal entity types in different countries, e.g.: "LLC", "Inc.", "GmbH", "Ldt."__ 
 
-<script src="https://gist.github.com/davidsbatista/e0b19d8e1a93ca6f460e57735051cd6f.js"></script>
+<script src="https://gist.github.com/davidsbatista/e0b19d8e1a93ca6f460e57735051cd6f.js" data-gist-hide-line-numbers="true"></script>
 
 [Try it](https://query.wikidata.org/#SELECT%20%3Fentity%20%3FentityLabel%20%28GROUP_CONCAT%28%3FalternativeNames%3B%20separator%3D%27%3B%20%27%29%20AS%20%3Fother_forms%29%0AWHERE%0A%7B%0A%20%20%3Fentity%20wdt%3AP31%20wd%3AQ19335303%20.%0A%20%20%3Fentity%20rdfs%3Alabel%20%3FentityLabel%20.%0A%20%20%3Fentity%20skos%3AaltLabel%20%3FalternativeNames%20.%0A%20%20FILTER%20%28lang%28%3FalternativeNames%29%20%3D%20%22de%22%29%0A%20%20FILTER%20%28lang%28%3FentityLabel%29%20%3D%20%22de%22%29%0A%7D%0AGROUP%20BY%20%3Fentity%20%3FentityLabel
 ){:target="_blank"}
@@ -26,7 +26,7 @@ __Get the "known as" for legal entity types in different countries, e.g.: "LLC",
 
 __Selects all the companies in the DAX TecDAX, MDAX and CDAX, gets their headquarters location's latitude and longitude and plots them in a map__ 
 
-<script src="https://gist.github.com/davidsbatista/365d09fb6578c6b0a73dae0a0d2a3f81.js"></script>
+<script src="https://gist.github.com/davidsbatista/365d09fb6578c6b0a73dae0a0d2a3f81.js" data-gist-hide-line-numbers="true"></script>
 
 [Try it](https://query.wikidata.org/#%23defaultView%3AMap%0ASELECT%20DISTINCT%20%3FcompanyLabel%20%3Fcompany%20%3Fheadquarters%20%3FheadquartersLabel%20%3Fcoordinates%20WHERE%20%7B%20%20%0A%20%20VALUES%20%3Fstock_markets%20%7Bwd%3AQ155718%20wd%3AQ378967%20wd%3AQ595622%20wd%3AQ874430%7D%20.%0A%20%20%3Fcompany%20wdt%3AP361%20%3Fstock_markets%20.%0A%20%20%3Fcompany%20rdfs%3Alabel%20%3FcompanyLabel%20.%20FILTER%28LANG%28%3FcompanyLabel%29%20%3D%20%22en%22%29%0A%20%20%3Fcompany%20wdt%3AP159%20%3Fheadquarters.%0A%20%20%3Fheadquarters%20rdfs%3Alabel%20%3FheadquartersLabel%20.%20FILTER%28LANG%28%3FheadquartersLabel%29%20%3D%20%22en%22%29%20%0A%20%20%3Fheadquarters%20wdt%3AP625%20%3Fcoordinates%0A%7D%0AORDER%20BY%20ASC%28%3FcompanyLabel%29
 ){:target="_blank"}
