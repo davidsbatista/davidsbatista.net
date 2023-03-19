@@ -15,13 +15,15 @@ using apache:
   2. `jekyll build -d jekyll build -d /var/www/davidsbatista.net`
 
 
-### How to iuse Jekyll on macOS 
+### Tips on how to set up Jekyll on macOS (it's a pain!)
 
-- https://www.youtube.com/watch?v=UKB9ylw0G4U
-- https://nickymarino.com/2020/06/13/jekyll-server-rvm-macos/
+- OPENSSL issues: https://stackoverflow.com/questions/74196882/cannot-install-jekyll-eventmachine-on-m1-mac>
+- Setup new Jekyll project: https://jekyllrb.com/docs/step-by-step/01-setup/
 
 
 ### Plugins and add-ons:
 
+- Jemoji: https://davemateer.com/2019/05/27/Jemoji
+- sitemap: https://github.com/jekyll/jekyll-sitemap
 - paginate: https://github.com/sverrirs/jekyll-paginate-v2
 - tags: http://longqian.me/2017/02/09/github-jekyll-tag/

@@ -13,6 +13,17 @@ A collection of several SPARQL queries to WikiData. Those are queries over diffe
 
 <br>
 
+__Get the "known as" for legal entity types in different countries, e.g.: "LLC", "Inc.", "GmbH", "Ldt."__ 
+
+<script src="https://gist.github.com/davidsbatista/e0b19d8e1a93ca6f460e57735051cd6f.js"></script>
+
+[Try it](https://query.wikidata.org/#SELECT%20%3Fentity%20%3FentityLabel%20%28GROUP_CONCAT%28%3FalternativeNames%3B%20separator%3D%27%3B%20%27%29%20AS%20%3Fother_forms%29%0AWHERE%0A%7B%0A%20%20%3Fentity%20wdt%3AP31%20wd%3AQ19335303%20.%0A%20%20%3Fentity%20rdfs%3Alabel%20%3FentityLabel%20.%0A%20%20%3Fentity%20skos%3AaltLabel%20%3FalternativeNames%20.%0A%20%20FILTER%20%28lang%28%3FalternativeNames%29%20%3D%20%22de%22%29%0A%20%20FILTER%20%28lang%28%3FentityLabel%29%20%3D%20%22de%22%29%0A%7D%0AGROUP%20BY%20%3Fentity%20%3FentityLabel
+){:target="_blank"}
+
+---
+
+<br>
+
 __Selects all the companies in the DAX TecDAX, MDAX and CDAX, gets their headquarters location's latitude and longitude and plots them in a map__ 
 
 <script src="https://gist.github.com/davidsbatista/365d09fb6578c6b0a73dae0a0d2a3f81.js"></script>

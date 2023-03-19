@@ -25,14 +25,15 @@ kramdown:
   input: GFM
 
 plugins:
-  - jemoji
-  - jekyll-paginate-v2
   - jekyll-sitemap
+  - jemoji
+
 
 emoji:
   src: "https://github.githubassets.com/images/icons/"
 
-# Pagination Settings
+
+# Pagination Settings - !!NOTE!! I've disabled this plugin
 pagination:
   enabled: false
   debug: true

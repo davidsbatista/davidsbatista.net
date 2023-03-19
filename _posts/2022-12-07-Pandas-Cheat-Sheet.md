@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Pandas DataFrame cheat-sheet
+title: Pandas Cheat Sheet
 date: 2022-12-07 00:00:00
 tags: pandas cheat-sheet reference-post
 categories: [blog]
@@ -9,7 +9,7 @@ disqus_identifier: 20221207
 preview_pic: /assets/images/2022-12-07-Zoo-Berlin-zoo-berlin-panda-plant-eye-1643703-pxhere.com.jpg
 ---
 
-I will just use a blog post to keep track of typical operations I need to do over pandas DataFrame. I came to realise and I need to do them whenever I need to explore DataFrames, but I keep forgetting them.
+I will use this blog post to keep track of typical operations I need to do over pandas DataFrame, after realising I need to do them whenever I explore a DataFrames, but I keep forgetting them.
 
 
 ## __Columns__
@@ -32,7 +32,7 @@ I will just use a blog post to keep track of typical operations I need to do ove
 	norm_arg = df_bookings_only.apply(lambda row: replace_arg(row.arg_type), axis=1)
 	df_bookings_only.insert(len(df_bookings_only.columns), "arg_type_norm", norm_arg)
 
-#### Sort after a groupby count
+#### Sort after a _groupby_ count
 
 	df_entities[['entity_text','entity_type']].groupby('entity_type').count().sort_values(by='entity_text', ascending=False)
 
