@@ -7,10 +7,10 @@ categories: [blog]
 comments: true
 disqus_identifier: 20171111
 preview_pic: /assets/images/2017-11-11-HMM.png
-description: An introduction to Hidden Markov Models, one of the first proposed algorithms for sequence prediction, and it's relationships with the Naive Bayes approach.
+description: An introduction to Hidden Markov Models, one of the first proposed algorithms for sequence prediction, and its relationships with the Naive Bayes approach.
 ---
 
-This is the first post, of a series of posts, about sequential supervised learning applied to Natural Language Processing. In this first post I will write about the classical algorithm for sequence learning, the Hidden Markov Model (HMM), explain how it's related with the Naive Bayes Model and it's limitations.
+This is the first post, of a series of posts, about sequential supervised learning applied to Natural Language Processing. In this first post I will write about the classical algorithm for sequence learning, the Hidden Markov Model (HMM), and explain how it's related to the Naive Bayes Model and its limitations.
 
 You can find the second and third posts here:
 
@@ -24,21 +24,21 @@ You can find the second and third posts here:
 
 The classical problem in Machine Learning is to learn a classifier that can distinguish between two or more classes, i.e., that can accurately predict a class for a new object given training examples of objects already classified.
 
-NLP typical examples are, for instance: classifying an email as spam or not spam, classifying a movie into genres, classifying a news article into topics, etc., however, there is another type of prediction problems which involve structure.
+NLP typical examples are, for instance: classifying an email as spam or not spam, classifying a movie into genres, classifying a news article into topics, etc., however, there is another type of prediction problem which involve structure.
 
 A classical example in NLP is part-of-speech tagging, in this scenario, each $$x_{i}$$ describes a word and each $$y_{i}$$ the associated part-of-speech of the word $$x_{i}$$ (e.g.: _noun_, _verb_, _adjective_, etc.).
 
-Another example, is named-entity recognition, in which, again, each $$x_{i}$$ describes a word and $$y_{i}$$ is a semantic label associated to that word (e.g.: _person_, _location_, _organization_, _event_, etc.).
+Another example is named-entity recognition, in which, again, each $$x_{i}$$ describes a word and $$y_{i}$$ is a semantic label associated with that word (e.g.: _person_, _location_, _organization_, _event_, etc.).
 
 In both examples __the data consist of sequences of $(x, y)$ pairs__, and we want to model our learning problem based on that sequence:
 
 $$p(y_1, y_2, \dots, y_m \mid x_1, x_2, \dots, x_m)$$
 
-in most problems these sequences can have a sequential correlation. That is, nearby $x$ and $y$ values are likely to be related to each other. For instance, in English, it's common after the word _to_ the have a word whose part-of-speech tag is a _verb_.
+in most problems, these sequences can have a sequential correlation. That is, nearby $x$ and $y$ values are likely to be related to each other. For instance, in English, it's common after the word _to_ the have a word whose part-of-speech tag is a _verb_.
 
-Note that there are other machine learning problems which also involve sequences but are clearly different. For instance, in time-series, there is also a sequence, but we want to predict a value $$y$$ at point $$t+1$$, and we can use all the previous true observed $$y$$ to predict. In sequential supervised learning we must predict all $$y$$ values in the sequence.
+Note that there are other machine learning problems which also involve sequences but are clearly different. For instance, there is also a sequence in time series, but we want to predict a value $$y$$ at point $$t+1$$, and we can use all the previous true observed $$y$$ to predict. In sequential supervised learning we must predict all $$y$$ values in the sequence.
 
-The Hidden Markov Model (HMM) was one the first proposed algorithms to classify sequences. There are other sequence models, but I will start by explaining the HMMM as a sequential extension to the Naive Bayes model.
+The Hidden Markov Model (HMM) was one of the first proposed algorithms to classify sequences. There are other sequence models, but I will start by explaining the HMMM as a sequential extension to the Naive Bayes model.
 
 ## __Naive Bayes classifier__
 
@@ -59,7 +59,7 @@ where $$y$$ it's a class and $$\vec{x}$$ is a feature vector associated to an ob
   <figcaption>Bayes theorem in blue neon. <br> (taken from Wikipedia)</figcaption>
 </figure>
 
-The NB classifier is based on the Bayes' theorem. Applying the theorem to the equation above, we get:
+The NB classifier is based on Bayes' theorem. Applying the theorem to the equation above, we get:
 
 $$ p(y \mid \vec{x}) = \frac{p(y) \cdot p(\vec{x} \mid y)}{p(\vec{x})} $$
 
@@ -71,7 +71,7 @@ which, if we decompose the vector of features, is the same as:
 
 $$ p(y \mid \vec{x}) = p(y) \cdot p(x_{1}, x_{2}, x_{3}, \dots, x_{1} \mid y) $$
 
-this is hard to compute, because it involves estimating every possible combination of features. We can relaxed this computation by applying the Naives Bayes assumption, which states that:
+this is hard to compute because it involves estimating every possible combination of features. We can relax this computation by applying the Naive Bayes assumption, which states that:
 
 <center>
 <b>
@@ -87,18 +87,18 @@ plugging this into our equation:
 
 $$ p(y \mid \vec{x}) = p(y) \prod_{i=1}^{m} p(x_{i} \mid y) $$
 
-we get the final Naive Bayes model, which as consequence of the assumption above, doesn't capture dependencies between each input variables in $$\vec{x}$$.
+we get the final Naive Bayes model, which as a consequence of the assumption above, doesn't capture dependencies between each input variable in $$\vec{x}$$.
 
 
 ### __Trainning__
 
 Training in Naive Bayes is mainly done by counting features and classes. Note that the procedure described below needs to be done for every class $$y_{i}$$.
 
-To calculate the prior, we simple count how many samples in the training data fall into each class $y_{i}$ divided by the total number of samples:
+To calculate the prior, we simply count how many samples in the training data fall into each class $y_{i}$ divided by the total number of samples:
 
 $$p(y_{i}) = \frac{ N_{y_{i}} } {N} $$
 
-To calculate the likelihood estimate, we count the number of times feature $$w_{i}$$ appears among all features in all samples of class $$y_{i}$$:
+To calculate the likelihood estimate, we count the number of times a feature $$w_{i}$$ appears among all features in all samples of class $$y_{i}$$:
 
 $$ p(x_{i} \mid y_{i}) = \frac{\text{count}(x_{i},y_{i})} {  \sum\limits_{x_{i} \in X} \text{count}(x_{i},y_{i})}$$
 
@@ -123,17 +123,17 @@ Again, this is calculated for each class $$y_{i}$$, and we assign to the new obs
 
 ## __From Naive Bayes to Hidden Markov Models__
 
-The model presented before predicts a class for a set of features associated to an observation. To predict a class sequence $$y=(y_{1}, \dots, y_{n})$$ for sequence of observation $$x=(x_{1}, \dots, y_{n})$$, a simple sequence model can be formulated as a product over single Naïve Bayes models:
+The model presented before predicts a class for a set of features associated with an observation. To predict a class sequence $$y=(y_{1}, \dots, y_{n})$$ for a sequence of observations $$x=(x_{1}, \dots, y_{n})$$, a simple sequence model can be formulated as a product over single Naïve Bayes models:
 
 $$ p(\vec{y} \mid \vec{x}) = \prod_{i=1}^{n} p(y_{i}) \cdot p(x_{i} \mid y_{i}) $$
 
-Two aspects about this model:
+Two aspects of this model:
 
-* there is only one feature at each sequence position, namely the identity of the respective observation due the assumption that each feature is generated independently, conditioned on the class $$y_{i}$$.
+* there is only one feature at each sequence position, namely the identity of the respective observation due to the assumption that each feature is generated independently, conditioned on the class $$y_{i}$$.
 
 * it doesn't capture interactions between the observable variables $$x_{i}$$.
 
-It is however reasonable to assume that there are dependencies at consecutive sequence positions $$y_{i}$$, remember the example above about the part-of-speech tags ?
+It is reasonable to assume that there are dependencies at consecutive sequence positions $$y_{i}$$, remember the example above about the part-of-speech tags?
 
 This is where the First-order Hidden Markov Model appears, introducing the __Markov Assumption__:
 
@@ -146,7 +146,7 @@ This is where the First-order Hidden Markov Model appears, introducing the __Mar
 
 $$ p(\vec{y} \mid \vec{x}) = \prod_{i=1}^{n} p(y_{i} \mid y_{i-1}) \cdot p(x_{i} \mid y_{i}) $$
 
-which written in it's more general form:
+which is written in its more general form:
 
 $$ p(\vec{x}) = \sum_{y \in Y} \prod_{i=1}^{n} p(y_{i} \mid y_{i-1}) \cdot p(x_{i} \mid y_{i}) $$
 
@@ -191,7 +191,7 @@ Notice how the output assumption is closely related with the Naive Bayes classif
 
 <br>
 
-We can now define two problems which can be solved by an HMM, the first is learning the parameters associated to a given observation sequence, that is __training__. For instance given words of a sentence and the associated part-of-speech tags, one can learn the latent structure.
+We can now define two problems which can be solved by an HMM, the first is learning the parameters associated with a given observation sequence, that is __training__. For instance given words of a sentence and the associated part-of-speech tags, one can learn the latent structure.
 
 The other one is applying a trained HMM to an observation sequence, for instance, having a sentence, __predicting__ each word's part-of-speech tag, using the latent structure from the training data learned by the HMM.
 
@@ -199,11 +199,11 @@ The other one is applying a trained HMM to an observation sequence, for instance
 
 #### __Learning: estimating transition and emission matrices__
 
-Given an observation sequence $$W$$ and the associated states $$T$$ how can we learn the HMM parameters, that is, the matrices $$A$$ and $$B$$ ?
+Given an observation sequence $$W$$ and the associated states $$T$$ how can we learn the HMM parameters, that is, the matrices $$A$$ and $$B$$?
 
-In a HHM supervised scenario this is done by applying the __Maximum Likelihood Estimation__ principle, which will compute the matrices.
+Using an HHM in a supervised scenario is done by applying the __Maximum Likelihood Estimation__ principle, which will compute the matrices.
 
-This is achieved by counting how many times each event occurs in the corpus and normalizing the counts to form proper probability distributions. We need to count 4 quantities which represent the counts of each event in the corpus:
+This is achieved by counting how many times each event occurs in the corpus and normalising the counts to form proper probability distributions. We need to count 4 quantities which represent the counts of each event in the corpus:
 
 __Initial counts__: $$\displaystyle C_{\text{init}} (t_{k}) = \sum_{m=1}^{M} 1(t_{1}^m = t_{k})$$
 <br>(how often does state $$t_{k}$$ is the initial state)
@@ -225,7 +225,7 @@ __Emissions counts__: $$\displaystyle C_{\text{emiss}} (w_{j},t_{k}) = \sum_{m=1
 <br>
 <br>
 
-where, $$M$$ is the number of training examples and $$N$$ the length of the sequence, __1__ is an indicator function that has the value 1 when the particular event happens, and 0 otherwise. The equations scan the training corpus and count how often each event occurs.
+where, $$M$$ is the number of training examples and $$N$$ is the length of the sequence, __1__ is an indicator function that has the value 1 when the particular event happens, and 0 otherwise. The equations scan the training corpus and count how often each event occurs.
 
 All these 4 counts are then normalised in order to have proper probability distributions:
 
@@ -247,12 +247,11 @@ These equations will produce the __transition probability__ matrix $$A$$, with t
 
 ##### __Laplace smoothing__
 
-How will the model handle words not seen during training ?
+How will the model handle words not seen during training?
 
 In the presence of an unseen word/observation, $$P(W_{i} \mid T_{i}) = 0$$ and has a consequence incorrect decisions will be made during the predicting process.
 
-There is a technique to handle this situations called _Laplace smoothing_ or _additive smoothing_. The idea is that every state will always have a small emission probability of producing an unseen word, for instance, denoted by __UNK__.
-Every time the HMM encounters an unknown word it will use the value $$P(\text{UNK} \mid T_{i})$$ as the emission probability.
+There is a technique to handle these situations called _Laplace smoothing_ or _additive smoothing_. The idea is that every state will always have a small emission probability of producing an unseen word, for instance, denoted by __UNK__. Every time the HMM encounters an unknown word it will use the value $$P(\text{UNK} \mid T_{i})$$ as the emission probability.
 
 
 ---
@@ -261,7 +260,7 @@ Every time the HMM encounters an unknown word it will use the value $$P(\text{UN
 
 Given a trained HMM i.e., the transition matrixes $$A$$ and $$B$$, and a new observation sequence $$W = w_{1}, w_{2}, \ldots, w_{N}$$ we want to find the sequence of states $$T = t_{1}, t_{2}, \ldots, t_{N}$$ that best explains it.
 
-This is can be achieved by using the Viterbi algorithm, that finds the best state assignment to the sequence $$T_{1} \ldots T_{N}$$ as a whole. There is another algorithm, Posterior Decoding which consists in picking the highest state posterior for each position $$i$$ in the sequence independently.
+This is can be achieved by using the Viterbi algorithm, which finds the best state assignment to the sequence $$T_{1} \ldots T_{N}$$ as a whole. There is another algorithm, Posterior Decoding which consists in picking the highest state posterior for each position $$i$$ in the sequence independently.
 
 #### __Viterbi__
 
@@ -298,7 +297,7 @@ The Viterbi algorithm uses a representation of the HMM called a __trellis__, whi
 
 <br>
 
-Using the Viterbi algorithm and the emission and transition probabilities matrices, one can fill in the trellis scores and effectively find the Viterby path.
+Using the Viterbi algorithm and the emission and transition probabilities matrices, one can fill in the trellis scores and effectively find the Viterbi path.
 
 <figure>
   <img style="width: 55%; height: 55%" src="/assets/images/2017-11-11-Viterbi_II.png">
@@ -350,7 +349,7 @@ The figures above were taken from a Viterbi algorithm example by [Roger Levy](ht
 
 ## __Extra__
 
-There is also a very good lecture, given by [Noah Smith](https://homes.cs.washington.edu/~nasmith/) at [LxMLS2016](http://lxmls.it.pt/2016/) about Sequence Models, mainly focusing on Hidden Markov Models and it's applications from sequence learning to language modeling.
+There is also a very good lecture, given by [Noah Smith](https://homes.cs.washington.edu/~nasmith/) at [LxMLS2016](http://lxmls.it.pt/2016/) about Sequence Models, mainly focusing on Hidden Markov Models and it's applications from sequence learning to language modelling.
 
 [![](https://img.youtube.com/vi/8vGSAwR716k/hqdefault.jpg)](https://www.youtube.com/watch?v=8vGSAwR716k)
 
