@@ -125,7 +125,7 @@ the probability of the current state $$s_{t}$$ given the previous state $$s_{t-
 <figure>
   <img style="width: 65%; height: 65%" border="5" src="/assets/images/2017-11-12-HMM_vs_MEMM.png">
   <figcaption>
-  Contrast in state transition estimation between an HMM and a MEMM. <br> (taken from "Speech and Language Processing" Daniel Jurafsky & James H. Martin)</figcaption>
+  The contrast in state transition estimation between an HMM and a MEMM. <br> (taken from "Speech and Language Processing" Daniel Jurafsky & James H. Martin)</figcaption>
 </figure>
 
 In contrast to HMMs, in which the current observation only depends on the current state, the current observation in an MEMM may also depend on the previous state. The HMM model includes distinct probability estimates for each transition and observation, while the MEMM gives one probability estimate per hidden state, which is the probability of the next tag given the previous tag and the observation.
@@ -160,7 +160,7 @@ to 1 across each row.
 
 Taken from the original paper: "In what follows, we will split $$P(s \mid s', O)$$ into $$\mid S \mid$$ separately trained transition functions $$ P_{s'} ( S \mid o) = P(s \mid s', O)$$. Each of these functions is given by an exponential model"
 
-THE MEMM trains one logistic regression per state transition, normalised locally. The original MEMM paper, published in 2000, used a generalized iterative scaling (GIS) algorithm to fit the multinomial logistic regression, that is finding the perfect weights according to the training data. That algorithm has been largely surpassed by gradient-based methods such as L-BFGS.
+THE MEMM trains one logistic regression per state transition, normalised locally. The original MEMM paper, published in 2000, used a generalised iterative scaling (GIS) algorithm to fit the multinomial logistic regression, that is finding the perfect weights according to the training data. That algorithm has been largely surpassed by gradient-based methods such as L-BFGS.
 
 For the decoding, the same algorithm as in the HMM is used, the Viterbi, although just slightly adapted to accommodate the new method of estimating state transitions.
 

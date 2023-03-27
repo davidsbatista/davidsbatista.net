@@ -11,7 +11,7 @@ preview_pic: /assets/images/2019-11-03-pt-embeddings.jpg
 
 While working on some projects of mine I come to a point where I needed pre-trained
 word embeddings for Portuguese. I could have trained some on my own on some corpora
-but I did not wanted to spent time on cleaning and running the training, so instead
+but I did not want to spend time on cleaning and running the training, so instead
 I searched the web for collections of word vectors for Portuguese, here's a compiled
 list of what I've found.
 
@@ -40,7 +40,7 @@ semantic similarity tasks.
 ### __LX-DSemVectors (2018)__
 
 The authors apply the Skip-Gram model to a dataset composed of mostly European
-Portuguese news papers. I would say that if you want embeddings for the new domain
+Portuguese newspapers. I would say that if you want embeddings for the new domain
 in European Portuguese this is probably a very good choice.
 
 * __Domain__: News Articles
@@ -93,7 +93,7 @@ including Portuguese.
 
 ### __NLPL word embeddings repository__
 
-From the paper "shared repository of large-text resources for creating word
+The paper states: "a shared repository of large-text resources for creating word
 vectors, including pre-processed corpora and pre-trained vectors for a range
 of frameworks and configurations. This will facilitate reuse, rapid
 experimentation, and replicability of results". The repository contains different

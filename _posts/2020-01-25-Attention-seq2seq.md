@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The Attention Mechanism in Natural Language Processing - seq2seq
+title: The Attention Mechanism in Natural Language Processing
 date: 2020-01-25 00:00:00
 tags: attention neural-networks LSTM GRU RNN
 categories: [blog]
@@ -10,9 +10,9 @@ preview_pic: /assets/images/2020-01-25-seq2seq_with_attention.png
 ---
 
 The __Attention__ mechanism is now an established technique in many NLP tasks.
-I've heard about it often, but wanted to go a bit more deep and understand
+I've heard about it often but wanted to go a bit more deeply and understand
 the details. In this first blog post - since I plan to publish a few more blog posts
-regarding the __attention__ subject - I make an introduction by focusing in the
+regarding the __attention__ subject - I make an introduction by focusing on the
 first proposal of attention mechanism, as applied to the task of neural machine
 translation.
 
@@ -87,7 +87,7 @@ hidden state. The initial input token is the start-of-string <SOS> token, and
 the first hidden state is the context vector (the encoder’s last hidden state).
 
 So, the fixed size context-vector needs to contain a good summary of the meaning
-of the whole source sentence, being this one big bottleneck, specially for long
+of the whole source sentence, being this one big bottleneck, especially for long
 sentences.
 
 <figure>
@@ -100,15 +100,14 @@ sentences.
 
 ### __Sequence-to-Sequence model with Attention__
 
-The fixed size context-vector bottleneck was one of the main motivations by
+The fixed-size context-vector bottleneck was one of the main motivations by
 [Bahdanau et al. 2015](https://arxiv.org/pdf/1409.0473.pdf), which proposed a
 similar architecture but with a crucial improvement:
 
-"_The new architecture consists of a bidirectional RNN as an encoder and a
-decoder that emulates searching through a source sentence during decoding
-a translation_"
+"_The new architecture consists of a bidirectional RNN as an encoder and a decoder 
+that emulates searching through a source sentence during decoding a translation_"
 
-The encoder is now a bidirectional recurrent network with a forward and backward
+The encoder is now a bidirectional recurrent network with forward and backwards
 hidden states. A simple concatenation of the two hidden states represents the
 encoder state at any given position in the sentence. The motivation is to
 include both the preceding and following words in the representation/annotation
@@ -123,13 +122,13 @@ sentence when it needs to produce an output word, the __attention mechanism__.
   <figcaption>Figure 2: The attention mechanism in a seq2seq model. Taken from Bahdanau et al. 2015.</figcaption>
 </figure>
 
-The Figure 2 above gives a good overview of this new mechanism. To produce the
+Figure 2 above gives a good overview of this new mechanism. To produce the
 output word at time $$y_{t}$$ the decoder uses the last hidden state from the
 decoder - one can think about this as some sort of representation of the already
 produced words - and a dynamically computed context vector based on the input
 sequence.
 
-The authors proposed to replace the fixed-length context vector by a another
+The authors proposed to replace the fixed-length context vector by another
 context vector $$c_{i}$$ which is a sum of the hidden states of the input sequence,
 weighted by alignment scores.
 
@@ -181,7 +180,7 @@ $$a(s_{i-1},h_{j}) = \mathbf{v}_a^\top \tanh(\mathbf{W}_{a}\ s_{i-1} + \mathbf{U
 where both $$\mathbf{v}_a$$ and $$\mathbf{W}_a$$ are weight matrices to be learned in the alignment model.
 
 
-The alignment model in the paper is described as feed forward neural network
+The alignment model in the paper is described as a feed-forward neural network
 whose weight matrices $$\mathbf{v}_a$$ and $$\mathbf{W}_a$$ are learned jointly
 together with the whole graph/network.
 
@@ -214,7 +213,7 @@ clearly the difference between the two encoder-decoder approaches.
 ### __Extensions to the classical attention mechanism__
 
 [Luong et al.](https://www.aclweb.org/anthology/D15-1166/) proposed and compared
-other mechanisms of attentions, more specifically, alternative functions to
+other mechanisms of attention, more specifically, alternative functions to
 compute the alignment score:
 
 
@@ -231,8 +230,8 @@ on the source for each target word.
 
 ## __Summary__
 
-This was a short introduction on the first "classical" attention mechanism, in
-the meantime others were published, such as __self-attention__ or
+This was a short introduction to the first "classical" attention mechanism, 
+in the meantime others were published, such as __self-attention__ or
 __key-value-attention__, which I plan to write about in the future.
 
 The __attention__ mechanism was then applied to other natural language processing
