@@ -1,66 +1,31 @@
 ---
 layout: default
 ---
-<!-- Just some nice to have styles for the pager buttons -->
+<!-- Just some nice-to-have styles for the pager buttons -->
 <style>
   ul.pager { text-align: center; list-style: none; }
   ul.pager li {display: inline;border: 0px solid black; padding: 10px; margin: 5px;}
 </style>
 
-<!--
-<div class="home">
-  {{ content }}
-  <ul class="post-list">
-    {% for post in paginator.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  {% if paginator.total_pages > 1 %}
-  <ul class="pager">
-      {% if paginator.previous_page %}
-      <li class="previous">
-          <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
-      </li>
-      {% endif %}
-      {% if paginator.next_page %}
-      <li class="next">
-          <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
-      </li>
-      {% endif %}
-  </ul>
-  {% endif %}
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
-
-</div>
--->
-
 <div class="previews">
   {% for post in site.posts %}
   <div class="preview">
+    <div class="post-meta">
+      <div class="post-date">
+        {{ post.date | date: '%Y-%m-%d' }}
+      </div>
+      <div class="post-tags">
+        {% for tag in post.tags %}
+          <span><a href="/tag/{{ tag }}"><code class="post-tags"><nobr>{{ tag }}</nobr></code></a></span>
+        {% endfor %}
+      </div>
+    </div>
+
     <h1 class="post-title">
       <a class="post-link" href="{{ post.url }}">{{ post.title }}</a>
     </h1>
     <div class="preview-content">
       <div class="preview-excerpt">
-        <div class="post-meta">
-          <div class="post-date">
-            <i class="fa fa-calendar-o"></i>   {{ post.date | date: '%Y-%m-%d' }}
-          </div>
-          <div class="post-tags">
-            <i class="fa fa-tags"></i>
-            {% for tag in post.tags %}
-              <span><a href="/tag/{{ tag }}"><code class="highligher"><nobr>{{ tag }}</nobr></code></a></span>
-            {% endfor %}
-          </div>
-        </div>
         {{ post.excerpt }}
       </div>
       {% if post.preview_pic %}
@@ -75,21 +40,6 @@ layout: default
   {% endfor %}
 </div>
 
-<!--
-<div class="home">
-  <h1 class="page-heading">Posts</h1>
-  {{ content | markdownify }}
-  <ul class="post-list">
-    {% for post in paginator.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}{% if post.book.rank %} | Rank: {{ post.book.rank }}{% endif %}{% if post.collection %} | {{ post.collection }}{% endif %}{% if post.tags %}<br>Tags: {{ post.tags }}{% endif %}</span>
-        <h2>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
--->
 
   <!--
     Showing buttons to move to the next and to the previous list of posts (pager buttons).

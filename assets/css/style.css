@@ -1,5 +1,4 @@
 /* Base */
-/* ----------------------------------------------------------*/
 
 @font-face {
   font-family: serifa;
@@ -19,21 +18,16 @@ body {
   font-size: 16.5px;
   line-height: 1.5;
   font-weight: 200;
-  background-color: white;
+  background-color: white;*/
 }
 
 /* link color and decoration*/
 a {
   color: #4292c6;
-  font-weight: bold;
-}
-a:hover {
-  /*text-decoration: underline;*/
 }
 
 a.site-link:focus, a.site-link:hover {
     color: #303030;
-    font-weight: bold;
 }
 
 a:focus, a:hover {
@@ -44,28 +38,21 @@ a:focus, a:hover {
 .site-link {
   font-size: 18px;
   color: #303030;
-  /*webkit-transition: color 0.25s;*/
-  /*transition: color 0.25s;*/
 }
+
 .site-link:hover {
   /*color: #807dba;*/
-  text-decoration: bold;
+  /* text-decoration: bold; */
 }
 
 .post-link {
-  color: #0099ff;
-  text-decoration: bold;
-  font-weight: bold;
-  /*webkit-transition: color 0.25s;
-  transition: color 0.25s;*/
-  font-size: 23px;
+  color: #222324;
+  font-size: 24px;
 }
+
 .post-link:hover {
-  /*color: #807dba;*/
-  /*text-decoration: bold;*/
-  font-size: 23px;
-  text-decoration: bold;
-  font-weight: bold;
+  color: #222324;
+  font-size: 24px;
 }
 
 .post-meta {
@@ -74,14 +61,18 @@ a:focus, a:hover {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
 .post-meta i,
+
 .post-meta span {
     margin-right: 4px;
 }
+
 .post-meta .post-date {
   margin-right: 15px;
   display: inline;
 }
+
 .post-meta .post-tags {
   display: inline;
 }
@@ -94,6 +85,7 @@ a:focus, a:hover {
   /*webkit-transition: color 0.25s, background-color 0.25s;*/
   /*transition: color 0.25s, background-color 0.25s;*/
 }
+
 .nav-link:hover {
   /*color: white;*/
   /*background-color: #807dba;*/
@@ -104,6 +96,7 @@ a:focus, a:hover {
   font-family: serifa;
   letter-spacing: -1px;
 }
+
 .site-header .site-title {
   font-size: 28px;
   line-height: 65px;
@@ -113,6 +106,7 @@ a:focus, a:hover {
   position: relative;
   z-index: 1;
 }
+
 .site-footer .site-title {
   font-size: 14px;
 }
@@ -132,7 +126,6 @@ a:focus, a:hover {
 
 
 /* Layout Styles */
-/* ----------------------------------------------------------*/
 
 /* =========== */
 /* SITE HEADER */
@@ -173,7 +166,7 @@ a:focus, a:hover {
 
 
 .footer-heading {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 300;
   letter-spacing: -.5px;
   margin-bottom: 1px;
@@ -184,8 +177,10 @@ a:focus, a:hover {
   font-size: 22px;
 }
 .footer-bottom {
-  font-size: 15px;
-  color: #555555
+  font-size: 14px;
+  color: #555555;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .site-footer ul { list-style: none; }
@@ -193,8 +188,6 @@ a:focus, a:hover {
 
 
 /* Page Content styles */
-/* ----------------------------------------------------------*/
-
 .page-content {
   padding: 8px 0;
   background-color: #ffffff;
@@ -202,7 +195,6 @@ a:focus, a:hover {
 
 
 /* Home styles */
-/* ----------------------------------------------------------*/
 
 .home h1 { margin-bottom: 25px; }
 
@@ -215,7 +207,7 @@ a:focus, a:hover {
 
 .preview .preview-content {
   display: flex;
-  align-items: center;
+  align-items: left;
 }
 .preview .preview-excerpt {
   flex: 1;
@@ -244,8 +236,8 @@ a:focus, a:hover {
 
 .post-title {
   font-size: 26px;
-  letter-spacing: -1px;
-  font-weight: 200;
+  letter-spacing: 1px;
+  font-weight: 400;
 }
 
 
@@ -254,7 +246,6 @@ a:focus, a:hover {
 }
 
 /* Post styles */
-/* ----------------------------------------------------------*/
 
 header h1 {
   font-size: 34px;
@@ -373,6 +364,14 @@ header h1 {
 .post img.fullw {
   width: 100%;
 }
+
+/* ------------------------ */
+
+.post-tags {
+	color: #69707a;
+}
+
+
 
 /* Syntax highlighting styles */
 /* ----------------------------------------------------------*/
@@ -703,4 +702,3 @@ img.emoji {
 .js-line-number {
   display: none;
 }
-

@@ -4,7 +4,7 @@ title: Portuguese Word Embeddings
 date: 2019-11-03 00:00:00
 tags: embeddings word-embeddings gensim fasttext word2vec portuguese
 categories: [blog]
-comments: true 
+comments: true
 disqus_identifier: 20191103
 preview_pic: /assets/images/2019-11-03-pt-embeddings.jpg
 ---
@@ -104,4 +104,3 @@ Portuguese CoNLL17 corpus.
 * __Domain__: Several
 - :pencil: ["Word vectors, reuse, and replicability: Towards a community repository \[...\]"](https://www.aclweb.org/anthology/W17-0237/)
 - :floppy_disk: [Download](http://vectors.nlpl.eu/repository/)
-

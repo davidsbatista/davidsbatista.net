@@ -2,7 +2,7 @@
 layout: post
 title: PyData Berlin 2017
 date: 2017-07-07 00:00:00
-tags: PyData
+tags: PyData conference
 categories: [blog]
 comments: true
 disqus_identifier: 20170707

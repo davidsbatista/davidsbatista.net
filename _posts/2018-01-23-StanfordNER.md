@@ -2,7 +2,7 @@
 layout: post
 title: StanfordNER - training a new model and deploying a web service
 date: 2018-01-23 00:00:00
-tags: stanford-NER NER conditional-random-fields named-entity-recognition
+tags: NER conditional-random-fields named-entity-recognition
 categories: blog
 comments: true
 disqus_identifier: 20180123
@@ -522,4 +522,3 @@ Some features are documented in [Frequently Asked Questions](https://nlp.stanfor
 * __[Conditional Random Fields for Sequence Prediction](../../../../../blog/2017/11/13/Conditional_Random_Fields/)__
 
 * __[Extracting Relationships between Named-Entities](../../../../../blog/2017/05/08/ReVerb/)__
-

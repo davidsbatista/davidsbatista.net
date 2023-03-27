@@ -2,7 +2,7 @@
 layout: post
 title: Conditional Random Fields for Sequence Prediction
 date: 2017-11-13 00:00:00
-tags: conditional-random-fields sequence-prediction viterbi
+tags: conditional-random-fields sequence-prediction viterbi CRF
 categories: blog
 comments: true
 disqus_identifier: 20171113

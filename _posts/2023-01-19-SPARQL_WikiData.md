@@ -1,8 +1,8 @@
 ---
 layout: post
-title: WikiData and SPARQL queries
+title: A collection of examples of SPARQL queries to Wikidata 
 date: 2023-01-19 00:00:00
-tags: sparql wikidata reference-post
+tags: SPARQL wikidata reference-post
 categories: [blog]
 comments: true
 disqus_identifier: 20230119
@@ -13,7 +13,7 @@ A collection of several SPARQL queries to WikiData. Those are queries over diffe
 
 <br>
 
-__Get the "known as" for legal entity types in different countries, e.g.: "LLC", "Inc.", "GmbH", "Ldt."__ 
+__Get the "known as" for legal entity types in different countries, e.g.: "LLC", "Inc.", "GmbH", "Ldt."__
 
 <script src="https://gist.github.com/davidsbatista/e0b19d8e1a93ca6f460e57735051cd6f.js" data-gist-hide-line-numbers="true"></script>
 
@@ -24,7 +24,7 @@ __Get the "known as" for legal entity types in different countries, e.g.: "LLC",
 
 <br>
 
-__Selects all the companies in the DAX TecDAX, MDAX and CDAX, gets their headquarters location's latitude and longitude and plots them in a map__ 
+__Selects all the companies in the DAX TecDAX, MDAX and CDAX, gets their headquarters location's latitude and longitude and plots them in a map__
 
 <script src="https://gist.github.com/davidsbatista/365d09fb6578c6b0a73dae0a0d2a3f81.js" data-gist-hide-line-numbers="true"></script>
 
@@ -77,10 +77,10 @@ __Number of connections served for a given airport__
 
 
 __Get all dams in Portugal with the latitude and longitude__
- 
- 
+
+
 <script src="https://gist.github.com/davidsbatista/3eca48c03865413f724fb703dea49244.js"></script>
- 
+
 [Try it](https://query.wikidata.org/#%23defaultView%3AMap%0ASELECT%20DISTINCT%20%3Fdam%20%3Fcoords%20%3Flat%20%3Flong%20WHERE%20%7B%0A%20%20%20%20%20%20%20%20%3Fdam%20wdt%3AP31%2Fwdt%3AP279%2a%20wd%3AQ12323%20.%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%3Fdam%20wdt%3AP17%20wd%3AQ45%20.%0A%20%20%20%20%20%20%20%20%3Fdam%20p%3AP625%20%3Fcoordinataes%20.%0A%20%20%20%20%20%20%20%20%3Fcoordinataes%20ps%3AP625%20%3Fcoords%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20psv%3AP625%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wikibase%3AgeoLatitude%20%3Flat%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wikibase%3AgeoLongitude%20%3Flong%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5D%20.%0A%7D%20){:target="_blank"}
 
 ---
@@ -90,5 +90,5 @@ __Get all dams in Portugal with the latitude and longitude__
 __Electric power dams in Portugal__
 
 <script src="https://gist.github.com/davidsbatista/30fdead90869539114bb892c2f22ab6c.js"></script>
- 
+
 [Try it](https://query.wikidata.org/#%23defaultView%3AMap%0ASELECT%20DISTINCT%20%3Fdam%20%3Fname%20%3Felevation%20%3Fcoords%20WHERE%20%7B%0A%20%20%20%20%20%20%20%20%23%20%3Fdam%20wdt%3AP31%2Fwdt%3AP279%2a%20wd%3AQ12323%20.%0A%20%20%20%20%20%20%20%20%3Fdam%20wdt%3AP31%2Fwdt%3AP279%2a%20wd%3AQ15911738%20.%20%20%23%20only%20hidroelectric%20cpower%0A%20%20%20%20%20%20%20%20%3Fdam%20wdt%3AP17%20wd%3AQ45%20.%20%20%23%20only%20located%20in%20Portugal%0A%20%20%20%20%20%20%20%20%3Fdam%20rdfs%3Alabel%20%3Fname%20%20FILTER%28LANG%28%3Fname%29%20%3D%20%22pt%22%29%20.%0A%20%20%20%20%20%20%20%20%3Fdam%20p%3AP2044%20%3Felevation_sea_level%20.%0A%20%20%20%20%20%20%20%20%3Felevation_sea_level%20ps%3AP2044%20%3Felevation%20.%0A%20%20%20%20%20%20%20%20%3Fdam%20p%3AP625%20%3Fcoordinataes%20.%0A%20%20%20%20%20%20%20%20%3Fcoordinataes%20ps%3AP625%20%3Fcoords%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20psv%3AP625%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wikibase%3AgeoLatitude%20%3Flat%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wikibase%3AgeoLongitude%20%3Flong%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5D%20.%0A%7D%20){:target="_blank"}

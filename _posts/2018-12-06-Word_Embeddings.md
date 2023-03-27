@@ -2,7 +2,7 @@
 layout: post
 title: Language Models and Contextualised Word Embeddings
 date: 2018-12-06 00:00:00
-tags: word-embeddings word2vec fasttext glove ELMo BERT language-models character-embeddings character-language-models neural-networks
+tags: word-embeddings language-models neural-networks
 categories: [blog]
 comments: true
 disqus_identifier: 20181206
@@ -94,7 +94,7 @@ A vector representation is associated to each character $$n$$-gram, and words ar
 
 Each word $w$ is represented as a bag of character $n$-gram, plus a special boundary symbols _\<_ and _\>_ at the beginning and end of words, plus the word $w$ itself in the set of its $n$-grams.
 
-Taking the word _where_ and $n = 3$ as an example, it will be represented by the character $n$-grams: 
+Taking the word _where_ and $n = 3$ as an example, it will be represented by the character $n$-grams:
 
 <center>
 < wh, whe, her, ere, re > and the special sequence < where >.

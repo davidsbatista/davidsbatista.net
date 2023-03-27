@@ -3,7 +3,7 @@ layout: post
 title: Named-Entity Recognition based on Neural Networks
 date: 2018-10-22 00:0:00
 categories: blog
-tags: conditional-random-fields NER neural-networks sequence-prediction viterbi LSTM
+tags: conditional-random-fields CRF NER sequence-prediction viterbi LSTM
 comments: true
 disqus_identifier: 20181022
 preview_pic: /assets/images/2018-10-21-CNN-Char-Embeddings.png

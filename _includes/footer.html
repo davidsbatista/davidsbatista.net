@@ -6,28 +6,21 @@
         {% if site.email %}
           <li><a class="site-link" href="mailto:{{ site.email }}"><i class="fa fa-envelope-square fa-fw fa-2x"></i></a></li>
         {% endif %}
-
         {% if site.twitter_username %}
-          <li><a class="site-link" href="https://twitter.com/{{ site.twitter_username }}"><i class="fa fa-twitter-square fa-fw fa-2x"></i></a></li>
+          <li><a class="site-link" target="_blank" href="https://twitter.com/{{ site.twitter_username }}"><i class="fa fa-twitter-square fa-fw fa-2x"></i></a></li>
         {% endif %}
-
         {% if site.github_username %}
-          <li><a class="site-link" href="https://github.com/{{ site.github_username }}"><i class="fa fa-github-square fa-fw fa-2x"></i></a></li>
+          <li><a class="site-link" target="_blank" href="https://github.com/{{ site.github_username }}"><i class="fa fa-github-square fa-fw fa-2x"></i></a></li>
         {% endif %}
-
         {% if site.linkedin_link %}
-          <li><a class="site-link" href="{{ site.linkedin_link }}"><i class="fa fa-linkedin-square fa-fw fa-2x"></i></a></li>
+          <li><a class="site-link" target="_blank" href="{{ site.linkedin_link }}"><i class="fa fa-linkedin-square fa-fw fa-2x"></i></a></li>
         {% endif %}
-
         {% if site.gscholar %}
-          <li><a class="site-link" href="http://scholar.google.com/citations?user={{ author.gscholar }}" class="author-social" target="_blank"><i class="icon-google"></i></a></li>
+          <li><a class="site-link" target="_blank" href="http://scholar.google.com/citations?user={{ author.gscholar }}" class="author-social" target="_blank"><i class="icon-google"></i></a></li>
         {% endif %}
-
-        <li><a class="site-link" href="{{ "/feed.xml" | prepend: site.baseurl }}"><i class="fa fa-rss-square fa-fw fa-2x"></i></a></li>
-        <br>
-        <!--© 2015-2021 David S. Batista-->
+        <li><a class="site-link" target="_blank" href="{{ "/feed.xml" | prepend: site.baseurl }}"><i class="fa fa-rss-square fa-fw fa-2x"></i></a></li>
       </center>
     </div>
-    <div class="footer-bottom"></div>
+    <div class="footer-bottom">© 2017-2023 David S. Batista</div>
   </div>
 </footer>

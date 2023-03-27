@@ -5,7 +5,7 @@ comments: true
 disqus_identifier: 20170401
 date: 2017-04-01 00:14:00
 categories: blog
-tags: document-classification multi-label-classification scikit-learn tf-idf word2vec doc2vec pos-tags gensim classification
+tags: multi-label-classification scikit-learn tf-idf word2vec doc2vec
 comments: true
 preview_pic: /assets/images/2017-04-01-IMDB-movie-genre-classification.png
 description: An introduction to the Document Classification task, in this case in a multi-class and multi-label scenario, proposed solutions include TF-IDF weighted vectors, an average of word2vec words-embeddings and a single vector representation of the document using doc2vec. Includes code using Pipeline and GridSearchCV classes from scikit-learn.
@@ -13,9 +13,9 @@ description: An introduction to the Document Classification task, in this case i
 
 Classifying a document into a pre-defined category is a common problem, for instance, classifying an email as spam or not spam. In this case there is an instance to be classified into one of two possible classes, i.e. binary classification.
 
-However, there are other scenarios, for instance, when one needs to classify a document into one of more than two classes, i.e., multi-class, and even more complex, when each document can be assigned to more than one class, i.e. multi-label or multi-output classification.
+However, there are other scenarios, for instance, when one needs to classify a document into one of more than two classes, i.e., multi-class, and even more complex when each document can be assigned to more than one class, i.e. multi-label or multi-output classification.
 
-In this post I will show an approach to classify a document into a set of pre-defined categories using different supervised classifiers and text representations. I will use the [IMDB dataset of movies](http://www.imdb.com/interfaces). Although the dataset contains several informations about a movie, for the scope of this post I will only use the plot of the movie and the genre(s) on which the movie is classified.
+In this post, I will show an approach to classify a document into a set of pre-defined categories using different supervised classifiers and text representations. I will use the [IMDB dataset of movies](http://www.imdb.com/interfaces). Although the dataset contains several pieces of information about a movie, for the scope of this post I will only use the plot of the movie and the genre(s) on which the movie is classified.
 
 
 ## Dataset
@@ -80,10 +80,10 @@ df.info()
     memory usage: 26.9+ MB
 
 
-We have a total of 117 352 movies and each of them is associated with 28 possible genres. The genres columns simply contain a 1 or 0 depending of whether the movie is classified into that particular genre or not. This means the multi-label binary mask is already provided in this file.
+We have a total of 117 352 movies and each of them is associated with 28 possible genres. The genres columns simply contain a 1 or 0 depending on whether the movie is classified into that particular genre or not. This means the multi-label binary mask is already provided in this file.
 
 
-Next we are going to calculate the absolute number of movies per genre. Note: each movie can be associated with more than one genre, we just want to know which genres have more movies.
+Next, we are going to calculate the absolute number of movies per genre. Note: each movie can be associated with more than one genre, we just want to know which genres have more movies.
 
 
 {% highlight python %}
@@ -321,13 +321,13 @@ To train supervised classifiers, we first need to transform the plot into a vect
 * doc2vec embeddings
 
 
-After having this vector representations of the text we can train supervised classifiers to train unseen plots and predict the genres on which they fall.
+After having these vector representations of the text we can train supervised classifiers to train unseen plots and predict the genres on which they fall.
 
 #### TF-IDF
 
-Based on the [bag-of-words model](https://www.wikiwand.com/en/Bag-of-words_model), i.e., no word order is kept. I considered [TF-IDF](https://www.wikiwand.com/en/Tf%E2%80%93idf) weighted vectors, composed of different [_n_-grams](https://www.wikiwand.com/en/N-gram) size, namely: uni-grams, bi-grams and tri-grams. I also experimentally eliminated words that appear in more than a given number of documents. All this features can be easily configured with [TfidfVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html) class.
+Based on the [bag-of-words model](https://www.wikiwand.com/en/Bag-of-words_model), i.e., no word order is kept. I considered [TF-IDF](https://www.wikiwand.com/en/Tf%E2%80%93idf) weighted vectors, composed of different [_n_-grams](https://www.wikiwand.com/en/N-gram) size, namely: uni-grams, bi-grams and tri-grams. I also experimentally eliminated words that appear in more than a given number of documents. All these features can be easily configured with [TfidfVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html) class.
 
-The _max_df_ parameter is used for removing terms that appear too frequently, i.e., _max_df_ = 0.50 means “ignore terms that appear in more than 50% of the documents”. The _ngram_range_ parameter selects how large are the sequence of words to be considered.
+The _max_df_ parameter is used for removing terms that appear too frequently, i.e., _max_df_ = 0.50 means “ignore terms that appear in more than 50% of the documents”. The _ngram_range_ parameter selects how large is the sequence of words to be considered.
 
 {% highlight python %}
 tfidf__max_df: (0,25 0.50, 0.75)
@@ -338,16 +338,16 @@ tfidf__ngram_range: ((1, 1), (1, 2), (1, 3))
 
 #### Word2Vec
 
-Under this scenario, a movie plot is represented by a single real-value dense vector based on the [word embeddings](https://www.wikiwand.com/en/Word_embedding) associated with each word. This is done by selecting words from the plot, based on their [part-of-speech (PoS)-tags](http://universaldependencies.org/u/pos/), and then summing their word embeddings and averaging them into a single vector. I used the [GoogleNews-vectors](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit), which have dimension of 300 and are derived from English corpora. For this experiment I selected only adjectives and nouns;
+Under this scenario, a movie plot is represented by a single real-value dense vector based on the [word embeddings](https://www.wikiwand.com/en/Word_embedding) associated with each word. This is done by selecting words from the plot, based on their [part-of-speech (PoS)-tags](http://universaldependencies.org/u/pos/), and then summing their word embeddings and averaging them into a single vector. I used the [GoogleNews-vectors](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit), which have a dimension of 300 and are derived from English corpora. For this experiment I selected only adjectives and nouns;
 
 
 
 #### Doc2Vec
 
-Doc2Vec is an [extension made over Word2Vec](https://www.wikiwand.com/en/Word2vec#/Extensions), which tries do model a single document or paragraph as a unique a single real-value dense vector. You can read more about it in the [original paper](http://proceedings.mlr.press/v32/le14.pdf). I will use the gensim implementation to derive vectors based on a single document.
+Doc2Vec is an [extension made over Word2Vec](https://www.wikiwand.com/en/Word2vec#/Extensions), which tries do model a single document or paragraph as a unique single real-value dense vector. You can read more about it in the [original paper](http://proceedings.mlr.press/v32/le14.pdf). I will use the gensim implementation to derive vectors based on a single document.
 
 
-At the of this post you have a link to the complete code, showing how to generate embeddings with word2vec and doc2vec.
+At the end of this post, you have a link to the complete code, showing how to generate embeddings with word2vec and doc2vec.
 
 
 ### Load pre-processed data:
@@ -377,10 +377,10 @@ After loading the data I also split the data into two sets:
 * 1/3 ~ 33.3% will be used to test the performance of the classifiers
 
 
-To achieve this I used the [StratifiedShuffleSplit class](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedShuffleSplit.html) which return stratified randomized folds, preserving the percentage of samples for each class.
+To achieve this I used the [StratifiedShuffleSplit class](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedShuffleSplit.html) which returns stratified randomised folds, preserving the percentage of samples for each class.
 
 
-In order to experiment with different features for the text representation and tuning the different parameters of the classifiers I used sklearn [Pipeline]() and [GridSearchCV](). I also use another class, to help transform binary classifiers into multi-label/multi-output classifiers, concretely [OneVsRestClassifier](), this class wraps ups the process of training a classifier for each possible class.
+In order to experiment with different features for the text representation and tune the different parameters of the classifiers I used sklearn [Pipeline]() and [GridSearchCV](). I also use another class, to help transform binary classifiers into multi-label/multi-output classifiers, concretely [OneVsRestClassifier](), this class wraps ups the process of training a classifier for each possible class.
 
 I considered the following supervise algorithms
 
@@ -562,9 +562,9 @@ The best results are achieved with a Linear SVM and TF-IDF representation of the
     avg / total       0.89      0.86      0.87     83596
 
 
-The embeddings methods shows very low results, the representation based on the word2vec was just a naive way to get sentence embeddings, more robust methods could be explored like concatenating each words vector into a single vector, and give it as input to a neural network.
+The embedding method shows very low results, the representation based on the word2vec was just a naive way to get sentence embeddings, more robust methods could be explored like concatenating each word's vector into a single vector and giving it as input to a neural network.
 
-The doc2vec vectors were generated with gensim out-of-the-box, some parameter tunning on vectors generation process might give better results.
+The doc2vec vectors were generated with gensim out-of-the-box, some parameter tuning on the vectors generation process might give better results.
 
 Also, word2vec and doc2vec, since they have a much lower dimension, i.e. 300 compared to 50 000 up to 100 000 of the TF-IDF weighted vectors, could probably be achieved with a non-linear kernel.
 

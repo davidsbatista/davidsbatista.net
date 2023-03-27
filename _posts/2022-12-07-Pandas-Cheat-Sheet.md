@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Pandas Cheat Sheet
+title: My pandas reference cheat-sheet
 date: 2022-12-07 00:00:00
 tags: pandas cheat-sheet reference-post
 categories: [blog]

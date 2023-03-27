@@ -2,7 +2,7 @@
 layout: post
 title: The Attention Mechanism in Natural Language Processing - seq2seq
 date: 2020-01-25 00:00:00
-tags: attention nlp seq2seq machine-translation neural-networks recurrent-neural-networks LSTM GRU RNN
+tags: attention neural-networks LSTM GRU RNN
 categories: [blog]
 comments: true
 disqus_identifier: 2020125
@@ -260,8 +260,3 @@ forthcoming blog posts.
 - __Figure 4 and 5__ taken from Nelson Zhao [blog's post](https://zhuanlan.zhihu.com/p/37290775)
 
 - __Figure 6__ taken from [Luong et al.](https://www.aclweb.org/anthology/D15-1166/)
-
-
-
-
-
