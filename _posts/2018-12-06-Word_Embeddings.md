@@ -254,7 +254,7 @@ The embeddings can then be used for other downstream tasks such as named-entity 
 
 In essence, this model first learns two character-based language models (i.e., forward and backward) using LSTMs. Then, an embedding for a given word is computed by feeding a word - character by character - into each of the language models and keeping the two last states (i.e., last character and first character) as two-word vectors, these are then concatenated.
 
-In the experiments described in the paper the authors concatenated the word vector generated before with yet another word vector from fastText and then apply a [Neural NER architecture](../../../../../blog/2018/10/22/Neural-NER-Systems/) for several sequence labelling tasks, e.g.: NER, chunking, PoS-tagging.
+In the experiments described in the paper, the authors concatenated the word vector generated before with yet another word vector from fastText and then apply a [Neural NER architecture](../../../../../blog/2018/10/22/Neural-NER-Systems/) for several sequence labelling tasks, e.g.: NER, chunking, PoS-tagging.
 
 #### __Links__
 

@@ -9,7 +9,7 @@ disqus_identifier: 20230119
 preview_pic: /assets/images/2023-01-19-SPARQL_WikiData.png
 ---
 
-A collection of several SPARQL queries to WikiData. Those are queries over different domains or topics that I've used for different goals. I've just decided to make them here public, so that I can quickly refer and reused them for new queries.
+A collection of several SPARQL queries to WikiData. Those are queries over different domains or topics that I've used for different goals. I've just decided to make them here public so that I can quickly refer to and reused them in other queries.
 
 <br>
 

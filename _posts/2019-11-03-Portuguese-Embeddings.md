@@ -24,7 +24,7 @@ models based on FastText, GloVe, Wang2Vec and Word2Vec, evaluated intrinsically 
 syntactic and semantic analogies and extrinsically on POS tagging and sentence
 semantic similarity tasks.
 
-* __Domain__: Mixed (News, Wiki, Subtitles, literay works, etc.)
+* __Domain__: Mixed (News, Wiki, Subtitles, literary works, etc.)
 * __Methods__: FastText, GloVe, Wang2Vec and Word2Vec
 - :pencil:  ["Portuguese Word Embeddings: Evaluating on Word Analogies and Natural Language \[...\]"](https://www.aclweb.org/anthology/W17-6615.pdf)
 - :floppy_disk: [Download](http://nilc.icmc.usp.br/embeddings)
@@ -80,7 +80,7 @@ including Portuguese.
 
 
 * __Methods__: Word2Vec
-* __Domain__: Wikiepdia
+* __Domain__: Wikipedia
 - :pencil:  ["Joint Learning of the Embedding of Words and Entities for Named Entity Disambiguation"](https://www.aclweb.org/anthology/K16-1025.pdf)
 - :floppy_disk: [Download](https://wikipedia2vec.github.io/wikipedia2vec/pretrained/)
 - :computer: [Code](https://github.com/wikipedia2vec/wikipedia2vec)

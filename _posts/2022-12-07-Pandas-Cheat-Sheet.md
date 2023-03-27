@@ -12,7 +12,6 @@ preview_pic: /assets/images/2022-12-07-Zoo-Berlin-zoo-berlin-panda-plant-eye-164
 I will use this blog post to keep track of typical operations I need to do over pandas DataFrame, after realising I need to do them whenever I explore a DataFrames, but I keep forgetting them.
 
 
-## __Columns__
 
 #### Remove columns from a DataFrame
 
@@ -41,8 +40,6 @@ I will use this blog post to keep track of typical operations I need to do over 
 
 	df.loc[df['column_name'] == some_value]
 
-
-## __Display__
 
 #### Number of rows to display
 
