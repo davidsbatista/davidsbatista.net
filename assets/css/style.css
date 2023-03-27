@@ -191,7 +191,7 @@ a:focus, a:hover {
 .page-content {
   padding: 8px 0;
   background-color: #ffffff;
-  
+
 }
 
 
@@ -204,6 +204,7 @@ a:focus, a:hover {
 
 .preview {
   margin-bottom: 50px;
+  margin-top: 50px;
 }
 
 .preview .preview-content {

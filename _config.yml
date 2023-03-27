@@ -36,11 +36,8 @@ pagination:
   enabled: true
   debug: true
   collection: 'posts'
-  per_page: 8
+  per_page: 7
   offset: 0
-  trail:
-    before: 2 # The number of links before the current page
-    after: 2  # The number of links after the current page
   # permalink: '/blog/:num/'
   title: ':title - page :num of :max'
   limit: 0
