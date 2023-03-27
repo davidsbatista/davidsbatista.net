@@ -13,7 +13,7 @@ I gather 10+ years of experience in both research and industry environments and 
 
 In the past I’ve tackled problems with a strong Machine Learning and Natural Language Processing components, involving tasks such as information extraction (e.g.: named‑entity recognition, relationship extraction, entity disambiguation), classification, clustering and information retrieval.
 
-I hold a Ph.D. in Natural Language Processing where I explored and proposed [methods for semantic relationship extraction](http://davidsbatista.net/assets/documents/publications/dsbatista-phd-thesis-2016.pdf){:target="_blank"}. You can see a complete list of my [publications](https://scholar.google.de/citations?user=-tRNGd0AAAAJ&hl=en){:target="_blank"}.  and my detailed [Curriculum Vitae](https://www.davidsbatista.net/assets/documents/dsbatista-cv.en.pdf){:target="_blank"}.
+I hold a Ph.D. in Natural Language Processing where I explored and proposed [methods for semantic relationship extraction](http://davidsbatista.net/assets/documents/publications/dsbatista-phd-thesis-2016.pdf){:target="_blank"}. You can see a complete list of my [publications](https://scholar.google.de/citations?user=-tRNGd0AAAAJ&hl=en){:target="_blank"} and my detailed [Curriculum Vitae](https://www.davidsbatista.net/assets/documents/dsbatista-cv.en.pdf){:target="_blank"}.
 
 I'm also the creator and maintainer of [Politiquices.PT](https://www.politiquices.pt){:target="_blank"} a semantic graph connected with Wikidata, which allows exploring political interactions of support and opposition based on archived news articles from the past 25 years.
 
