@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A collection of examples of SPARQL queries to Wikidata 
+title: A collection of examples of SPARQL queries to Wikidata
 date: 2023-01-19 00:00:00
 tags: SPARQL wikidata reference-post
 categories: [blog]

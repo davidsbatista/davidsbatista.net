@@ -104,7 +104,7 @@ The fixed-size context-vector bottleneck was one of the main motivations by
 [Bahdanau et al. 2015](https://arxiv.org/pdf/1409.0473.pdf), which proposed a
 similar architecture but with a crucial improvement:
 
-"_The new architecture consists of a bidirectional RNN as an encoder and a decoder 
+"_The new architecture consists of a bidirectional RNN as an encoder and a decoder
 that emulates searching through a source sentence during decoding a translation_"
 
 The encoder is now a bidirectional recurrent network with forward and backwards
@@ -230,7 +230,7 @@ on the source for each target word.
 
 ## __Summary__
 
-This was a short introduction to the first "classical" attention mechanism, 
+This was a short introduction to the first "classical" attention mechanism,
 in the meantime others were published, such as __self-attention__ or
 __key-value-attention__, which I plan to write about in the future.
 

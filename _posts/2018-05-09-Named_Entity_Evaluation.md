@@ -9,6 +9,7 @@ disqus_identifier: 20180509
 preview_pic: /assets/images/2018-05-09-NER_metrics.jpeg
 description: Named-Entity evaluation metrics based on entity-level
 ---
+
 When you train a NER system the most typically evaluation method is to measure __precision__, __recall__ and __f1-score__ at a token level. These metrics are indeed useful to tune a NER system. But when using the predicted named-entities for downstream tasks, it is more useful to evaluate with metrics at a full named-entity level. In this post I will go through some metrics that go beyond simple token-level performance.
 
 You can find the complete code associated with this blog post on this repository:

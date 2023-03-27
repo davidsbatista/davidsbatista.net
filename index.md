@@ -5,8 +5,7 @@ permalink: /
 
 <img style="float: left; padding-right: 10px;" align="left"  src="/assets/images/about-me_2020_2.jpg" alt="about-me.jpg" width="30%">
 
-
-Hello! :) 
+Hello! :)
 
 My name is David Batista and I currently live in [Berlin](https://www.google.com/maps/d/viewer?mid=19OMZvuXI0bNyCy-tEzsEglB7UmY&hl&ll=52.51602753988408%2C13.316764005371056&z=10){:target="_blank"}.
 

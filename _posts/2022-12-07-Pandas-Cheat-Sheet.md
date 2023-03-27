@@ -7,6 +7,7 @@ categories: [blog]
 comments: true
 disqus_identifier: 20221207
 preview_pic: /assets/images/2022-12-07-Zoo-Berlin-zoo-berlin-panda-plant-eye-1643703-pxhere.com.jpg
+
 ---
 
 I will use this blog post to keep track of typical operations I need to do over pandas DataFrame, after realising I need to do them whenever I explore a DataFrames, but I keep forgetting them.
