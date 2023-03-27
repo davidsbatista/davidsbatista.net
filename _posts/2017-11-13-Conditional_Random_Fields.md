@@ -7,7 +7,7 @@ categories: blog
 comments: true
 disqus_identifier: 20171113
 preview_pic: /assets/images/2017-11-13-Conditional_Random_Fields.png
-description: An introduction to Linear-Chain Conditional Random Fields, explaining what was the motivation behind it's proposal and making a comparison with two other sequence models, Hidden-Markov Model, and Maximum Entropy Markov Model.
+description: An introduction to Linear-Chain Conditional Random Fields, explaining what was the motivation behind its proposal and making a comparison with two other sequence models, Hidden-Markov Model, and Maximum Entropy Markov Model.
 ---
 
 This is the third and (maybe) the last part of a series of posts about sequential supervised learning applied to NLP. In this post I will talk about Conditional Random Fields (CRF), explain what was the main motivation behind the proposal of this model, and make a final comparison between Hidden Markov Models (HMM), Maximum Entropy Markov Models (MEMM) and CRF for sequence prediction.
@@ -22,13 +22,13 @@ You can find the first and second posts here:
 
 ## __Introduction__
 
-CRFs were proposed roughly only year after the Maximum Entropy Markov Models, basically by the same authors. Reading through the original [paper that introduced Conditional Random Fields](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1162&context=cis_papers), one finds at the beginning this sentence:
+CRFs were proposed roughly only a year after the Maximum Entropy Markov Model, basically by the same authors. Reading through the original [paper that introduced Conditional Random Fields](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1162&context=cis_papers), one finds at the beginning of this sentence:
 
 _"The critical difference between CRF and MEMM is that the latter uses per-state exponential models for the conditional probabilities of next states given the current state, whereas CRF uses a single exponential model to determine the joint probability of the entire sequence of labels, given the observation sequence. Therefore, in CRF, the weights of different features in different states compete against each other."_
 
-This means that in the MEMMs there is a model to compute the probability of the next state, given the current state and the observation. On the other hand CRF computes all state transitions globally, in a single model.
+This means that in the MEMMs there is a model to compute the probability of the next state, given the current state and the observation. On the other hand, CRF computes all state transitions globally, in a single model.
 
-The main motivation for this proposal is the so called Label Bias Problem occurring in MEMM, which generates a bias towards states with few successor states.
+The main motivation for this proposal is the so-called Label Bias Problem occurring in MEMM, which generates a bias towards states with few successor states.
 
 ### __Label Bias Problem in MEMMs__
 
@@ -39,7 +39,7 @@ Recalling how the transition probabilities are computed in a MEMM model, from th
   <figcaption>MEMM transition probability computation. <br> (taken from A. McCallum et al. 2000)</figcaption>
 </figure>
 
-This causes the so called __Label Bias Problem__, and Lafferty et al. 2001 demonstrate this through experiments and report it. I will not demonstrate it, but just give the basic intuition taken also from the paper:
+This causes the so-called __Label Bias Problem__, and Lafferty et al. 2001 demonstrate this through experiments and report it. I will not demonstrate it, but just give the basic intuition taken also from the paper:
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2017-11-13-Label_Bias_Problem.png">
@@ -48,7 +48,7 @@ This causes the so called __Label Bias Problem__, and Lafferty et al. 2001 demon
 
 Given the observation sequence: ___r_ _i_ _b___
 
-_"In the first time step, r matches both transitions from the start state, so the probability mass gets distributed roughly equally among those two transitions. Next we observe i. Both states 1 and 4 have only one outgoing transition. State 1 has seen this observation often in training, state 4 has almost never seen this observation; but like state 1, state 4 has no choice but to pass all its mass to its single outgoing transition, since it is not generating the observation, only conditioning on it. Thus, states with a single outgoing transition effectively ignore their observations."_
+_"In the first time step, r matches both transitions from the start state, so the probability mass gets distributed roughly equally among those two transitions. Next, we observe i. Both states 1 and 4 have only one outgoing transition. State 1 has seen this observation often in training, and state 4 has almost never seen this observation; but like state 1, state 4 has no choice but to pass all its mass to its single outgoing transition, since it is not generating the observation, only conditioning on it. Thus, states with a single outgoing transition effectively ignore their observations."_
 
 _[...]_
 
@@ -56,7 +56,7 @@ _"the top path and the bottom path will be about equally likely, independently o
 
 * Transitions from a given state are competing against each other only.
 
-* Per state normalization, i.e. sum of transition probability for any state has to sum to 1.
+* Per state normalization, i.e. the sum of transition probability for any state has to sum to 1.
 
 * MEMM are normalized locally over each observation where the transitions going out from a state compete only against each other, as opposed to all the other transitions in the model.
 
@@ -64,9 +64,9 @@ _"the top path and the bottom path will be about equally likely, independently o
 
 * Causes bias: states with fewer arcs are preferred.
 
-The idea of CRF is to drop this local per state normalization, and replace it by a global per sequence normalisation.
+The idea of CRF is to drop this local per-state normalization and replace it with a global per-sequence normalisation.
 
-So, how dow we formalise this global normalisation? I will try to explain it in the sections that follow.
+So, how do we formalise this global normalisation? I will try to explain it in the sections that follow.
 
 <br>
 
@@ -74,11 +74,11 @@ So, how dow we formalise this global normalisation? I will try to explain it in 
 
 ### __Undirected Graphical Models__
 
-A Conditional Random Field can be seen as an undirected graphical model, or Markov Random Field, globally conditioned on $$X$$, the random variable representing observation sequence.
+A Conditional Random Field can be seen as an undirected graphical model, or Markov Random Field, globally conditioned on $$X$$, the random variable representing the observation sequence.
 
 [Lafferty et al. 2001](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1162&context=cis_papers) define a Conditional Random Field as:
 
-* $$X$$ is a random variable over data sequences to be labeled, and $$Y$$ is a random variable over corresponding label sequences.
+* $$X$$ is a random variable over data sequences to be labelled, and $$Y$$ is a random variable over corresponding label sequences.
 
 * The random variables $$X$$ and $$Y$$ are jointly distributed, but in a discriminative framework we construct a conditional model $$p(Y \mid X)$$ from paired observation and label sequences:
 
@@ -92,7 +92,7 @@ where $$w \sim v$$ means that $$w$$ and $$v$$ are neighbours in G. Thus, a CRF i
 
 This graph may have an arbitrary structure as long as it represents the label sequences being modelled, this is also called general Conditional Random Fields.
 
-However the simplest and most common graph structured in NLP, which is the one used to model sequences is the one in which the nodes corresponding to elements of $$Y$$ form a simple first-order chain, as illustrated in the figure below:
+However, the simplest and most common graph-structured in NLP, which is the one used to model sequences is the one in which the nodes corresponding to elements of $$Y$$ form a simple first-order chain, as illustrated in the figure below:
 
 <figure>
   <img style="width: 45%; height: 55%" src="/assets/images/2017-11-13-Conditional_Random_Fields.png">
@@ -110,7 +110,7 @@ $$
 P(\bar{y} \mid \bar{x}; \bar{w}) = \frac{\exp(\bar{w} \cdot F(\bar{x},\bar{y}))}{\sum\limits_{\bar{y}' \in Y} \exp(\bar{w} \cdot F(\bar{x},\bar{y}'))}
 $$
 
-This can been seen as another log-linear model, but "giant" in the sense that:
+This can be seen as another log-linear model, but "giant" in the sense that:
 
 * The space of possible values for $$\bar{y}$$, i.e., $$Y^{n}$$, is huge, where $$n$$ is the since of the sequence.
 * The normalisation constant involves a sum over the set $$Y^{n}$$.
@@ -119,7 +119,7 @@ $$F$$ will represent a global feature vector defined by a set of feature functio
 
 $$F (\bar{x},\bar{y}) = \sum\limits_{i} f(y_{i-1}, y_{i}, \bar{x}, i)$$
 
-we can defined an arbitrary number of feature functions. The _k_’th global feature is then computed by summing the $$f_{k}$$ over all the $$n$$ different state transitions $$\bar{y}$$. In this way we have a "global" feature vector that maps the entire sequence: $$F(\bar{x}, \bar{y}) \in {\rm I\!R}^{d}$$.
+we can define an arbitrary number of feature functions. The _k_’th global feature is then computed by summing the $$f_{k}$$ over all the $$n$$ different state transitions $$\bar{y}$$. In this way, we have a "global" feature vector that maps the entire sequence: $$F(\bar{x}, \bar{y}) \in {\rm I\!R}^{d}$$.
 
 Thus, the full expanded linear-chain CRF equation is:
 
@@ -139,7 +139,7 @@ $$
 $$
 
 
-We want to try all possible $$\bar{y}$$ sequences computing for each one the probability of "fitting" the observation $$\bar{x}$$ with feature weights $$\bar{w}$$. If we just want the score for a particular labelling sequence $$\bar{y}$$, we can ignore the exponential inside the numerator, and the denominator:
+We want to try all possible $$\bar{y}$$ sequences computing for each one the probability of "fitting" the observation $$\bar{x}$$ with feature weights $$\bar{w}$$. If we just want the score for a particular labelling sequence $$\bar{y}$$, we can ignore the exponential inside the numerator and the denominator:
 
 $$\hat{\bar{y}} = \underset{\bar{y}}{\arg\max}\ P(\bar{y} \mid \bar{x}; w) = \sum\limits_{j} \bar{w}\  F(\bar{x},\bar{y})$$
 
@@ -153,18 +153,17 @@ Each transition from state $$y_{i-1}$$ to state $$y_{i}$$ has an associated scor
 
 $$\bar{w}\ f(y_{i-1}, y_{i}, \bar{x}, i)$$
 
-Since we took the $$\exp$$ out, this score could be positive or negative, intuitively, this score will be relatively high if the state transition is plausible, relatively low if this transition is implausible.
+Since we took the $$\exp$$ out, this score could be positive or negative, intuitively, this score will be relatively high if the state transition is plausible, and relatively low if this transition is implausible.
 
 The decoding problem is then to find an entire sequence of states such that the sum of the transition scores is maximized. We can again solve this problem using a variant of the Viterbi algorithm, in a very similar way to the decoding algorithm for HMMs or MEMMs.
 
 ---
 
-The denominator, also called the partition function:
+The denominator is also called the partition function:
 
 $$ Z(\bar{x},w)= {\sum\limits_{\bar{y}' \in Y} \exp(\sum\limits_{j} w_{j} F_{j}(\bar{x},\bar{y}'))}$$
 
-is useful to compute a marginal probability. For example, this is useful for measuring the model's confidence in it's predicted labeling over a segment of input. This marginal probability can be computed efficiently using the forward-backward algorithm. See the references section for demonstrations on how
-this is achieved.
+is useful to compute a marginal probability. For example, this is useful for measuring the model's confidence in its predicted labelling over a segment of input. This marginal probability can be computed efficiently using the forward-backward algorithm. See the references section for demonstrations of how this is achieved.
 
 ### __Parameter Estimation__
 
@@ -183,7 +182,7 @@ $$\bar{w}^* = \underset{\bar{w}\ \in {\rm \ I\!R}^{d}} {\arg\max}\ \sum\limits_{
 
 where $$\frac{\lambda}{2} \| \bar{w} \| ^{2}$$ is an L2 regularization term.
 
-The standard approach to finding $$\bar{w}^* $$ is to compute the gradient of the objective function, and use the gradient in an optimization algorithm like L-BFGS.
+The standard approach to finding $$\bar{w}^* $$ is to compute the gradient of the objective function and use the gradient in an optimization algorithm like L-BFGS.
 
 <br>
 
@@ -191,7 +190,7 @@ The standard approach to finding $$\bar{w}^* $$ is to compute the gradient of th
 
 ### __Wrapping up: HMM vs. MEMM vs. CRF__
 
-It is now helpful to look at the three sequence prediction models, and compared them. The figure bellow shows the graphical representation for the Hidden Markov Model, the Maximum Entropy Markov Model and the Conditional Random Fields.
+It is now helpful to look at the three sequence prediction models and compared them. The figure below shows the graphical representation of the Hidden Markov Model, the Maximum Entropy Markov Model and the Conditional Random Fields.
 
 <figure>
   <img style="width: 95%; height: 95%" src="/assets/images/2017-11-13-HMM-MEMM-CRF.png">
@@ -220,11 +219,11 @@ $$
 
 ### __CRF Important Observations__
 
-* MEMMs are normalized locally over each observation, and hence suffer from the Label Bias problem, where the transitions going out from a state compete only against each other, as opposed to all the other transitions in the model.
+* MEMMs are normalized locally over each observation and hence suffer from the Label Bias problem, where the transitions going out from a state compete only against each other, as opposed to all the other transitions in the model.
 
-* CRFs avoid the label bias problem a weakness exhibited by Maximum Entropy Markov Models (MEMM). The big difference between MEMM and CRF is that MEMM is locally renormalized and suffers from the label bias problem, while CRFs are globally re-normalized.
+* CRFs avoid the label bias problem a weakness exhibited by Maximum Entropy Markov Models (MEMM). The big difference between MEMM and CRF is that MEMM is locally renormalized and suffers from the label bias problem, while CRFs are globally renormalised.
 
-* The inference algorithm in CRF is again based on Viterbi algorithm.
+* The inference algorithm in CRF is again based on the Viterbi algorithm.
 
 * Output transition and observation probabilities are not modelled separately.
 
@@ -239,11 +238,11 @@ $$
 
 * [CRF++: Yet Another CRF toolkit](https://taku910.github.io/crfpp/): is a popular implementation in C++ but as far as I know there are no python bindings.
 
-* [MALLET](http://mallet.cs.umass.edu/):includes implementations of widely used sequence algorithms including hidden Markov models (HMMs) and linear chain conditional random fields (CRFs), it's written in Java.
+* [MALLET](http://mallet.cs.umass.edu/): includes implementations of widely used sequence algorithms including hidden Markov models (HMMs) and linear chain conditional random fields (CRFs), it's written in Java.
 
-* [FlexCRFs](http://flexcrfs.sourceforge.net/) supports both first-order and second-order Markov CRFs, it's written in C/C++ using STL library.
+* [FlexCRFs](http://flexcrfs.sourceforge.net/) supports both first-order and second-order Markov CRFs, it's written in C/C++ using the STL library.
 
-* [python-wapiti](https://github.com/adsva/python-wapiti) is a python wrapper for [wapiti](http://wapiti.limsi.fr), a sequence labeling tool with support for maxent models, maximum entropy Markov models and linear-chain CRF.
+* [python-wapiti](https://github.com/adsva/python-wapiti) is a python wrapper for [wapiti](http://wapiti.limsi.fr), a sequence labelling tool with support for maxent models, maximum entropy Markov models and linear-chain CRF.
 
 ## __References__
 

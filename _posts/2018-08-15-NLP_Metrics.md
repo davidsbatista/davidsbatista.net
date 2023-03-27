@@ -10,7 +10,7 @@ preview_pic: /assets/images/2018-08-19-ROC-Curve.png
 description: This blog post describes some evaluation metrics used in NLP, it points out where we should use each one of them and the advantages and disadvantages of each.
 ---
 
-I wrote this blog post with the intention to review and compare some evaluation metrics typically used for classification tasks, and how they should be used depending on the the dataset. I also show how one can tune the probability thresholds for the particularly metrics.
+I wrote this blog post with the intention to review and compare some evaluation metrics typically used for classification tasks, and how they should be used depending on the dataset. I also show how one can tune the probability thresholds for particular metrics.
 
 You can find the complete code associated with this blog post on this repository:
 
@@ -31,19 +31,19 @@ When making a prediction for a two-class classification problem, the following t
 
 ## __Accuracy__
 
-Accuracy simply measures the number of correct predicted samples over the total number of samples. For instance, if the classifier is 90% correct, it means that out of 100 instance it correctly predicts the class for 90 of them.
+Accuracy simply measures the number of correctly predicted samples over the total number of samples. For instance, if the classifier is 90% correct, it means that out of 100 instances it correctly predicts the class for 90 of them.
 
 $$ \textrm{accuracy} = \frac{\textrm{nr. correct predictions}}{\textrm{nr. total predictions}} = \frac{\textrm{TP+TN}}{\textrm{TP+TN+FP+FN}}$$
 
-This can be misleading if the number of samples per class in your problem is unbalanced. Having a dataset with two classes only, where the first class is 90% of the data, and the second completes the remaining 10%. If the classifier predicts every sample as belonging to the first class, the accuracy reported will be of 90% but this classifier is in practice useless.
+This can be misleading if the number of samples per class in your problem is unbalanced. Having a dataset with two classes only, where the first class is 90% of the data, and the second completes the remaining 10%. If the classifier predicts every sample as belonging to the first class, the accuracy reported will be 90% but this classifier is in practice useless.
 
-With imbalanced classes, it’s easy to get a high accuracy without actually making useful predictions. So, __accuracy__ as an evaluation metrics makes sense only if the class labels are uniformly distributed.
+With imbalanced classes, it’s easy to get a high accuracy without actually making useful predictions. So, __accuracy__ as an evaluation metric makes sense only if the class labels are uniformly distributed.
 
 ---
 
 ## __Precision and Recall__
 
-Precision and Recall are two metrics computed for each class. They can be easily explained through an example, imagine that we want to evaluate how well does a robot selects good apples from rotten apples There are $$m$$ good apples and $$n$$ rotten apples in a basket. A robot looks into the basket and picks out all the good apples, leaving the rotten apples behind, but is not perfect and could sometimes mistake a rotten apple for a good apple orange.
+Precision and Recall are two metrics computed for each class. They can be easily explained through an example, imagine that we want to evaluate how well a robot selects good apples from rotten apples There are $$m$$ good apples and $$n$$ rotten apples in a basket. A robot looks into the basket and picks out all the good apples, leaving the rotten apples behind, but is not perfect and could sometimes mistake a rotten apple for a good apple orange.
 
 When the robot finishes, regarding the good apples, precision and recall means:
 
@@ -52,11 +52,11 @@ When the robot finishes, regarding the good apples, precision and recall means:
 
 __Precision__ is about exactness, classifying only one instance correctly yields 100% precision, but a very low recall, it tells us how well the system identifies samples from a given class.
 
-__Recall__ is about completeness, classifying all instances as positive yields 100% recall, but a very low precision, it tells how well the system does and identify all the samples from a given class.
+__Recall__ is about the completeness, classifying all instances as positive yields 100% recall, but very low precision, it tells how well the system does at identifying all the samples from a given class.
 
 We will see further ahead how to get the best out of these two metrics, using Precision-Recall curves.
 
-Typically these two metrics are combined together in a metric called $$F_{1}$$ (i.e., harmonic mean of precision and recall), which eases comparison of different systems, and problems with many classes. They are defined as:
+Typically these two metrics are combined together in a metric called $$F_{1}$$ (i.e., the harmonic mean of precision and recall), which eases the comparison of different systems, and problems with many classes. They are defined as:
 
 $$ \textrm{Precision} = \frac{\textrm{TP}}{\textrm{TP+FP}}$$  
 
@@ -94,9 +94,9 @@ There some scenarios where focusing on one of these two might be important, e.g:
 
 ## __Receiver Operating Characteristic (ROC) Curves__
 
-While defining the metrics above, I assumed that we are directly given the predictions of each class. But it might be the case that we have the probability for each class instead, which then allows to calibrate the threshold on how to interpret the probabilities. Does it belong to positive class if it's greater than 0.5 or 0.3 ?
+While defining the metrics above, I assumed that we are directly given the predictions of each class. But it might be the case that we have the probability for each class instead, which then allows calibrating the threshold on how to interpret the probabilities. Does it belong to the positive class if it's greater than 0.5 or 0.3?
 
-The curve is a plot of _false positive rate_ (x-axis) versus the _true positive rate_ (y-axis) for a number of different candidate threshold values between 0.0 and 1.0. An operator may plot the ROC curve and choose a threshold that gives a desirable balance between the false positives and false negatives.
+The curve is a plot of the _false positive rate_ (x-axis) versus the _true positive rate_ (y-axis) for a number of different candidate threshold values between 0.0 and 1.0. An operator may plot the ROC curve and choose a threshold that gives a desirable balance between false positives and false negatives.
 
 
 * __x-axis__: the false positive rate is also referred to as the inverted specificity where specificity is the total number of true negatives divided by the sum of the number of true negatives and false positives.
@@ -123,7 +123,7 @@ A Precision-Recall curve is a plot of the __Precision__ (y-axis) and the __Recal
 ## __Pratical Example__
 
 
-### Let's first generate a 2 class imbalanced dataset
+### Let's first generate a 2-class imbalanced dataset
 ```python
 X, y = make_classification(n_samples=10000, n_classes=2, weights=[0.95,0.05], random_state=42)
 trainX, testX, trainy, testy = train_test_split(X, y, test_size=0.2, random_state=2)
@@ -218,13 +218,13 @@ print('AUC: %.3f' % auc_score)
 
 ## __Summary__
 
-If you have an imbalanced dataset __accuracy__ can give you false assumptions regarding the classifier's performance, it's better to rely on __precision__ and __recall__, in the same way a Precision-Recall curve is better to calibrate the probability threshold in an imbalanced class scenario as a ROC curve.
+If you have an imbalanced dataset __accuracy__ can give you false assumptions regarding the classifier's performance, so it's better to rely on __precision__ and __recall__, in the same way, a Precision-Recall curve is better to calibrate the probability threshold in an imbalanced class scenario as a ROC curve.
 
 - __ROC Curves__: summarise the trade-off between the true positive rate and false positive rate for a predictive model using different probability thresholds.
 
 - __Precision-Recall curves__: summarise the trade-off between the true positive rate and the positive predictive value for a predictive model using different probability thresholds.
 
-ROC curves are appropriate when the observations are balanced between each class, whereas precision-recall curves are appropriate for imbalanced datasets. In both cases the area under the curve (AUC) can be used as a summary of the model performance.
+ROC curves are appropriate when the observations are balanced between each class, whereas precision-recall curves are appropriate for imbalanced datasets. In both cases, the area under the curve (AUC) can be used as a summary of the model performance.
 
 
 <center>
@@ -275,12 +275,6 @@ ROC curves are appropriate when the observations are balanced between each class
 
 - [Sensitivity and Specificity (Wikipedia)](https://www.wikiwand.com/en/Sensitivity_and_specificity)
 
-- [The Precision-Recall Plot Is More Informative
-than the ROC Plot When Evaluating Binary
-Classifiers on Imbalanced Datasets](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0118432)
+- [The Precision-Recall Plot Is More Informative than the ROC Plot When Evaluating Binary Classifiers on Imbalanced Datasets](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0118432)
 
 - [Neptune.Ai - F1 Score vs ROC AUC vs Accuracy vs PR AUC: Which Evaluation Metric Should You Choose?](https://neptune.ai/blog/f1-score-accuracy-roc-auc-pr-auc)
-
-<!--
-https://machinelearningmastery.com/how-to-score-probability-predictions-in-python/
--->

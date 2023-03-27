@@ -7,10 +7,10 @@ categories: [blog]
 comments: true
 disqus_identifier: 20171112
 preview_pic: /assets/images/2017-11-12-HMM_vs_MEMM.png
-description: This blog post is an introduction to Maximum Entropy Markov Model, it points the fundamental difference between discriminative and generative models, and what are the main advantages of the Maximum Entropy Markov Model over the Naive Bayes model.
+description: This blog post is an introduction to Maximum Entropy Markov Model, it points out the fundamental difference between discriminative and generative models, and what are the main advantages of the Maximum Entropy Markov Model over the Naive Bayes model.
 ---
 
-This is the second part of a series of posts about sequential supervised learning applied to NLP. It can be seen as a follow up on the previous post, where I tried do explain the relationship between HMM and Naive Bayes. In this post I will try to explain how to build a sequence classifier based on a Logistic Regression classifier, i.e.,  using a discriminative approach.
+This is the second part of a series of posts about sequential supervised learning applied to NLP. It can be seen as a follow-up to the previous post, where I tried to explain the relationship between HMM and Naive Bayes. In this post I will try to explain how to build a sequence classifier based on a Logistic Regression classifier, i.e.,  using a discriminative approach.
 
 You can find the first and third posts here:
 
@@ -24,15 +24,15 @@ You can find the first and third posts here:
 
 In a [previous post](../../12/HHM_and_Naive_Bayes/) I wrote about the __Naive Bayes Model__ and how it is connected with the __Hidden Markov Model__. Both are __generative models__, in contrast, __Logistic Regression__ is a __discriminative model__, this post will start, by explaining this difference.
 
-In general a machine learning classifier chooses which output label $$y$$ to assign to an input $$x$$, by selecting from all the possible $$y_{i}$$ the one that maximizes $$P(y\mid x)$$.
+In general, a machine learning classifier chooses which output label $$y$$ to assign to a given input $$x$$, by selecting from all the possible $$y_{i}$$ the one that maximizes $$P(y\mid x)$$.
 
-The Naive Bayes classifier estimates $$p(y \mid x)$$ indirectly, by applying the Baye's theorem, and then computing the class conditional distribution/likelihood $$P(x \mid y)$$ and the prior $$P(y)$$.
+The Naive Bayes classifier estimates $$p(y \mid x)$$ indirectly, by applying Baye's theorem, and then computing the class conditional distribution/likelihood $$P(x \mid y)$$ and the prior $$P(y)$$.
 
 $$ \hat{y} = \underset{y}{\arg\max}\ P(y \mid x) = \underset{y}{\arg\max} \ P(x \mid y) \cdot P(y)$$
 
-This indirection makes Naive Bayes a generative model, a model that is trained to generated the data $$x$$ from the class $$y$$. The likelihood $$p(x \mid y)$$, means that we are given a class $$y$$ and will try to predict which features to see in the input $$x$$.
+This indirection makes Naive Bayes a generative model, a model that is trained to generate the data $$x$$ from the class $$y$$. The likelihood $$p(x \mid y)$$, means that we are given a class $$y$$ and will try to predict which features to see in the input $$x$$.
 
-In contrast a discriminative model directly computes $$p(y \mid x)$$ by discriminating among the different possible values of the class $$y$$ instead of computing a likelihood. The Logistic Regression classifier is one of such type of classifiers.
+In contrast, a discriminative model directly computes $$p(y \mid x)$$ by discriminating among the different possible values of the class $$y$$ instead of computing a likelihood. The Logistic Regression classifier is one such type of classifier.
 
 $$ \hat{y} = \underset{y}{\arg\max} \ P(y \mid x)$$
 
@@ -40,7 +40,7 @@ $$ \hat{y} = \underset{y}{\arg\max} \ P(y \mid x)$$
 
 ## __Logistic Regression__
 
-Logistic regression is supervised machine learning algorithm used for classification, which is has it's roots in linear regression.
+Logistic regression is a supervised machine learning algorithm used for classification, which has its roots in linear regression.
 
 When used to solve NLP tasks, it estimates $$p( y\mid x)$$ by extracting features from the input text and combining them linearly i.e., multiplying each feature by a weight and then adding them up, and then applying the exponential function to this linear combination:
 
@@ -48,7 +48,7 @@ $$P(y|x) = \frac{1}{Z} \ \exp \sum_{i=1}^{N} w_{i} \cdot f_{i}$$
 
 where $$f_{i}$$ is a feature and $$w_{i}$$ the weight associated to the feature. The $$\exp$$ (i.e., exponential function) surrounding the weight-feature dot product ensures that all values are positive and the denominator $$Z$$ is needed to force all values into a valid probability where the sum is 1.
 
-The extracted features, are binary-valued features, i.e., only takes the values 0 and 1, and are commonly called indicator functions. Each of these features is calculated by a function that is associated with the input $$x$$ and the class $$y$$. Each indicator function is represented as $$f_{i}(y,x)$$, the feature $$i$$ for class $$y$$, given observation $$x$$:
+The extracted features are binary-valued features, i.e., only take the values 0 and 1, and are commonly called indicator functions. Each of these features is calculated by a function that is associated with the input $$x$$ and the class $$y$$. Each indicator function is represented as $$f_{i}(y,x)$$, the feature $$i$$ for class $$y$$, given observation $$x$$:
 
 $$P(y|x) = \frac{\exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x,y) \bigg)} {\sum\limits_{y' \in Y} \exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x,y') \bigg)}$$
 
@@ -69,7 +69,7 @@ which by replacing with expanded form presented before and by applying the divis
 
 $$ L(w) = \sum\limits_{j} \log \exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i} (x^{j},y^{j}) \bigg) - \sum\limits_{j} \log {\sum\limits_{y' \in Y} \exp \bigg( \sum\limits_{i=1}^{N} w_{i} \cdot f_{i}(x^{j},y'^{j}) \bigg)}$$
 
-Maximize this objective, i.e. finding the optimal weights, is typically solved by methods like stochastic gradient ascent, L-BFGS, or conjugate gradient.
+Maximizing this objective, i.e. finding the optimal weights, is typically solved by methods like stochastic gradient ascent, L-BFGS, or conjugate gradient.
 
 
 ### __Classification__
@@ -98,9 +98,9 @@ The HMM model is based on two probabilities:
 
 * $$P( \text{word} \mid \text{tag} )$$ emission probability, probability of a state emitting a word.
 
-In real world problems we want to predict a tag/state given a word/observation. But, due to the Bayes theorem, that is, a generative approach, this is not possible to encode in the HMM, and the model estimates rather the probability of a state producing a certain word.
+In real-world problems, we want to predict a tag/state given a word/observation. But, due to the Bayes theorem, that is, a generative approach, this is not possible to encode in the HMM, and the model estimates rather the probability of a state producing a certain word.
 
-The [MEMM was proposed](http://www.ai.mit.edu/courses/6.891-nlp/READINGS/maxent.pdf) as way to have richer set of observation features:
+The [MEMM was proposed](http://www.ai.mit.edu/courses/6.891-nlp/READINGS/maxent.pdf) as a way to have a richer set of observation features:
 
 * _"a representation that describes observations in terms of many overlapping features, such as capitalization, word endings, part-of-speech, formatting, position on the page, and node memberships in WordNet, in addition to the traditional word identity."_
 
@@ -128,7 +128,7 @@ the probability of the current state $$s_{t}$$ given the previous state $$s_{t-
   The contrast in state transition estimation between an HMM and a MEMM. <br> (taken from "Speech and Language Processing" Daniel Jurafsky & James H. Martin)</figcaption>
 </figure>
 
-In contrast to HMMs, in which the current observation only depends on the current state, the current observation in an MEMM may also depend on the previous state. The HMM model includes distinct probability estimates for each transition and observation, while the MEMM gives one probability estimate per hidden state, which is the probability of the next tag given the previous tag and the observation.
+In contrast to HMMs, in which the current observation only depends on the current state, the current observation in a MEMM may also depend on the previous state. The HMM model includes distinct probability estimates for each transition and observation, while the MEMM gives one probability estimate per hidden state, which is the probability of the next tag given the previous tag and the observation.
 
 In the MEMM instead of the transition and observation matrices, there is only one transition probability matrix. This matrix encapsulates all combinations of previous states $$S_{t−1}$$ and current observation $$O_{t}$$ pairs in the training data to the current state $$S_{t}$$.
 
@@ -138,7 +138,7 @@ $$(N \cdot M) \cdot N$$
 
 ### __Features Functions__
 
-The MEMM can condition on any useful feature of the input observation, in the HMM this wasn’t possible because the HMM is likelihood based, and hence we would have needed to compute the likelihood of each feature of the observation.
+The MEMM can condition on any useful feature of the input observation, in the HMM this wasn’t possible because the HMM is likelihood-based, and hence we would have needed to compute the likelihood of each feature of the observation.
 
 The use of state-observation transition functions, rather than the separate transition and observation functions as in HMMs, allows us to model transitions in terms of multiple, non-independent features of observations.
 
@@ -174,7 +174,7 @@ For the decoding, the same algorithm as in the HMM is used, the Viterbi, althoug
 
 * The main advantage over the HMM is the use of feature vectors, making the transition probability sensitive to any word in the input sequence.
 
-* There is an exponential model associate to each (state, word) pair to calculate the conditional probability of the next state.
+* There is an exponential model associated with each (state, word) pair to calculate the conditional probability of the next state.
 
 * The exponential model allows the MEMMs to support long-distance interactions over the whole observation sequence together with the previous state, instead of two different probability distributions.
 
@@ -182,7 +182,7 @@ For the decoding, the same algorithm as in the HMM is used, the Viterbi, althoug
 
 * It also uses the Viterbi algorithm (slightly adapted) to perform decoding.
 
-* It suffers from the label bias problem, I will detailed in the next post about Conditional Random Fields.
+* It suffers from the label bias problem, which I will detail in the next post about Conditional Random Fields.
 
 
 ## __Software Packages__

@@ -296,7 +296,7 @@ df['plot_lang'].value_counts()
 
 
 
-There other languages besides English, let's just keep English plots, and save this to a new file.
+There are other languages besides English, let's just keep English plots, and save this to a new file.
 
 
 {% highlight python %}
@@ -344,7 +344,7 @@ Under this scenario, a movie plot is represented by a single real-value dense ve
 
 #### Doc2Vec
 
-Doc2Vec is an [extension made over Word2Vec](https://www.wikiwand.com/en/Word2vec#/Extensions), which tries do model a single document or paragraph as a unique single real-value dense vector. You can read more about it in the [original paper](http://proceedings.mlr.press/v32/le14.pdf). I will use the gensim implementation to derive vectors based on a single document.
+Doc2Vec is an [extension made over Word2Vec](https://www.wikiwand.com/en/Word2vec#/Extensions), which tries to model a single document or paragraph as a unique single real-value dense vector. You can read more about it in the [original paper](http://proceedings.mlr.press/v32/le14.pdf). I will use the gensim implementation to derive vectors based on a single document.
 
 
 At the end of this post, you have a link to the complete code, showing how to generate embeddings with word2vec and doc2vec.
@@ -352,7 +352,7 @@ At the end of this post, you have a link to the complete code, showing how to ge
 
 ### Load pre-processed data:
 
-First we are going to load the pre-processed and cleaned data into the proper data structures which serve as input for the sklearn classifiers:
+First, we are going to load the pre-processed and cleaned data into the proper data structures which serve as input for the sklearn classifiers:
 
 {% highlight python %}
 data_df = pd.read_csv("movies_genres_en.csv", delimiter='\t')
@@ -569,7 +569,7 @@ The doc2vec vectors were generated with gensim out-of-the-box, some parameter tu
 Also, word2vec and doc2vec, since they have a much lower dimension, i.e. 300 compared to 50 000 up to 100 000 of the TF-IDF weighted vectors, could probably be achieved with a non-linear kernel.
 
 
-The full code for this post is available on my github:
+The full code for this post is available on my GitHub:
 
 [https://github.com/davidsbatista/text-classification](https://github.com/davidsbatista/text-classification)
 

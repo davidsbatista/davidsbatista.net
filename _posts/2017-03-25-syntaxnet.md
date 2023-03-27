@@ -7,14 +7,14 @@ categories: blog
 comments: true
 disqus_identifier: 20170325
 preview_pic: /assets/images/2017-03-25-syntaxnet.png
-description: This post shows how to load the output of SyntaxNet into Python NLTK toolkit, precisely how to instantiate a DependencyGraph object with SyntaxNet's output.
+description: This post shows how to load the output of SyntaxNet into the Python NLTK toolkit, and precisely how to instantiate a DependencyGraph object with SyntaxNet's output.
 ---
 
-In May 2016 Google released [SyntaxNet](https://research.googleblog.com/2016/05/announcing-syntaxnet-worlds-most.html), a syntactic parser whose performance beat previous proposed approaches.
+In May 2016 Google released [SyntaxNet](https://research.googleblog.com/2016/05/announcing-syntaxnet-worlds-most.html), a syntactic parser whose performance beat previously proposed approaches.
 
 In this post I will show you how to have SyntaxNet's syntactic dependencies and other morphological information in Python, precisely how to load [NLTK](http://www.nltk.org/) structures such as [DependencyGraph](http://www.nltk.org/_modules/nltk/parse/dependencygraph.html) and [Tree](http://www.nltk.org/_modules/nltk/tree.html) with SyntaxNet's output.
 
- In this example will use the Portuguese model, but as you will see this can be easily adapted to any language, provided you have already a pretrained model.
+ In this example will use the Portuguese model, but as you will see this can be easily adapted to any language, provided you have already a pre-trained model.
 
 
 ## Setup
@@ -24,12 +24,12 @@ First you need to install SyntaxNet:
     https://github.com/tensorflow/models/tree/master/syntaxnet
 
 
-Then, you need to download a pretrained model, from the [list of all the available models](https://github.com/tensorflow/models/blob/master/syntaxnet/g3doc/universal.md)
+Then, you need to download a pre-trained model, from the [list of all the available models](https://github.com/tensorflow/models/blob/master/syntaxnet/g3doc/universal.md)
 
     http://download.tensorflow.org/models/parsey_universal/<language>.zip
 
 
-As the authors show in the tutorial after installing SyntaxNet and downloading a pretrained model, one can parse a sentence with the following command:
+As the authors show in the tutorial after installing SyntaxNet and downloading a pre-trained model, one can parse a sentence with the following command:
 
     MODEL_DIRECTORY=/where/you/unzipped/the/model/files
     cat sentences.txt | syntaxnet/models/parsey_universal/parse.sh \
@@ -46,7 +46,7 @@ Now I will show you how to parse a file with a sentence per line and use it with
 	de clientes.
 
 
-First we load all the sentences into a list, and joined them into a single string separated by the newline '\n' character.
+First, we load all the sentences into a list and joined them into a single string separated by the newline '\n' character.
 
 
 {% highlight python %}
@@ -88,7 +88,7 @@ output = process.communicate()
 
 {% endhighlight %}
 
-We process the captured stdout, for each token, the dependencies and other morphological information. Each token is represented by list with all it's syntactic and morphologic information. A list of lists makes the sentence.
+We process the captured stdout, for each token, the dependencies and other morphological information. Each token is represented by a list with all its syntactic and morphologic information. A list of lists makes the sentence.
 
 {% highlight python %}
 
@@ -104,7 +104,7 @@ for line in output[0].split("\n"):
 
 {% endhighlight %}
 
-We then join each word/token information in a string separated by '\tab' character, each word/token in a different line.
+We then join each word/token information in a string separated by a '\tab' character, each word/token in a different line.
 
 {% highlight python %}
 
@@ -176,7 +176,7 @@ And for the second sentence:
       Uma   por      250  por
 
 
-I'm still trying to figure it out how to have SyntaxNet running as a daemon or service, where we can give a sentence and have as a result, for instance, a JSON object with the syntactic and morphologic information.
+I'm still trying to figure out how to have SyntaxNet running as a daemon or service, where we can give a sentence and have as a result, for instance, a JSON object with the syntactic and morphologic information.
 
 
 ## __Related posts__
