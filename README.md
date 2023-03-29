@@ -17,7 +17,7 @@ using apache:
 
 ### Tips on how to set up Jekyll on macOS (it's a pain!)
 
-- OPENSSL issues: https://stackoverflow.com/questions/74196882/cannot-install-jekyll-eventmachine-on-m1-mac>
+- OPENSSL issues: https://stackoverflow.com/questions/74196882/cannot-install-jekyll-eventmachine-on-m1-mac
 - Setup new Jekyll project: https://jekyllrb.com/docs/step-by-step/01-setup/
 
 
