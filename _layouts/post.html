@@ -19,12 +19,10 @@ pagination:
 </div>
 
 <center>
-<b>tagged in</b>: [
 {% for tag in page.tags %}
   {% capture tag_name %}{{ tag }}{% endcapture %}
-  <a href="/tag/{{ tag_name }}"><code class="highlighter-rouge"><nobr>{{ tag_name }}</nobr></code></a>
+  <a href="/tag/{{ tag_name }}"><code class="post-tags"><nobr>{{ tag_name }}</nobr></code></a>
 {% endfor %}
-]
 </center>
 
 {% include share-page.html %}
