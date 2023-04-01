@@ -545,30 +545,6 @@ ul.share-buttons .sr-only{
   overflow: hidden;
 }
 
-/* ----------------------------------------------------------*/
-
-table{
-    border-collapse: collapse;
-    border-spacing: 0;
-    border:2px solid #000000;
-}
-
-th{
-    border:2px solid #000000;
-}
-
-td{
-    border:1px solid #000000;
-}
-
-.mbtablestyle {
-        border-collapse: collapse;
-
-   > table, td, th {
-        border: 1px solid black;
-        }
-}
-
 img.emoji {
     display: inline;
     height: 1em;
@@ -578,4 +554,81 @@ img.emoji {
 
 .js-line-number {
   display: none;
+}
+
+
+
+
+
+
+
+
+
+/* other site */
+
+/* open-sans-regular - latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'),
+       url('/fonts/open-sans-v15-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('/fonts/open-sans-v15-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* open-sans-700 - latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'),
+       url('/fonts/open-sans-v15-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('/fonts/open-sans-v15-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+
+.container {max-width: 73rem; margin: 0 auto; padding: 0 1rem;}
+.content {background: #fcfcfc url(/img/bg_content.svg) center top no-repeat; background-attachment: fixed; padding: 4rem 0 5.5rem;}
+
+#navigation {background: white; border-bottom: 0.0625rem solid #e5e5e5; position: fixed; width: 100%; z-index: 99;}
+#navigation .container {display: flex; align-items: center;}
+#navigation .container #menu {display: flex; align-items: center; justify-content: space-between; flex-grow: 1;}
+#navigation ul {display: flex; align-items: center;}
+#navigation ul li {list-style: none;}
+#navigation .brand img {display: inline-block; height: 2rem; vertical-align: middle;}
+#navigation .brand {font-size: 1.05rem; color: #777777; padding: 0.25rem 0.9rem 0.25rem 0;}
+#navigation ul li a {display: block; color: #777777; text-decoration: none; padding: 0.25rem 0.9rem;}
+#navigation .brand:hover, #navigation ul li a:hover, #navigation ul li.active a {color: #d9230f;}
+#navigation ul li svg {height: 1rem; fill: #777; position: relative; top: 0.0625rem;}
+
+#togglemenu {display: none; color: #777777; cursor: pointer;}
+.menuopen #togglemenu {color: white;}
+
+p:not(:last-child), pre:not(:last-child), .content ul:not(:last-child), .content ol:not(:last-child), div.expand {margin-bottom: 1.2rem;}
+
+@media (max-width: 55rem) {
+  .threecols .col {width: 47.5%;}
+  .threecols .col:nth-child(3) {margin-top: 1.5rem;}
+  #togglemenu {display: block;}
+  #navigation ul li svg {position: relative; top: 0.15rem;}
+  #navigation ul {display: block; margin: 0 0.5rem 1rem;}
+  #navigation .container {justify-content: space-between;}
+  #navigation .container #menu {
+      display: none; 
+      position: fixed; 
+      top: 0; 
+      padding: 3.2rem 0 1.5rem;
+      left: 0;
+      width: 100%;
+      background: white;
+      z-index: -1;
+      border-bottom: 0.0625rem solid #e5e5e5;
+  }
+  .menuopen #navigation .container #menu {display: block;}
+  #navigation .container .btn {margin: 1rem;}
+}
+@media (max-width: 45rem) {
+  html {font-size: 18px;}
+  .threecols {display: block;}
+  .threecols .col {width: 100%;}
+  .threecols .col + .col {margin-top: 1.5rem;}
 }
