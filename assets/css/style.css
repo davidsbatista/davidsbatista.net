@@ -18,7 +18,7 @@ body {
   font-size: 16.5px;
   line-height: 1.5;
   font-weight: 200;
-  background-color: white;*/
+  background-color: white;
 }
 
 /* link color and decoration*/
@@ -38,11 +38,6 @@ a:focus, a:hover {
 .site-link {
   font-size: 18px;
   color: #303030;
-}
-
-.site-link:hover {
-  /*color: #807dba;*/
-  /* text-decoration: bold; */
 }
 
 .post-link {
@@ -80,13 +75,9 @@ a:focus, a:hover {
   border-radius: 7px;
   color: #303030;
   background-color: white;
-  /*webkit-transition: color 0.25s, background-color 0.25s;*/
-  /*transition: color 0.25s, background-color 0.25s;*/
 }
 
 .nav-link:hover {
-  /*color: white;*/
-  /*background-color: #807dba;*/
   text-decoration: none;
 }
 
@@ -99,7 +90,6 @@ a:focus, a:hover {
   font-size: 28px;
   line-height: 65px;
   display: block;
-  vertical-align: middle;
   float: left;
   position: relative;
   z-index: 1;
@@ -111,7 +101,6 @@ a:focus, a:hover {
 
 
 /* Utility */
-
 .wrap:before,
 .wrap:after { content: ""; display: table; }
 .wrap:after { clear: both; }
@@ -255,8 +244,10 @@ header h1 {
 }
 
 .post-content { 
-  margin: 0 0 30px; 
-  margin-top: 50px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 30px;
+  margin-top: 100px;
 }
 
 .post-content > * { margin: 20px 0; }
@@ -343,7 +334,9 @@ header h1 {
   border-radius: 3px;
 }
 
-.post pre.terminal code { background-color: #303030; }
+.post pre.terminal code { 
+  background-color: #303030; 
+}
 
 .post figcaption {
   text-align: center;
@@ -499,8 +492,6 @@ header h1 {
     display: none;
   }
 
-  ./*site-nav:hover .trigger { display: block; }*/
-
   .site-nav .page-link {
     display: block;
     text-align: right;
@@ -566,27 +557,35 @@ img.emoji {
 
 /* other site */
 
-/* open-sans-regular - latin */
+
+/* open-sans-regular - latin 
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
   src: local('Open Sans Regular'), local('OpenSans-Regular'),
-       url('/fonts/open-sans-v15-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/fonts/open-sans-v15-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('/fonts/open-sans-v15-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ 
+       url('/fonts/open-sans-v15-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ 
 }
-/* open-sans-700 - latin */
+/* open-sans-700 - latin 
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
   src: local('Open Sans Bold'), local('OpenSans-Bold'),
-       url('/fonts/open-sans-v15-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/fonts/open-sans-v15-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('/fonts/open-sans-v15-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ 
+       url('/fonts/open-sans-v15-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+
 }
+ */
 
 
-.container {max-width: 73rem; margin: 0 auto; padding: 0 1rem;}
+.container {
+    max-width: 73rem; 
+    margin: 0 auto; 
+    padding: 0 1rem;
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
 .content {background: #fcfcfc url(/img/bg_content.svg) center top no-repeat; background-attachment: fixed; padding: 4rem 0 5.5rem;}
 
 #navigation {background: white; border-bottom: 0.0625rem solid #e5e5e5; position: fixed; width: 100%; z-index: 99;}
@@ -596,8 +595,17 @@ img.emoji {
 #navigation ul li {list-style: none;}
 #navigation .brand img {display: inline-block; height: 2rem; vertical-align: middle;}
 #navigation .brand {font-size: 1.05rem; color: #777777; padding: 0.25rem 0.9rem 0.25rem 0;}
-#navigation ul li a {display: block; color: #777777; text-decoration: none; padding: 0.25rem 0.9rem;}
-#navigation .brand:hover, #navigation ul li a:hover, #navigation ul li.active a {color: #d9230f;}
+#navigation ul li a {
+  display: block; 
+  color: #303030; 
+  text-decoration: none; 
+  padding: 0.25rem 0.9rem;
+  font-size: 21px;
+  font-weight: bold;
+}
+#navigation .brand:hover, #navigation ul li a:hover, #navigation ul li.active a {
+  text-decoration: underline;
+}
 #navigation ul li svg {height: 1rem; fill: #777; position: relative; top: 0.0625rem;}
 
 #togglemenu {display: none; color: #777777; cursor: pointer;}
