@@ -326,7 +326,7 @@ The [Language-Independent Named Entity Recognition task](http://www.aclweb.org/a
 
 The ACE challenges use a more complex evaluation metric which include a weighting schema, I will not go into detail here, and just point for the papers about it:
 
-* __["Automatic Content Extraction 2008 Evaluation Plan (ACE08)""](http://www.eng.utah.edu/~cs6961/papers/ACE-2008-description.pdf)__
+* __["Automatic Content Extraction 2008 Evaluation Plan (ACE08)"](http://www.eng.utah.edu/~cs6961/papers/ACE-2008-description.pdf)__
 
 * __["The Automatic Content Extraction (ACE) Program Tasks, Data, and Evaluation" ](https://pdfs.semanticscholar.org/0617/dd6924df7a3491c299772b70e90507b195dc.pdf)__
 
