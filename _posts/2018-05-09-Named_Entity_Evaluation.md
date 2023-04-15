@@ -10,7 +10,7 @@ preview_pic: /assets/images/2018-05-09-NER_metrics.jpeg
 description: Named-Entity evaluation metrics based on entity-level
 ---
 
-When you train a NER system the most typically evaluation method is to measure __precision__, __recall__ and __f1-score__ at a token level. These metrics are indeed useful to tune a NER system. But when using the predicted named-entities for downstream tasks, it is more useful to evaluate with metrics at a full named-entity level. In this post I will go through some metrics that go beyond simple token-level performance.
+When you train a NER system the most typical evaluation method is to measure __precision__, __recall__ and __f1-score__ at a token level. These metrics are indeed useful to tune a NER system. But when using the predicted named-entities for downstream tasks, it is more useful to evaluate with metrics at a full named-entity level. In this post I will go through some metrics that go beyond simple token-level performance.
 
 You can find the complete code associated with this blog post on this repository:
 
@@ -29,7 +29,7 @@ You can find more about Named-Entity Recognition here:
 
 Comparing the golden standard annotations with the output of a NER system different scenarios might occur:
 
-#### __I. Surface string and entity type match__
+#### __I. System surface string and entity type match__
 
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
@@ -79,7 +79,7 @@ Comparing the golden standard annotations with the output of a NER system differ
 </table>
 </center>
 
-#### __II. System hypothesized an entity__
+#### __II. The system hypothesised an entity__
 
 <center>
 <table class="tg">
@@ -120,9 +120,7 @@ Comparing the golden standard annotations with the output of a NER system differ
 </table>
 </center>
 
-
-
-#### __III. System misses an entity__
+#### __III. The system misses an entity__
 
 <center>
 <table class="tg">
@@ -167,7 +165,7 @@ Note that considering only this 3 scenarios, and discarding every other possible
 
 But of course we are discarding partial matches, or other scenarios when the NER system gets the named-entity surface string correct but the type wrong, and we might also want to evaluate these scenarios again at a full-entity level.
 
-#### __IV. System assigns the wrong entity type__
+#### __IV. The system assigns the wrong entity type__
 
 <center>
 <table class="tg">
@@ -220,9 +218,7 @@ But of course we are discarding partial matches, or other scenarios when the NER
 </table>
 </center>
 
-
-
-#### __V. System gets the boundaries of the surface string wrong__
+#### __V. The system gets the boundaries of the surface string wrong__
 
 <center>
 <table class="tg">
@@ -263,9 +259,7 @@ But of course we are discarding partial matches, or other scenarios when the NER
 </table>
 </center>
 
-
-
-#### __VI. System gets the boundaries and entity type wrong__
+#### __VI. The system gets the boundaries and entity type wrong__
 
 <center>
 <table class="tg">
@@ -316,15 +310,15 @@ Throughout the years different NER forums proposed different evaluation metrics:
 
 The [Language-Independent Named Entity Recognition task](http://www.aclweb.org/anthology/W03-0419) introduced at CoNLL-2003 measures the performance of the systems in terms of precision, recall and f1-score, where:
 
- _"precision is the percentage of named entities found by the learning system that are correct. Recall is the percentage of named entities present in the corpus that are found by the system. A named entity is correct only if it is an exact match of the corresponding entity in the data file."_
+ _"precision is the percentage of named entities found by the learning system that are correct. Recall is the percentage of named entities in the corpus found by the system. A named entity is correct only if it is an exact match of the corresponding entity in the data file."_
 
- so basically it only considers scenarios I, II and III, the others described scenarios are not considered for evaluation.
+ so basically it only considers scenarios I, II and III, the other described scenarios are not considered for evaluation.
 
 
 #### __Automatic Content Extraction (ACE)__
 
 
-The ACE challenges use a more complex evaluation metric which include a weighting schema, I will not go into detail here, and just point for the papers about it:
+The ACE challenges use a more complex evaluation metric which includes a weighting schema, I will not go into detail here, and just point for the papers about it:
 
 * __["Automatic Content Extraction 2008 Evaluation Plan (ACE08)"](http://www.eng.utah.edu/~cs6961/papers/ACE-2008-description.pdf)__
 
@@ -476,7 +470,7 @@ Number of annotations produced by the NER system:
 $$\text{ACTUAL} (ACT) = COR + INC + PAR + SPU = TP + FP$$
 </center>
 
-Then we can compute precision/recall/f1-score, where roughly describing __precision__ is the percentage of correct named-entities found by the NER system, and __recall__ is the percentage of the named-entities in the golden annotations that are retrieved by the NER system. This is computed in two different ways depending wether we want an __exact match__ (i.e., _strict_ and _exact_ ) or a __partial match__ (i.e., _partial_ and _type_) scenario:
+Then we can compute precision/recall/f1-score, where roughly describing __precision__ is the percentage of correct named-entities found by the NER system, and __recall__ is the percentage of the named-entities in the golden annotations that are retrieved by the NER system. This is computed in two different ways depending whether we want an __exact match__ (i.e., _strict_ and _exact_ ) or a __partial match__ (i.e., _partial_ and _type_) scenario:
 
 #### __Exact Match__ (i.e., _strict_ and _exact_ )
 
@@ -1104,7 +1098,7 @@ evaluation_agg_entities_type
 
 ## __References__
 
-* [Chris Manning blog post: "Doing Named Entity Recognition? Don't optimize for F1"](https://nlpers.blogspot.de/2006/08/doing-named-entity-recognition-dont.html)
+* [Chris Manning blog post: "Doing Named Entity Recognition? Don't optimise for F1"](https://nlpers.blogspot.de/2006/08/doing-named-entity-recognition-dont.html)
 
 * [MUC-5 EVALUATION METRICS](https://aclanthology.info/pdf/M/M93/M93-1007.pdf)
 
