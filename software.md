@@ -42,11 +42,10 @@ __[PyPI Package](https://pypi.org/project/snowball-extractor/){:target="_blank"}
 
 #### __Politiquices.PT__ ‑ Support and Opposition Relationships in Portuguese Political News Headlines
 
-Political news headlines often report supportive or opposing relationships between political actors. 
 
-I've analysed thousands of archived titles, identifying those that express supportive or opposing relationships, and associating the political personalities with their identifier on Wikidata, thus resulting in a semantic graph,  [__politiquices.pt__](https://www.politiquices.pt) allowing answering questions involving political personalities and parties. 
 
-The project was awarded [__2nd place in the "Arquivo.pt Awards 2021"__](https://sobre.arquivo.pt/en/meet-the-winners-of-the-arquivo-pt-award-2021/) organised by the [__Portuguese Web Archive__](https://sobre.arquivo.pt/en/help/what-is-arquivo-pt/).
+
+I've analysed thousands of archived titles, identifying those that report supportive or opposing relationships between political actors and also associated the political personalities with their identifier on Wikidata. The result was a semantic graph,  [__politiquices.pt__](https://www.politiquices.pt) allowing answering questions involving political personalities and parties. The project was awarded [__2nd place in the "Arquivo.pt Awards 2021"__](https://sobre.arquivo.pt/en/meet-the-winners-of-the-arquivo-pt-award-2021/).
 
 
 __[Web](https://www.politiquices.pt/){:target="_blank"}__
