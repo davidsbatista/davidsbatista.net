@@ -37,6 +37,23 @@ __[GitHub](https://github.com/davidsbatista/snowball){:target="_blank"}__
 __[PyPI Package](https://pypi.org/project/snowball-extractor/){:target="_blank"}__
 
 
+---
+
+
+#### __Politiquices.PT__ ‑ Support and Opposition Relationships in Portuguese Political News Headlines
+
+Political news headlines often report supportive or opposing relationships between political actors. 
+
+I've analysed thousands of archived titles, identifying those that express supportive or opposing relationships, and associating the political personalities with their identifier on Wikidata, thus resulting in a semantic graph,  [__politiquices.pt__](https://www.politiquices.pt) allowing answering questions involving political personalities and parties. 
+
+The project was awarded [__2nd place in the "Arquivo.pt Awards 2021"__](https://sobre.arquivo.pt/en/meet-the-winners-of-the-arquivo-pt-award-2021/) organised by the [__Portuguese Web Archive__](https://sobre.arquivo.pt/en/help/what-is-arquivo-pt/).
+
+
+__[Web](https://www.politiquices.pt/){:target="_blank"}__
+&nbsp;
+__[GitHub](https://github.com/politiquices){:target="_blank"}__
+
+
 <br>
 
 ---
@@ -44,11 +61,12 @@ __[PyPI Package](https://pypi.org/project/snowball-extractor/){:target="_blank"}
 
 <br>
 
+
 # __Datasets__
 
 #### __Relationship Extraction__
 
-I've been keeping track of [public and free datasets](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets) for semantic relationship extraction. The datasets are organised into three different groups:
+I've been keeping track of [__public and free datasets__](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets) for semantic relationship extraction. The datasets are organised into three different groups:
 
 * [__Traditional Information Extraction__](https://github.com/davidsbatista/Annotated-Semantic-Relationships-Datasets/blob/master/README.md#tie)
 
