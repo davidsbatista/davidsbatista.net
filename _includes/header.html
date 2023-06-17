@@ -1,15 +1,16 @@
 <div id="navigation">
   <div class="container">
       <div id="menu">
-          <ul>
+          <!-- <ul style="list-style-type:none; display:flex; justify-content: center;">-->
+		  <ul>
             {% assign site_pages = site.pages | sort: 'title' %}
             {% for page in site_pages %}
               {% if page.title and page.title != "404: Page not found" and page.title != "David S. Batista"
                  and page.category != 'tag' and page.autogen == nil %}
-                 <li><a class="site-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></li>
+                 <li style="display: list-item; padding: 10px 10px;"><a class="site-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></li>
               {% endif %}
             {% endfor %}
-            <li><a class="site-link" target="_blank" href="/assets/documents/dsbatista-cv.en.pdf">CV</a></li>
+            <li style="display: list-item; padding: 10px 10px;"><a class="site-link" target="_blank" href="/assets/documents/dsbatista-cv.en.pdf">CV</a></li>
           </ul>
       </div>
       <a id="togglemenu" onclick="document.body.classList.toggle('menuopen');">Menu<span><span></span><span></span><span></span></span></a>
