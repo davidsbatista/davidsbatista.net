@@ -9,13 +9,71 @@ disqus_identifier: 20230627
 preview_pic: /assets/images/2023-07-11-Machine_Learning_in_Production.jpg
 ---
 
+I recently did the Machine Learning Engineering for Production (MLOps) Specialization from Coursera. This blog post aims to give a quick review of the course and detail the topics discussed in the course. Overall I can say I did enjoy the course and learn something.
+
+
+
 
 ### __Introduction to Machine Learning in Production__
 
 
-- Steps of an ML project
-- Example with a speech recognition
+<figure>
+  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_steps.png">
+  <figcaption>Figure 1: Steps of a ML project.</figcaption>
+</figure>
+
 - Very high-level just to peek into what's coming 
+- Goes through briefly through every step which is then detailed in the next courses, part of this specialisations
+
+
+
+
+- Steps of an ML project
+	- Scoping
+	
+	- Data
+		- Define data and establish a baseline
+		- 
+	
+	- Modeling
+		- model + hyperparameters + data
+		- doing well on train data, test data and on business metrics
+		- literature search + open source
+		- reasonable algorithm with good data will often perform a great algorithm with not-so-good data
+		- Auditing framework
+			- Brainstorm the ways the system might go wrong.
+			" Performance on subsets of data (e.g., ethnicity, gender).
+			" Prevalence of specific errors/outputs (e.g., FP, FN).
+			" Performance on rare classes.
+		- Experiment tracking
+
+		
+	
+	
+	- Deployment
+		- Concept drift and Data drift
+		- First deployment vs. maintenance
+		- Deployment patterns
+			- Shadow mode
+			- Canary deployment
+				- Roll out to small fraction (say 5%) of traffic initially.
+				- Monitor system and ramp up traffic gradually.
+			- Blue green deployment
+				- router sends request to old/blue or to new/green
+				- enable easy rollback
+			- Monitoring
+				- software/hardware metrics
+				- input metrics
+				- output metrics
+				- Set thresholds for alarms, Adapt metrics and thresholds over time
+
+
+
+- Deployment patterns
+- Monitoring
+
+
+
 
 
 ### __Machine Learning Modeling Pipelines in Production__
