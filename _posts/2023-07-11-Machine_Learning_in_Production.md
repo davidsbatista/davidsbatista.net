@@ -10,23 +10,40 @@ preview_pic: /assets/images/2023-07-11-Machine_Learning_in_Production.jpg
 ---
 
 
-## __Introduction to Machine Learning in Production__
+### __Introduction to Machine Learning in Production__
+
+
+- Steps of an ML project
+- Example with a speech recognition
+- Very high-level just to peek into what's coming 
+
+
+### __Machine Learning Modeling Pipelines in Production__
 
 
 
-## __Machine Learning Modeling Pipelines in Production__
+
+### __Deploying Machine Learning Models in Production__
+
+this one was of particular interest to me, mainly because of these topics:
+
+- dimensionality reduction
+- quantization and pruning
+- distillation techniques
+- interpretability
+
+
+### __Machine Learning Data Lifecycle in Production__
+
+
+- feature engineering, data transformation, data lineage and provenance, and how to rely on schemas to follow data evolution.
+- Authors tend to oversell TensorFlow Extended, anyway, the main thing is to learn the concepts.
 
 
 
-## __Deploying Machine Learning Models in Production__
 
 
-
-## __Machine Learning Data Lifecycle in Production__
-
-
-
-## __References__
+### __References__
 
 
 - __[Introduction to Machine Learning in Production](https://www.coursera.org/learn/introduction-to-machine-learning-in-production)__
