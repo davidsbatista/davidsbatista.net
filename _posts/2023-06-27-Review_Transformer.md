@@ -9,7 +9,7 @@ disqus_identifier: 20230627
 preview_pic: /assets/images/2023-06-27-transformer_arch.png
 ---
 
-The Transformer architecture was a game-changer in NLP and other domains. I wanted to review and understand in detail the Transformer which became the base framework for many other pre-trained models available today, and which are used to solve a vast number of NLP tasks. This post tends to be a review of the mechanisms inside the Transformer: self-attention, multi-head attention, cross attention and how these are connected with encoder-decoder architecture.
+The Transformer architecture was a game-changer in NLP and other domains. I wanted to review in detail the Encoder-Decoder Transformer architecture which became the base framework for many pre-trained models available today, which are used to solve a vast number of NLP tasks. This post tends to be a review of the mechanisms inside the Transformer: self-attention, multi-head attention, cross attention and how these are connected with encoder-decoder architecture.
 
 
 ## __Introduction__
@@ -192,22 +192,18 @@ see: https://d2l.ai/chapter_attention-mechanisms-and-transformers/multihead-atte
 			- local windows
 			- look at everything: average the whole sentence in a single vector
 			- random interactions
+
+	cross attention
 		
 -->
 
 
-
-
-
-
-
-
-
+<!--
 ## __Subword Modelling__
 
 - Byte-pair encoding
 - Word-piece
-
+-->
 
 
 
