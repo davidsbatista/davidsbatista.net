@@ -19,7 +19,7 @@ I recently did the Machine Learning Engineering for Production (MLOps) Specializ
 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_steps.png">
-  <figcaption>Figure 1: Steps of a ML project.</figcaption>
+  <figcaption>Figure 1: Steps of a Machine Learning project.</figcaption>
 </figure>
 
 - Very high-level just to peek into what's coming 
@@ -27,17 +27,29 @@ I recently did the Machine Learning Engineering for Production (MLOps) Specializ
 
 
 
-
 - Steps of an ML project
 	- Scoping
+		- define a project, identify a problem
+		- diligence on feasibility and value
+		- ethical considerations
+			- value for society?
+			- fair and free from bias?
+			- any ethical concerns?
+		- milestones and resources
+			- ml metrics
+			- software metrics
+			- business metrics
+			- resources
 	
 	- Data
 		- Define data and establish a baseline
-		- 
+		-  Label and organize data
+			- meta-data, data provenance and lineage
+			- balanced train/dev/test splits
 	
 	- Modeling
 		- model + hyperparameters + data
-		- doing well on train data, test data and on business metrics
+		- doing well on train data, test data and also on business metrics
 		- literature search + open source
 		- reasonable algorithm with good data will often perform a great algorithm with not-so-good data
 		- Auditing framework
@@ -46,9 +58,6 @@ I recently did the Machine Learning Engineering for Production (MLOps) Specializ
 			" Prevalence of specific errors/outputs (e.g., FP, FN).
 			" Performance on rare classes.
 		- Experiment tracking
-
-		
-	
 	
 	- Deployment
 		- Concept drift and Data drift
