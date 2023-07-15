@@ -9,7 +9,7 @@ disqus_identifier: 20230627
 preview_pic: /assets/images/2023-07-11-Machine_Learning_in_Production.jpg
 ---
 
-I recently did the Machine Learning Engineering for Production (MLOps) Specialization from Coursera. This blog post aims to give a quick review of the course and detail the topics discussed in the course. Overall I can say I did enjoy the course and learn something.
+I recently did the Machine Learning Engineering for Production (MLOps) Specialisation from Coursera. This blog post aims to give a quick review of the course and detail the topics discussed in the course. Overall I can say I did enjoy the course and learn something.
 
 
 
@@ -77,9 +77,7 @@ I recently did the Machine Learning Engineering for Production (MLOps) Specializ
 				- Set thresholds for alarms, Adapt metrics and thresholds over time
 
 
-
-### __Machine Learning Modeling Pipelines in Production__
-
+### __Machine Learning Data Lifecycle in Production__
 
 
 #### __Week 1__
@@ -235,7 +233,6 @@ I recently did the Machine Learning Engineering for Production (MLOps) Specializ
 			- https://github.com/awslabs/deequ
 
 
-
 #### __Week 2__
 
 - Feature Engineering
@@ -250,9 +247,10 @@ I recently did the Machine Learning Engineering for Production (MLOps) Specializ
 			- UMAP
 	- Feature Crosses
 		- combining multiple features into a new feature
-	
+
 	- Tensorflow transform does what described in the previous sections
 	- Feature Selection
+	
 	
 	
 	<figure>
@@ -261,19 +259,92 @@ I recently did the Machine Learning Engineering for Production (MLOps) Specializ
 	</figure>
 	
 
+#### __Week 3__
+
+- Data Journey and Data Storage
+- Accounting for data and model evolution
+- Using ML metadata to track changes
+- Schema Development
+- Features Stores
+- Datawarehouse (OLAP) vs Databases (OLTP)
+- Data lakes
+
+
+#### __Week 4__
+
+- Advanced Labelling, Augmentation and Data Preprocessing
+	- Semi-supervised labelling: 
+		- label propagation graph based
+	- Active Learning
+		- Margin sampling: Label points the current model is least confident in.
+		- Cluster-based sampling: sample from well-formed clusters to "cover" the entire space.
+		- Query-by-committee: train an ensemble of models and sample points that generate disagreement.
+		- Region-based sampling: Runs several active learning algorithms in different partitions of the space.
+	- Weak supervision with Snorkel
+		-Unlabeled data, without ground-truth labels
+			● One or more weak supervision sources
+			○ A list of heuristics that can automate labeling
+			○ Typically provided by subject matter experts
+			● Noisy labels have a certain probability of being correct, not 100%
+			● Objective: learn a generative model to determine weights for weak supervision sources
+	Data Augmentation
+ 
 
 
 
+### __Machine Learning Modeling Pipelines in Production__
+
+#### __Week 1__
+
+Neural Architecture Search
+Neural architecture search (NAS) is is a technique for automating the design of artificial neural networks
+● It helps finding the optimal architecture
+● This is a search over a huge space
+● AutoML is an algorithm to automate this search  
+
+<figure>
+  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_search_strategies.png">
+  <figcaption>ToDo</figcaption>
+</figure>
+
+<figure>
+  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_grid_search_random_search.png">
+  <figcaption>ToDo</figcaption>
+</figure>
+
+<figure>
+  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_bayesian_optimisation.png">
+  <figcaption>ToDo</figcaption>
+</figure>
+
+<figure>
+  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_evolutionary_methods.png">
+  <figcaption>ToDo</figcaption>
+</figure>
+
+<figure>
+  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_reinforcement_learning_1.png">
+  <figcaption>ToDo</figcaption>
+</figure>
+
+<figure>
+  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_reinforcement_learning_2.png">
+  <figcaption>ToDo</figcaption>
+</figure>
+
+- Automated Machine Learning (AutoML)
+- Automating hyperparameter tuning with Keras Tuner
+- Microsoft Azure Automated Machine Learning
+- Google Cloud AutoML
+
+
+#### __Week 2__
+
+- Model Resource Management Techniques
+	- Dimensionality Reduction
 
 
 
-
-
-
-
-
-
-### __Deploying Machine Learning Models in Production__
 
 this one was of particular interest to me, mainly because of these topics:
 
@@ -283,11 +354,15 @@ this one was of particular interest to me, mainly because of these topics:
 - interpretability
 
 
-### __Machine Learning Data Lifecycle in Production__
+
+
+### __Deploying Machine Learning Models in Production__
 
 
 - feature engineering, data transformation, data lineage and provenance, and how to rely on schemas to follow data evolution.
 - Authors tend to oversell TensorFlow Extended, anyway, the main thing is to learn the concepts.
+
+
 
 
 
