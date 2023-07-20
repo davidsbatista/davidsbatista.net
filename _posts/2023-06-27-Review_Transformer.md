@@ -295,6 +295,8 @@ Although I never used them, I would say that you want to use BERT whenever you w
 
 <!-- "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding": https://aclanthology.org/N19-1423.pdf -->
 
+https://www.youtube.com/watch?v=acxqoltilME&ab_channel=FutureMojo
+
 - __[Stanford CS224N - Winter 2021 Lecture 09 - Self-Attention and Transformers](https://www.youtube.com/watch?v=ptuGllU5SQQ)__
 - __[Stanford CS224N - Winter 2021 Lecture 10 - Transformers and Pre-training](https://www.youtube.com/watch?v=j9AcEI98C0o)__
 - __[Dive into Deep Learning - 11. Attention Mechanisms and Transformers](https://d2l.ai/chapter_attention-mechanisms-and-transformers/queries-keys-values.html)__
