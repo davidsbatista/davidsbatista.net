@@ -51,123 +51,87 @@ blue-green deployment: router sends a request to old/blue or to new/green, it en
 
 This course focuses mostly on the data aspect of a Machine Learning project, and it's organised into 4 main topics
 
-#### __Collecting, Labelling, Validating__
+#### __Collecting, Labelling, Validating__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W1.pdf))
 
 The main focus of this topic is on the importance of data: the data pipeline, and data monitoring. It starts by explaining the data collection and labelling process, focusing on understanding the data source, the consistency of values, units and data types, detecting outliers, errors and inconsistent formatting. Mentions privacy and fairness aspects in the data collection, and the use of process feedback using logging tools, such as [logstash](https://github.com/elastic/logstash) and [fluentd](https://github.com/fluent/fluentd).
 
-Mentions the problems with data, particularly the drift in data. Changes occur due to trends and seasonality, which have an impact on the distribution of features and the relative importance of features. Here the instructors introduce the concept of 
+Mentions the problems with data, particularly the drift in data, which can be a consequence of trends and seasonality. The impact on the distribution of features and the relative importance of features. Here the instructors explain in great detail the concepts:
 
+__Data Drift__: changes in data over time, i.e.: changes in the statistical properties of the features over time due to seasonality, trends or unexpected events.
 
-- Validating
-	- Data and Concept change in Production ML
-		- Model performance decays over time
-			- Data and Concept drift
-
-- Data Issues
-	- Data Drift: 
-		 - changes in data over time, such as data collected once a day
-		 - changes in the statistical properties of the features over time
-		 	- seasonality or trend, unexpected events
+__Concept Drift__: changes in the statistical properties of the labels over time, i.e.: mapping to labels in training remains static while the real-world changes.
 	
-	- Concept Drift:
-		- changes in the statistical properties of the labels over time
-		- mapping to labels in training remains static while the real-world changes
-	
+__Schema Skew__: training and service data do not conform to the same schema, e.g.: getting an integer when expecting a float, empty string vs None
 
-	- Detecting Data Issues
-		- detecting schema skew: Training and serving data do not conform to the same schema
-		- detecting distribution skew: Dataset shift → covariate or concept shift
+__Distribution Skew__: divergence between training and serving datasets, dataset shift caused by covariate/concept shift
 
 
-	- Schema Skew: 
-		- training and service data do not conform to the same schema
-		- examples:
-			- getting an integer when expecting a float
-			- empty string vs None
+<figure>
+<img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_skew.png">
+<figcaption>Figure 2: Detection distribution skew.</figcaption>
+</figure>
 
-	- Distribution Skew
-		- divergence between training and serving datasets (i.e., data being received at the 
-		inference stage of an ML model)
-		- dataset shift caused by covariant and concept shift
-		
-		
-		<figure>
-		  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_skew.png">
-		  <figcaption>Figure 2: Detection distribution skew.</figcaption>
-		</figure>
+__Dataset shift__: the joint probability of features $$x$$ and labels $$y$$ is not the same during training and serving
 
+__Covariate shift__: a change in the distribution of the input variables present in training and serving data. In other words, it's where the marginal distribution of features $$x$$ is not the same during training and serving, but the conditional distribution remains unchanged.
 
-		<figure>
-		  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_skew_detection.png">
-		  <figcaption>Figure 3: Skew detection workflow.</figcaption>
-		</figure>
-		
-		
-		- Dataset shift
-			the joint probability of x are features and y are labels is not the same during training and serving
-		
-		- Covariate shift
-			Covariate shift refers to the change in the distribution of the input variables present in training and serving data. In other words, it's where the marginal distribution of x are features is not the same during training and serving, but the conditional distribution remains unchanged.
-			
-		- Concept
-			Concept shift refers to a change in the relationship between the input and output variables as opposed to the differences in the Data Distribution or input itself.
-			In other words, it's when the conditional distribution of y are labels given x are features is not the same during training and serving, but the marginal distribution of x are features remains unchanged.
-			
-		
-		- Skew Detection
-			- The first stage is looking at training data and computing baseline statistics and a reference schema.
-			- Then you do basically the same with your serving data, you're going to generate the descriptive statistics.
-			- Then you compare the two.
-			You compare your serving baseline statistics and instances.
-			You check for differences between that and your training data.
-			You look for skew and drift.
-			Significant changes become anomalies and they'll trigger an alert.
-			That alert goes to whoever's monitoring system, that can either be a human or another system to analyze the change and decide on the proper course of action. That's got to be the remediation of the way that you're going to fix and react to that problem.
+__Concept shift__: refers to a change in the relationship between the input and output variables as opposed to the differences in the data distribution or input. It's when the conditional distribution of labels $$y$$ and n features $$x$$ are not the same during training and serving, but the marginal distribution features $$x$$ remain unchanged.
 
-Software
-- https://medium.com/datamindedbe/data-quality-libraries-the-right-fit-a6564641dfad
-- https://github.com/tensorflow/data-validation
-- https://github.com/great-expectations/great_expectations
-- https://github.com/awslabs/deequ
+<br>
+
+<figure>
+<img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_skew_detection.png">
+<figcaption>Figure 3: Skew detection workflow.</figcaption>
+</figure>
+
+__Software Tools__
+- [Tensorflow data-validation](https://github.com/tensorflow/data-validation)
+- [Great Expectations](https://github.com/great-expectations/great_expectations)
+- [Deequ - Unit Tests for Data](https://github.com/awslabs/deequ)
 
 
-#### __Feature Engineering__
+#### __Feature Engineering__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W2.pdf))
 
 An overview of the pre-processing operations and feature engineering techniques, e.g.: feature scaling, normalisation and standardisation, bucketing/binning. Also, a good summarisation of the techniques to reduce the dimensionality of features: PCA, t-SNE and UMAP. Lastly, how to combine multiple features into a new feature and the feature selection process.
 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_feature_selection.png">
-  <figcaption>Figure 2: Supervised Feature Selection.</figcaption>
+  <figcaption>Figure 4: Supervised Feature Selection.</figcaption>
 </figure>
 
 
-#### __Data Storage__
+#### __Data Storage__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W3.pdf))
 
-- Data Journey and Data Storage
-- Accounting for data and model evolution
-- Using ML metadata to track changes
-- Schema Development
-- Features Stores
-- Datawarehouse (OLAP) vs Databases (OLTP)
-- Data lakes
+This chapter deals with the data journey, accounting for data and model evolution and using metadata to track changes in data in the ML pipeline. How a schema to hold data can evolve and how to keep track of those changes, it also introduces the concept of feature stores, as well as Datawarehouse (OLAP) vs. Databases (OLTP) and data lakes.
 
 
-#### __Advanced Labelling, Augmentation and Data Preprocessing__
+#### __Advanced Labelling, Augmentation and Data Preprocessing__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W4.pdf))
 
-- Semi-supervised labelling: 
-	- label propagation graph based
-- Active Learning
-	- Margin sampling: Label points the current model is least confident in.
-	- Cluster-based sampling: sample from well-formed clusters to "cover" the entire space.
-	- Query-by-committee: train an ensemble of models and sample points that generate disagreement.
-	- Region-based sampling: Runs several active learning algorithms in different partitions of the space.
-- Weak supervision with Snorkel
-	-Unlabelled data, without ground-truth labels
-		● One or more weak supervision sources
-		○ A list of heuristics that can automate labelling
-		○ Typically provided by subject matter experts
-		● Noisy labels have a certain probability of being correct, but not 100%
-		● Objective: learn a generative model to determine weights for weak supervision sources
+The last topic covers data labelling and data augmentation techniques. __Semi-Supervised Labelling__, and briefly introduce graph-based label propagation, combines supervised and unsupervised data.
+
+For __Active Learning__, a few strategies to select the best samples to be annotated by a human are introduced and explained:
+
+- Margin sampling: label points the current model is least confident in.
+- Cluster-based sampling: sample from well-formed clusters to "cover" the entire space.
+- Query-by-committee: train an ensemble of models and sample points that generate disagreement.
+- Region-based sampling: Runs several active learning algorithms in different partitions of the space.
+
+<figure>
+  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_snorkel.png">
+  <figcaption>Figure 5: Snorkel workflow.</figcaption>
+</figure>
+
+
+Lastly, for __Weak Supervision__, the instructors give the example of Snorkel:
+
+- Start with unlabelled data, without ground-truth labels
+- One or more weak supervision sources
+- A list of heuristics that can automate labelling, typically provided by subject matter experts
+- Noisy labels have a certain probability of being correct, but not 100%
+- Objective: learn a generative model to determine weights for weak supervision sources
+- Learn a supervised model
+
+This topic also briefly explains how to do data augmentation techniques, mostly for images, and about windowing strategies for time-series.
 
 
 ---
@@ -345,6 +309,7 @@ this one was of particular interest to me, mainly because of these topics:
 
 - __[4 - Machine Learning Data Lifecycle in Production](https://www.coursera.org/learn/machine-learning-data-lifecycle-in-production) - [Lesson Slides](/assets/documents/Coursera-MLOps_Specialization/C4_-_Deploying_Machine_Learning_Models_in_Production/)__
 
+- Figure 1, 2, 3 ,4 taken from
 
 
 
