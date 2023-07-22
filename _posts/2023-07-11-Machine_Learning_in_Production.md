@@ -9,14 +9,23 @@ disqus_identifier: 20230627
 preview_pic: /assets/images/2023-07-11-Machine_Learning_in_Production.jpg
 ---
 
-I recently did the Machine Learning Engineering for Production (MLOps) Specialisation from Coursera. This blog post aims to give a quick review of the course and detail the topics discussed in the course. The course covers a range number of topics and sometimes it can feel overwhelming, which is one more reason for writing these notes, it's a way to review and consolidate what I've learned. The specialisation is organised into 4 courses. I will describe each one separately.
+I enrolled and successfully did the [Machine Learning Engineering for Production (MLOps) Specialisation from Coursera](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops). This blog post aims to give a quick review of the course and detail the topics discussed in the course. The course covers a range number of topics and sometimes it can feel overwhelming, which is one more reason for writing these notes, it's a way to review and consolidate what I've learned. 
 
-I personally enjoyed a lot the 3 and 4 courses of the specialisations, it's where they go into details and give some practical tips.
+The specialisation is organised into 4 courses. I will describe each one separately. I personally enjoyed a lot the 3 and 4 courses of the specialisations, it's where they go into details and give some practical tips.
+
+<br>
+
+<!--
+
+- ML Pipelines
+	- Pipeline orchestration frameworks
+	- TensorFlow Extended (TFX)
+-->
 
 
 ### __1 - Introduction to Machine Learning in Production__
 
-This is a high-level introduction to the topics that are covered in the specialisation. The instructors go briefly through the different steps of a Machine Learning Project, which are then detailed in the next courses.
+The first course is a high-level introduction to the topics covered in the specialisation, it briefly goes through the different steps of a Machine Learning Project, which are then detailed in the next courses.
 
 
 <figure>
@@ -25,52 +34,14 @@ This is a high-level introduction to the topics that are covered in the speciali
 </figure>
 
 
+__Scoping__: the definition of an ML project. Identifying the problem, doing due diligence on the feasibility and value, considering possible ethical concerns, and milestones and metrics.
 
-#### __Scoping__
+__Data__: introduction to the definition of the data used in the project and an expected baseline, how to label and organize the data: meta-data, data provenance and lineage, balanced train/dev/test splits.
 
-This topic deals essentially with the definition of an ML project. Identifying the problem, doing due diligence on the feasibility and value taking into consideration possible ethical concerns, and milestones and metrics.
-
+__Modelling__: how to approach the modelling of the data to solve the problem assuring the algorithm does well on the training data, test data but also has a positive impact on any business metrics. Auditing the framework by brainstorming ways the system might go wrong, e.g.: performance on subsets of data (e.g., ethnicity, gender), the prevalence of specific errors/outputs, and performance on rare classes.
 	
-#### __Data__
-
-- Define data and establish a baseline
-- Label and organize data
-	- meta-data, data provenance and lineage
-	- balanced train/dev/test splits
-	
-#### __Modeling__
-	
-- model + hyperparameters + data
-- doing well on train data, test data and also on business metrics
-- literature search + open source
-- reasonable algorithm with good data will often perform a great algorithm with not-so-good data
-- Auditing framework
-	- Brainstorm the ways the system might go wrong.
-		" Performance on subsets of data (e.g., ethnicity, gender).
-		" Prevalence of specific errors/outputs (e.g., FP, FN).
-		" Performance on rare classes.
-	- Experiment tracking
-	
-#### __Deployment__
-
-- Concept drift and Data drift
-- First deployment vs. maintenance
-- Deployment patterns
-	- Shadow mode
-	- Canary deployment
-		- Roll out to a small fraction (say 5%) of traffic initially.
-		- Monitor the system and ramp up traffic gradually.
-	- Blue-green deployment
-		- router sends a request to old/blue or to new/green
-		- enable easy rollback
-	- Monitoring
-		- software/hardware metrics
-		- input metrics
-		- output metrics
-		- Set thresholds for alarms, Adapt metrics and thresholds over time
-
-
-Give examples and make analogies
+__Deployment__: deployment vs. maintenance and deployment patterns. Shadow mode; Canary deployment: roll out to a small fraction (say 5%) of traffic initially monitor the system and ramp up traffic gradually;
+blue-green deployment: router sends a request to old/blue or to new/green, it enables easy rollback. Monitoring: software/hardware metrics, input metrics, output metrics, thresholds for alarms, adapt metrics and thresholds over time
 
 
 ---
@@ -78,71 +49,21 @@ Give examples and make analogies
 
 ### __2 - Machine Learning Data Lifecycle in Production__
 
-#### __Week 1__
+This course focuses mostly on the data aspect of a Machine Learning project, and it's organised into 4 main topics
 
-- Collecting, Labeling, and Validating Data
+#### __Collecting, Labelling, Validating__
 
-- Managing the entire life cycle of data
- - Labeling
- - Feature space coverage
- - Minimal dimensionality
- - Maximum predictive data ● Fairness
- - Rare conditions
-   
-- Challenges in production-grade ML
- - Build integrated ML systems
- - Continuously operate it in production
- - Handle continuously changing data
- - Optimize compute resource costs
+The main focus of this topic is on the importance of data: the data pipeline, and data monitoring. It starts by explaining the data collection and labelling process, focusing on understanding the data source, the consistency of values, units and data types, detecting outliers, errors and inconsistent formatting. Mentions privacy and fairness aspects in the data collection, and the use of process feedback using logging tools, such as [logstash](https://github.com/elastic/logstash) and [fluentd](https://github.com/fluent/fluentd).
 
-- ML Pipelines
-	- Pipeline orchestration frameworks
-	- TensorFlow Extended (TFX)
+Mentions the problems with data, particularly the drift in data. Changes occur due to trends and seasonality, which have an impact on the distribution of features and the relative importance of features. Here the instructors introduce the concept of 
 
-- Collecting Data
-	- Get to know your data
-		- Identify sources
-		- Check if they are refreshed
-		- Consistency for values, units and data types
-		- Monitor outliers and errors
-		- Inconsistent formatting: zero: 0, or 0.0
-	- Security, Privacy and Fairness
-		- GPDR
-		- Protect personally identifiable information
-			- aggregation: replace unique values with summary value
-			- redaction: remove some data to create a less complete picture
-
-- Labelling Data
-	- problems
-		- gradual (slow) problems:
-			- Drift
-			- data changes: 
-				- trends and seasonality
-				- distribution of features changes
-				- the relative importance of features changes
-			- world changes:
-				- styles changes
-				- scope and processes change
-		- sudden (fast) problems:
-			- software
 
 - Validating
 	- Data and Concept change in Production ML
 		- Model performance decays over time
 			- Data and Concept drift
-	- Model retraining helps to improve performance
-		- data labelling for changing ground-truth
-
-
-- Process feedback and Human Labeling
-	- process feedback: actual vs predicted click-through
-		- logstash
-		- fluentd
-	- human labelling: cardiologists labelling MRI images
-
 
 - Data Issues
-
 	- Data Drift: 
 		 - changes in data over time, such as data collected once a day
 		 - changes in the statistical properties of the features over time
@@ -186,76 +107,41 @@ Give examples and make analogies
 			the joint probability of x are features and y are labels is not the same during training and serving
 		
 		- Covariate shift
-			Covariate shift refers to the change in
-			distribution of the input variables
-			present in training and serving data.
-			In other words, it's where the marginal distribution of x
-			are features is not the same during training and serving,
-			but the conditional distribution remains unchanged.
+			Covariate shift refers to the change in the distribution of the input variables present in training and serving data. In other words, it's where the marginal distribution of x are features is not the same during training and serving, but the conditional distribution remains unchanged.
 			
 		- Concept
-			Concept shift refers to
-			a change in the relationship between
-			the input and output variables as
-			opposed to the differences in
-			the Data Distribution or input itself.
-			In other words, it's when
-			the conditional distribution of y are
-			labels given x are
-			features is not the same during training and serving,
-			but the marginal distribution of x are features remains unchanged.
+			Concept shift refers to a change in the relationship between the input and output variables as opposed to the differences in the Data Distribution or input itself.
+			In other words, it's when the conditional distribution of y are labels given x are features is not the same during training and serving, but the marginal distribution of x are features remains unchanged.
 			
 		
 		- Skew Detection
 			- The first stage is looking at training data and computing baseline statistics and a reference schema.
 			- Then you do basically the same with your serving data, you're going to generate the descriptive statistics.
 			- Then you compare the two.
-			
 			You compare your serving baseline statistics and instances.
 			You check for differences between that and your training data.
 			You look for skew and drift.
-			Significant changes become anomalies
-			and they'll trigger an alert.
-			That alert goes to whoever's monitoring system,
-			that can either be a human or another system to
-			analyze the change and
-			decide on the proper course of action.
-			That's got to be the remediation of
-			the way that you're going to fix
-			and react to that problem.
+			Significant changes become anomalies and they'll trigger an alert.
+			That alert goes to whoever's monitoring system, that can either be a human or another system to analyze the change and decide on the proper course of action. That's got to be the remediation of the way that you're going to fix and react to that problem.
 
-		- Software
-			- https://medium.com/datamindedbe/data-quality-libraries-the-right-fit-a6564641dfad
-			- https://github.com/tensorflow/data-validation
-			- https://github.com/great-expectations/great_expectations
-			- https://github.com/awslabs/deequ
+Software
+- https://medium.com/datamindedbe/data-quality-libraries-the-right-fit-a6564641dfad
+- https://github.com/tensorflow/data-validation
+- https://github.com/great-expectations/great_expectations
+- https://github.com/awslabs/deequ
 
-#### __Week 2__
 
-- Feature Engineering
-	- Pre-processing operations
-	- Engineering Techniques
-		- Feature Scaling
-		- Normalization and Standardization
-		- Bucketing / Binning
-		- Dimensionality Reduction
-			- PCA
-			- t-SNE
-			- UMAP
-	- Feature Crosses
-		- combining multiple features into a new feature
+#### __Feature Engineering__
 
-	- Tensorflow transform does what described in the previous sections
-	- Feature Selection
-	
-	
-	
-	<figure>
-	  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_feature_selection.png">
-	  <figcaption>Figure 2: Detection distribution skew.</figcaption>
-	</figure>
-	
-#### __Week 3__
+An overview of the pre-processing operations and feature engineering techniques, e.g.: feature scaling, normalisation and standardisation, bucketing/binning. Also, a good summarisation of the techniques to reduce the dimensionality of features: PCA, t-SNE and UMAP. Lastly, how to combine multiple features into a new feature and the feature selection process.
+
+<figure>
+  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_feature_selection.png">
+  <figcaption>Figure 2: Supervised Feature Selection.</figcaption>
+</figure>
+
+
+#### __Data Storage__
 
 - Data Journey and Data Storage
 - Accounting for data and model evolution
@@ -265,25 +151,24 @@ Give examples and make analogies
 - Datawarehouse (OLAP) vs Databases (OLTP)
 - Data lakes
 
-#### __Week 4__
 
-- Advanced Labelling, Augmentation and Data Preprocessing
-	- Semi-supervised labelling: 
-		- label propagation graph based
-	- Active Learning
-		- Margin sampling: Label points the current model is least confident in.
-		- Cluster-based sampling: sample from well-formed clusters to "cover" the entire space.
-		- Query-by-committee: train an ensemble of models and sample points that generate disagreement.
-		- Region-based sampling: Runs several active learning algorithms in different partitions of the space.
-	- Weak supervision with Snorkel
-		-Unlabeled data, without ground-truth labels
-			● One or more weak supervision sources
-			○ A list of heuristics that can automate labeling
-			○ Typically provided by subject matter experts
-			● Noisy labels have a certain probability of being correct, not 100%
-			● Objective: learn a generative model to determine weights for weak supervision sources
-	Data Augmentation
- 
+#### __Advanced Labelling, Augmentation and Data Preprocessing__
+
+- Semi-supervised labelling: 
+	- label propagation graph based
+- Active Learning
+	- Margin sampling: Label points the current model is least confident in.
+	- Cluster-based sampling: sample from well-formed clusters to "cover" the entire space.
+	- Query-by-committee: train an ensemble of models and sample points that generate disagreement.
+	- Region-based sampling: Runs several active learning algorithms in different partitions of the space.
+- Weak supervision with Snorkel
+	-Unlabelled data, without ground-truth labels
+		● One or more weak supervision sources
+		○ A list of heuristics that can automate labelling
+		○ Typically provided by subject matter experts
+		● Noisy labels have a certain probability of being correct, but not 100%
+		● Objective: learn a generative model to determine weights for weak supervision sources
+
 
 ---
 
@@ -452,10 +337,23 @@ this one was of particular interest to me, mainly because of these topics:
 ### __References__
 
 
-- __[1 - Introduction to Machine Learning in Production](https://www.coursera.org/learn/introduction-to-machine-learning-in-production) - [Lesson Slides](/assets/documents/Coursera-Machine_Learning_Engineering_for_Production_MLOps_Specialization/C1%20-%20Introduction%20to%20Machine%20Learning%20in%20Production/)__
+- __[1 - Introduction to Machine Learning in Production](https://www.coursera.org/learn/introduction-to-machine-learning-in-production) - [Lesson Slides](/assets/documents/Coursera-MLOps_Specialization/C1_-_Introduction_to_Machine_Learning_in_Production/)__
 
-- __[2 - Machine Learning Modeling Pipelines in Production](https://www.coursera.org/learn/machine-learning-modeling-pipelines-in-production)__
+- __[2 - Machine Learning Modeling Pipelines in Production](https://www.coursera.org/learn/machine-learning-modeling-pipelines-in-production)  - [Lesson Slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/)__
 
-- __[3 - Deploying Machine Learning Models in Production](https://www.coursera.org/learn/deploying-machine-learning-models-in-production)__
+- __[3 - Deploying Machine Learning Models in Production](https://www.coursera.org/learn/deploying-machine-learning-models-in-production) - [Lesson Slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/)__
 
-- __[4 - Machine Learning Data Lifecycle in Production](https://www.coursera.org/learn/machine-learning-data-lifecycle-in-production)__
+- __[4 - Machine Learning Data Lifecycle in Production](https://www.coursera.org/learn/machine-learning-data-lifecycle-in-production) - [Lesson Slides](/assets/documents/Coursera-MLOps_Specialization/C4_-_Deploying_Machine_Learning_Models_in_Production/)__
+
+
+
+
+
+
+
+
+
+
+
+
+
