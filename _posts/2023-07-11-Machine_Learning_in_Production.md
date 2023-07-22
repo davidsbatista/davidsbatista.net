@@ -13,6 +13,12 @@ I recently did the Machine Learning Engineering for Production (MLOps) Specialis
 
 
 
+### __Intro__
+
+Practically all hands-on examples are based on Tensorflow
+
+
+
 
 ### __Introduction to Machine Learning in Production__
 
@@ -340,31 +346,121 @@ Neural architecture search (NAS) is is a technique for automating the design of 
 
 #### __Week 2__
 
-- Model Resource Management Techniques
-	- Dimensionality Reduction
-
-
-
-
 this one was of particular interest to me, mainly because of these topics:
 
-- dimensionality reduction
-- quantization and pruning
-- distillation techniques
-- interpretability
+- Model Resource Management Techniques
+	- C3_W2_Lab_2_Algorithmic_Dimensionality.ipynb
+	- Dimensionality Reduction
+		- PCA
+		- Unsupervised:
+			- Latent Semantic Indexing/Analysis (LSI and LSA) (SVD)
+			- Independent Component Analysis (ICA)
+		- Matrix Factorisation
+			- Non-Negative Matrix Factorisation (NMF)
+		- Latent Methods
+			-  Latent Dirichlet Allocation (LDA)
+
+	- Quantisation
+		- Post-Training
+			- What post-training quantisation basically does is efficiently convert, or more precisely, quantize the weights from floating point numbers to integers. 
+			- reduced precision representation
+			- incur a small loss in model accuracy
+		- Quantisation-aware training (QAT)
+			- The core idea is that quantization aware training simulates low precision inference time computation in the forward pass of the training process. By inserting fake quantization nodes, the rounding effects of quantization are assimilated in the forward pass, as it would normally occur in actual inference. The goal is to fine-tune the weights to adjust for the precision loss. If fake quantization nodes are included in the model graph at the points where quantization is expected to occur, for example, convolutions. Then in the forward pass, the flood values will be rounded to the specified number of levels to simulate the effects of quantization. This introduces the quantization error as noise during training and is part of the overall loss which the optimization algorithm tries to minimize. Here, the model learns parameters that are more robust to quantization. 
+
+		- [Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference](https://arxiv.org/abs/1712.05877)
+		
+	- Pruning
+		- Pruning aims to reduce the number of parameters and operations involved in generating a prediction by removing network connections. 
+		- Reduce model search space/capacity
+	    Finding Sparse Neural Networks
+	    “A randomly-initialized, dense neural network contains a subnetwork that is initialised such that — when trained in isolation — it can match the test accuracy of the original network after training for at most the same number of iterations”
+		- [The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks](https://arxiv.org/abs/1803.03635)
+		- https://patrick-llgc.github.io/Learning-Deep-Learning/paper_notes/lottery_ticket_hypothesis.html
+
+
+
+#### __Week 3__
+
+- High-Performance Modeling: 
+	- distributed training, including a couple of different kinds of parallelism. 
+	- Then we'll turn to high-performance modelling, including high-performance ingestion.
+
+- Distillation Techniques
+	- Knowledge Distillation: 
+	- Teacher and student model
+
+
+
+#### __Week 4__
+
+- Model Analysis
+- TensorFlow Model Analysis
+
+
+#### __Week 5__
+
+- Interpretability
+- ....
+- Shapley Value
+- LIME
+- .....
 
 
 
 
 ### __Deploying Machine Learning Models in Production__
 
+#### __Week 1__
 
+- Introduction to Model Serving
+- Resources and Requirements for Serving Models
+- Tensorflow serving
+
+
+#### __Week 2__
+
+- Model Serving: Patterns and Infrastructure
+
+- NVIDIA Triton Inference Server
+- TensorFlow Serving Architecture
+- Torch Serve
+- KFServing
+- Scalling
+- Containers and Orchestration Tools
+-  Batch Inference
+
+
+#### __Week 3__
+
+- Model Management and Delivery
+- ML Experiments Management and Workflow Automation
+- Experiment Tracking
+- MLOps
+- ML Solution Lifecycle
+- Tensorflow Extended
+- Managing Model Versions
+- Continuous Delivery
+- Progressive Delivery
+
+#### __Week 4__
+
+- Model Monitoring
+- Logging for ML Monitoring
+- Tracing for ML Systems
+-  What is Model Decay?
+	- Data Drift
+	- Concept Drift
+- Ways to Mitigate Model Decay
+- Responsible AI
+-  Legal Requirements for Secure & Private AI
+-  Anonymization & Pseudonymisation
+
+
+<!--
 - feature engineering, data transformation, data lineage and provenance, and how to rely on schemas to follow data evolution.
 - Authors tend to oversell TensorFlow Extended, anyway, the main thing is to learn the concepts.
-
-
-
-
+-->
 
 
 
