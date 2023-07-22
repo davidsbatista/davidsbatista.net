@@ -2,25 +2,21 @@
 layout: post
 title: Machine Learning in Production
 date: 2023-06-27 00:00:00
-tags: coursera machine-learning mlops production deployment
+tags: coursera mlops production deployment monitoring
 categories: [blog]
 comments: true
 disqus_identifier: 20230627
 preview_pic: /assets/images/2023-07-11-Machine_Learning_in_Production.jpg
 ---
 
-I recently did the Machine Learning Engineering for Production (MLOps) Specialisation from Coursera. This blog post aims to give a quick review of the course and detail the topics discussed in the course. Overall I can say I did enjoy the course and learn something.
+I recently did the Machine Learning Engineering for Production (MLOps) Specialisation from Coursera. This blog post aims to give a quick review of the course and detail the topics discussed in the course. The course covers a range number of topics and sometimes it can feel overwhelming, which is one more reason for writing these notes, it's a way to review and consolidate what I've learned. The specialisation is organised into 4 courses. I will describe each one separately.
+
+I personally enjoyed a lot the 3 and 4 courses of the specialisations, it's where they go into details and give some practical tips.
 
 
+### __1 - Introduction to Machine Learning in Production__
 
-### __Intro__
-
-Practically all hands-on examples are based on Tensorflow
-
-
-
-
-### __Introduction to Machine Learning in Production__
+This is a high-level introduction to the topics that are covered in the specialisation. The instructors go briefly through the different steps of a Machine Learning Project, which are then detailed in the next courses.
 
 
 <figure>
@@ -28,63 +24,59 @@ Practically all hands-on examples are based on Tensorflow
   <figcaption>Figure 1: Steps of a Machine Learning project.</figcaption>
 </figure>
 
-- Very high-level just to peek into what's coming 
-- Goes through briefly through every step which is then detailed in the next courses, part of this specialisations
 
 
+#### __Scoping__
 
-- Steps of an ML project
-	- Scoping
-		- define a project, identify a problem
-		- diligence on feasibility and value
-		- ethical considerations
-			- value for society?
-			- fair and free from bias?
-			- any ethical concerns?
-		- milestones and resources
-			- ml metrics
-			- software metrics
-			- business metrics
-			- resources
+This topic deals essentially with the definition of an ML project. Identifying the problem, doing due diligence on the feasibility and value taking into consideration possible ethical concerns, and milestones and metrics.
+
 	
-	- Data
-		- Define data and establish a baseline
-		-  Label and organize data
-			- meta-data, data provenance and lineage
-			- balanced train/dev/test splits
+#### __Data__
+
+- Define data and establish a baseline
+- Label and organize data
+	- meta-data, data provenance and lineage
+	- balanced train/dev/test splits
 	
-	- Modeling
-		- model + hyperparameters + data
-		- doing well on train data, test data and also on business metrics
-		- literature search + open source
-		- reasonable algorithm with good data will often perform a great algorithm with not-so-good data
-		- Auditing framework
-			- Brainstorm the ways the system might go wrong.
-			" Performance on subsets of data (e.g., ethnicity, gender).
-			" Prevalence of specific errors/outputs (e.g., FP, FN).
-			" Performance on rare classes.
-		- Experiment tracking
+#### __Modeling__
 	
-	- Deployment
-		- Concept drift and Data drift
-		- First deployment vs. maintenance
-		- Deployment patterns
-			- Shadow mode
-			- Canary deployment
-				- Roll out to a small fraction (say 5%) of traffic initially.
-				- Monitor the system and ramp up traffic gradually.
-			- Blue-green deployment
-				- router sends a request to old/blue or to new/green
-				- enable easy rollback
-			- Monitoring
-				- software/hardware metrics
-				- input metrics
-				- output metrics
-				- Set thresholds for alarms, Adapt metrics and thresholds over time
+- model + hyperparameters + data
+- doing well on train data, test data and also on business metrics
+- literature search + open source
+- reasonable algorithm with good data will often perform a great algorithm with not-so-good data
+- Auditing framework
+	- Brainstorm the ways the system might go wrong.
+		" Performance on subsets of data (e.g., ethnicity, gender).
+		" Prevalence of specific errors/outputs (e.g., FP, FN).
+		" Performance on rare classes.
+	- Experiment tracking
+	
+#### __Deployment__
+
+- Concept drift and Data drift
+- First deployment vs. maintenance
+- Deployment patterns
+	- Shadow mode
+	- Canary deployment
+		- Roll out to a small fraction (say 5%) of traffic initially.
+		- Monitor the system and ramp up traffic gradually.
+	- Blue-green deployment
+		- router sends a request to old/blue or to new/green
+		- enable easy rollback
+	- Monitoring
+		- software/hardware metrics
+		- input metrics
+		- output metrics
+		- Set thresholds for alarms, Adapt metrics and thresholds over time
 
 
-### __Machine Learning Data Lifecycle in Production__
+Give examples and make analogies
 
+
+---
+
+
+### __2 - Machine Learning Data Lifecycle in Production__
 
 #### __Week 1__
 
@@ -238,7 +230,6 @@ Practically all hands-on examples are based on Tensorflow
 			- https://github.com/great-expectations/great_expectations
 			- https://github.com/awslabs/deequ
 
-
 #### __Week 2__
 
 - Feature Engineering
@@ -264,7 +255,6 @@ Practically all hands-on examples are based on Tensorflow
 	  <figcaption>Figure 2: Detection distribution skew.</figcaption>
 	</figure>
 	
-
 #### __Week 3__
 
 - Data Journey and Data Storage
@@ -274,7 +264,6 @@ Practically all hands-on examples are based on Tensorflow
 - Features Stores
 - Datawarehouse (OLAP) vs Databases (OLTP)
 - Data lakes
-
 
 #### __Week 4__
 
@@ -296,9 +285,10 @@ Practically all hands-on examples are based on Tensorflow
 	Data Augmentation
  
 
+---
 
 
-### __Machine Learning Modeling Pipelines in Production__
+### __3 - Machine Learning Modeling Pipelines in Production__
 
 #### __Week 1__
 
@@ -343,7 +333,6 @@ Neural architecture search (NAS) is is a technique for automating the design of 
 - Microsoft Azure Automated Machine Learning
 - Google Cloud AutoML
 
-
 #### __Week 2__
 
 this one was of particular interest to me, mainly because of these topics:
@@ -378,8 +367,6 @@ this one was of particular interest to me, mainly because of these topics:
 		- [The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks](https://arxiv.org/abs/1803.03635)
 		- https://patrick-llgc.github.io/Learning-Deep-Learning/paper_notes/lottery_ticket_hypothesis.html
 
-
-
 #### __Week 3__
 
 - High-Performance Modeling: 
@@ -390,13 +377,10 @@ this one was of particular interest to me, mainly because of these topics:
 	- Knowledge Distillation: 
 	- Teacher and student model
 
-
-
 #### __Week 4__
 
 - Model Analysis
 - TensorFlow Model Analysis
-
 
 #### __Week 5__
 
@@ -407,16 +391,16 @@ this one was of particular interest to me, mainly because of these topics:
 - .....
 
 
+---
 
 
-### __Deploying Machine Learning Models in Production__
+### __4 - Deploying Machine Learning Models in Production__
 
 #### __Week 1__
 
 - Introduction to Model Serving
 - Resources and Requirements for Serving Models
 - Tensorflow serving
-
 
 #### __Week 2__
 
@@ -429,7 +413,6 @@ this one was of particular interest to me, mainly because of these topics:
 - Scalling
 - Containers and Orchestration Tools
 -  Batch Inference
-
 
 #### __Week 3__
 
@@ -463,11 +446,13 @@ this one was of particular interest to me, mainly because of these topics:
 -->
 
 
+---
+
 
 ### __References__
 
 
-- __[1 - Introduction to Machine Learning in Production](https://www.coursera.org/learn/introduction-to-machine-learning-in-production) - [Lesson Slides](/assets/documentsassets/documents/Coursera-Machine_Learning_Engineering_for_Production_MLOps_Specialization/C1%20-%20Introduction%20to%20Machine%20Learning%20in%20Production/)__
+- __[1 - Introduction to Machine Learning in Production](https://www.coursera.org/learn/introduction-to-machine-learning-in-production) - [Lesson Slides](/assets/documents/Coursera-Machine_Learning_Engineering_for_Production_MLOps_Specialization/C1%20-%20Introduction%20to%20Machine%20Learning%20in%20Production/)__
 
 - __[2 - Machine Learning Modeling Pipelines in Production](https://www.coursera.org/learn/machine-learning-modeling-pipelines-in-production)__
 
