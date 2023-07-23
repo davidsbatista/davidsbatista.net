@@ -13,6 +13,15 @@ I enrolled and successfully did the [Machine Learning Engineering for Production
 
 The specialisation is organised into 4 courses. I will describe each one separately. I personally enjoyed a lot the 3 and 4 courses of the specialisations, it's where they go into details and give some practical tips.
 
+- [__1 -  Introduction to Machine Learning in Production__](#2---introduction-to-machine-learning-in-production)
+
+- [__2 - Machine Learning Data Lifecycle in Production__](#2---machine-learning-data-lifecycle-in-production)
+
+- [__3 - Machine Learning Modelling Pipelines in Production__](#3---machine-learning-modelling-pipelines-in-production)
+
+- [__4 - Deploying Machine Learning Models in Production__](#4---deploying-machine-learning-models-in-production)
+
+
 <br>
 
 <!--
@@ -23,7 +32,7 @@ The specialisation is organised into 4 courses. I will describe each one separat
 -->
 
 
-### __1 - Introduction to Machine Learning in Production__
+### __1 -  Introduction to Machine Learning in Production__
 
 The first course is a high-level introduction to the topics covered in the specialisation, it briefly goes through the different steps of a Machine Learning Project, which are then detailed in the next courses.
 
@@ -45,6 +54,9 @@ blue-green deployment: router sends a request to old/blue or to new/green, it en
 
 
 ---
+
+<br>
+
 
 
 ### __2 - Machine Learning Data Lifecycle in Production__
@@ -89,7 +101,6 @@ __Software Tools__
 - [Great Expectations](https://github.com/great-expectations/great_expectations)
 - [Deequ - Unit Tests for Data](https://github.com/awslabs/deequ)
 
-
 #### __Feature Engineering__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W2.pdf))
 
 An overview of the pre-processing operations and feature engineering techniques, e.g.: feature scaling, normalisation and standardisation, bucketing/binning. Also, a good summarisation of the techniques to reduce the dimensionality of features: PCA, t-SNE and UMAP. Lastly, how to combine multiple features into a new feature and the feature selection process.
@@ -99,11 +110,9 @@ An overview of the pre-processing operations and feature engineering techniques,
   <figcaption>Figure 4: Supervised Feature Selection.</figcaption>
 </figure>
 
-
 #### __Data Storage__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W3.pdf))
 
 This chapter deals with the data journey, accounting for data and model evolution and using metadata to track changes in data in the ML pipeline. How a schema to hold data can evolve and how to keep track of those changes, it also introduces the concept of feature stores, as well as Datawarehouse (OLAP) vs. Databases (OLTP) and data lakes.
-
 
 #### __Advanced Labelling, Augmentation and Data Preprocessing__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W4.pdf))
 
@@ -136,17 +145,22 @@ This topic also briefly explains how to do data augmentation techniques, mostly 
 
 ---
 
+<br>
 
-### __3 - Machine Learning Modeling Pipelines in Production__
 
-#### __Week 1__
 
-Neural Architecture Search
-Neural architecture search (NAS) is is a technique for automating the design of artificial neural networks
-● It helps finding the optimal architecture
-● This is a search over a huge space
-● AutoML is an algorithm to automate this search  
+### __3 - Machine Learning Modelling Pipelines in Production__
 
+The 3rd course on this specialisation is the longest one covering 5 topics.
+
+#### __Neural Architectural Search and Auto ML__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W1.pdf))
+
+It covers essentially the Auto ML topic,
+
+<!-- a technique for automating the design of artificial neural networks, i.e.: search over a huge space to find the optimal architecture-->
+<!-- >● AutoML is an algorithm to automate this search  -->
+
+<!-- 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_search_strategies.png">
   <figcaption>ToDo</figcaption>
@@ -156,6 +170,8 @@ Neural architecture search (NAS) is is a technique for automating the design of 
   <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_grid_search_random_search.png">
   <figcaption>ToDo</figcaption>
 </figure>
+
+-->
 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_bayesian_optimisation.png">
@@ -182,41 +198,50 @@ Neural architecture search (NAS) is is a technique for automating the design of 
 - Microsoft Azure Automated Machine Learning
 - Google Cloud AutoML
 
-#### __Week 2__
+#### __Model Resource Management Techniques__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W2.pdf))
 
-this one was of particular interest to me, mainly because of these topics:
+<h3 style="text-align: center;font-weight:bold"></h3>
 
-- Model Resource Management Techniques
-	- C3_W2_Lab_2_Algorithmic_Dimensionality.ipynb
-	- Dimensionality Reduction
-		- PCA
-		- Unsupervised:
-			- Latent Semantic Indexing/Analysis (LSI and LSA) (SVD)
-			- Independent Component Analysis (ICA)
-		- Matrix Factorisation
-			- Non-Negative Matrix Factorisation (NMF)
-		- Latent Methods
-			-  Latent Dirichlet Allocation (LDA)
+This one was of particular interest to me, mainly because all of the subjects covered deal with how to make a model more efficient in terms of CPU/GPU needs. Essentially through methods of dimensionality reduction, quantisation and pruning.
 
-	- Quantisation
-		- Post-Training
-			- What post-training quantisation basically does is efficiently convert, or more precisely, quantize the weights from floating point numbers to integers. 
-			- reduced precision representation
-			- incur a small loss in model accuracy
-		- Quantisation-aware training (QAT)
-			- The core idea is that quantization aware training simulates low precision inference time computation in the forward pass of the training process. By inserting fake quantization nodes, the rounding effects of quantization are assimilated in the forward pass, as it would normally occur in actual inference. The goal is to fine-tune the weights to adjust for the precision loss. If fake quantization nodes are included in the model graph at the points where quantization is expected to occur, for example, convolutions. Then in the forward pass, the flood values will be rounded to the specified number of levels to simulate the effects of quantization. This introduces the quantization error as noise during training and is part of the overall loss which the optimization algorithm tries to minimize. Here, the model learns parameters that are more robust to quantization. 
 
-		- [Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference](https://arxiv.org/abs/1712.05877)
-		
-	- Pruning
-		- Pruning aims to reduce the number of parameters and operations involved in generating a prediction by removing network connections. 
-		- Reduce model search space/capacity
-	    Finding Sparse Neural Networks
-	    “A randomly-initialized, dense neural network contains a subnetwork that is initialised such that — when trained in isolation — it can match the test accuracy of the original network after training for at most the same number of iterations”
-		- [The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks](https://arxiv.org/abs/1803.03635)
-		- https://patrick-llgc.github.io/Learning-Deep-Learning/paper_notes/lottery_ticket_hypothesis.html
+__Dimensionality Reduction__: there's a brief explanation about the curse of dimensionality and the Hughes effect as motivation for dimensionality reduction, which is can be tackled with manual feature reduction techniques, and the instructors give a few examples and also explain and introduce a few algorithms:
 
-#### __Week 3__
+- Unsupervised:
+	- Principal Components Analysis (PCA)
+	- Latent Semantic Indexing/Analysis (LSI and LSA) / Singular-Value Decomposition (SVD)
+	- Independent Component Analysis (ICA)
+- Non-Negative Matrix Factorisation (NMF)
+- Latent Dirichlet Allocation (LDA)
+
+__TODO__: C3_W2_Lab_2_Algorithmic_Dimensionality.ipynb
+
+
+__Quantisation and Pruning__
+
+As the instructors explain, one of the motivation reasons for reducing model sizer is the deployment of ML models in IoT and mobile devices.
+
+<figure>
+  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_quantisation.png">
+  <figcaption>ToDo</figcaption>
+</figure>
+
+In a nutshell what post-training quantisation does is to efficiently convert or quantize the weights from floating point numbers to integers. This might reduce the precision representation and incur a small loss in model accuracy.
+
+Pruning aims to reduce the number of parameters and operations involved in generating a prediction by removing network connections, this reduces the model capacity, but also its size and complexity. 
+
+The instructors also suggest reading [The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks](https://arxiv.org/abs/1803.03635) - which has as the hypothesis that "A randomly-initialized, dense neural network contains a subnetwork that is initialised such that — when trained in isolation — it can match the test accuracy of the original network after training for at most the same number of iterations"
+
+
+Reading:
+
+- [Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference](https://arxiv.org/abs/1712.05877)
+
+- [The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks](https://arxiv.org/abs/1803.03635) 
+
+- [The Lottery Ticket Hypothesis - Patrick Liu Notes](https://patrick-llgc.github.io/Learning-Deep-Learning/paper_notes/lottery_ticket_hypothesis.html)
+
+#### __High-Performance Modeling and Distillation Techniques__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W3.pdf))
 
 - High-Performance Modeling: 
 	- distributed training, including a couple of different kinds of parallelism. 
@@ -226,12 +251,14 @@ this one was of particular interest to me, mainly because of these topics:
 	- Knowledge Distillation: 
 	- Teacher and student model
 
-#### __Week 4__
+#### __Model Analysis__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W4.pdf))
+
+This topic covers the question of what's next after the model is trained and deployed, and it's processing data on a daily basis.
 
 - Model Analysis
 - TensorFlow Model Analysis
 
-#### __Week 5__
+#### __Model Interpretability__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W5.pdf))
 
 - Interpretability
 - ....
@@ -297,7 +324,6 @@ this one was of particular interest to me, mainly because of these topics:
 
 ---
 
-
 ### __References__
 
 
@@ -309,7 +335,7 @@ this one was of particular interest to me, mainly because of these topics:
 
 - __[4 - Machine Learning Data Lifecycle in Production](https://www.coursera.org/learn/machine-learning-data-lifecycle-in-production) - [Lesson Slides](/assets/documents/Coursera-MLOps_Specialization/C4_-_Deploying_Machine_Learning_Models_in_Production/)__
 
-- Figure 1, 2, 3 ,4 taken from
+- Figures 1, 2, 3 , and 4 taken from
 
 
 
