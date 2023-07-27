@@ -43,21 +43,20 @@ The first course is a high-level introduction to the topics covered in the speci
 </figure>
 
 
-__Scoping__: the definition of an ML project. Identifying the problem, doing due diligence on the feasibility and value, considering possible ethical concerns, and milestones and metrics.
+__Scoping__: the definition of an ML project. Identifying the problem, doing due diligence on the feasibility and value, and considering possible ethical concerns, milestones, and metrics.
 
 __Data__: introduction to the definition of the data used in the project and an expected baseline, how to label and organize the data: meta-data, data provenance and lineage, balanced train/dev/test splits.
 
-__Modelling__: how to approach the modelling of the data to solve the problem assuring the algorithm does well on the training data, test data but also has a positive impact on any business metrics. Auditing the framework by brainstorming ways the system might go wrong, e.g.: performance on subsets of data (e.g., ethnicity, gender), the prevalence of specific errors/outputs, and performance on rare classes.
+__Modelling__: how to approach the modelling of the data to solve the problem assuring the algorithm does well on the training data and test data but also positively impacts any business metrics. Auditing the framework by brainstorming ways the system might go wrong, e.g.: performance on subsets of data (e.g., ethnicity, gender), the prevalence of specific errors/outputs, and performance on rare classes.
 	
 __Deployment__: deployment vs. maintenance and deployment patterns. Shadow mode; Canary deployment: roll out to a small fraction (say 5%) of traffic initially monitor the system and ramp up traffic gradually;
 blue-green deployment: router sends a request to old/blue or to new/green, it enables easy rollback. Monitoring: software/hardware metrics, input metrics, output metrics, thresholds for alarms, adapt metrics and thresholds over time
 
+<br>
 
 ---
 
 <br>
-
-
 
 ### __2 - Machine Learning Data Lifecycle in Production__
 
@@ -140,18 +139,19 @@ Lastly, for __Weak Supervision__, the instructors give the example of Snorkel:
 - Objective: learn a generative model to determine weights for weak supervision sources
 - Learn a supervised model
 
-This topic also briefly explains how to do data augmentation techniques, mostly for images, and about windowing strategies for time-series.
+This topic also briefly explains how to do data augmentation techniques, mostly for images, and about windowing strategies for time series.
 
+
+<br>
 
 ---
 
 <br>
 
 
-
 ### __3 - Machine Learning Modelling Pipelines in Production__
 
-The 3rd course on this specialisation is the longest one covering 5 topics.
+The 3rd course on this specialisation is the longest one covering 5 topics and was also the one that brought, for me, the most interesting topics from all the 4 courses.
 
 #### __Neural Architectural Search and Auto ML__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W1.pdf))
 
@@ -226,7 +226,7 @@ As the instructors explain, one of the motivation reasons for reducing model siz
   <figcaption>ToDo</figcaption>
 </figure>
 
-In a nutshell what post-training quantisation does is to efficiently convert or quantize the weights from floating point numbers to integers. This might reduce the precision representation and incur a small loss in model accuracy.
+In a nutshell what post-training quantisation does is to efficiently convert or quantize the weights from floating point numbers to integers. This might reduce the precision representation and incur a small loss in model accuracy but significantly reduces the model size making it more feasible to run on a memory-constrained device.
 
 Pruning aims to reduce the number of parameters and operations involved in generating a prediction by removing network connections, this reduces the model capacity, but also its size and complexity. 
 
@@ -260,14 +260,19 @@ This topic covers the question of what's next after the model is trained and dep
 
 #### __Model Interpretability__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W5.pdf))
 
-- Interpretability
-- ....
+It introduces the concept and the importance of __explainability in AI__ and also touches on other related subjects such as fairness, privacy and security. But ultimately this chapter presents several methods to understand model predictions.
+
+- Partial Dependence Plots
 - Shapley Value
 - LIME
-- .....
 
+
+<br>
 
 ---
+
+<br>
+
 
 
 ### __4 - Deploying Machine Learning Models in Production__
@@ -286,9 +291,9 @@ This topic covers the question of what's next after the model is trained and dep
 - TensorFlow Serving Architecture
 - Torch Serve
 - KFServing
-- Scalling
+- Scaling
 - Containers and Orchestration Tools
--  Batch Inference
+- Batch Inference
 
 #### __Week 3__
 
@@ -313,7 +318,7 @@ This topic covers the question of what's next after the model is trained and dep
 - Ways to Mitigate Model Decay
 - Responsible AI
 -  Legal Requirements for Secure & Private AI
--  Anonymization & Pseudonymisation
+-  Anonymisation & Pseudonymisation
 
 
 <!--
