@@ -181,7 +181,7 @@ __Dimensionality Reduction__: there's a brief explanation about the curse of dim
 - Non-Negative Matrix Factorisation (NMF)
 - Latent Dirichlet Allocation (LDA)
 
-### __TODO: C3_W2_Lab_2_Algorithmic_Dimensionality.ipynb___
+#### __TODO: C3_W2_Lab_2_Algorithmic_Dimensionality.ipynb___
 
 
 __Quantisation and Pruning__
@@ -215,15 +215,122 @@ Reading:
 	- Then we'll turn to high-performance modelling, including high-performance ingestion.
 
 - Distillation Techniques
-	- Knowledge Distillation: 
+	- #### __TODO: Knowledge Distillation:__
 	- Teacher and student model
 
 #### __Model Analysis__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W4.pdf))
 
 This topic covers the question of what's next after the model is trained and deployed, and it's processing data on a daily basis.
 
-- Model Analysis
+- Model Performance Analysis
 - TensorFlow Model Analysis
+
+
+
+Is model performing well?
+● Is there scope for improvement?
+● Can the data change in future?
+● Has the data changed since you created your training dataset?
+
+Models can be tested for metrics like accuracy and losses like test error without knowing internal details
+● For finer evaluation, models can be inspected part by part
+
+
+ Top level aggregate metrics vs slicing
+ ● Most of the time, metrics are calculated on the entire dataset
+● Slicing deals with understanding how the model is performing on each subset of data
+
+->  - TensorFlow Model Analysis (TFMA)
+
+
+ Model robustness
+ ● Robustness is much more than generalization
+● Is the model accurate even for slightly corrupted input data?
+
+
+
+
+ Model debugging
+ ● Deals with detecting and dealing with problems in ML systems
+● Applies mainstream software engineering practices to ML models   
+
+
+- Opaqueness
+- Social Security discrimination vulnerabilities
+- Privacy harms
+- Model decay
+
+
+  Model Debugging Techniques
+   Sensitivity Analysis and Adversarial Attacks
+   	What-If Tool for sensitivity analysis
+	 Random Attacks
+	 ● Expose models to high volumes of random input data
+	● Exploits the unexpected software and math bugs
+	● Great way to start debugging
+	
+	
+  Partial dependence plots
+  
+  
+   Cleverhans:
+  an open-source Python library to benchmark machine learning systems' vulnerability to adversarial examples
+  Foolbox:
+  an open-source Python library that lets you easily run adversarial attacks against machine learning models
+  
+  
+   Residual analysis
+   ● Measures the difference between model’s predictions and ground truth
+  ● Randomly distributed errors are good
+  ● Correlated or systematic errors show that a model can be improved	 
+
+
+Model Remediation techniques
+
+Model editing:
+○ Applies to decision trees
+○ Manual tweaks to adapt your use case
+
+
+Model assertions:
+○ Implement business rules that override model predictions
+ 
+
+
+Fairness
+Compute performance metrics at all slices of data
+● Evaluate your metrics across multiple thresholds
+● If decision margin is small, report in more detail
+
+
+ Continuous evaluation and monitoring
+ 
+ Training data is a snapshot of the world at a point in time
+ ● Many types of data change over time, some quickly
+ ● ML Models do not get better with age
+
+
+Concept drift: loss of prediction quality
+● Concept Emergence: new type of data distribution
+● Types of dataset shift:
+○ covariate shift
+○ prior probability shift
+
+
+ Statistical process control
+ 
+  Sequential analysis
+  
+   Error distribution monitoring
+   
+    Clustering/novelty detection
+	
+	 Feature distribution monitoring
+	 
+	  Model-dependent monitoring
+
+
+
 
 #### __Model Interpretability__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W5.pdf))
 
