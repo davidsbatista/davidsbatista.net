@@ -155,48 +155,15 @@ The 3rd course on this specialisation is the longest one covering 5 topics and w
 
 #### __Neural Architectural Search and Auto ML__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W1.pdf))
 
-It covers essentially the Auto ML topic,
+The first chapter covers automatic parameter tuning. It describes briefly different strategies to find the best hyperparameters (i.e.: set before launching the learning process and not updated in each training step):
 
-<!-- a technique for automating the design of artificial neural networks, i.e.: search over a huge space to find the optimal architecture-->
-<!-- >● AutoML is an algorithm to automate this search  -->
+- Grid Search
+- Random Search
+- Bayesian Optimisation
+- Evolutionary Algorithms
+- Reinforcement Learning
 
-<!-- 
-<figure>
-  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_search_strategies.png">
-  <figcaption>ToDo</figcaption>
-</figure>
-
-<figure>
-  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_grid_search_random_search.png">
-  <figcaption>ToDo</figcaption>
-</figure>
-
--->
-
-<figure>
-  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_bayesian_optimisation.png">
-  <figcaption>ToDo</figcaption>
-</figure>
-
-<figure>
-  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_evolutionary_methods.png">
-  <figcaption>ToDo</figcaption>
-</figure>
-
-<figure>
-  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_reinforcement_learning_1.png">
-  <figcaption>ToDo</figcaption>
-</figure>
-
-<figure>
-  <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_hyperparameter_reinforcement_learning_2.png">
-  <figcaption>ToDo</figcaption>
-</figure>
-
-- Automated Machine Learning (AutoML)
-- Automating hyperparameter tuning with Keras Tuner
-- Microsoft Azure Automated Machine Learning
-- Google Cloud AutoML
+Shows how the hyperparameters can be tuned with Keras Tuner, and it finishes by talking more broadly about the ML topic and the services provided by cloud providers to perform AutoML.
 
 #### __Model Resource Management Techniques__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W2.pdf))
 
@@ -214,7 +181,7 @@ __Dimensionality Reduction__: there's a brief explanation about the curse of dim
 - Non-Negative Matrix Factorisation (NMF)
 - Latent Dirichlet Allocation (LDA)
 
-__TODO__: C3_W2_Lab_2_Algorithmic_Dimensionality.ipynb
+### __TODO: C3_W2_Lab_2_Algorithmic_Dimensionality.ipynb___
 
 
 __Quantisation and Pruning__
@@ -230,7 +197,7 @@ In a nutshell what post-training quantisation does is to efficiently convert or 
 
 Pruning aims to reduce the number of parameters and operations involved in generating a prediction by removing network connections, this reduces the model capacity, but also its size and complexity. 
 
-The instructors also suggest reading [The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks](https://arxiv.org/abs/1803.03635) - which has as the hypothesis that "A randomly-initialized, dense neural network contains a subnetwork that is initialised such that — when trained in isolation — it can match the test accuracy of the original network after training for at most the same number of iterations"
+The instructors also make a mention [The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks](https://arxiv.org/abs/1803.03635) with the hypothesis that "a randomly-initialized, dense neural network contains a subnetwork that is initialised such that — when trained in isolation — it can match the test accuracy of the original network after training for at most the same number of iterations"
 
 
 Reading:
