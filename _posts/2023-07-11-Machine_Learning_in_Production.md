@@ -9,9 +9,9 @@ disqus_identifier: 20230627
 preview_pic: /assets/images/2023-07-11-Machine_Learning_in_Production.jpg
 ---
 
-I enrolled and successfully did the [Machine Learning Engineering for Production (MLOps) Specialisation from Coursera](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops). This blog post aims to give a quick review of the course and detail the topics discussed in the course. The course covers a range number of topics and sometimes it can feel overwhelming, which is one more reason for writing these notes, it's a way to review and consolidate what I've learned. 
+I enrolled and successfully did the [Machine Learning Engineering for Production (MLOps) Specialisation from Coursera](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops). This blog post aims to give a quick review of the course and detail the topics discussed in the course. The course covers a range of topics and sometimes it can feel overwhelming, which is one more reason for writing these notes, it's a way for me to review and consolidate what I've learned.
 
-The specialisation is organised into 4 courses. I will describe each one separately. I personally enjoyed a lot the 3 and 4 courses of the specialisations, it's where they go into details and give some practical tips.
+The specialisation is organised into 4 courses. I will describe each one separately. I personally enjoyed a lot the 3rd and 4th courses of the specialisations, it's where they go into details and give some practical tips.
 
 - [__1 -  Introduction to Machine Learning in Production__](#2---introduction-to-machine-learning-in-production)
 
@@ -24,15 +24,7 @@ The specialisation is organised into 4 courses. I will describe each one separat
 
 <br>
 
-<!--
-
-- ML Pipelines
-	- Pipeline orchestration frameworks
-	- TensorFlow Extended (TFX)
--->
-
-
-### __1 -  Introduction to Machine Learning in Production__
+## __1 -  Introduction to Machine Learning in Production__
 
 The first course is a high-level introduction to the topics covered in the specialisation, it briefly goes through the different steps of a Machine Learning Project, which are then detailed in the next courses.
 
@@ -58,7 +50,7 @@ blue-green deployment: router sends a request to old/blue or to new/green, it en
 
 <br>
 
-### __2 - Machine Learning Data Lifecycle in Production__
+## __2 - Machine Learning Data Lifecycle in Production__
 
 This course focuses mostly on the data aspect of a Machine Learning project, and it's organised into 4 main topics
 
@@ -149,11 +141,11 @@ This topic also briefly explains how to do data augmentation techniques, mostly 
 <br>
 
 
-### __3 - Machine Learning Modelling Pipelines in Production__
+## __3 - Machine Learning Modelling Pipelines in Production__
 
 The 3rd course on this specialisation is the longest one covering 5 topics and was also the one that brought, for me, the most interesting topics from all the 4 courses.
 
-#### __Neural Architectural Search and Auto ML__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W1.pdf))
+### __Neural Architectural Search and Auto ML__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W1.pdf))
 
 The first chapter covers automatic parameter tuning. It describes briefly different strategies to find the best hyperparameters (i.e.: set before launching the learning process and not updated in each training step):
 
@@ -165,7 +157,7 @@ The first chapter covers automatic parameter tuning. It describes briefly differ
 
 Shows how the hyperparameters can be tuned with Keras Tuner, and it finishes by talking more broadly about the ML topic and the services provided by cloud providers to perform AutoML.
 
-#### __Model Resource Management Techniques__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W2.pdf))
+### __Model Resource Management Techniques__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W2.pdf))
 
 <h3 style="text-align: center;font-weight:bold"></h3>
 
@@ -181,7 +173,7 @@ __Dimensionality Reduction__: there's a brief explanation about the curse of dim
 - Non-Negative Matrix Factorisation (NMF)
 - Latent Dirichlet Allocation (LDA)
 
-#### __TODO: C3_W2_Lab_2_Algorithmic_Dimensionality.ipynb___
+### __TODO: C3_W2_Lab_2_Algorithmic_Dimensionality.ipynb___
 
 
 __Quantisation and Pruning__
@@ -208,7 +200,7 @@ Reading:
 
 - [The Lottery Ticket Hypothesis - Patrick Liu Notes](https://patrick-llgc.github.io/Learning-Deep-Learning/paper_notes/lottery_ticket_hypothesis.html)
 
-#### __High-Performance Modeling and Distillation Techniques__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W3.pdf))
+### __High-Performance Modeling and Distillation Techniques__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W3.pdf))
 
 - High-Performance Modeling: 
 	- distributed training, including a couple of different kinds of parallelism. 
@@ -218,127 +210,68 @@ Reading:
 	- #### __TODO: Knowledge Distillation:__
 	- Teacher and student model
 
-#### __Model Analysis__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W4.pdf))
+### __Model Analysis__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W4.pdf))
 
-This topic covers the question of what's next after the model is trained and deployed, and it's processing data on a daily basis.
+This topic covers the question of what's next after the model is trained and deployed, and its processing data. Is it performing well? Can we improve it? Has the data changed from the training dataset? 
 
-- Model Performance Analysis
-- TensorFlow Model Analysis
+One first aspect is how to compute metrics, most of the time, metrics are calculated on the entire dataset, and slicing deals with understanding how the model is performing on each subset of data. This is demonstrated using [Tensorflow Model Analysis](https://www.tensorflow.org/tfx/guide/tfma) to perform top-level aggregate metrics versus slicing.
 
+The chapter then covers different model debugging techniques:
 
+#### __Adversarial Attacks__
 
-Is model performing well?
-● Is there scope for improvement?
-● Can the data change in future?
-● Has the data changed since you created your training dataset?
-
-Models can be tested for metrics like accuracy and losses like test error without knowing internal details
-● For finer evaluation, models can be inspected part by part
-
-
- Top level aggregate metrics vs slicing
- ● Most of the time, metrics are calculated on the entire dataset
-● Slicing deals with understanding how the model is performing on each subset of data
-
-->  - TensorFlow Model Analysis (TFMA)
-
-
- Model robustness
- ● Robustness is much more than generalization
-● Is the model accurate even for slightly corrupted input data?
-
-
-
-
- Model debugging
- ● Deals with detecting and dealing with problems in ML systems
-● Applies mainstream software engineering practices to ML models   
-
-
-- Opaqueness
-- Social Security discrimination vulnerabilities
-- Privacy harms
-- Model decay
-
-
-  Model Debugging Techniques
-   Sensitivity Analysis and Adversarial Attacks
-   	What-If Tool for sensitivity analysis
-	 Random Attacks
-	 ● Expose models to high volumes of random input data
-	● Exploits the unexpected software and math bugs
-	● Great way to start debugging
+- Random Attacks: expose models to high volumes of random input data
+- Partial dependence plots
 	
+	-- [Python Partial Dependence Plot toolbox](https://github.com/SauceCat/PDPbox)
 	
-  Partial dependence plots
-  
-  
-   Cleverhans:
-  an open-source Python library to benchmark machine learning systems' vulnerability to adversarial examples
-  Foolbox:
-  an open-source Python library that lets you easily run adversarial attacks against machine learning models
-  
-  
-   Residual analysis
-   ● Measures the difference between model’s predictions and ground truth
-  ● Randomly distributed errors are good
-  ● Correlated or systematic errors show that a model can be improved	 
+	-- [PyCEBbox](https://github.com/AustinRochford/PyCEbox)
 
+- Measuring your vulnerability to attack
 
-Model Remediation techniques
+	-- [Cleverhans](https://github.com/cleverhans-lab/cleverhans): benchmark machine learning systems' vulnerability to adversarial examples
 
-Model editing:
-○ Applies to decision trees
-○ Manual tweaks to adapt your use case
+	-- [Foolbox](https://github.com/bethgelab/foolbox): lets you easily run adversarial attacks against machine-learning models
 
+#### __Residual Analysis__
+- Measures the difference between the model’s predictions and ground truth
+- Randomly distributed errors are good
+- Correlated or systematic errors show that a model can be improved	 
 
-Model assertions:
-○ Implement business rules that override model predictions
+#### __Model Remediation Techniques__
+- Model editing: manual tweaks to adapt your use case
+- Model assertions: implement business rules that override model predictions
  
+#### __Fairness__
+- Compute performance metrics at all slices of data
+- Evaluate your metrics across multiple thresholds
+- If the decision margin is small, report in more detail
 
+#### __Continuous Evaluation and Monitoring__
+- Training data is a snapshot of the world at a point in time and many types of data change over time, some quickly.
+- Concept drift: loss of prediction quality
+	- Concept Emergence: a new type of data distribution
+	- Types of dataset shift: covariate shift and prior probability shift
+- Statistical process control 
+- Sequential analysis
+- Error distribution monitoring
+- Feature distribution monitoring
 
-Fairness
-Compute performance metrics at all slices of data
-● Evaluate your metrics across multiple thresholds
-● If decision margin is small, report in more detail
-
-
- Continuous evaluation and monitoring
- 
- Training data is a snapshot of the world at a point in time
- ● Many types of data change over time, some quickly
- ● ML Models do not get better with age
-
-
-Concept drift: loss of prediction quality
-● Concept Emergence: new type of data distribution
-● Types of dataset shift:
-○ covariate shift
-○ prior probability shift
-
-
- Statistical process control
- 
-  Sequential analysis
-  
-   Error distribution monitoring
-   
-    Clustering/novelty detection
-	
-	 Feature distribution monitoring
-	 
-	  Model-dependent monitoring
-
-
-
-
-#### __Model Interpretability__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W5.pdf))
+### __Model Interpretability__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W5.pdf))
 
 It introduces the concept and the importance of __explainability in AI__ and also touches on other related subjects such as fairness, privacy and security. But ultimately this chapter presents several methods to understand model predictions.
 
 - Partial Dependence Plots
 - Shapley Value
 - LIME
+
+#### __Software__
+
+- [Tensorflow Model Analysis](https://www.tensorflow.org/tfx/guide/tfma)
+- [Python Partial Dependence Plot toolbox](PDPbox)	
+- [PyCEBbox](https://github.com/AustinRochford/PyCEbox)
+- [Cleverhans](https://github.com/cleverhans-lab/cleverhans)
+- [Foolbox](https://github.com/bethgelab/foolbox)
 
 
 <br>
@@ -349,7 +282,7 @@ It introduces the concept and the importance of __explainability in AI__ and als
 
 
 
-### __4 - Deploying Machine Learning Models in Production__
+## __4 - Deploying Machine Learning Models in Production__
 
 #### __Week 1__
 
