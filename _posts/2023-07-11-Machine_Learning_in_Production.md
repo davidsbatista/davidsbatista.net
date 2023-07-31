@@ -11,6 +11,8 @@ preview_pic: /assets/images/2023-07-11-Machine_Learning_in_Production.jpg
 
 I enrolled and successfully did the [Machine Learning Engineering for Production (MLOps) Specialisation from Coursera](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops). This blog post aims to give a quick review of the course and detail the topics discussed in the course. The course covers a range of topics and sometimes it can feel overwhelming, which is one more reason for writing these notes, it's a way for me to review and consolidate what I've learned.
 
+Authors tend to focus too much on TensorFlow-related solutions for the concepts and challenges presented throughout the course.
+
 The specialisation is organised into 4 courses. I will describe each one separately. I personally enjoyed a lot the 3rd and 4th courses of the specialisations, it's where they go into details and give some practical tips.
 
 - [__1 -  Introduction to Machine Learning in Production__](#2---introduction-to-machine-learning-in-production)
@@ -248,7 +250,7 @@ The chapter then covers different model debugging techniques:
 - If the decision margin is small, report in more detail
 
 #### __Continuous Evaluation and Monitoring__
-- Training data is a snapshot of the world at a point in time and many types of data change over time, some quickly.
+- Training data is a snapshot of the world at a point in time and many types of data change over time.
 - Concept drift: loss of prediction quality
 	- Concept Emergence: a new type of data distribution
 	- Types of dataset shift: covariate shift and prior probability shift
@@ -259,11 +261,16 @@ The chapter then covers different model debugging techniques:
 
 ### __Model Interpretability__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W5.pdf))
 
-It introduces the concept and the importance of __explainability in AI__ and also touches on other related subjects such as fairness, privacy and security. But ultimately this chapter presents several methods to understand model predictions.
+This chapter introduces the concept and the importance of __explainability in AI__ mentioning other related subjects such as fairness, privacy and security. But ultimately this chapter presents several methods to understand how and why ML models make certain predictions. 
 
-- Partial Dependence Plots
-- Shapley Value
-- LIME
+It introduces different categories and properties for model interpretation methods, such as post-hoc: models as black boxes, extract relationships between features and model predictions; or model-specific methods (e.g.: interpretation of regression weights in linear models; it finishes with a detailed description of many agnostic models:
+
+- Partial Dependence Plots 
+- Permutation Feature Importance 
+- Shapley Values
+- SHAP
+- Testing Concept Activation Vectors
+- Local Interpretable Model-agnostic Explanations (LIME)
 
 #### __Software__
 
@@ -281,16 +288,17 @@ It introduces the concept and the importance of __explainability in AI__ and als
 <br>
 
 
-
 ## __4 - Deploying Machine Learning Models in Production__
 
-#### __Week 1__
+This chapter deals with deploying a trained model, exposing your model to the world outside, and dealing with incoming data requests. It focuses on metrics to optimize such as Latency, Cost, Throughput
 
-- Introduction to Model Serving
-- Resources and Requirements for Serving Models
-- Tensorflow serving
+### __Resources and Requirements for Serving Models__
 
-#### __Week 2__
+
+
+
+
+### __Model Serving Architecture__
 
 - Model Serving: Patterns and Infrastructure
 
@@ -302,7 +310,7 @@ It introduces the concept and the importance of __explainability in AI__ and als
 - Containers and Orchestration Tools
 - Batch Inference
 
-#### __Week 3__
+### __Model Management and Deployment Infrastructure__
 
 - Model Management and Delivery
 - ML Experiments Management and Workflow Automation
@@ -314,7 +322,7 @@ It introduces the concept and the importance of __explainability in AI__ and als
 - Continuous Delivery
 - Progressive Delivery
 
-#### __Week 4__
+### __Model Monitoring__
 
 - Model Monitoring
 - Logging for ML Monitoring
@@ -328,10 +336,6 @@ It introduces the concept and the importance of __explainability in AI__ and als
 -  Anonymisation & Pseudonymisation
 
 
-<!--
-- feature engineering, data transformation, data lineage and provenance, and how to rely on schemas to follow data evolution.
-- Authors tend to oversell TensorFlow Extended, anyway, the main thing is to learn the concepts.
--->
 
 
 ---
@@ -347,7 +351,7 @@ It introduces the concept and the importance of __explainability in AI__ and als
 
 - __[4 - Machine Learning Data Lifecycle in Production](https://www.coursera.org/learn/machine-learning-data-lifecycle-in-production) - [Lesson Slides](/assets/documents/Coursera-MLOps_Specialization/C4_-_Deploying_Machine_Learning_Models_in_Production/)__
 
-- Figures 1, 2, 3 , and 4 taken from
+- Figures 1, 2, 3 and 4 taken from
 
 
 
