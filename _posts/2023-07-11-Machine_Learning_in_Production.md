@@ -163,8 +163,6 @@ Shows how the hyperparameters can be tuned with Keras Tuner, and it finishes by 
 
 ### __Model Resource Management Techniques__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W2.pdf))
 
-<h3 style="text-align: center;font-weight:bold"></h3>
-
 This one was of particular interest to me, mainly because all of the subjects covered deal with how to make a model more efficient in terms of CPU/GPU needs. Essentially through methods of dimensionality reduction, quantisation and pruning.
 
 
