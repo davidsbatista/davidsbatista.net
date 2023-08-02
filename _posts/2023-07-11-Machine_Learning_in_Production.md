@@ -296,6 +296,7 @@ This chapter deals with deploying a trained model, exposing your model to the wo
 
 ### __Resources and Requirements for Serving Models__
 
+- ### __TODO__
 
 ### __Model Serving Architecture__
 
@@ -312,11 +313,10 @@ It then describes the paradigm of online inference, i.e.: generating machine lea
 The chapter ends with the batch inference paradigm within the context of ETLs and distributed processing.
 
 
-### __Model Management and Deployment Infrastructure__
+### __Model Management and Delivery__
 
-- Model Management and Delivery
-- ML Experiments Management and Workflow Automation
-- Experiment Tracking
+This chapter deals with all the model management activities such as tracking experiments, model versioning and after this slowly transition into MLops.
+
 - MLOps
 - ML Solution Lifecycle
 - Tensorflow Extended
