@@ -11,6 +11,8 @@ preview_pic: /assets/images/2023-07-11-Machine_Learning_in_Production.jpg
 
 I enrolled and successfully did the [Machine Learning Engineering for Production (MLOps) Specialisation from Coursera](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops). This blog post aims to give a quick review of the course and detail the topics discussed in the course. The course covers a range of topics and sometimes it can feel overwhelming, which is one more reason for writing these notes, it's a way for me to review and consolidate what I've learned.
 
+Concepts are brought up again with more context agian, and make sense to the student to seem there, and that they are not now, since they were already briefly explaind in the introduction, but seeing them in practice, consolideates the learning, in my opinion.
+
 Authors tend to focus too much on TensorFlow-related solutions for the concepts and challenges presented throughout the course.
 
 The specialisation is organised into 4 courses. I will describe each one separately. I personally enjoyed a lot the 3rd and 4th courses of the specialisations, it's where they go into details and give some practical tips.
@@ -295,20 +297,20 @@ This chapter deals with deploying a trained model, exposing your model to the wo
 ### __Resources and Requirements for Serving Models__
 
 
-
-
-
 ### __Model Serving Architecture__
 
-- Model Serving: Patterns and Infrastructure
-
+Compares different patterns and infrastructure choices to deploy a model. It starts with the different aspects of deploying a model on-premises or on the cloud and describes different pre-built servers
+- TensorFlow Serving
 - NVIDIA Triton Inference Server
-- TensorFlow Serving Architecture
 - Torch Serve
-- KFServing
-- Scaling
-- Containers and Orchestration Tools
-- Batch Inference
+- Kubeflow KFServing
+
+The topic then describes how horizontal scaling can be achieved with containers and orchestration tools, and helps scale the process of serving a model, they give examples with Kubernetes.
+
+It then describes the paradigm of online inference, i.e.: generating machine learning predictions in real-time upon request and which optimisations can be done to decrease latency and increase throughput, giving special focus to data preprocessing.
+
+The chapter ends with the batch inference paradigm within the context of ETLs and distributed processing.
+
 
 ### __Model Management and Deployment Infrastructure__
 
@@ -334,9 +336,6 @@ This chapter deals with deploying a trained model, exposing your model to the wo
 - Responsible AI
 -  Legal Requirements for Secure & Private AI
 -  Anonymisation & Pseudonymisation
-
-
-
 
 ---
 
