@@ -313,14 +313,21 @@ The chapter ends with the batch inference paradigm within the context of ETLs an
 
 ### __Model Management and Delivery__
 
-This chapter deals with all the model management activities such as tracking experiments, model versioning and after this slowly transition into MLops.
+This chapter deals with all the model management activities such as tracking experiments and model versioning, after this, the chapter transitions into the MLops topic. Starts by giving an ML Solution Lifecycle, bridging ML and IT with MLops:
 
-- MLOps
-- ML Solution Lifecycle
-- Tensorflow Extended
-- Managing Model Versions
-- Continuous Delivery
-- Progressive Delivery
+- Continuous Integration (CI): Testing and validating code, components, data, data schemas, and models
+- Continuous Delivery (CD): Deploying model prediction service
+- Continuous Training (CT): A process that automatically retrains candidate models for testing and serving
+- Continuous Monitoring (CM): Catching errors in production systems, and monitoring production inference data and model performance metrics
+
+A proposal on how to manage model versions, __MAJOR.MINOR.PIPELINE__
+- MAJOR: Incompatibility in data or target variable
+- MINOR: Model performance is improved
+- PIPELINE: Pipeline of model training is changed
+
+and it describes what a model registry can do.
+
+The chapter ends by going into a very detailed and practical description of __Continuous Delivery__ and __Progressive Delivery__, an improvement over the former, __CD__.
 
 ### __Model Monitoring__
 
