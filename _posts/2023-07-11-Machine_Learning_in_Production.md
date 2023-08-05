@@ -292,11 +292,11 @@ It introduces different categories and properties for model interpretation metho
 
 This chapter deals with deploying a trained model, exposing your model to the world outside, and dealing with incoming data requests. It focuses on metrics to optimize such as Latency, Cost, Throughput
 
-### __Resources and Requirements for Serving Models__
+### __Resources and Requirements for Serving Models__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C4_-_Deploying_Machine_Learning_Models_in_Production/C4_W1.pdf))
 
 - ### __TODO__
 
-### __Model Serving Architecture__
+### __Model Serving Architecture__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C4_-_Deploying_Machine_Learning_Models_in_Production/C4_W2.pdf))
 
 Compares different patterns and infrastructure choices to deploy a model. It starts with the different aspects of deploying a model on-premises or on the cloud and describes different pre-built servers
 - TensorFlow Serving
@@ -311,9 +311,9 @@ It then describes the paradigm of online inference, i.e.: generating machine lea
 The chapter ends with the batch inference paradigm within the context of ETLs and distributed processing.
 
 
-### __Model Management and Delivery__
+### __Model Management and Delivery__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C4_-_Deploying_Machine_Learning_Models_in_Production/C4_W3.pdf))
 
-This chapter deals with all the model management activities such as tracking experiments and model versioning, after this, the chapter transitions into the MLops topic. Starts by giving an ML Solution Lifecycle, bridging ML and IT with MLops:
+This chapter deals with all the model management activities such as tracking model experiments and model versioning, after this, the chapter transitions into the MLops topic. It starts by giving an ML Solution Lifecycle, bridging ML and IT with MLops:
 
 - Continuous Integration (CI): Testing and validating code, components, data, data schemas, and models
 - Continuous Delivery (CD): Deploying model prediction service
@@ -327,9 +327,9 @@ A proposal on how to manage model versions, __MAJOR.MINOR.PIPELINE__
 
 and it describes what a model registry can do.
 
-The chapter ends by going into a very detailed and practical description of __Continuous Delivery__ and __Progressive Delivery__, an improvement over the former, __CD__.
+The chapter ends by going into a very detailed and practical description of __Continuous Delivery__ and __Progressive Delivery__, an improvement over the former.
 
-### __Model Monitoring__
+### __Model Monitoring__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C4_-_Deploying_Machine_Learning_Models_in_Production/C4_W4.pdf))
 
 - Model Monitoring
 - Logging for ML Monitoring
