@@ -11,7 +11,7 @@ preview_pic: /assets/images/2023-07-11-Machine_Learning_in_Production.jpg
 
 I enrolled and successfully did the [Machine Learning Engineering for Production (MLOps) Specialisation from Coursera](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops). This blog post aims to give a quick review of the course and detail the topics discussed in the course. The course covers a range of topics and sometimes it can feel overwhelming, which is one more reason for writing these notes, it's a way for me to review and consolidate what I've learned.
 
-Concepts are brought up again with more context agian, and make sense to the student to seem there, and that they are not now, since they were already briefly explaind in the introduction, but seeing them in practice, consolideates the learning, in my opinion.
+Concepts are brought up again with more context again, and make sense to the student to seem there, and that they are not now, since they were already briefly explained in the introduction, but seeing them in practice, consolidates the learning, in my opinion.
 
 Authors tend to focus too much on TensorFlow-related solutions for the concepts and challenges presented throughout the course.
 
