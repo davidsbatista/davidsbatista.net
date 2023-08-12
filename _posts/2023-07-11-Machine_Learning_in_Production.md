@@ -331,13 +331,26 @@ The chapter ends by going into a very detailed and practical description of __Co
 
 ### __Model Monitoring__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C4_-_Deploying_Machine_Learning_Models_in_Production/C4_W4.pdf))
 
-- Model Monitoring
-- Logging for ML Monitoring
-- Tracing for ML Systems
--  What is Model Decay?
-	- Data Drift
-	- Concept Drift
+The last chapter focuses on the last step of a Machine Learning project. It essentially reviews and consolidates concepts already mentioned in the course, but goes into a bit more detail. 
+
+The chapter introduces the concept of logging as a way of providing observability of the model. Logs should be used to keep track of the model inputs and predictions and detect potential red flags, e.g.: a feature becoming unavailable, notable shifts in the distributions.
+
+Next, introduces the concept of tracing for ML Systems, mentioning some tools:
+
+- Dapper
+- Zipkin
+- Jaeger
+
+It follows with a review of the causes for model decay
+
+- Data Drift:
+- Concept Drift:
+
+and also mentions how those can be mitigated or earlier detected.
+
+
 - Ways to Mitigate Model Decay
+
 - Responsible AI
 -  Legal Requirements for Secure & Private AI
 -  Anonymisation & Pseudonymisation
