@@ -292,7 +292,11 @@ This chapter deals with deploying a trained model, exposing your model to the wo
 
 ### __Resources and Requirements for Serving Models__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C4_-_Deploying_Machine_Learning_Models_in_Production/C4_W1.pdf))
 
-- ### __TODO__
+The introduction for this main chapter, with an overview of machine learning workflows: training, predictions; serving patterns: batch inference, real-time inference; metrics: latency, throughput, cost. 
+
+How a model complexity can affect different metrics and a quick overview of serving infrastructures, i.e.: using caching and feature lookup. Model deployments in different hardware (data centers, embedded devices, mobile phones). 
+
+The chapter ends with a walkthrough demo of TensorFlow Serving.
 
 ### __Model Serving Architecture__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C4_-_Deploying_Machine_Learning_Models_in_Production/C4_W2.pdf))
 
@@ -332,13 +336,7 @@ The last chapter focuses on the last step of a Machine Learning project. It esse
 
 #### __Observability and Logging__ ####
 
-The chapter introduces the concept of logging as a way of providing __observability__ of the model. __Logging__ should be used to keep track of the model inputs and predictions and detect potential red flags, e.g.: a feature becoming unavailable, or notable shifts in the distributions. 
-
-Next, introduces the concept of __tracing for ML Systems__, mentioning some tools:
-
-- Dapper
-- Zipkin
-- Jaeger
+The chapter introduces the concept of logging as a way of providing __observability__ of the model. __Logging__ should be used to keep track of the model inputs and predictions and detect potential red flags, e.g.: a feature becoming unavailable, or notable shifts in the distributions.  Next, introduces the concept of __tracing for ML Systems__, mentioning some tools.
 
 #### __Model Decay__ ####
 
