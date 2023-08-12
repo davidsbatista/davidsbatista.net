@@ -182,14 +182,14 @@ As the instructors explain, one of the motivation reasons for reducing model siz
 
 <figure>
   <img style="width: 75%; height: 75%" src="/assets/images/2023-07-11-Machine_Learning_in_Production_quantisation.png">
-  <figcaption>ToDo</figcaption>
+  <figcaption>Figure 6: Quantising the weights from floating point numbers to integers. </figcaption>
 </figure>
 
 In a nutshell what post-training quantisation does is to efficiently convert or quantise the weights from floating point numbers to integers. This might reduce the precision representation and incur a small loss in model accuracy but significantly reduces the model size making it more feasible to run on a memory-constrained device.
 
 Pruning aims to reduce the number of parameters and operations involved in generating a prediction by removing network connections, this reduces the model capacity, but also its size and complexity. 
 
-The instructors also make a mention [The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks](https://arxiv.org/abs/1803.03635) with the hypothesis that "a randomly-initialized, dense neural network contains a subnetwork that is initialised such that — when trained in isolation — it can match the test accuracy of the original network after training for at most the same number of iterations"
+The instructors also make a mention [The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks](https://arxiv.org/abs/1803.03635) with the hypothesis that "a randomly-initialised, dense neural network contains a subnetwork that is initialised such that — when trained in isolation — it can match the test accuracy of the original network after training for at most the same number of iterations"
 
 
 Reading:
