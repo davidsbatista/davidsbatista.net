@@ -17,6 +17,12 @@ Authors tend to focus too much on TensorFlow-related solutions for the concepts 
 
 The specialisation is organised into 4 courses. I will describe each one separately. I personally enjoyed a lot the 3rd and 4th courses of the specialisations, it's where they go into details and give some practical tips.
 
+
+Some topics have more notes than others due to my interess or novelty of the topic for me on each topic.
+
+One thing I learn is that for this long coursera specializations is good to take notes to review the learning, and not just passively listen to the video
+
+
 - [__1 -  Introduction to Machine Learning in Production__](#2---introduction-to-machine-learning-in-production)
 
 - [__2 - Machine Learning Data Lifecycle in Production__](#2---machine-learning-data-lifecycle-in-production)
@@ -175,9 +181,6 @@ __Dimensionality Reduction__: there's a brief explanation about the curse of dim
 - Non-Negative Matrix Factorisation (NMF)
 - Latent Dirichlet Allocation (LDA)
 
-### __TODO: C3_W2_Lab_2_Algorithmic_Dimensionality.ipynb___
-
-
 __Quantisation and Pruning__
 
 As the instructors explain, one of the motivation reasons for reducing model sizer is the deployment of ML models in IoT and mobile devices.
@@ -333,27 +336,58 @@ The chapter ends by going into a very detailed and practical description of __Co
 
 The last chapter focuses on the last step of a Machine Learning project. It essentially reviews and consolidates concepts already mentioned in the course, but goes into a bit more detail. 
 
-The chapter introduces the concept of logging as a way of providing observability of the model. Logs should be used to keep track of the model inputs and predictions and detect potential red flags, e.g.: a feature becoming unavailable, notable shifts in the distributions.
+The chapter introduces the concept of logging as a way of providing __observability__ of the model. __Logging__ should be used to keep track of the model inputs and predictions and detect potential red flags, e.g.: a feature becoming unavailable, or notable shifts in the distributions. 
 
-Next, introduces the concept of tracing for ML Systems, mentioning some tools:
+Next, introduces the concept of __tracing for ML Systems__, mentioning some tools:
 
 - Dapper
 - Zipkin
 - Jaeger
 
-It follows with a review of the causes for model decay
+It follows with a review of the causes of model decay, __data drift__: statistical properties of input changes; and __concept drift__: the relationship between features and label changes, the very meaning of what you are trying to predict changes.
+Model Decay can be mitigated by first detecting drift through logging of request predictions and responses. By observing the statistical properties of logged data and comparing it with the training data one can detect drift.
 
-- Data Drift:
-- Concept Drift:
+Libraries for detecting drift:
+- [TensorFlow Data Validation (TFDV)](https://github.com/tensorflow/data-validation)
+- [Scikit-multiflow library](https://github.com/scikit-multiflow/scikit-multiflow)
 
-and also mentions how those can be mitigated or earlier detected.
+Lastly, to mitigate the model drift, we need to deal with data:
+
+- Determine the portion of your training set that is still correct
+- Keep the good data, discard the bad, and add new data - OR -
+- Discard data collected before a certain date and add new data - OR -
+- Create an entirely new training dataset from new data
+
+Model:
+
+- Continue training your model, fine-tuning from the last checkpoint using new data - OR -
+- Start over, reinitialise your model, and completely retrain it
 
 
-- Ways to Mitigate Model Decay
+This chapter ends talking about __Responsible AI__
 
-- Responsible AI
--  Legal Requirements for Secure & Private AI
--  Anonymisation & Pseudonymisation
+Best practices:
+
+-  Human-Centered Design: 
+	- Model potential adverse feedback early in the design process
+	- Engage with a diverse set of users and use-case scenarios
+- Identify Multiple Metrics
+- Analyse your raw data carefully: does your data reflect all your users?
+
+
+Legal Requirements for Secure & Private AI:
+
+- General Data Protection Regulation (GDPR)
+- Informational Harms: unintended or unanticipated leakage of information
+- Behavioural Harms: manipulating the behaviour of the model itself, impacting the predictions or outcomes of the model
+
+
+The chapter ends on the __Anonymisation & Pseudonymisation__ topic, showing examples of how to anonymise data under GPDR, and talking about the __Right to Be Forgotten__, __Right to Rectification__ and other __Rights of the Data Subject__, all part of the GPDR.
+
+
+
+
+
 
 ---
 
