@@ -9,18 +9,13 @@ disqus_identifier: 20230627
 preview_pic: /assets/images/2023-07-11-Machine_Learning_in_Production.jpg
 ---
 
-I enrolled and successfully did the [Machine Learning Engineering for Production (MLOps) Specialisation from Coursera](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops). This blog post aims to give a quick review of the course and detail the topics discussed in the course. The course covers a range of topics and sometimes it can feel overwhelming, which is one more reason for writing these notes, it's a way for me to review and consolidate what I've learned.
+I enrolled and successfully completed the [Machine Learning Engineering for Production (MLOps) Specialisation from Coursera](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops). This blog post aims to give a quick review of the course and detail the topics discussed, mostly based on the notes I took during the video lectures. The course covers a wide range of topics and sometimes it can feel overwhelming, which is another reason for me to write these notes
 
-Concepts are brought up again with more context again, and make sense to the student to seem there, and that they are not now, since they were already briefly explained in the introduction, but seeing them in practice, consolidates the learning, in my opinion.
+The specialisation follows the "Steps of a Machine Learning project" which is introduced in the first course and will follow throughout the 4 courses. Some of the concepts are brought up several times during the specialisation and in different courses, they are first briefly introduced and then shown in different contexts and with different levels of detail. 
 
-Authors tend to focus too much on TensorFlow-related solutions for the concepts and challenges presented throughout the course.
+One thing that stands out is that the specialisations tend to focus too much on TensorFlow-related solutions for the concepts and challenges presented throughout the course, but there are also many references to other software projects and solutions for the different challenges presented.
 
-The specialisation is organised into 4 courses. I will describe each one separately. I personally enjoyed a lot the 3rd and 4th courses of the specialisations, it's where they go into details and give some practical tips.
-
-
-Some topics have more notes than others due to my interess or novelty of the topic for me on each topic.
-
-One thing I learn is that for this long coursera specializations is good to take notes to review the learning, and not just passively listen to the video
+The specialisation is organised into 4 courses, and I will describe each one separately. I personally enjoyed most the 3rd and 4th courses, since it's where the instructors into more deep practical details. Some topics have more notes than others due to my personal interest or the novelty of the topic for me.
 
 
 - [__1 -  Introduction to Machine Learning in Production__](#2---introduction-to-machine-learning-in-production)
@@ -64,7 +59,7 @@ blue-green deployment: router sends a request to old/blue or to new/green, it en
 
 This course focuses mostly on the data aspect of a Machine Learning project, and it's organised into 4 main topics
 
-#### __Collecting, Labelling, Validating__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W1.pdf))
+### __Collecting, Labelling, Validating__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W1.pdf))
 
 The main focus of this topic is on the importance of data: the data pipeline, and data monitoring. It starts by explaining the data collection and labelling process, focusing on understanding the data source, the consistency of values, units and data types, detecting outliers, errors and inconsistent formatting. Mentions privacy and fairness aspects in the data collection, and the use of process feedback using logging tools, such as [logstash](https://github.com/elastic/logstash) and [fluentd](https://github.com/fluent/fluentd).
 
@@ -102,7 +97,7 @@ __Software Tools__
 - [Great Expectations](https://github.com/great-expectations/great_expectations)
 - [Deequ - Unit Tests for Data](https://github.com/awslabs/deequ)
 
-#### __Feature Engineering__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W2.pdf))
+### __Feature Engineering__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W2.pdf))
 
 An overview of the pre-processing operations and feature engineering techniques, e.g.: feature scaling, normalisation and standardisation, bucketing/binning. Also, a good summarisation of the techniques to reduce the dimensionality of features: PCA, t-SNE and UMAP. Lastly, how to combine multiple features into a new feature and the feature selection process.
 
@@ -111,11 +106,11 @@ An overview of the pre-processing operations and feature engineering techniques,
   <figcaption>Figure 4: Supervised Feature Selection.</figcaption>
 </figure>
 
-#### __Data Storage__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W3.pdf))
+### __Data Storage__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W3.pdf))
 
 This chapter deals with the data journey, accounting for data and model evolution and using metadata to track changes in data in the ML pipeline. How a schema to hold data can evolve and how to keep track of those changes, it also introduces the concept of feature stores, as well as Datawarehouse (OLAP) vs. Databases (OLTP) and data lakes.
 
-#### __Advanced Labelling, Augmentation and Data Preprocessing__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W4.pdf))
+### __Advanced Labelling, Augmentation and Data Preprocessing__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W4.pdf))
 
 The last topic covers data labelling and data augmentation techniques. __Semi-Supervised Labelling__, and briefly introduce graph-based label propagation, combines supervised and unsupervised data.
 
@@ -190,7 +185,7 @@ As the instructors explain, one of the motivation reasons for reducing model siz
   <figcaption>ToDo</figcaption>
 </figure>
 
-In a nutshell what post-training quantisation does is to efficiently convert or quantize the weights from floating point numbers to integers. This might reduce the precision representation and incur a small loss in model accuracy but significantly reduces the model size making it more feasible to run on a memory-constrained device.
+In a nutshell what post-training quantisation does is to efficiently convert or quantise the weights from floating point numbers to integers. This might reduce the precision representation and incur a small loss in model accuracy but significantly reduces the model size making it more feasible to run on a memory-constrained device.
 
 Pruning aims to reduce the number of parameters and operations involved in generating a prediction by removing network connections, this reduces the model capacity, but also its size and complexity. 
 
@@ -199,20 +194,20 @@ The instructors also make a mention [The Lottery Ticket Hypothesis: Finding Spar
 
 Reading:
 
-- [Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference](https://arxiv.org/abs/1712.05877)
+- [Quantisation and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference](https://arxiv.org/abs/1712.05877)
 
 - [The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks](https://arxiv.org/abs/1803.03635) 
 
 - [The Lottery Ticket Hypothesis - Patrick Liu Notes](https://patrick-llgc.github.io/Learning-Deep-Learning/paper_notes/lottery_ticket_hypothesis.html)
 
-### __High-Performance Modeling and Distillation Techniques__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W3.pdf))
+### __High-Performance Modelling and Distillation Techniques__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W3.pdf))
 
-- High-Performance Modeling: 
+- High-Performance Modelling: 
 	- distributed training, including a couple of different kinds of parallelism. 
 	- Then we'll turn to high-performance modelling, including high-performance ingestion.
 
 - Distillation Techniques
-	- #### __TODO: Knowledge Distillation:__
+	- Knowledge Distillation
 	- Teacher and student model
 
 ### __Model Analysis__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C3_-_Machine_Learning_Modeling_Pipelines_in_Production/C3_W4.pdf))
@@ -313,7 +308,6 @@ It then describes the paradigm of online inference, i.e.: generating machine lea
 
 The chapter ends with the batch inference paradigm within the context of ETLs and distributed processing.
 
-
 ### __Model Management and Delivery__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C4_-_Deploying_Machine_Learning_Models_in_Production/C4_W3.pdf))
 
 This chapter deals with all the model management activities such as tracking model experiments and model versioning, after this, the chapter transitions into the MLops topic. It starts by giving an ML Solution Lifecycle, bridging ML and IT with MLops:
@@ -326,7 +320,7 @@ This chapter deals with all the model management activities such as tracking mod
 A proposal on how to manage model versions, __MAJOR.MINOR.PIPELINE__
 - MAJOR: Incompatibility in data or target variable
 - MINOR: Model performance is improved
-- PIPELINE: Pipeline of model training is changed
+- PIPELINE: The pipeline of model training is changed
 
 and it describes what a model registry can do.
 
@@ -336,6 +330,8 @@ The chapter ends by going into a very detailed and practical description of __Co
 
 The last chapter focuses on the last step of a Machine Learning project. It essentially reviews and consolidates concepts already mentioned in the course, but goes into a bit more detail. 
 
+#### __Observability and Logging__ ####
+
 The chapter introduces the concept of logging as a way of providing __observability__ of the model. __Logging__ should be used to keep track of the model inputs and predictions and detect potential red flags, e.g.: a feature becoming unavailable, or notable shifts in the distributions. 
 
 Next, introduces the concept of __tracing for ML Systems__, mentioning some tools:
@@ -343,6 +339,8 @@ Next, introduces the concept of __tracing for ML Systems__, mentioning some tool
 - Dapper
 - Zipkin
 - Jaeger
+
+#### __Model Decay__ ####
 
 It follows with a review of the causes of model decay, __data drift__: statistical properties of input changes; and __concept drift__: the relationship between features and label changes, the very meaning of what you are trying to predict changes.
 Model Decay can be mitigated by first detecting drift through logging of request predictions and responses. By observing the statistical properties of logged data and comparing it with the training data one can detect drift.
@@ -363,8 +361,9 @@ Model:
 - Continue training your model, fine-tuning from the last checkpoint using new data - OR -
 - Start over, reinitialise your model, and completely retrain it
 
+#### __Responsible AI__ ####
 
-This chapter ends talking about __Responsible AI__
+This chapter ends by talking about Responsible AI, mainly:
 
 Best practices:
 
@@ -382,17 +381,12 @@ Legal Requirements for Secure & Private AI:
 - Behavioural Harms: manipulating the behaviour of the model itself, impacting the predictions or outcomes of the model
 
 
-The chapter ends on the __Anonymisation & Pseudonymisation__ topic, showing examples of how to anonymise data under GPDR, and talking about the __Right to Be Forgotten__, __Right to Rectification__ and other __Rights of the Data Subject__, all part of the GPDR.
-
-
-
-
-
+The chapter ends on the __Anonymisation & Pseudonymisation__ topic, showing examples of how to anonymise data under GPDR, and 
+talking about the __Right to Be Forgotten__, __Right to Rectification__ and other __Rights of the Data Subject__, all part of the GPDR.
 
 ---
 
 ### __References__
-
 
 - __[1 - Introduction to Machine Learning in Production](https://www.coursera.org/learn/introduction-to-machine-learning-in-production) - [Lesson Slides](/assets/documents/Coursera-MLOps_Specialization/C1_-_Introduction_to_Machine_Learning_in_Production/)__
 
