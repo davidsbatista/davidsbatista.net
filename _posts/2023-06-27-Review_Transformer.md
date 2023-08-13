@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Reviewing the Transformer Architecture
-date: 2023-06-27 00:00:00
+date: 2023-08-13 00:00:00
 tags: Transformers NLP
 categories: [blog]
 comments: true
-disqus_identifier: 20230627
-preview_pic: /assets/images/2023-06-27-transformer_arch.png
+disqus_identifier: 20230813
+preview_pic: /assets/images/2023-08-13-transformer_arch.png
 ---
 
 The Transformer architecture was a game-changer in NLP and other domains. I wanted to review and understand in detail the Transformer which became the base framework for many other pre-trained models available today, and which are used to solve a vast number of NLP tasks. This post tends to be a review of the mechanisms inside the Transformer: self-attention, multi-head attention, cross attention and how these are connected with encoder-decoder architecture.
