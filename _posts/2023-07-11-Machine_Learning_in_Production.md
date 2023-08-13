@@ -9,13 +9,13 @@ disqus_identifier: 20230627
 preview_pic: /assets/images/2023-07-11-Machine_Learning_in_Production.jpg
 ---
 
-I enrolled and successfully completed the [Machine Learning Engineering for Production (MLOps) Specialisation from Coursera](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops). This blog post aims to give a quick review of the course and detail the topics discussed, mostly based on the notes I took during the video lectures. The course covers a wide range of topics and sometimes it can feel overwhelming, which is another reason for me to write these notes
+I enrolled and successfully completed the [Machine Learning Engineering for Production - Specialisation](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops) from Coursera. This blog post aims to give a review of the course and the topics discussed, it's mostly based on the notes I took during the video lectures. The course covers a wide range of topics and it can feel overwhelming, which is another reason for me to write these review notes.
 
-The specialisation follows the "Steps of a Machine Learning project" which is introduced in the first course and will follow throughout the 4 courses. Some of the concepts are brought up several times during the specialisation and in different courses, they are first briefly introduced and then shown in different contexts and with different levels of detail. 
+The specialisation follows the "Steps of a Machine Learning project" which is introduced in the first course and is followed throughout the 4 courses. Some of the concepts are brought up several times during the specialisation and in different courses, they are first briefly introduced and then shown in different contexts and with different levels of detail.
 
-One thing that stands out is that the specialisations tend to focus too much on TensorFlow-related solutions for the concepts and challenges presented throughout the course, but there are also many references to other software projects and solutions for the different challenges presented.
+The specialisations tends to focus too much on TensorFlow-related practical demonstrations for the concepts and challenges presented throughout the course, but there are also many references to other software projects for the different challenges presented not relying on Tensorflow.
 
-The specialisation is organised into 4 courses, and I will describe each one separately. I personally enjoyed most the 3rd and 4th courses, since it's where the instructors into more deep practical details. Some topics have more notes than others due to my personal interest or the novelty of the topic for me.
+The specialisation is organised into 4 courses, and I will describe each one separately. I personally enjoyed most the 3rd and 4th courses, it's where the instructors go into more deep practical details. Some topics are more detailed in my notes than others due to my personal interest or the novelty of the topic for me.
 
 
 - [__1 -  Introduction to Machine Learning in Production__](#2---introduction-to-machine-learning-in-production)
