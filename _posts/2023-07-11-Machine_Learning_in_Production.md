@@ -46,8 +46,10 @@ __Data__: introduction to the definition of the data used in the project and an 
 
 __Modelling__: how to approach the modelling of the data to solve the problem assuring the algorithm does well on the training data and test data but also positively impacts any business metrics. Auditing the framework by brainstorming ways the system might go wrong, e.g.: performance on subsets of data (e.g., ethnicity, gender), the prevalence of specific errors/outputs, and performance on rare classes.
 	
-__Deployment__: deployment vs. maintenance and deployment patterns. Shadow mode; Canary deployment: roll out to a small fraction (say 5%) of traffic initially monitor the system and ramp up traffic gradually;
-blue-green deployment: router sends a request to old/blue or to new/green, it enables easy rollback. Monitoring: software/hardware metrics, input metrics, output metrics, thresholds for alarms, adapt metrics and thresholds over time
+__Deployment__: deployment vs. maintenance and deployment patterns: 
+- Shadow mode: model is deployed and make predictions in the background, and those are only used to evaluate the quality.
+- Canary deployment: roll out to a small fraction (say 5%) of traffic initially monitor the system and ramp up traffic gradually.
+- Blue-Green deployment: router sends a request to old/blue or to new/green, it enables easy rollback. Monitoring: software/hardware metrics, input metrics, output metrics, thresholds for alarms, adapt metrics and thresholds over time.
 
 <br>
 
@@ -61,7 +63,7 @@ This course focuses mostly on the data aspect of a Machine Learning project, and
 
 ### __Collecting, Labelling, Validating__ ([slides](/assets/documents/Coursera-MLOps_Specialization/C2_-_Machine_Learning_Data_Lifecycle_in_Production/C2_W1.pdf))
 
-The main focus of this topic is on the importance of data: the data pipeline, and data monitoring. It starts by explaining the data collection and labelling process, focusing on understanding the data source, the consistency of values, units and data types, detecting outliers, errors and inconsistent formatting. Mentions privacy and fairness aspects in the data collection, and the use of process feedback using logging tools, such as [logstash](https://github.com/elastic/logstash) and [fluentd](https://github.com/fluent/fluentd).
+The main focus of this topic is on the importance of data: the data pipeline, and data monitoring. It starts by explaining the data collection and labelling process, focusing on understanding the data source, the consistency of values, units and data types, and detecting outliers, errors and inconsistent formatting. Mentions privacy and fairness aspects in the data collection, and the use of process feedback using logging tools, such as [logstash](https://github.com/elastic/logstash) and [fluentd](https://github.com/fluent/fluentd).
 
 Mentions the problems with data, particularly the drift in data, which can be a consequence of trends and seasonality. The impact on the distribution of features and the relative importance of features. Here the instructors explain in great detail the concepts:
 
@@ -394,7 +396,7 @@ talking about the __Right to Be Forgotten__, __Right to Rectification__ and othe
 
 - __[4 - Machine Learning Data Lifecycle in Production](https://www.coursera.org/learn/machine-learning-data-lifecycle-in-production) - [Lesson Slides](/assets/documents/Coursera-MLOps_Specialization/C4_-_Deploying_Machine_Learning_Models_in_Production/)__
 
-- Figures 1, 2, 3 and 4 taken from
+- Figures 1, 2, 3, 4 and 5 are taken from the slides of the course.
 
 
 
