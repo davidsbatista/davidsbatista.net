@@ -15,41 +15,48 @@ by generating a textual summary of the main content in the original text (abstra
 
 
 ### __Extractive summarisation__
-
 * Select representative words or phrases from the original text and combine them to make a summary
 * Scores sentences by their relevance to the whole text's meaning
-* 2004 - [TextRank: Bringing Order into Text](https://aclanthology.org/W04-3252)
-    * inspired by PageRank was part of gensim package - removed on 4.0.0
-* 2011 - LexRank - based on eigenvector centrality
-	 * LexRank: Graph-based Lexical Centrality as Salience in Text Summarization (2011)
-* 2019 - HIBERT Document Level Pre-training of Hierarchical Bidirectional Transformers for Document Summarization
-* 2019 - BertSumExt Text Summarization with Pretrained Encoders 
-* 2020 - MatchSum Extractive Summarization as Text Matching 
 
 
-#### HIBERT
-− Relies on two encoders to obtain the representation of a document
-− A sentence encoder to transform each sentence to a vector
-− A document encoder learns sentence representations based on their surrounding context sentences
+#### __2004 - TextRank__
+* [TextRank: Bringing Order into Text](https://aclanthology.org/W04-3252)
+* inspired by PageRank was part of gensim package - removed on 4.0.0
 
 
-#### MatchSum
-− Extractive summarisation as a semantic text-matching problem
-− The source document and candidate summaries will be extracted from the original text and matched in a semantic space
-− Siamese-BERT architecture to compute the similarity between the source document and the candidate summary
-− Leverages the pre-trained BERT in a Siamese network structure to derive semantically meaningful text embeddings that can be compared using cosine-similarity
-
-#### BERTSumExt
-− An encoder creates sentence representations and a classifier predicts which sentences should be selected as summaries
-− Has a document-level encoder based on BERT to obtain sentence representations
-− The modification mainly consists of surrounding each sentence of the text with a [CLS] (which represents the entire sentence) and [SEP] (which represents the boundary between two sentences) and assigning different segment embeddings for every pair of sentences
-− Sentence-level contextual representations fed to a classifier for binary classification
+#### __2011 - LexRank__
+* [LexRank: Graph-based Lexical Centrality as Salience in Text Summarization](https://arxiv.org/abs/1109.2128)
 
 
+#### __2019 - HIBERT__
+* [Document Level Pre-training of Hierarchical Bidirectional Transformers for Document Summarization](https://aclanthology.org/P19-1499/)
+* Relies on two encoders to obtain the representation of a document
+* A sentence encoder to transform each sentence to a vector
+* A document encoder learns sentence representations based on their surrounding context sentences
 
 
+#### __2019 - BERTSumExt__
+* [Text Summarization with Pretrained Encoders](https://aclanthology.org/D19-1387.pdf)
+* An encoder creates sentence representations and a classifier predicts which sentences should be selected as summaries
+* Has a document-level encoder based on BERT to obtain sentence representations
+* The modification mainly consists of surrounding each sentence of the text with a [CLS] (which represents the entire sentence) and [SEP] (which represents the boundary between two sentences) and assigning different segment embeddings for every pair of sentences
+* Sentence-level contextual representations fed to a classifier for binary classification
 
-#### __Abstractive summarisation__
+
+#### __2020 - MatchSum__
+* [Extractive Summarization as Text Matching](https://aclanthology.org/2020.acl-main.552/)
+* The source document and candidate summaries will be extracted from the original text and matched in a semantic space
+* Siamese-BERT architecture to compute the similarity between the source document and the candidate summary
+* Leverages the pre-trained BERT in a Siamese network structure to derive semantically meaningful text embeddings that can be compared using cosine-similarity
+
+
+<br>
+
+---
+
+<br>
+
+### __Abstractive summarisation__
 * Generate a textual summary of the main content in the original text
 * Writes a summary as a human would do
 * “old school”
@@ -66,14 +73,10 @@ by generating a textual summary of the main content in the original text (abstra
 
 
 #### BERTSumAbs
-− Adopts an encoder-decoder architecture, combining the same pre-trained BERT encoder and a
-randomly-initialised Transformer decoder
-− Training separates the optimisers of the encoder and the decoder in order to accommodate the fact
-that the encoder is pre-trained while the decoder must be trained from scratch
-− Propose a two-stage fine-tuning approach, where we first fine-tune the encoder on the extractive
-summarisation task and then fine-tune it on the abstractive summarisation task
-− Combine extractive and abstractive objectives, a two-stage approach: the encoder is fine-tuned
-twice, first with an extractive objective and subsequently on the abstractive summarisation task.
+− Adopts an encoder-decoder architecture, combining the same pre-trained BERT encoder and a randomly-initialised Transformer decoder
+− Training separates the optimisers of the encoder and the decoder in order to accommodate the fact that the encoder is pre-trained while the decoder must be trained from scratch
+− Propose a two-stage fine-tuning approach, where we first fine-tune the encoder on the extractive summarisation task and then fine-tune it on the abstractive summarisation task
+− Combine extractive and abstractive objectives, a two-stage approach: the encoder is fine-tuned twice, first with an extractive objective and subsequently on the abstractive summarisation task.
 
 
 
@@ -84,7 +87,6 @@ twice, first with an extractive objective and subsequently on the abstractive su
 
 
 #### BART
-
 - Trained on reconstructing documents to which noise has been introduced
 − The noise may take multiple forms, ranging from removing tokens to permuting sentences
 
@@ -152,8 +154,6 @@ __Abstractive summarisation__
   * always need a reference summary
   * just measuring string overlaps
   * alternative is to have a human evaluation
-
-
 
 
 ---
