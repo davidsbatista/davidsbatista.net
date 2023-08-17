@@ -36,7 +36,7 @@ pagination:
   enabled: true
   debug: true
   collection: 'posts'
-  per_page: 15
+  per_page: 100
   offset: 0
   # permalink: '/blog/:num/'
   title: ':title - page :num of :max'
