@@ -22,11 +22,14 @@ However, the generated summary may not cover all important content or be longer 
 
 __2004 - TextRank__
 * [TextRank: Bringing Order into Text](https://aclanthology.org/W04-3252)
-* inspired by PageRank was part of gensim package - removed on 4.0.0
-
+* Inspired by PageRank
+* This page contains a very good resume of the algorithm: [Textrank for Summarizing Text](https://cran.r-project.org/web/packages/textrank/vignettes/textrank.html)
+* It was part of gensim package - removed on 4.0.0 - still present in older releases
 
 __2011 - LexRank__
 * [LexRank: Graph-based Lexical Centrality as Salience in Text Summarization](https://arxiv.org/abs/1109.2128)
+* A connectivity matrix based on intra-sentence cosine similarity is used as the adjacency matrix of the graph representation of sentences.
+* Uses eigenvector centrality to select sentences.
 
 
 __2019 - HIBERT__
@@ -133,27 +136,17 @@ __2020 PEGASUS__
 
 <br>
 
-|   Name          | Method          | Max. Input     | Code                                                     | Pre-Trained models                      | Languages         |
-| <img width=150/>| <img width=115/>|<img width=150/>|<img width=125/>                                          | <img width=150/>                        |<img width=125/>   |
-|:----------------|:---------------:|:--------------:|:--------------------------------------------------------:|:---------------------------------------:|:-----------------:|
-| TextRank (2004) | Extractive      | \-             | [gensim](https://pypi.org/project/gensim/)               | \-                                      | \-                |
-| LexRank (2011)  | Extractive      | \-             | [lexrank](https://github.com/crabcamp/lexrank)           | \-                                      | \-                |
-| BertSum (2019)  | Both            | ?              | [PreSumm](https://github.com/nlpyang/PreSumm)            | see code                                | English           |
-| HIBERT (2019)   | Extractive      | ?              | [HIBERT](https://xingxingzhang.github.io/hibert.html)    | see code                                | English           |
-| T5 (2019)       | Abstractive     | 1024 - 16384   | [T5x](https://github.com/google-research/t5x)            | [huggingface.co](http://huggingface.co) | several           |
-| MatchSum (2020) | Extractive      | ?              | [MatchSum](https://github.com/maszhongming/MatchSum)     | see code                                | English           |
-| BART (2020)     | Abstractive     | 1024           | [fairseq](https://github.com/facebookresearch/fairseq)   | [huggingface.co](http://huggingface.co) | several           |
-| PEGASUS (2020)  | Abstractive     | ?              | [pegasus](https://github.com/google-research/pegasus)    | [huggingface.co](http://huggingface.co) | several           |
-
-
-<!--
-
-
-
-
-
--->
-
+|   Name                                                                      | Method          | Max. Input     | Code                                                     | Pre-Trained models                      | Languages         |
+| <img width=150/>                                                            | <img width=115/>|<img width=150/>|<img width=125/>                                          | <img width=150/>                        |<img width=125/>   |
+|:----------------------------------------------------------------------------|:---------------:|:--------------:|:--------------------------------------------------------:|:---------------------------------------:|:-----------------:|
+| [TextRank (2004)](https://aclanthology.org/W04-3252)                        | Extractive      | \-             | [gensim](https://pypi.org/project/gensim/)               | \-                                      | \-                |
+| [LexRank (2011](https://arxiv.org/abs/1109.2128)                            | Extractive      | \-             | [lexrank](https://github.com/crabcamp/lexrank)           | \-                                      | \-                |
+| [BertSum (2019)](https://aclanthology.org/D19-1387.pdf)                     | Both            | ?              | [PreSumm](https://github.com/nlpyang/PreSumm)            | see code                                | English           |
+| [HIBERT (2019)](https://aclanthology.org/P19-1499/)                         | Extractive      | ?              | [HIBERT](https://xingxingzhang.github.io/hibert.html)    | see code                                | English           |
+| [T5 (2019)](https://arxiv.org/abs/1910.10683)                               | Abstractive     | 1024 - 16384   | [T5x](https://github.com/google-research/t5x)            | [huggingface.co](http://huggingface.co) | several           |
+| [MatchSum (2020)](https://aclanthology.org/2020.acl-main.552/)              | Extractive      | ?              | [MatchSum](https://github.com/maszhongming/MatchSum)     | see code                                | English           |
+| [BART (2020)](https://aclanthology.org/2020.acl-main.703/)                  | Abstractive     | 1024           | [fairseq](https://github.com/facebookresearch/fairseq)   | [huggingface.co](http://huggingface.co) | several           |
+| [PEGASUS (2020](http://proceedings.mlr.press/v119/zhang20ae/zhang20ae.pdf)  | Abstractive     | ?              | [pegasus](https://github.com/google-research/pegasus)    | [huggingface.co](http://huggingface.co) | several           |
 
 <br>
 
