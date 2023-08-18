@@ -18,6 +18,6 @@ jobs:
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
     - name: connect and pull
-      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && python3 tag_generator.py && /home/dsbatista/gems/bin/jekyll build -d /var/www/davidsbatista.net && exit"
+      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && python3 tag_generator.py && GEM_HOME=/home/dsbatista/gems /home/dsbatista/gems/bin/jekyll build -d /var/www/davidsbatista.net && exit"
     - name: cleanup
       run: rm -rf ~/.ssh
