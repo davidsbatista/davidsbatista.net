@@ -21,5 +21,5 @@ jobs:
       run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
     - name: cleanup
       run: rm -rf ~/.ssh
-	- name: deploy
-	  run: cd ${{ secrets.WORK_DIR }} && python3 tag_generator.py && jekyll build -d jekyll build -d /var/www/davidsbatista.net	  
+    - name: deploy
+      run: cd ${{ secrets.WORK_DIR }} && python3 tag_generator.py && jekyll build -d jekyll build -d /var/www/davidsbatista.net	  
