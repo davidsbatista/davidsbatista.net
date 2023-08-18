@@ -98,10 +98,21 @@ __2019 T5 - Text-to-Text Transfer Transformer__
 * T5 is trained to generate some target text conditional on input text to perform as text-to-text
 
 
+<figure>
+  <img style="width: 65%; height: 65%" src="/assets/images/2023-08-13-T5.png">
+  <figcaption></figcaption>
+</figure>
+
 __2020 BART__
 * [BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension](https://aclanthology.org/2020.acl-main.703/)
 * Trained on reconstructing documents to which noise has been introduced
 * The noise may take multiple forms, ranging from removing tokens to permuting sentences
+
+
+<figure>
+  <img style="width: 65%; height: 65%" src="/assets/images/2023-08-13-BART.png">
+  <figcaption></figcaption>
+</figure>
 
 
 __2020 PEGASUS__
@@ -111,25 +122,40 @@ __2020 PEGASUS__
 * Fine-tuned on 12 diverse summarisation datasets
 * Select and mask whole sentences from documents, and concatenate the gap sentences into a pseudo-summary.
 
+<figure>
+  <img style="width: 65%; height: 65%" src="/assets/images/2023-08-13-PEGASUS.png">
+  <figcaption></figcaption>
+</figure>
+
+<br>
 
 ### __Comparative Summarisation__
 
 <br>
 
-|   Name          | Method          | Max. Input     | Code           | Pre-Trained models                      | Languages         |
-| <img width=150/>| <img width=115/>|<img width=150/>|<img width=125/>| <img width=150/>                        |<img width=125/>   |
-|:----------------|:---------------:|:--------------:|:--------------:|:---------------------------------------:|:-----------------:|
-| TextRank (2004) | Extractive      | \-             | gensim         | \-                                      | \-                |
-| LexRank (2011)  | Extractive      | \-             | lexrank        | \-                                      | \-                |
-| BertSum (2019)  | Both            | ?              | PreSumm        | see code                                | English           |
-| HIBERT (2019)   | Extractive      | ?              | HIBERT         | see code                                | English           |
-| T5 (2019)       | Abstractive     | 1024 - 16384   | T5x            | [huggingface.co](http://huggingface.co) | several           |
-| MatchSum (2020) | Extractive      | ?              | MatchSum       | see code                                | English           |
-| BART (2020)     | Abstractive     | 1024           | fairseq        | [huggingface.co](http://huggingface.co) | several           |
-| PEGASUS (2020)  | Abstractive     | ?              | pegasus        | [huggingface.co](http://huggingface.co) | several           |
+|   Name          | Method          | Max. Input     | Code                                                     | Pre-Trained models                      | Languages         |
+| <img width=150/>| <img width=115/>|<img width=150/>|<img width=125/>                                          | <img width=150/>                        |<img width=125/>   |
+|:----------------|:---------------:|:--------------:|:--------------------------------------------------------:|:---------------------------------------:|:-----------------:|
+| TextRank (2004) | Extractive      | \-             | [gensim](https://pypi.org/project/gensim/)               | \-                                      | \-                |
+| LexRank (2011)  | Extractive      | \-             | [lexrank](https://github.com/crabcamp/lexrank)           | \-                                      | \-                |
+| BertSum (2019)  | Both            | ?              | [PreSumm](https://github.com/nlpyang/PreSumm)            | see code                                | English           |
+| HIBERT (2019)   | Extractive      | ?              | [HIBERT](https://xingxingzhang.github.io/hibert.html)    | see code                                | English           |
+| T5 (2019)       | Abstractive     | 1024 - 16384   | [T5x](https://github.com/google-research/t5x)            | [huggingface.co](http://huggingface.co) | several           |
+| MatchSum (2020) | Extractive      | ?              | [MatchSum](https://github.com/maszhongming/MatchSum)     | see code                                | English           |
+| BART (2020)     | Abstractive     | 1024           | [fairseq](https://github.com/facebookresearch/fairseq)   | [huggingface.co](http://huggingface.co) | several           |
+| PEGASUS (2020)  | Abstractive     | ?              | [pegasus](https://github.com/google-research/pegasus)    | [huggingface.co](http://huggingface.co) | several           |
+
+
+<!--
+
+
+
+
+
+-->
+
 
 <br>
-
 
 #### __Evaluation__
 * ROUGE (Recall-Oriented Understudy for Gisting Evaluation) - Recall
