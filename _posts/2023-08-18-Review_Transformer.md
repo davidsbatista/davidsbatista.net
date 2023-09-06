@@ -9,12 +9,14 @@ disqus_identifier: 20230813
 preview_pic: /assets/images/2023-08-18-transformer_arch.png
 ---
 
-The Transformer architecture was groundbreaking, revolutionary and innovative deep learning architecture that impacted NLP and other domains. I wanted to review and understand in detail the Transformer architecture which became the de-facto framework for many foundational and pre-trained models available today, which are used to solve a vast number of NLP tasks. This post is a review of the mechanisms that build up the Transformer: self-attention, multi-head attention, cross attention and how these are connected with encoder-decoder architecture.
+The Transformer was a groundbreaking, revolutionary, innovative deep learning architecture that impacted NLP and other domains. I wanted to review and understand in detail the Transformer architecture which became the de-facto framework for many foundational and pre-trained models available today and used to solve a vast number of NLP tasks. This post is a review of the mechanisms that build up the Transformer: self-attention, multi-head attention, cross attention and how these are connected with encoder-decoder architecture.
 
 
 ## __Introduction__
 
-A Transformer is a particular attention-based model, more specifically a self-attention model. It was initially proposed as another algorithm to perform Machine Translation overcoming the limitations of the recurrent neural networks by being based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.
+A Transformer is a particular type of attention-based model, more specifically a self-attention model. It was initially proposed as another algorithm to perform Machine Translation overcoming the limitations of the recurrent neural networks by being based solely on attention mechanisms, dispensing entirely recurrence and convolutions.
+
+
 
 
 <!--
@@ -28,6 +30,11 @@ A Transformer is a particular attention-based model, more specifically a self-at
 - RNN hidden states can't be computed in full before past RNN hidden states have been computed
 -->
 
+
+<figure>
+  <img style="width: 65%; height: 65%" src="/assets/images/2023-08-18-transformer_svg_arch.svg">
+  <figcaption></figcaption>
+</figure>
 
 
 ## __Self-Attention__
@@ -213,7 +220,11 @@ see: https://d2l.ai/chapter_attention-mechanisms-and-transformers/multihead-atte
 
 ## __Large-Scale Pre-training with Transformers__
 
-Transformers can be used in three different modes: encoder-only, encoder-decoder, and decoder-only
+Transformers can be used in three different modes: 
+
+- __encoder-only__
+- __encoder-decoder__
+- __decoder-only__
 
 
 #### __Encoder only__
