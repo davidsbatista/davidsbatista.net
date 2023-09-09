@@ -26,11 +26,14 @@ __2004 - TextRank__
 * This page contains a very good resume of the algorithm: [Textrank for Summarizing Text](https://cran.r-project.org/web/packages/textrank/vignettes/textrank.html)
 * It was part of gensim package - removed on 4.0.0 - still present in older releases
 
+<br>
+
 __2011 - LexRank__
 * [LexRank: Graph-based Lexical Centrality as Salience in Text Summarization](https://arxiv.org/abs/1109.2128)
 * A connectivity matrix based on intra-sentence cosine similarity is used as the adjacency matrix of the graph representation of sentences.
 * Uses eigenvector centrality to select sentences.
 
+<br>
 
 __2019 - HIBERT__
 * [Document Level Pre-training of Hierarchical Bidirectional Transformers for Document Summarization](https://aclanthology.org/P19-1499/)
@@ -40,9 +43,10 @@ __2019 - HIBERT__
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2023-08-13-HIBERT.png">
-  <figcaption></figcaption>
+  <figcaption>Figure 1 - The encoding and training mechanism of the HIBERT model.</figcaption>
 </figure>
 
+<br>
 
 __2019 - BERTSumExt__
 * [Text Summarization with Pretrained Encoders](https://aclanthology.org/D19-1387.pdf)
@@ -56,10 +60,10 @@ __2019 - BERTSumExt__
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2023-08-13-BertSum.png">
-  <figcaption></figcaption>
+  <figcaption>Figure 2 - BertSum architecture.</figcaption>
 </figure>
 
-
+<br>
 
 __2020 - MatchSum__
 * [Extractive Summarization as Text Matching](https://aclanthology.org/2020.acl-main.552/)
@@ -69,9 +73,8 @@ __2020 - MatchSum__
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2023-08-13-MatchSum.png">
-  <figcaption></figcaption>
+  <figcaption>Figure 3 - MatchSum approach of matching candidate summaries and original text in the same semantic space.</figcaption>
 </figure>
-
 
 
 <br>
@@ -103,8 +106,10 @@ __2019 T5 - Text-to-Text Transfer Transformer__
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2023-08-13-T5.png">
-  <figcaption></figcaption>
+  <figcaption>Figure 4 - Text-to-Text Transfer Transformer (T5) approach.</figcaption>
 </figure>
+
+<br>
 
 __2020 BART__
 * [BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension](https://aclanthology.org/2020.acl-main.703/)
@@ -114,9 +119,10 @@ __2020 BART__
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2023-08-13-BART.png">
-  <figcaption></figcaption>
+  <figcaption>Figure 5 - BART training approach.</figcaption>
 </figure>
 
+<br>
 
 __2020 PEGASUS__
 * [PEGASUS: Pre-training with Extracted Gap-sentences for Abstractive Summarization](http://proceedings.mlr.press/v119/zhang20ae/zhang20ae.pdf)
@@ -127,7 +133,7 @@ __2020 PEGASUS__
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2023-08-13-PEGASUS.png">
-  <figcaption></figcaption>
+  <figcaption>Figure 5 - PEGASUS__ training approach.</figcaption>
 </figure>
 
 <br>
@@ -162,18 +168,3 @@ __2020 PEGASUS__
   * always need a reference summary
   * just measuring string overlaps
   * alternative is to have a human evaluation
-
-
----
-
-### __References__
-
-
-
-
-
-
-
-
-
-
