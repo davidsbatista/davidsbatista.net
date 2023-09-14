@@ -14,10 +14,7 @@ The Transformer was a groundbreaking, revolutionary, innovative deep learning ar
 
 ## __Introduction__
 
-A Transformer is a particular type of attention-based model, more specifically a self-attention model. It was initially proposed as another algorithm to perform Machine Translation overcoming the limitations of the recurrent neural networks by being based solely on attention mechanisms, dispensing entirely recurrence and convolutions.
-
-
-
+A Transformer is a particular type of attention-based model, more specifically a self-attention model. It was initially proposed as another algorithm to perform Machine Translation overcoming the limitations of the recurrent neural networks by being based solely on the attention mechanism, dispensing entirely recurrence and convolutions.
 
 <!--
 - unrolled left-to-right, essentially one direction
@@ -41,7 +38,7 @@ A Transformer is a particular type of attention-based model, more specifically a
 
 <!-- verbatim -->
 
-In deep learning, we often use CNNs or RNNs to encode sequences. Now with attention mechanisms in mind, imagine feeding a sequence of tokens into an attention mechanism such that at each step, each token has its own query, keys, and values. 
+In deep learning, we often use CNNs or RNNs to encode sequences. Now, with attention mechanisms in mind, imagine feeding a sequence of tokens into an attention mechanism such that each token has its own query, keys, and values at each step. 
 
 Here, when computing the value of a token’s representation at the next layer, the token can attend (via its query vector) to each other token (matching based on their key vectors). Using the full set of query-key compatibility scores, we can compute, for each token, a representation by building the appropriate weighted sum over the other tokens. Because each token is attending to each other token (unlike the case where decoder steps attend to encoder steps), such architectures are typically described as self-attention models (Lin et al., 2017, Vaswani et al., 2017), and elsewhere described as intra-attention model (Cheng et al., 2016, Parikh et al., 2016, Paulus et al., 2017). 
 
@@ -314,5 +311,18 @@ Although I never used them, I would say that you want to use BERT whenever you w
 - __[Stanford CS224N - Winter 2021 Lecture 10 - Transformers and Pre-training](https://www.youtube.com/watch?v=j9AcEI98C0o)__
 - __[Dive into Deep Learning - 11. Attention Mechanisms and Transformers](https://d2l.ai/chapter_attention-mechanisms-and-transformers/queries-keys-values.html)__
 - __["Attention? Attention!" from Lilian Weng blog](https://lilianweng.github.io/posts/2018-06-24-attention/)__
+
+
+http://jalammar.github.io/illustrated-transformer/
+
+https://www.youtube.com/watch?v=rBCqOTEfxvg
+
+https://www.youtube.com/watch?v=fEVyfT-gLqQ
+
+https://generativeai.pub/explainable-ai-visualizing-attention-in-transformers-4eb931a2c0f8
+
+https://sebastianraschka.com/blog/2023/self-attention-from-scratch.html
+
+https://www.youtube.com/watch?v=acxqoltilME
 
 
