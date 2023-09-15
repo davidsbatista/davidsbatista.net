@@ -16,7 +16,7 @@ I hold a Ph.D. in Natural Language Processing, where my focus was on [__semantic
 
 Occasionally, I write <a href="/posts/" target="_blank"><b>blog posts</b></a> primarily about Software Engineering, Natural Language Processing, and Machine Learning. 
 
-I am available for consultancy or freelance work on projects, subject to my time availability and ongoing commitments. Please feel free to contact me per email or fill in this [__from__](https://o0dzsg71ld8.typeform.com/to/tA9kn9Dd){:target="_blank"} if you require assistance with the following topics:
+I am available for consultancy or freelance work on projects, subject to my time availability and ongoing commitments. Please feel free to contact me via email or fill in this [__form__](https://o0dzsg71ld8.typeform.com/to/tA9kn9Dd){:target="_blank"} if you require assistance with the following topics:
 
 * Natural Language Processing and Text Analytics
 * Knowledge Bases and Semantic Graphs
