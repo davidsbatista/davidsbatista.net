@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Extraction of Support and Opposition Relationships in Portuguese Political News Headlines
+title: Extracting Support and Opposition Relationships in Portuguese Political News Headlines
 date: 2023-09-14 00:00:00
 tags: relationship-extraction dataset semantic-web political-science
 categories: [blog]
@@ -14,14 +14,52 @@ Back in 2020, I was awarded the 2nd place in the [Arquivo.pt Awards 2021](https:
 
 <br>
 
+<!--
+1. [Getting the Most out of Wikidata: Semantic Technology Usage in Wikipedia’s Knowledge Graph](https://iccl.inf.tu-dresden.de/w/images/5/5a/Malyshev-et-al-Wikidata-SPARQL-ISWC-2018.pdf)
+
+2. [Search the Past with the Portuguese Web Archive](https://doi.org/10.1145/2487788.2487934)
+
+3. [Resource Description Framework](#resource-description-framework)
+
+4. [RDF 1.1 Primer W3C Working Group Note](https://www.w3.org/TR/rdf11-primer/)
+
+5. [SPARQL 1.1 Query Language](http://www.w3.org/TR/sparql11-query)
+
+6. [Evaluating CETEMPúblico, a Free Resource for Portuguese](https://www.aclweb.org/anthology/P01-1058)
+
+7. [CHAVE: Topics and Questions on the Portuguese Participation in CLEF](http://ceur-ws.org/Vol-1170/CLEF2004wn-other-Santos2004.pdf)
+
+8. [Term-Weighting Approaches in Automatic Text Retrieval](https://doi.org/10.1016/0306-4573(88)90021-0)
+
+9. [Elasticsearch: The Definitive Guide](https://www.amazon.com/Elasticsearch-Definitive-Expanded-Distributed-Scalable/dp/1449358543)
+
+10. [spaCy: Industrial-strength Natural Language Processing in Python](https://doi.org/10.5281/zenodo.1212303)
+
+11. [Support-vector networks](https://link.springer.com/article/10.1007/BF00994018)
+
+12. [Universal Dependencies v2: An Evergrowing Multilingual Treebank Collection](https://www.aclweb.org/anthology/2020.lrec-1.497)
+
+13. [Advances in Record-Linkage Methodology as Applied to Matching the 1985 Census of Tampa, Florida](https://doi.org/10.1080/01621459.1989.10478785)
+
+14. [A free and open source Java framework for building Semantic Web and Linked Data applications](https://jena.apache.org/)
+
+15. [Learning to Extract International Relations from Political Context](https://aclanthology.org/P13-1108)
+
+16. [No Permanent Friends or Enemies: Tracking Relationships between Nations from News](https://aclanthology.org/N19-1167)
+-->
+
+
+
+
+
 # __Abstract__ {#sec:abstract}
 
 Political news headlines often report supportive or opposing relationships between personalities, for example: 
 
-- *"Marques Mendes criticizes Rui Rio's strategy\"* 
+- *"Marques Mendes criticises Rui Rio's strategy\"* 
 - *"'Costa reaffirms confidence in Centeno\"*. 
 
-In this work we analyzed thousands of archived titles, identifying those that express supportive or opposing relationships, and associating the political personalities with their identifier on Wikidata, thus resulting in a semantic graph. 
+In this work we analysed thousands of archived titles, identifying those that express supportive or opposing relationships, and associating the political personalities with their identifier on Wikidata, thus resulting in a semantic graph. 
 
 The graph allows answering questions involving political personalities and parties. We describe the graph generation process and make it available together with a labelled dataset, which allowed supervised learning classifiers to be trained to identify the relationships expressed in the titles and link the personalities with Wikidata.
 
@@ -36,11 +74,17 @@ News headlines related to politics or politicians often report interactions invo
 
 - *"Sócrates went to the grassroots to call for a vote for Soares\"*
 
-Analysing a large number of these types of relationships over time allows for various studies, for example: finding out which are the major communities of support or opposition depending on the governments in power, or finding the major alliances and oppositions and their dynamics. You can also explore an individual personality over time, for example by comparing the relationships of support or opposition before taking office in a particular public position with the relationships after taking office, or to see which relationships of support have suddenly emerged. A database collating news stories expressing relationships of support or opposition between political personalities can be used to quickly assemble a collection of news stories containing or involving specific personalities and political parties, for example, to assist in an investigative journalism task.
+Analysing a large number of these types of relationships over time allows for various studies, for example: finding out which are the major communities of support or opposition depending on the governments in power, or finding the major alliances and oppositions and their dynamics. 
+
+You can also explore an individual personality over time, for example by comparing the relationships of support or opposition before taking office in a particular public position with the relationships after taking office, or to see which relationships of support have suddenly emerged. 
+
+A database collating news stories expressing relationships of support or opposition between political personalities can be used to quickly assemble a collection of news stories containing or involving specific personalities and political parties, for example, to assist in an investigative journalism task.
 
 Having an automatic method for extracting relationships and being able to apply it to a collection of data covering long periods of time would make it possible to realise the examples described above.
 
-In this paper we present a method for extracting relationships of support or opposition between political personalities and describe the results of applying it to a news collection covering a period of around 25 years. During the relationship extraction process, we linked the political personalities involved with their Wikidata identifier [@MKGGB2018], thus enriching the relationship with information associated with the personality (e.g. political affiliation, public offices held, legislatures, family relationships, etc.).
+In this paper we present a method for extracting relationships of support or opposition between political personalities and describe the results of applying it to a news collection covering a period of around 25 years. 
+
+During the relationship extraction process, we linked the political personalities involved with their Wikidata identifier[^20](@MKGGB2018), thus enriching the relationship with information associated with the personality (e.g. political affiliation, public offices held, legislatures, family relationships, etc.).
 
 All the relationships extracted are represented in the form of semantic triples following the Resource Description Framework (RDF) standard [@schreiber2014primer]. The political personalities involved, represented by their Wikidata identifier, are linked through a relationship of opposition or support represented by the news item that supports the relationship. This structure thus gives rise to a semantic graph, making it possible to formulate SPARQL queries [@2013sparql] involving the Wikidata information associated with each personality and the relationships extracted from the news headlines, for example:
 
@@ -62,9 +106,18 @@ The main contributions of this work are:
 
 - a web interface to explore the semantic graph
 
-This article is organised as follows: in Section [2](#sec_related_work) we refer to related work, in Section [3](#sec_kb) we describe the knowledge base used to support the linking of political personalities to Wikidata. Section [4](#sec:data_sources) refers to and describes the news sources used. In Section [5](#sec:rel_data_annot) we detail the annotated dataset and in Section [6](#sec:classifiers) the supervised learning classifiers developed. In Section [7](#sec:pipeline) we describe the RDF triple extraction process and the construction of the semantic graph. Finally, in Section [8](#sec:future_work) we summarise the conclusions of this work and present some ideas for future work.
+This article is organised as follows: 
+
+- in [Section 2](#sec_related_work) we refer to related work, 
+- in [Section 3](#sec_kb) we describe the knowledge base used to support the linking of personalities to Wikidata
+- in [Section 4](#sec:data_sources) refers to and describes the news sources used. 
+- in [Section 5](#sec:rel_data_annot) we detail the annotated dataset
+- in [Section 6](#sec:classifiers) the supervised learning classifiers developed
+- in [Section 7](#sec:pipeline) we describe the RDF triple extraction process and the construction of the semantic graph. 
+- in [Section 8](#sec:future_work) we summarise the conclusions of this work and present some ideas for future work.
 
 
+<br>
 
 
 # __Related Work__ {#sec_related_work}
@@ -91,12 +144,15 @@ Several authors have explored methods for extracting sentiment involving politic
 
 Some explore these relationships in an international political context, i.e.: the actors are nations mentioned in political news text, and some of these relationships implicitly have a positive or negative sentiment. [@oconnor-etal-2013-learning] propose an unsupervised model based on *topic models* and linguistic patterns to identify relationships, in an open-ended way, describing conflicts between nations referenced in English news articles. [@han-etal-2019-permanent] also propose an unsupervised model to generate relationship descriptors for pairs of nations mentioned in English news articles. The proposed model extends the work of [@iyyer-etal-2016-feuding] by integrating linguistic information (i.e.: verbal predicates and common and proper nouns) in order to identify the context of the relations.
 
-[@liang2019blames] define a tarefa de extracção de relações de culpabilidade para textos em Inglês: dado um artigo $d$ e um conjunto de entidades $E$, presentes no artigo, detectar se existe uma relação de culpabilidade $(s,t)$, onde $s,t \in E$, quando $s$ culpa $t$ com base no artigo $d$, sendo que há $\lvert{E}\rvert \cdot (\lvert{E}\rvert - 1)$, possíveis relações de culpabilidade. Para detectar estas relações os autores propõem 3 modelos. O modelo *Entity Prior* extrai informação sobre entidades, tentando capturar um *prior* sobre quem é susceptível de culpar quem sem informação adicional. O modelo *Context* faz uso da informação de contexto da frase onde duas entidades ocorrem para determinar a presença de uma relação de culpabilidade. O modelo *Combined* combina a informação dois modelos anteriores num único modelo. Os autores aplicam esta abordagem num corpus com 998 artigos de notícias e com cerca de 3 entidades por artigo reportando uma macro-média F~1~ de 0,70 com o modelo *Combined*.
+[@liang2019blames] defines the task of extracting guilt relations for English texts: given an article $d$ and a set of entities $E$, present in the article, detect if there is a guilt relation $(s,t)$, where $s,t \in E$, when $s$ blames $t$ based on the article $d$, and there are $\lvert{E}\rvert \cdot (\lvert{E}\rvert - 1)$, possible guilt relations. To detect these relationships, the authors propose 3 models. The *Entity Prior* model extracts information about entities, trying to capture a *prior* about who is likely to blame whom without additional information. The *Context* model makes use of the context information of the sentence where two entities occur to determine the presence of a blame relationship. The *Combined* model combines the information from the two previous models into a single model. The authors applied this approach to a corpus with 998 news articles and about 3 entities per article, reporting a macro-average F~1~ of 0.70 with the *Combined* model.
 
+
+Translated with www.DeepL.com/Translator (free version)
 [@park-etal-2021-blames] proposes a structure of relations to detect sentiment and direction: given a sentence $s$ referring to two entities $p$ and $q$, detect which sentiment relation between $p$ and $q$ out of five possible ones: neutral, $p$ has a positive or negative opinion of $q$, or $q$ has a positive or negative opinion of $p$.
 In their work, the authors use multiple models by transforming the sentiment extraction task into sub-tasks that answer yes/no questions for each of the 5 possible sentiments, then combining the various results into a final result.This approach is applied to English in a corpus created by the authors containing sentences from news articles containing at least two entities.The pairs of entities are annotated with one of the 5 possible sentiments.The authors report a macro-average F~1~ of 0.68.
 
 
+<br>
 
 
 # __Knowledge Base Construction__ {#sec_kb}
@@ -116,22 +172,26 @@ We also added all the identifiers of political parties to which the personalitie
 For each political figure we selected: their Wikidata identifier, their most common name and alternative names, i.e. combinations of first names and surnames. Based on these three fields, we created an index in ElasticSearch [@10.5555/2904394] using its default configuration, not making use of any extra functionality such as $n$-gram parsers.
 
 
+<br>
+
 
 # __Data Sources__ {#sec:data_sources}
 
-The main source of news was the Portuguese *web* archive [@SearchPastPWA2013]. Using the public search API we collected archived pages, restricting the results to occurrences of names gathered in Section [3](#sec_kb){reference-type="ref" reference="sec_kb"} and 45 `.pt` domains associated with various sources of information: *online* newspapers, *websites* of television and radio stations, and content aggregator portals.
+The main source of news was the Portuguese *web* archive [@SearchPastPWA2013]. Using the public search API we collected archived pages, restricting the results to occurrences of names gathered in [Section 3](#sec_kb) and 45 `.pt` domains associated with various sources of information: *online* newspapers, *websites* of television and radio stations, and content aggregator portals.
 
 A second news source was the CHAVE[^3][@DBLP:conf/clef/SantosR04; @santos-rocha-2001-evaluating] collection, containing articles from the newspaper PÚBLICO published between 1994 and 1995. Finally, some articles not archived by arquivo.pt were also added, taken directly from the *World*, *Politics* and *Society* sections of the publico.pt website.
 
 This process resulted in a collection of around 13.7 million article titles published between 1994 and 2022. Pre-processing was then applied in order to remove news items with: duplicate titles, titles with less than 4 words, and titles or URLs containing words that are part of a pre-defined list (e.g.: *sports*, *celebrities*, *arts*, *cinema*, etc.) that suggest a context other than politics. This pre-processing resulted in 1.3 million different titles, around 10 per cent of the data initially collected.
 
 
+<br>
 
-# __Annotated Dataset of Support and Oppostions Political Relationships__ {#sec:rel_data_annot}
+
+# __Dataset of Support and Opposition Political Relationships__ {#sec:rel_data_annot}
 
 In order to be able to train supervised learning classifiers to identify the relationships present in the news headlines, and to link the personalities with Wikidata, we manually annotated headlines with: the mentions of personalities, the identifiers in Wikidata and the relationship between the personalities mentioned.
 
-We began by pre-processing all the headlines collected using the spaCy 3.0 software package [@spacy], using the `pt_core_news_lg-3.0.0` model to recognise entities mentioned of the `PERSON` type. For each recognised entity we tried to find its corresponding identifier in Wikidata by querying the index described in Section [3](#sec_kb){reference-type="ref" reference="sec_kb"} and assuming that in the list of results the first is the correct identifier associated with the entity. We then selected the titles for annotation, including only titles referring to at least two personalities.
+We began by pre-processing all the headlines collected using the spaCy 3.0 software package [@spacy], using the `pt_core_news_lg-3.0.0` model to recognise entities mentioned of the `PERSON` type. For each recognised entity we tried to find its corresponding identifier in Wikidata by querying the index described in [Section 3](#sec_kb) and assuming that in the list of results the first is the correct identifier associated with the entity. We then selected the titles for annotation, including only titles referring to at least two personalities.
 
 In the annotation process all the titles were loaded into the Argilla[^4] annotation tool, and using the graphical interface we selected titles to annotate.
 
@@ -139,17 +199,20 @@ For each title, we corrected the recognised entities and their Wikidata identifi
 
 <br>
 
-Title | Relationship
---- | ---:
-Sá Fernandes accuses António Costa of defending corporate interests | Ent1-opposes-Ent2
-Joana Mortágua: statements by Cavaco are "a series of nonsense" | Ent1-opposes-Ent2
-Passos Coelho is accused of political immaturity by Santos Silva | Ent2-opposes-Ent1
-Durão Barroso supports Paulo Portas as an "excellent minister" | Ent1-supports-Ent2
-Armando Vara chosen by Guterres to coordinate local elections | Ent2-supports-Ent1
-Manuel Alegre receives support from Jorge Sampaio | Ent2-supports-Ent1
-Rui Tavares and Ana Drago elected in the LIVRE primaries | other
-Teresa Zambujo acknowledges Isaltino Morais' victory | other
-CDS accuses Marcelo Rebelo de Sousa of jeopardising the relationship with Cavaco | other
+<img width=10/>|Title   														 | Relationship
+:-|:--------------------------------------------------------------------------------| ---:
+|Sá Fernandes accuses António Costa of defending corporate interests 			 | Ent1-opposes-Ent2
+|Joana Mortágua: statements by Cavaco are "a series of nonsense" 				 | Ent1-opposes-Ent2
+|Passos Coelho is accused of political immaturity by Santos Silva 				 | Ent2-opposes-Ent1
+|Durão Barroso supports Paulo Portas as an "excellent minister" 				 | Ent1-supports-Ent2
+|Armando Vara chosen by Guterres to coordinate local elections	 				 | Ent2-supports-Ent1
+|Manuel Alegre receives support from Jorge Sampaio 								 | Ent2-supports-Ent1
+|Rui Tavares and Ana Drago elected in the LIVRE primaries 						 | other
+|Teresa Zambujo acknowledges Isaltino Morais' victory 							 | other
+|CDS accuses Marcelo Rebelo de Sousa of jeopardising the relationship with Cavaco | other
+
+__Table 1__: 
+
 
 <br>
 
@@ -157,13 +220,16 @@ This process resulted in a dataset containing 3,324 annotated titles. For each t
 
 <br>
 
-Relação<img width=150/> | Ent1 &rarr; Ent2<img width=150/> | Ent1 &larr; Ent2<img width=150/> | Total<img width=150/>
---- 				    | --- 							   | --- 							  | ---
-opõe-se 				| 1,155 | 102 | 1,257
-apoia 					| 717 | 44 | 761
-outra 					| - | - | 1,306
-Total 					| 1,872 | 146 | 3,324
+<img width=100/>|Relação<img width=200/>| Ent1 &rarr; Ent2<img width=150/> | Ent1 &larr; Ent2<img width=150/> | Total<img width=150/>
+|--- 				    | --- 							   | --- 							  | ---
+|opõe-se 				| 1 155                            | 102                              | 1 257
+|apoia 					| 717                              | 44                               | 761
+|outra 					|             -                    | -                                | 1,306
+|Total 					| 1,872                            | 146                              | 3,324
 
+__Table 2__: 
+
+<br>
 
 The ratio of oppositional relationships to supportive relationships is 1.6. This value is similar to the data for English provided by [@park-etal-2021-blames], where this same ratio between the two classes is 1.8. In terms of class representativeness, aggregated by sentiment, the two datasets are also similar, with **other** being the most present class, followed by **opposition** and lastly **support**.
 
@@ -190,6 +256,8 @@ In terms of the number of words contained in the titles, excluding words that ar
 ```
 
 
+<br>
+
 
 # __Relationship Extraction Process__ {#sec:classifiers}
 
@@ -202,6 +270,8 @@ The process of extracting RDF triples from news headlines involves 4 sub-process
 - classifying the type of relationship
 
 - classifying the direction of the relationship
+
+
 
 ## __Named-Entity Recognition__ {#subsec:ner}
 
@@ -218,6 +288,7 @@ Table [2](#tab:results_ner){reference-type="ref" reference="tab:results_ner"} sh
 | Model         | 0,97  | 0,91  | 0,94  |
 | Rules+Model   | 0,97  | 0,92  | 0,94  |
 
+__Table 3__: 
 
 <br>
 
@@ -296,7 +367,7 @@ In Table [3](#tab:ent_linking_results){reference-type="ref" reference="tab:ent_l
 |-----------------------------------------------
 | **Accuracy**       | 0,93     | 0,96        |
 
-Table Caption: Resultados da avaliação do algoritmo de ligação com a Base de Conhecimento.
+__Table 4__:  Resultados da avaliação do algoritmo de ligação com a Base de Conhecimento.
 
 
 <br>
@@ -314,6 +385,7 @@ The LSTM recurrent neural network was used in a bidirectional architecture, i.e.
 
 The DistilBERT model was trained on the basis of a pre-trained model for Portuguese [@abdaoui-etal-2020-load] and then fine-tuned on the annotated dataset, i.e.: the weights of all the pre-trained *layers* were updated taking into account the task of classifying the relation. The network was trained for 5 *epochs* with a *batch size* of 8.
 
+
 | Relação       | P     | A     | F1    |
 | ------------- | ----- | ----- | ----- |
 | opõe-se       | 0,71  | 0,69  | 0,70  |
@@ -321,8 +393,7 @@ The DistilBERT model was trained on the basis of a pre-trained model for Portugu
 | apoia         | 0,65  | 0,69  | 0,67  |
 | Macro-Média   | 0,69  | 0,69  | 0,69  |
 
-**Table 1: Results for Relationship Evaluation para uma avaliação com 4-partições e validação cruzada com SVM.**
-
+__Table 5__:  Results for Relationship Evaluation para uma avaliação com 4-partições e validação cruzada com SVM.**
 
 
 | Relação       | P     | A     | F1    |
@@ -332,8 +403,8 @@ The DistilBERT model was trained on the basis of a pre-trained model for Portugu
 | apoia         | 0,65  | 0,62  | 0,63  |
 | Macro-Média   | 0,69  | 0,68  | 0,68  |
 
-**Table 2: Results for Relationship Evaluation**
-(P)recisão, (A)brangência e F1 para uma avaliação com 4-partições e validação cruzada com LSTM bidireccional..
+__Table 6__: Results for Relationship Evaluation** (P)recisão, (A)brangência e F1 para uma avaliação com 4-partições e validação cruzada com LSTM bidireccional..
+
 
 | Relação       | P     | A     | F1    |
 | ------------- | ----- | ----- | ----- |
@@ -342,8 +413,10 @@ The DistilBERT model was trained on the basis of a pre-trained model for Portugu
 | apoia         | 0,72  | 0,71  | 0,71  |
 | Macro-Média   | 0,73  | 0,72  | 0,72  |
 
-**Table 3: Results for Relationship Evaluation**
-(P)recisão, (A)brangência e F1 para uma avaliação com 4-partições e validação cruzada com DistilBERT pr´e-treinado em Portuguˆes..
+__Table 7__:(P)recisão, (A)brangência e F1 para uma avaliação com 4-partições e validação cruzada com DistilBERT pr´e-treinado em Portuguˆes..
+
+
+<br>
 
 Table [6](#tab:results_relation){reference-type="ref" reference="tab:results_relation"} describes the results for the various classifiers. There are no marked differences in performance between the 3 classifiers, although the approach using DistilBERT achieved the best results. When analysing the results, we noticed that there are relations that are difficult to classify correctly, particularly those containing idiomatic expressions, for example:
 
@@ -380,22 +453,27 @@ Table [\[tab:examples_patterns_direction\]](#tab:examples_patterns_direction){re
 | Maria Luís Albuquerque sob críticas de Luís Amado                               | NOUN_ENT2      |
 | André Ventura diz-se surpreendido com perda de apoio de Cristas                 | NOUN_ENT2      |
 
+__Table 8__:
 
 
 Table [7](#tab:direction_clf_results){reference-type="ref" reference="tab:direction_clf_results"} contains the results of this classifier for the annotated data set.
 
 **Table: Direction Classification Results**
 
-| Direction<img width=150/>                    | P     | A     | F1    | #Títulos |
+| Direction<img width=150/>    | Precision<img width=150/>     | Recall<img width=150/>     | F1<img width=150/>    | Number of Headlines |
 | ---------------------------- | ----- | ----- | ----- | -------- |
 | Ent1 → Ent2                  | 0,99  | 1,00  | 0,99  | 1,488    |
 | Ent1 ← Ent2                  | 0,95  | 0,84  | 0,89  | 129      |
 | weighted avg.                | 0,98  | 0,98  | 0,98  | 1,517    |
 
-(P)recisão, A(brangência) e F1 usando 3 regras baseadas em padrões.
+__Table 9__: (P)recisão, A(brangência) e F1 usando 3 regras baseadas em padrões.
 
 
 The results show that the proposed method correctly classifies a large part of the direction of the Ent~1~$\leftarrow$Ent~2~ relations, the only class for which rules have been developed, without prejudice to the Ent~1~$\rightarrow$Ent~2~ class.
+
+
+<br>
+
 
 # __Semantic Graph__ {#sec:pipeline}
 
@@ -408,12 +486,18 @@ For all the headlines considered, the final result is an RDF triple linking the 
 The graph generated has a total of 680 political personalities, 107 political parties and 10,361 news items covering a period of 25 years. It is available *online* in *Terse RDF Triple Language* format[^8] and can also be explored via a textitweb interface[^9].
 
 
+<br>
+
 
 # __Conclusions and Future Work__ {#sec:future_work}
 
 This work describes in detail the process of constructing a semantic graph from political news headlines.
 
-Using SPARQL queries and referring to the various properties taken from Wikidata for each personality, it is possible to explore support and opposition relationships through aggregations by political parties, public offices, constitutional governments, constituent assemblies, among others, thus being able to formulate more complex queries, for example: *"Ministers of the XXII Constitutional Government who were opposed by PCP or BE personalities.\"* The answer is the list of ministers and the articles that support the opposition relations coming from the BE.
+Using SPARQL queries and referring to the various properties taken from Wikidata for each personality, it is possible to explore support and opposition relationships through aggregations by political parties, public offices, constitutional governments, constituent assemblies, among others, thus being able to formulate more complex queries, for example: 
+
+*"Ministers of the XXII Constitutional Government who were opposed by PCP or BE personalities.\"* 
+
+The answer is the list of ministers and the articles that support the opposition relations coming from the BE.
 
 One of the limitations of this work is that the headline doesn't contain enough information to realise what kind of relationship or feeling exists from one personality to another, or the presence of idiomatic expressions, which make automatic classification difficult. As future work we would like to explore the text of the news item in order to complement the headline and improve the detection of the relationship. Also based on the text of the headline, the relationships could be enriched by categorising them into topics, giving the relationship another dimension, a context for the feeling of support or opposition.
 
@@ -433,10 +517,8 @@ This work also leaves open the possibility of carrying out various studies based
 We would like to thank Nuno Feliciano for all his comments during the preparation of this work and the Arquivo.PT team for providing access to the archived data via an API and for considering this work for the Arquivo.PT 2021 awards. To Edgar Felizardo and Tiago Cogumbreiro for their extensive revisions to the article, and also to reviewers Sérgio Nunes and José Paulo Leal for all their comments and corrections.
 
 
-# __References__ {#agradecimentos}
 
-
-# __References__ {#agradecimentos}
+# __Links__ {#links}
 
 [^1]: <https://query.wikidata.org>
 
@@ -455,3 +537,177 @@ We would like to thank Nuno Feliciano for all his comments during the preparatio
 [^8]: <https://github.com/politiquices/data-releases>
 
 [^9]: <https://www.politiquices.pt>
+
+
+# __References__ {#references}
+
+1. **Feuding Families and Former Friends: Unsupervised Learning for Dynamic Fictional Relationships**
+   - *Authors*: Mohit Iyyer, Anupam Guha, Snigdha Chaturvedi, Jordan Boyd-Graber, Hal Daumé III
+   - *Conference*: Proceedings of the 2016 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies
+   - *Year*: 2016
+   - *DOI*: [10.18653/v1/N16-1180](https://aclanthology.org/N16-1180)
+   - *Pages*: 1534-1544
+
+2. **What Do You Mean by Relation Extraction? A Survey on Datasets and Study on Scientific Relation Classification**
+   - *Authors*: Elisa Bassignana, Barbara Plank
+   - *Conference*: Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics: Student Research Workshop
+   - *Year*: 2022
+   - *DOI*: [10.18653/v1/2022.acl-srw.7](https://aclanthology.org/2022.acl-srw.7)
+   - *Pages*: 67-83
+
+3. **Tracking politics with POWER**
+   - *Authors*: Silvio Moreira, David S. Batista, Paula Carvalho, Francisco M. Couto, Mario J. Silva
+   - *Journal*: Program: electronic library and information systems
+   - *Volume*: 47
+   - *Number*: 2
+   - *Year*: 2013
+
+4. **Automatic Creation of a Reference Corpus for Political Opinion Mining in User-Generated Content**
+   - *Authors*: Luís Sarmento, Paula Carvalho, Mario J. Silva, Eugénio de Oliveira
+   - *Conference*: Proceedings of the 1st International CIKM Workshop on Topic-Sentiment Analysis for Mass Opinion
+   - *Year*: 2009
+   - *DOI*: [10.1145/1651461.1651468](https://doi.org/10.1145/1651461.1651468)
+   - *Pages*: 29–36
+
+5. **A dataset for Sentiment analysis of Entities in News headlines (SEN)**
+   - *Authors*: Katarzyna Baraniak, Marcin Sydow
+   - *Journal*: Procedia Computer Science
+   - *Volume*: 192
+   - *Year*: 2021
+   - *DOI*: [10.1016/j.procs.2021.09.136](https://www.sciencedirect.com/science/article/pii/S1877050921018755)
+   - *Pages*: 3627-3636
+
+6. **An Annotated Corpus for Sentiment Analysis in Political News**
+   - *Authors*: Gabriel Domingos de Arruda, Norton Trevisan Roman, Ana Maria Monteiro
+   - *Conference*: Proceedings of the 10th Brazilian Symposium in Information and Human Language Technology
+   - *Year*: 2015
+   - *DOI*: [10.1145/2835988.2835995](https://aclanthology.org/W15-5614)
+   - *Pages*: 101-110
+
+7. **Load What You Need: Smaller Versions of Multilingual BERT**
+   - *Authors*: Amine Abdaoui, Camille Pradel, Grégoire Sigel
+   - *Conference*: Proceedings of SustaiNLP: Workshop on Simple and Efficient Natural Language Processing
+   - *Year*: 2020
+   - *DOI*: [10.18653/v1/2020.sustainlp-1.16](https://aclanthology.org/2020.sustainlp-1.16)
+   - *Pages*: 119-123
+
+8. **Portuguese Word Embeddings: Evaluating on Word Analogies and Natural Language Tasks**
+   - *Authors*: Nathan Hartmann, Erick Fonseca, Christopher Shulby, Marcos Treviso, Jéssica Silva, Sandra Aluísio
+   - *Conference*: Proceedings of the 11th Brazilian Symposium in Information and Human Language Technology
+   - *Year*: 2017
+   - *DOI*: [10.18653/v1/W17-6615](https://aclanthology.org/W17-6615)
+   - *Pages*: 122-131
+
+9. **DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter**
+   - *Authors*: Victor Sanh, Lysandre Debut, Julien Chaumond, Thomas Wolf
+   - *Conference*: 2019 Fifth Workshop on Energy Efficient Machine Learning and Cognitive Computing - NeurIPS Edition (EMC2-NIPS)
+   - *Year*: 2019
+   - *DOI*: [N/A](https://aclanthology.org/N/A)
+   - *Pages*: N/A
+
+10. **Long Short-Term Memory**
+    - *Authors*: Sepp Hochreiter, Jürgen Schmidhuber
+    - *Journal*: Neural Comput.
+    - *Volume*: 9
+    - *Number*: 8
+    - *Year*: 1997
+    - *DOI*: [10.1162/neco.1997.9.8.1735](https://doi.org/10.1162/neco.1997.9.8.1735)
+    - *Pages*: 1735–1780
+
+
+12. **Search the Past with the Portuguese Web Archive**
+    - *Authors*: Daniel Gomes, David Cruz, João Miranda, Miguel Costa, Simão Fontes
+    - *Conference*: 22nd International World Wide Web Conference
+    - *Year*: 2013
+    - *DOI*: [10.1145/2487788.2487934](https://doi.org/10.1145/2487788.2487934)
+
+13. **Resource Description Framework**
+    - *Author*: Jeff Z. Pan
+    - *Book*: Handbook on Ontologies
+    - *Pages*: 71-90
+    - *Year*: 2009
+
+14. **RDF 1.1 Primer W3C Working Group Note**
+    - *Authors*: Guus Schreiber, Yves Raimond
+    - *Year*: 2014
+    - *URL*: [RDF 1.1 Primer W3C Working Group Note](https://www.w3.org/TR/rdf11-primer/)
+
+15. **SPARQL 1.1 Query Language**
+    - *Authors*: Eric Prud'hommeaux, Steve Harris, Andy Seaborne
+    - *Year*: 2013
+    - *URL*: [SPARQL 1.1 Query Language](http://www.w3.org/TR/sparql11-query)
+
+16. **Evaluating CETEMPúblico, a Free Resource for Portuguese**
+    - *Authors*: Diana Santos, Paulo Rocha
+    - *Conference*: Proceedings of the 39th Annual Meeting of the Association for Computational Linguistics
+    - *Year*: 2001
+    - *URL*: [PDF](https://www.aclweb.org/anthology/P01-1058)
+
+17. **CHAVE: Topics and Questions on the Portuguese Participation in CLEF**
+    - *Authors*: Diana Santos, Paulo Rocha
+    - *Conference*: Working Notes for CLEF 2004 Workshop co-located with the 8th European Conference on Digital Libraries (ECDL 2004)
+    - *Year*: 2004
+    - *URL*: [PDF](http://ceur-ws.org/Vol-1170/CLEF2004wn-other-Santos2004.pdf)
+
+18. **Term-Weighting Approaches in Automatic Text Retrieval**
+    - *Authors*: Gerard Salton, Chris Buckley
+    - *Journal*: Information Processing & Management
+    - *Volume*: 24
+    - *Number*: 5
+    - *Year*: 1988
+    - *DOI*: [10.1016/0306-4573(88)90021-0](https://doi.org/10.1016/0306-4573(88)90021-0)
+
+19. **Elasticsearch: The Definitive Guide**
+    - *Authors*: Clinton Gormley, Zachary Tong
+    - *Year*: 2015
+    - *ISBN*: 1449358543
+    - *Publisher*: O'Reilly Media, Inc.
+    - *Edition*: 1st
+
+20. **spaCy: Industrial-strength Natural Language Processing in Python**
+    - *Authors*: Matthew Honnibal, Ines Montani, Sofie Van Landeghem, Adriane Boyd
+    - *Year*: 2020
+    - *Publisher*: Zenodo
+    - *DOI*: [10.5281/zenodo.1212303](https://doi.org/10.5281/zenodo.1212303)
+
+21. **Support-vector networks**
+    - *Authors*: Corinna Cortes, Vladimir Vapnik
+    - *Journal*: Machine Learning
+    - *Volume*: 20
+    - *Number*: 3
+    - *Year*: 1995
+    - *Pages*: 273-297
+    - *DOI*: [10.1007/BF00994018](https://link.springer.com/article/10.1007/BF00994018)
+
+22. **Universal Dependencies v2: An Evergrowing Multilingual Treebank Collection**
+    - *Authors*: Joakim Nivre, Marie-Catherine de Marneffe, Filip Ginter, Jan Hajič, Christopher D. Manning, Sampo Pyysalo, Sebastian Schuster, Francis Tyers, Daniel Zeman
+    - *Conference*: Proceedings of the 12th Language Resources and Evaluation Conference
+    - *Year*: 2020
+    - *DOI*: [10.18653/v1/2020.lrec-1.497](https://www.aclweb.org/anthology/2020.lrec-1.497)
+    - *Pages*: 4034-4043
+    - *ISBN*: 979-10-95546-34-4
+
+23. **Advances in Record-Linkage Methodology as Applied to Matching the 1985 Census of Tampa, Florida**
+    - *Author*: Matthew A. Jaro
+    - *Journal*: Journal of the American Statistical Association
+    - *Volume*: 84
+    - *Number*: 406
+    - *Year*: 1989
+    - *DOI*: [10.1080/01621459.1989.10478785](https://doi.org/10.1080/01621459.1989.10478785)
+
+24. **A free and open source Java framework for building Semantic Web and Linked Data applications**
+    - *Author*: Apache Jena
+    - *Year*: 2015
+    - *URL*: [Official Website](https://jena.apache.org/)
+
+25. **Learning to Extract International Relations from Political Context**
+    - *Authors*: Brendan O'Connor, Brandon M. Stewart, Noah A. Smith
+    - *Conference*: Proceedings of the 51st Annual Meeting of the ACL (Volume 1: Long Papers)
+    - *Year*: 2013
+    - *URL*: [PDF](https://aclanthology.org/P13-1108)
+
+26. **No Permanent Friends or Enemies: Tracking Relationships between Nations from News**
+    - *Authors*: Xiaochuang Han, Eunsol Choi, Chenhao Tan
+    - *Conference*: Proceedings of the 2019 Conference of the North American Chapter of the ACL: Human Language Technologies, Volume 1 (Long and Short Papers)
+    - *Year*: 2019
+    - *DOI*: [10.18653/v1/N19-1167](https://aclanthology.org/N19-1167)
