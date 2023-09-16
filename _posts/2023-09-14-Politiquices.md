@@ -84,7 +84,7 @@ Having an automatic method for extracting relationships and being able to apply 
 
 In this paper we present a method for extracting relationships of support or opposition between political personalities and describe the results of applying it to a news collection covering a period of around 25 years. 
 
-During the relationship extraction process, we linked the political personalities involved with their Wikidata identifier[^20](@MKGGB2018), thus enriching the relationship with information associated with the personality (e.g. political affiliation, public offices held, legislatures, family relationships, etc.).
+During the relationship extraction process, we linked the political personalities involved with their Wikidata identifier(@MKGGB2018), thus enriching the relationship with information associated with the personality (e.g. political affiliation, public offices held, legislatures, family relationships, etc.).
 
 All the relationships extracted are represented in the form of semantic triples following the Resource Description Framework (RDF) standard [@schreiber2014primer]. The political personalities involved, represented by their Wikidata identifier, are linked through a relationship of opposition or support represented by the news item that supports the relationship. This structure thus gives rise to a semantic graph, making it possible to formulate SPARQL queries [@2013sparql] involving the Wikidata information associated with each personality and the relationships extracted from the news headlines, for example:
 
@@ -160,14 +160,24 @@ By making SPARQL queries to the [public endpoint](https://query.wikidata.org){:t
 
 - people who are or have been affiliated with a Portuguese political party
 
-- Portuguese people born after 1935 whose profession is: judge, economist, lawyer, civil servant, politician, businessman or banker*
+- Portuguese people born after 1935 whose profession is: 
+	- judge
+	- economist
+	- lawyer
+	- civil servant
+	- politician
+	- businessman
+	- banker
 
 - people who hold or have held at least one office from a list of previously selected Portuguese public offices (e.g.: *minister, party leader, ambassador*, etc.)
 
 In addition to the results of these queries, we manually selected some identifiers of personalities not covered by the SPARQL queries defined above, many of them from an international political context, but who interact with Portuguese personalities.
-We also added all the identifiers of political parties to which the personalities collected are affiliated. This process resulted in a total of 1,757 personalities and 37 political parties. It should be noted that some of the parties included are now defunct and/or from an international context. For each of the identifiers of the personalities and parties, we downloaded the corresponding page from Wikidata using another [public endpoint](https://www.wikidata.org/wiki/Special:EntityData?){:target="_blank"}.
 
-For each political figure we selected: their Wikidata identifier, their most common name and alternative names, i.e. combinations of first names and surnames. Based on these three fields, we created an index in ElasticSearch [@10.5555/2904394] using its default configuration, not making use of any extra functionality such as $n$-gram parsers.
+We also added all the identifiers of political parties to which the personalities collected are affiliated. This process resulted in a total of 1,757 personalities and 37 political parties. It should be noted that some of the parties included are now defunct and/or from an international context. 
+
+For each of the identifiers of the personalities and parties, we downloaded the corresponding page from Wikidata using another [public endpoint](https://www.wikidata.org/wiki/Special:EntityData?){:target="_blank"}. For each political figure we selected: their Wikidata identifier, their most common name and alternative names, i.e. combinations of first names and surnames. 
+
+Based on these three fields, we created an index in ElasticSearch [@10.5555/2904394] using its default configuration, not making use of any extra functionality such as $$n$$-gram parsers.
 
 
 <br>
@@ -177,7 +187,7 @@ For each political figure we selected: their Wikidata identifier, their most com
 
 The main source of news was the Portuguese *web* archive [@SearchPastPWA2013]. Using the public search API we collected archived pages, restricting the results to occurrences of names gathered in [Section 3](#sec_kb) and 45 `.pt` domains associated with various sources of information: *online* newspapers, *websites* of television and radio stations, and content aggregator portals.
 
-A second news source was the CHAVE[^3][@DBLP:conf/clef/SantosR04; @santos-rocha-2001-evaluating] collection, containing articles from the newspaper PÚBLICO published between 1994 and 1995. Finally, some articles not archived by arquivo.pt were also added, taken directly from the *World*, *Politics* and *Society* sections of the publico.pt website.
+A second news source was the [CHAVE collection](https://www.linguateca.pt/CHAVE)[@DBLP:conf/clef/SantosR04; @santos-rocha-2001-evaluating], containing articles from the newspaper PÚBLICO published between 1994 and 1995. Finally, some articles not archived by arquivo.pt were also added, taken directly from the *World*, *Politics* and *Society* sections of the publico.pt website.
 
 This process resulted in a collection of around 13.7 million article titles published between 1994 and 2022. Pre-processing was then applied in order to remove news items with: duplicate titles, titles with less than 4 words, and titles or URLs containing words that are part of a pre-defined list (e.g.: *sports*, *celebrities*, *arts*, *cinema*, etc.) that suggest a context other than politics. This pre-processing resulted in 1.3 million different titles, around 10 per cent of the data initially collected.
 
@@ -191,7 +201,7 @@ In order to be able to train supervised learning classifiers to identify the rel
 
 We began by pre-processing all the headlines collected using the spaCy 3.0 software package [@spacy], using the `pt_core_news_lg-3.0.0` model to recognise entities mentioned of the `PERSON` type. For each recognised entity we tried to find its corresponding identifier in Wikidata by querying the index described in [Section 3](#sec_kb) and assuming that in the list of results the first is the correct identifier associated with the entity. We then selected the titles for annotation, including only titles referring to at least two personalities.
 
-In the annotation process all the titles were loaded into the Argilla[^4] annotation tool, and using the graphical interface we selected titles to annotate.
+In the annotation process all the titles were loaded into the [Argilla](https://argilla.io/){:target="_blank"} annotation tool, and using the graphical interface we selected titles to annotate.
 
 For each title, we corrected the recognised entities and their Wikidata identifiers where necessary. We annotated the existing relationship: **opposition** or **support**, and its direction. When neither is the case, the relationship is noted as **other**. 
 
@@ -255,7 +265,7 @@ Of the 6 648 mentions of names of political personalities annotated, 515 are dis
 
 Analysing the frequency of occurrence of each entity shows that there are a small number of entities responsible for a large proportion of all entity occurrences in the annotated data. As shown in Figure 1 there is a small number of frequent entities, and a long list of infrequent entities, specifically, 96 distinct personalities, i,.e.: 19% of the personalities, are responsible for 80% of the mentions of personalities in the data.
 
-In terms of the number of words contained in the titles, excluding words that are part of the entities, there is a median of 8 words with a maximum of 22 and a minimum of 1. This set of annotated data is online[^5] in JSON format as illustrated in below in Figure 2.
+In terms of the number of words contained in the titles, excluding words that are part of the entities, there is a median of 8 words with a maximum of 22 and a minimum of 1. This set of [annotated data is online](https://github.com/politiquices/data-releases){:target="_blank"} in JSON format as illustrated in below in Figure 2.
 
 ``` {fontsize="\\small"}
 {"title": "Ana Gomes defende Durão Barroso",
@@ -292,7 +302,7 @@ The process of extracting RDF triples from news headlines involves 4 sub-process
 
 The recognition of entities mentioned is based on a hybrid method, combining rules with a supervised model.
 
-Using the `EntityRuler`[^6] component of spaCy 3.0, we define a series of of rules combining patterns based on the names of all the personalities from the knowledge base described in [Section 3](#sec_kb). 
+Using the [EntityRuler](https://spacy.io/api/entityruler){:target="_blank"} component of spaCy 3.0, we define a series of of rules combining patterns based on the names of all the personalities from the knowledge base described in [Section 3](#sec_kb). 
 
 To detect entities of type `PERSON` this classifier applies first the rules and then the supervised model for Portuguese model. In situations of disagreement between the two approaches, the entities marked with rules are prioritised. Table 3 shows the performance for the 3 approaches on the annotated dataset.
 
@@ -400,7 +410,7 @@ __Table 4__:  Accuracy results for the linking approach.
 
 We chose to break down the task of classifying the relationship into two tasks: classifying the type of relationship and the direction of the relationship, as opposed to developing a single classifier that would have to distinguish between 5 possible classes, and with classes that are very unbalanced in terms of representativeness. 
 
-This section describes the classifier developed to detect the type of relationship present in a title, with 3 possible classes: **opposes**, **supports** and **other**. All the experiments were carried out with a cross-evaluation of 4 partitions[^7].
+This section describes the classifier developed to detect the type of relationship present in a title, with 3 possible classes: **opposes**, **supports** and **other**. All the experiments were carried out with [cross-evaluation of 4 partitions](https://github.com/politiquices/data-releases){:target="_blank"}.
 
 We evaluated different approaches for the supervised classification of the relationships present in the titles, namely: 
 
@@ -482,7 +492,7 @@ We defined rules based on patterns built with morphological and syntactic inform
 
 - **NOUN_ENT2**: checks whether the pattern `<ADJ>?<NOUN><ADJ>?<ADP>Ent2<EOS>` is present in the title, i.e.: a noun can be preceded or succeeded by one or more adjectives ending with Ent2, and the noun is restricted to a predefined list of nouns.
 
-__Table 6__ shows some examples of news headlines and the rules that were applied to detect the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class direction. The rules are applied sequentially, in the same order as described here. If none of the patterns are detected in the headline, the classifier assigns the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class.
+__Table 6__ shows some examples of news headlines and the rules that were applied to detect the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class direction. The rules are applied sequentially, in the same order as described here. If none of the patterns are detected in the headline, the classifier assigns the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class. __Table 7__ contains the results of this classifier for the annotated data set.
 
 <br>
 
@@ -500,8 +510,6 @@ __Table 6__ shows some examples of news headlines and the rules that were applie
 __Table 6__: Examples of titles and respective rules used to detect the direction of the relationship.
 
 ---
-
-Table 7 contains the results of this classifier for the annotated data set.
 
 <br>
 
@@ -532,7 +540,7 @@ The extraction process begins by recognising the personalities in the headline a
 
 For all the headlines considered, the final result is an RDF triple linking the personalities through a relationship of opposition or support supported by a news item. The RDF triples generated are indexed in a SPARQL engine [@jena2015free] together with a Wikidata sub-graph described in [Section 3](#sec_kb).
 
-The graph generated has a total of 680 political personalities, 107 political parties and 10,361 news items covering a period of 25 years. It is available online in Terse RDF Triple Language format[^8] and can also be explored via a web interface[^9].
+The graph generated has a total of 680 political personalities, 107 political parties and 10,361 news items covering a period of 25 years. It is available online in [Terse RDF Triple Language format](https://www.w3.org/TeamSubmission/turtle/){:target="_blank"} and can also be explored via a [web interface](https://www.politiquices.pt/){:target="_blank"}.
 
 
 <br>
@@ -564,25 +572,6 @@ This work also leaves open the possibility of carrying out various studies based
 # __Acknowledgements__ {#agradecimentos}
 
 We would like to thank Nuno Feliciano for all his comments during the preparation of this work and the Arquivo.PT team for providing access to the archived data via an API and for considering this work for the Arquivo.PT 2021 awards. To Edgar Felizardo and Tiago Cogumbreiro for their extensive revisions to the article, and also to reviewers Sérgio Nunes and José Paulo Leal for all their comments and corrections.
-
-
-
-# __Links__ {#links}
-
-[^3]: <https://www.linguateca.pt/CHAVE/>
-
-[^4]: <https://github.com/argilla-io/argilla>
-
-[^5]: <https://github.com/politiquices/data-releases>
-
-[^6]: <https://spacy.io/usage/rule-based-matching>
-
-[^7]: <https://github.com/politiquices/data-releases>
-
-[^8]: <https://github.com/politiquices/data-releases>
-
-[^9]: <https://www.politiquices.pt>
-
 
 # __References__ {#references}
 
