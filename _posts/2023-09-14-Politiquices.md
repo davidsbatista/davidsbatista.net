@@ -157,16 +157,20 @@ This process resulted in a dataset containing 3,324 annotated titles. For each t
 
 <br>
 
-Relação | Ent1->Ent2 | Ent1<-Ent2 | Total
---- | --- | --- | ---
-opõe-se | 1,155 | 102 | 1,257
-apoia | 717 | 44 | 761
-outra | - | - | 1,306
-Total | 1,872 | 146 | 3,324
+Relação<img width=150/> | Ent1 &rarr; Ent2<img width=150/> | Ent1 &larr; Ent2<img width=150/> | Total<img width=150/>
+--- 				    | --- 							   | --- 							  | ---
+opõe-se 				| 1,155 | 102 | 1,257
+apoia 					| 717 | 44 | 761
+outra 					| - | - | 1,306
+Total 					| 1,872 | 146 | 3,324
+
 
 The ratio of oppositional relationships to supportive relationships is 1.6. This value is similar to the data for English provided by [@park-etal-2021-blames], where this same ratio between the two classes is 1.8. In terms of class representativeness, aggregated by sentiment, the two datasets are also similar, with **other** being the most present class, followed by **opposition** and lastly **support**.
 
-(assets/images/2023-09-14-power_law_ent_freq.png){#fig:ent_power_law width="53%"}
+<figure>
+  <img style="width: 65%; height: 65%" src="/assets/images/2023-09-14-power_law_ent_freq.png">
+  <figcaption>Figure 1 - Frequency distribution of occurrences of the personalities in the annotated titles. annotated.</figcaption>
+</figure>
 
 Of the 6,648 mentions of names of political personalities annotated, 515 are distinct and have an identifier on Wikidata. A total of 129 distinct entities, identified by aggregating the *string* that mentions them in the title, are not associated with an identifier because they are not present in Wikidata.
 
@@ -207,18 +211,15 @@ Using the `EntityRuler`[^6] component of spaCy 3.0, we define a series of of rul
 
 Table [2](#tab:results_ner){reference-type="ref" reference="tab:results_ner"} shows the performance for the 3 approaches on the annotated dataset.
 
-::: center
-::: {#tab:results_ner}
-  **Abordagem**    **P**   **A**   **F~1~**
-  --------------- ------- ------- ----------
-  Regras           0,99    0,42      0,59
-  Modelo           0,97    0,91      0,94
-  Regras+Modelo    0,97    0,92      0,94
 
-  :  (P)recisão, A(brangência) e F~1~ para a componente de REM
-  combinando regras e o modelos supervisionado.
-:::
-:::
+| Approach<img width=150/>      | Precision<img width=150/>     | Recall<img width=150/>     | F-1    |
+| -------------- | ----- | ----- | ----- |
+| Rules         | 0,99  | 0,42  | 0,59  |
+| Model         | 0,97  | 0,91  | 0,94  |
+| Rules+Model   | 0,97  | 0,92  | 0,94  |
+
+
+<br>
 
 ## __Entity Linking over Wikidata__ {#subsec:ent_linking}
 
@@ -228,17 +229,19 @@ The algorithm first interrogates the knowledge base (KB) using the reference to 
 
 Algorithm 1 describes the procedure that uses only the headline.
 
-``` {#lst:alg1 .python language="python" columns="fullflexible" frame="single" label="lst:alg1" title="Algoritmo 1. Ligação com a Wikidata usando apenas o título." captionpos="b"}
+
+```python
 def title_only(ent, candidates):
     if len(candidates) == 1:
-      if jaro(ent,candidates[0]) >= 0.8:
-        return candidates[0]
+        if jaro(ent, candidates[0]) >= 0.8:
+            return candidates[0]
     else:
-      filtered = exact(ent, candidates):
-    if len(filtered) == 1:
-      return candidates[0]
+        filtered = exact(ent, candidates)
+        if len(filtered) == 1:
+            return candidates[0]
     return None
 ```
+
 
 If no candidates are generated in the first phase or none are selected from the list of candidates, the algorithm tries to expand the entities mentioned in the headline based on the news text, exploiting a pattern: a personality mentioned in the headline by a short version of their name (e.g. just their surname) is usually referred to in the news text by a fuller name.
 
@@ -247,15 +250,13 @@ The algorithm identifies all the people mentioned in the news text, using the co
 If the process results in only one expanded entity and there is a similarity of 1.0 with one of the candidates previously selected from the CBB, that candidate is chosen. Otherwise, the expanded entity is used to interrogate the CBB and collect a new list of candidates. If there is only one candidate on this list and its similarity is at least 0.8 to the expanded entity, that candidate is chosen. If there is more than one candidate and only one has a similarity of 1.0 to the expanded entity, that one is chosen.
 
 
-Translated with www.DeepL.com/Translator (free version)
-``` {#lst:alg2 .python language="python" columns="fullflexible" frame="single" label="lst:alg2" title="Algoritmo 2. Ligação com a Wikidata usando o texto da notícia para expandir as entidades reconhecidas no título." captionpos="b"}
-]
+```python
 def article_text(expanded, candidates):
   if len(expanded) == 1:
     filtered = exact(expanded[0], candidates)
     if len(filtered) == 1:
       return filtered[0]
-      
+
     x_candidates = get_candidates(expanded)
     if len(x_candidates) == 1:
       if jaro(expanded, x_candidates[0])>=0.8:
@@ -285,19 +286,20 @@ The results of this approach on the annotated dataset are described in Table [3]
 
 In Table [3](#tab:ent_linking_results){reference-type="ref" reference="tab:ent_linking_results"} two evaluations are reported, the first column describes the results for the base algorithm, without mappings. The second column considers the ambiguity that a reference may have in terms of the personalities it represents. For example, in the annotated data, all mentions of *Cavaco* correspond to the personality *Cavaco Silva*, based on this the algorithm maps all references to *Cavaco* to *Cavaco Silva*. Similarly, all mentions of *Marques Mendes* correspond to the personality *Luís Marques Mendes*. By using these mappings we reduce the number of entities for which the algorithm cannot find an identifier.
 
-::: center
-::: {#tab:ent_linking_results}
-  **Classificação**     **base**   ***mapeamentos***
-  ------------------- ---------- -------------------
-  correcta                 5 059               5 136
-  incorrecta                  43                  43
-  não desambiguada           246                 169
-  **Exactidão**             0,93                0,96
+<br>
 
-  : Resultados da avaliação do algoritmo de ligação com a Base de Conhecimento.
-:::
-:::
+| Classificação<img width=250/>       | base<img width=150/>     | mapeamentos<img width=150/> |
+| ------------------- | -------- | ----------- |
+| correcta             | 5,059    | 5,136       |
+| incorrecta           | 43       | 43          |
+| não desambiguada    | 246      | 169         |
+|-----------------------------------------------
+| **Accuracy**       | 0,93     | 0,96        |
 
+Table Caption: Resultados da avaliação do algoritmo de ligação com a Base de Conhecimento.
+
+
+<br>
 
 
 ## __Relationship Type Classifier__ {#subsec:rel_classifier}
@@ -312,75 +314,51 @@ The LSTM recurrent neural network was used in a bidirectional architecture, i.e.
 
 The DistilBERT model was trained on the basis of a pre-trained model for Portuguese [@abdaoui-etal-2020-load] and then fine-tuned on the annotated dataset, i.e.: the weights of all the pre-trained *layers* were updated taking into account the task of classifying the relation. The network was trained for 5 *epochs* with a *batch size* of 8.
 
-::: subtable
-.5
+| Relação       | P     | A     | F1    |
+| ------------- | ----- | ----- | ----- |
+| opõe-se       | 0,71  | 0,69  | 0,70  |
+| outra         | 0,69  | 0,69  | 0,69  |
+| apoia         | 0,65  | 0,69  | 0,67  |
+| Macro-Média   | 0,69  | 0,69  | 0,69  |
 
-::: {#tab:results_relacao}
-  **Relação**    **P**   **A**   **F~1~**
-  ------------- ------- ------- ----------
-  opõe-se        0,71    0,69      0,70
-  outra          0,69    0,69      0,69
-  apoia          0,65    0,69      0,67
-  Macro-Média    0,69    0,69      0,69
+**Table 1: Results for Relationship Evaluation para uma avaliação com 4-partições e validação cruzada com SVM.**
 
-  : (P)recisão, (A)brangência e F~1~ para uma avaliação com 4-partições e validação cruzada com diferentes classificadores.
-:::
-:::
 
-::: subtable
-.5
 
-::: {#tab:results_relacao}
-  **Relação**    **P**   **A**   **F~1~**
-  ------------- ------- ------- ----------
-  opõe-se        0,75    0,64      0,69
-  outra          0,65    0,75      0,70
-  apoia          0,65    0,62      0,63
-  Macro-Média    0,69    0,68      0,68
+| Relação       | P     | A     | F1    |
+| ------------- | ----- | ----- | ----- |
+| opõe-se       | 0,75  | 0,64  | 0,69  |
+| outra         | 0,65  | 0,75  | 0,70  |
+| apoia         | 0,65  | 0,62  | 0,63  |
+| Macro-Média   | 0,69  | 0,68  | 0,68  |
 
-  : (P)recisão, (A)brangência e F~1~ para uma avaliação com 4-partições e validação cruzada com diferentes classificadores.
-:::
-:::
+**Table 2: Results for Relationship Evaluation**
+(P)recisão, (A)brangência e F1 para uma avaliação com 4-partições e validação cruzada com LSTM bidireccional..
 
-::: subtable
-.5
+| Relação       | P     | A     | F1    |
+| ------------- | ----- | ----- | ----- |
+| opõe-se       | 0,74  | 0,76  | 0,75  |
+| outra         | 0,72  | 0,71  | 0,72  |
+| apoia         | 0,72  | 0,71  | 0,71  |
+| Macro-Média   | 0,73  | 0,72  | 0,72  |
 
-::: {#tab:results_relacao}
-  **Relação**    **P**   **A**   **F~1~**
-  ------------- ------- ------- ----------
-  opõe-se        0,74    0,76      0,75
-  outra          0,72    0,71      0,72
-  apoia          0,72    0,71      0,71
-  Macro-Média    0,73    0,72      0,72
-
-  : (P)recisão, (A)brangência e F~1~ para uma avaliação com 4-partições e validação cruzada com diferentes classificadores.
-:::
-:::
+**Table 3: Results for Relationship Evaluation**
+(P)recisão, (A)brangência e F1 para uma avaliação com 4-partições e validação cruzada com DistilBERT pr´e-treinado em Portuguˆes..
 
 Table [6](#tab:results_relation){reference-type="ref" reference="tab:results_relation"} describes the results for the various classifiers. There are no marked differences in performance between the 3 classifiers, although the approach using DistilBERT achieved the best results. When analysing the results, we noticed that there are relations that are difficult to classify correctly, particularly those containing idiomatic expressions, for example:
 
 - *José Lello says that Nogueira Leite wants to "abifar uns tachos"*
 
-- Louçã says that Passo Coelho's "António Borges is the talking cricket".
+- *Louçã says that Passo Coelho's "António Borges is the talking cricket".*
 
 Other relationships are ambiguous and difficult to categorise without any other context than the one in the title. In the dataset we have made public, all the headlines contain a URL to the text of the news item.
 
 The results obtained with the approaches described, for Portuguese data, are in line with the results previously reported on English data [@liang2019blames; @park-etal-2021-blames].
 
-::: table*
-  **Título**                                                                          **Regra Aplicada**
-  ---------------------------------------------------------------------------------- --------------------
-  **Marques Júnior** elogiado por **Cavaco Silva** pela "integridade de carácter\"       VOZ_PASSIVA
-  **Passos Coelho** é acusado de imaturidade política por **Santos Silva**               VOZ_PASSIVA
-  **António Costa** vive no "país das maravilhas\" acusa **Assunção Cristas**             VERBO_ENT2
-  **Passos Coelho** "insultou 500 mil portugueses\", acusa **José Sócrates**              VERBO_ENT2
-  **Maria Luís Albuquerque** sob críticas de **Luís Amado**                               NOUN_ENT2
-  **André Ventura** diz-se surpreendido com perda de apoio de **Cristas**                 NOUN_ENT2
-:::
 
-## __Relationship Direction Classifier___ {#subsec:rel_direction}
+## __Relationship Direction Classifier__ {#subsec:rel_direction}
 
-The direction classifier has 2 possible classes. As shown in Table [1](#tab:rel_dataset){reference-type="ref" reference="tab:rel_dataset"}, the dataset has a bias towards the Ent~1~$\rightarrow$Ent~2~ class representing 91.5% of the data. We therefore chose to develop a rule-based approach to detect only the Ent~1~$\leftarrow$Ent~2~ class, and whenever none of the rules are verified, the classifier assigns the Ent~1~$\rightarrow$Ent~2~ class.
+The direction classifier has 2 possible classes. As shown in Table [1](#tab:rel_dataset){reference-type="ref" reference="tab:rel_dataset"}, the dataset has a bias towards the Ent~1~$\rightarrow$Ent~2~ class representing 91.5% of the data. We therefore chose to develop a rule-based approach to detect only the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class, and whenever none of the rules are verified, the classifier assigns the Ent~1~$\rightarrow$Ent~2~ class.
 
 We defined rules based on patterns built with morphological and syntactic information [@nivre-etal-2020-universal] extracted from the title with spaCy, using the same model as described in Section [5](#sec:rel_data_annot){reference-type="ref" reference="sec:rel_data_annot"}. We extracted morpho-syntactic information from all the words, including information on conjugation for verbs: person and number. The patterns defined were as follows:
 
@@ -392,20 +370,30 @@ We defined rules based on patterns built with morphological and syntactic inform
 
 Table [\[tab:examples_patterns_direction\]](#tab:examples_patterns_direction){reference-type="ref" reference="tab:examples_patterns_direction"} shows some examples of news headlines and the rules that were applied to detect the Ent~1~$\leftarrow$Ent~2~ direction. The rules are applied sequentially, in the same order as described here. If none of the patterns are detected in the headline, the classifier assigns the Ent~1~$\rightarrow$Ent~2~ class.
 
+
+| Título<img width=150/>                                                                           | Regra Aplicada |
+| -------------------------------------------------------------------------------- | -------------- |
+| Marques Júnior elogiado por Cavaco Silva pela "integridade de carácter"       | VOZ_PASSIVA    |
+| Passos Coelho é acusado de imaturidade política por Santos Silva               | VOZ_PASSIVA    |
+| António Costa vive no "país das maravilhas" acusa Assunção Cristas             | VERBO_ENT2     |
+| Passos Coelho "insultou 500 mil portugueses", acusa José Sócrates              | VERBO_ENT2     |
+| Maria Luís Albuquerque sob críticas de Luís Amado                               | NOUN_ENT2      |
+| André Ventura diz-se surpreendido com perda de apoio de Cristas                 | NOUN_ENT2      |
+
+
+
 Table [7](#tab:direction_clf_results){reference-type="ref" reference="tab:direction_clf_results"} contains the results of this classifier for the annotated data set.
 
-::: center
-::: {#tab:direction_clf_results}
-  **Direction**                  **P**   **A**   **F~1~**    **#Títulos**
-  ----------------------------- ------- ------- ---------- --------------
-  Ent~1~ $\rightarrow$ Ent~2~    0,99    1,00      0,99             1 488
-  Ent~1~ $\leftarrow$ Ent~2~     0,95    0,84      0,89               129
-  weighted avg.                  0,98    0,98      0,98             1 517
+**Table: Direction Classification Results**
 
-  : (P)recisão, A(brangência) e F~1~ usando 3 regras baseadas em
-  padrões.
-:::
-:::
+| Direction<img width=150/>                    | P     | A     | F1    | #Títulos |
+| ---------------------------- | ----- | ----- | ----- | -------- |
+| Ent1 → Ent2                  | 0,99  | 1,00  | 0,99  | 1,488    |
+| Ent1 ← Ent2                  | 0,95  | 0,84  | 0,89  | 129      |
+| weighted avg.                | 0,98  | 0,98  | 0,98  | 1,517    |
+
+(P)recisão, A(brangência) e F1 usando 3 regras baseadas em padrões.
+
 
 The results show that the proposed method correctly classifies a large part of the direction of the Ent~1~$\leftarrow$Ent~2~ relations, the only class for which rules have been developed, without prejudice to the Ent~1~$\rightarrow$Ent~2~ class.
 
@@ -421,7 +409,7 @@ The graph generated has a total of 680 political personalities, 107 political pa
 
 
 
-# __Conclusions and Future Work___ {#sec:future_work}
+# __Conclusions and Future Work__ {#sec:future_work}
 
 This work describes in detail the process of constructing a semantic graph from political news headlines.
 
@@ -429,7 +417,12 @@ Using SPARQL queries and referring to the various properties taken from Wikidata
 
 One of the limitations of this work is that the headline doesn't contain enough information to realise what kind of relationship or feeling exists from one personality to another, or the presence of idiomatic expressions, which make automatic classification difficult. As future work we would like to explore the text of the news item in order to complement the headline and improve the detection of the relationship. Also based on the text of the headline, the relationships could be enriched by categorising them into topics, giving the relationship another dimension, a context for the feeling of support or opposition.
 
-Some headlines contain a mutual relationship, for example: *"Sócrates and Alegre exchange accusations over co-incineration\"* or *"Pinto da Costa hits back at Pacheco Pereira's criticisms\"*, could be categorised as Ent~2~$\leftrightarrow$Ent~1~, indicating in this case that both personalities are accusing each other.
+Some headlines contain a mutual relationship, for example: 
+
+- *"Sócrates and Alegre exchange accusations over co-incineration\"*
+- *"Pinto da Costa hits back at Pacheco Pereira's criticisms\"*
+
+could be categorised as Ent~2~$\leftrightarrow$Ent~1~, indicating in this case that both personalities are accusing each other.
 
 This work also leaves open the possibility of carrying out various studies based on the structure of the graph, for example: finding communities of support and opposition as a function of time and verifying the changes within these communities. Political triangles can also be studied: if two political personalities, X and Y, always accuse or defend a third personality Z, what is the typical relationship expected between X and Y?
 
@@ -439,9 +432,11 @@ This work also leaves open the possibility of carrying out various studies based
 
 We would like to thank Nuno Feliciano for all his comments during the preparation of this work and the Arquivo.PT team for providing access to the archived data via an API and for considering this work for the Arquivo.PT 2021 awards. To Edgar Felizardo and Tiago Cogumbreiro for their extensive revisions to the article, and also to reviewers Sérgio Nunes and José Paulo Leal for all their comments and corrections.
 
+
 # __References__ {#agradecimentos}
 
 
+# __References__ {#agradecimentos}
 
 [^1]: <https://query.wikidata.org>
 
