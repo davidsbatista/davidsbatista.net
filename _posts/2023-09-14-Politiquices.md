@@ -85,7 +85,7 @@ In this section we describe resources similar to those we have produced in this 
 
 
 
-## __Extracting targeted sentiment from news text__
+## __Extracting Targeted Sentiment from News Text__
 
 Several authors have explored methods for extracting sentiment involving political actors. It should be noted that many of the works transform the task of detecting sentiment into a task of detecting a relationship between mentioned entities [@bassignana-plank-2022-mean].
 
@@ -137,35 +137,32 @@ In the annotation process all the titles were loaded into the Argilla[^4] annota
 
 For each title, we corrected the recognised entities and their Wikidata identifiers where necessary. We annotated the existing relationship: **opposition** or **support**, and its direction. When neither is the case, the relationship is noted as **other**. Table [\[tab:samples\]](#tab:samples){reference-type="ref" reference="tab:samples"} shows some examples of the annotated relationships. The annotation process was carried out by an annotator. In the most ambiguous situations, for example, where the information in the news text is needed to decide, the relationships have been annotated as **other**.
 
-::: table*
-  **Título**                                                                           **Relação**
-  ------------------------------------------------------------------------------ -----------------------
-  **Sá Fernandes** acusa **António Costa** de defender interesses corporativos    Ent~1~-opõe-se-Ent~2~
-  **Joana Mortágua**: declarações de **Cavaco** são "uma série de disparates\"    Ent~1~-opõe-se-Ent~2~
-  **Passos Coelho** é acusado de imaturidade política por **Santos Silva**        Ent~2~-opõe-se-Ent~1~
-  **Durão Barroso** defende **Paulo Portas** como "excelente ministro\"            Ent~1~-apoia-Ent~2~
-  **Armando Vara** escolhido por **Guterres** para coordenar autárquicas           Ent~2~-apoia-Ent~1~
-  **Manuel Alegre** recebe apoio de **Jorge Sampaio**                              Ent~2~-apoia-Ent~1~
-  **Rui Tavares** e **Ana Drago** eleitos nas primárias do LIVRE                          outra
-  **Teresa Zambujo** reconhece vitória de **Isaltino Morais**                             outra
-  CDS acusa **Marcelo Rebelo de Sousa** de pôr em causa relação com **Cavaco**            outra
-:::
+<br>
 
+Title | Relationship
+--- | ---:
+Sá Fernandes accuses António Costa of defending corporate interests | Ent1-opposes-Ent2
+Joana Mortágua: statements by Cavaco are "a series of nonsense" | Ent1-opposes-Ent2
+Passos Coelho is accused of political immaturity by Santos Silva | Ent2-opposes-Ent1
+Durão Barroso supports Paulo Portas as an "excellent minister" | Ent1-supports-Ent2
+Armando Vara chosen by Guterres to coordinate local elections | Ent2-supports-Ent1
+Manuel Alegre receives support from Jorge Sampaio | Ent2-supports-Ent1
+Rui Tavares and Ana Drago elected in the LIVRE primaries | other
+Teresa Zambujo acknowledges Isaltino Morais' victory | other
+CDS accuses Marcelo Rebelo de Sousa of jeopardising the relationship with Cavaco | other
+
+<br>
 
 This process resulted in a dataset containing 3,324 annotated titles. For each title we annotated only two personalities and the relationship between them, even if the titles contain references to more than two personalities. Table [1](#tab:rel_dataset){reference-type="ref" reference="tab:rel_dataset"} characterises the data in terms of number of relationships and direction. Most titles contain an **opposition** or **other** relationship, and the vast majority of relationships have a direction from the first to the second entity, Ent~1~$\rightarrow$Ent~2~.
 
-::: center
-::: {#tab:rel_dataset}
-  **Relação**    **Ent~1~$\rightarrow$Ent~2~**   **Ent~1~$\leftarrow$Ent~2~**    **Total**
-  ------------- ------------------------------- ------------------------------ -----------
-  opõe-se                    1 155                           102                     1 257
-  apoia                       717                             44                       761
-  outra                       \-                              \-                     1 306
-  Total                      1 872                           146                     3 324
+<br>
 
-  : Relações por classe e direcção.
-:::
-:::
+Relação | Ent1->Ent2 | Ent1<-Ent2 | Total
+--- | --- | --- | ---
+opõe-se | 1,155 | 102 | 1,257
+apoia | 717 | 44 | 761
+outra | - | - | 1,306
+Total | 1,872 | 146 | 3,324
 
 The ratio of oppositional relationships to supportive relationships is 1.6. This value is similar to the data for English provided by [@park-etal-2021-blames], where this same ratio between the two classes is 1.8. In terms of class representativeness, aggregated by sentiment, the two datasets are also similar, with **other** being the most present class, followed by **opposition** and lastly **support**.
 
@@ -303,7 +300,7 @@ In Table [3](#tab:ent_linking_results){reference-type="ref" reference="tab:ent_l
 
 
 
-## Relationship Type Classifier {#subsec:rel_classifier}
+## __Relationship Type Classifier__ {#subsec:rel_classifier}
 
 We chose to break down the task of classifying the relationship into two tasks: classifying the type of relationship and the direction of the relationship, as opposed to developing a single classifier that would have to distinguish between 5 possible classes, and with classes that are very unbalanced in terms of representativeness. This section describes the classifier developed to detect the type of relationship present in a title, with 3 possible classes: **opposes**, **supports** and **other**. All the experiments were carried out with a cross-evaluation of 4 partitions[^7].
 
@@ -381,7 +378,7 @@ The results obtained with the approaches described, for Portuguese data, are in 
   **André Ventura** diz-se surpreendido com perda de apoio de **Cristas**                 NOUN_ENT2
 :::
 
-## Relation Direction Classifier {#subsec:rel_direction}
+## __Relationship Direction Classifier___ {#subsec:rel_direction}
 
 The direction classifier has 2 possible classes. As shown in Table [1](#tab:rel_dataset){reference-type="ref" reference="tab:rel_dataset"}, the dataset has a bias towards the Ent~1~$\rightarrow$Ent~2~ class representing 91.5% of the data. We therefore chose to develop a rule-based approach to detect only the Ent~1~$\leftarrow$Ent~2~ class, and whenever none of the rules are verified, the classifier assigns the Ent~1~$\rightarrow$Ent~2~ class.
 
@@ -438,9 +435,13 @@ This work also leaves open the possibility of carrying out various studies based
 
 
 
-# Acknowledgements {#agradecimentos .unnumbered}
+# __Acknowledgements__ {#agradecimentos}
 
 We would like to thank Nuno Feliciano for all his comments during the preparation of this work and the Arquivo.PT team for providing access to the archived data via an API and for considering this work for the Arquivo.PT 2021 awards. To Edgar Felizardo and Tiago Cogumbreiro for their extensive revisions to the article, and also to reviewers Sérgio Nunes and José Paulo Leal for all their comments and corrections.
+
+# __References__ {#agradecimentos}
+
+
 
 [^1]: <https://query.wikidata.org>
 
