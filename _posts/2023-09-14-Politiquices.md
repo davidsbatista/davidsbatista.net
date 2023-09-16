@@ -14,43 +14,6 @@ I was awarded the 2nd place in the [Arquivo.pt Awards 2021](https://sobre.arquiv
 
 <br>
 
-<!--
-1. [Getting the Most out of Wikidata: Semantic Technology Usage in Wikipedia’s Knowledge Graph](https://iccl.inf.tu-dresden.de/w/images/5/5a/Malyshev-et-al-Wikidata-SPARQL-ISWC-2018.pdf)
-
-2. [Search the Past with the Portuguese Web Archive](https://doi.org/10.1145/2487788.2487934)
-
-3. [Resource Description Framework](#resource-description-framework)
-
-4. [RDF 1.1 Primer W3C Working Group Note](https://www.w3.org/TR/rdf11-primer/)
-
-5. [SPARQL 1.1 Query Language](http://www.w3.org/TR/sparql11-query)
-
-6. [Evaluating CETEMPúblico, a Free Resource for Portuguese](https://www.aclweb.org/anthology/P01-1058)
-
-7. [CHAVE: Topics and Questions on the Portuguese Participation in CLEF](http://ceur-ws.org/Vol-1170/CLEF2004wn-other-Santos2004.pdf)
-
-8. [Term-Weighting Approaches in Automatic Text Retrieval](https://doi.org/10.1016/0306-4573(88)90021-0)
-
-9. [Elasticsearch: The Definitive Guide](https://www.amazon.com/Elasticsearch-Definitive-Expanded-Distributed-Scalable/dp/1449358543)
-
-10. [spaCy: Industrial-strength Natural Language Processing in Python](https://doi.org/10.5281/zenodo.1212303)
-
-11. [Support-vector networks](https://link.springer.com/article/10.1007/BF00994018)
-
-12. [Universal Dependencies v2: An Evergrowing Multilingual Treebank Collection](https://www.aclweb.org/anthology/2020.lrec-1.497)
-
-13. [Advances in Record-Linkage Methodology as Applied to Matching the 1985 Census of Tampa, Florida](https://doi.org/10.1080/01621459.1989.10478785)
-
-14. [A free and open source Java framework for building Semantic Web and Linked Data applications](https://jena.apache.org/)
-
-15. [Learning to Extract International Relations from Political Context](https://aclanthology.org/P13-1108)
-
-16. [No Permanent Friends or Enemies: Tracking Relationships between Nations from News](https://aclanthology.org/N19-1167)
--->
-
-
-
-
 
 # __Abstract__ {#sec:abstract}
 
@@ -140,7 +103,7 @@ In this section we describe resources similar to those we have produced in this 
 
 ## __Extracting Targeted Sentiment from News Text__
 
-Several authors have explored methods for extracting sentiment involving political actors. It should be noted that many of the works transform the task of detecting sentiment into a task of detecting a relationship between mentioned entities [@bassignana-plank-2022-mean].
+Several authors have explored methods for extracting sentiment involving political actors. It should be noted that many of the works transform the task of detecting sentiment into a task of detecting a relationship between mentioned entities [Bassignana & Plank, 2022 ](https://aclanthology.org/2022.acl-srw.7){:target="_blank"}[^1].
 
 Some explore these relationships in an international political context, i.e.: the actors are nations mentioned in political news text, and some of these relationships implicitly have a positive or negative sentiment. [@oconnor-etal-2013-learning] propose an unsupervised model based on *topic models* and linguistic patterns to identify relationships, in an open-ended way, describing conflicts between nations referenced in English news articles. [@han-etal-2019-permanent] also propose an unsupervised model to generate relationship descriptors for pairs of nations mentioned in English news articles. The proposed model extends the work of [@iyyer-etal-2016-feuding] by integrating linguistic information (i.e.: verbal predicates and common and proper nouns) in order to identify the context of the relations.
 
@@ -304,7 +267,7 @@ The recognition of entities mentioned is based on a hybrid method, combining rul
 
 Using the [EntityRuler](https://spacy.io/api/entityruler){:target="_blank"} component of spaCy 3.0, we define a series of of rules combining patterns based on the names of all the personalities from the knowledge base described in [Section 3](#sec_kb). 
 
-To detect entities of type `PERSON` this classifier applies first the rules and then the supervised model for Portuguese model. In situations of disagreement between the two approaches, the entities marked with rules are prioritised. Table 3 shows the performance for the 3 approaches on the annotated dataset.
+To detect entities of type `PERSON` this classifier applies first the rules and then the supervised model for Portuguese model. In situations of disagreement between the two approaches, the entities marked with rules are prioritised. __Table 3__ shows the performance for the 3 approaches on the annotated dataset.
 
 <br>
 
@@ -383,9 +346,9 @@ If the expansion process results in several expanded entities, we filter out can
 
 Algorithm 2 describes this procedure using the text of the news item.
 
-The results of this approach on the annotated dataset are described in Table [3]. The *incorrect* classification corresponds to personalities who were not associated with the correct identifier in Wikidata, *not disambiguated* for those for whom the algorithm was unable to select a unique identifier from all the candidates or the BC did not return any results.
+The results of this approach on the annotated dataset are described in __Table 3__. The *incorrect* classification corresponds to personalities who were not associated with the correct identifier in Wikidata, *not disambiguated* for those for whom the algorithm was unable to select a unique identifier from all the candidates or the KB did not return any results.
 
-In Table [3](#tab:ent_linking_results) two evaluations are reported, the first column describes the results for the base algorithm, without mappings. The second column considers the ambiguity that a reference may have in terms of the personalities it represents. For example, in the annotated data, all mentions of *Cavaco* correspond to the personality *Cavaco Silva*, based on this the algorithm maps all references to *Cavaco* to *Cavaco Silva*. Similarly, all mentions of *Marques Mendes* correspond to the personality *Luís Marques Mendes*. By using these mappings we reduce the number of entities for which the algorithm cannot find an identifier.
+In __Table 3__ two evaluations are reported, the first column describes the results for the base algorithm, without mappings. The second column considers the ambiguity that a reference may have in terms of the personalities it represents. For example, in the annotated data, all mentions of *Cavaco* correspond to the personality *Cavaco Silva*, based on this the algorithm maps all references to *Cavaco* to *Cavaco Silva*. Similarly, all mentions of *Marques Mendes* correspond to the personality *Luís Marques Mendes*. By using these mappings we reduce the number of entities for which the algorithm cannot find an identifier.
 
 <br>
 
@@ -482,7 +445,7 @@ The results obtained with the approaches described, for Portuguese data, are in 
 
 ## __Relationship Direction Classifier__ {#subsec:rel_direction}
 
-The direction classifier has 2 possible classes. As shown in Table [1](#tab:rel_dataset), the dataset has a bias towards the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class representing 91.5% of the data. We therefore chose to develop a rule-based approach to detect only the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class, and whenever none of the rules are verified, the classifier assigns the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class.
+The direction classifier has 2 possible classes. As shown in __Table 1__, the dataset has a bias towards the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class representing 91.5% of the data. We therefore chose to develop a rule-based approach to detect only the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class, and whenever none of the rules are verified, the classifier assigns the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class.
 
 We defined rules based on patterns built with morphological and syntactic information [@nivre-etal-2020-universal] extracted from the title with spaCy, using the same model as described in [Section 5](#sec:rel_data_annot). We extracted morpho-syntactic information from all the words, including information on conjugation for verbs: person and number. The patterns defined were as follows:
 
@@ -572,6 +535,18 @@ This work also leaves open the possibility of carrying out various studies based
 # __Acknowledgements__ {#agradecimentos}
 
 We would like to thank Nuno Feliciano for all his comments during the preparation of this work and the Arquivo.PT team for providing access to the archived data via an API and for considering this work for the Arquivo.PT 2021 awards. To Edgar Felizardo and Tiago Cogumbreiro for their extensive revisions to the article, and also to reviewers Sérgio Nunes and José Paulo Leal for all their comments and corrections.
+
+
+# __References__ {#references}
+
+[^1]: **What Do You Mean by Relation Extraction? A Survey on Datasets and Study on Scientific Relation Classification**
+       - *Authors*: Elisa Bassignana, Barbara Plank
+       - *Conference*: Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics: Student Research Workshop
+       - *Year*: 2022
+       - *DOI*: [10.18653/v1/2022.acl-srw.7](https://aclanthology.org/2022.acl-srw.7)
+       - *Pages*: 67-83
+
+<!--
 
 # __References__ {#references}
 
@@ -745,3 +720,4 @@ We would like to thank Nuno Feliciano for all his comments during the preparatio
     - *Conference*: Proceedings of the 2019 Conference of the North American Chapter of the ACL: Human Language Technologies, Volume 1 (Long and Short Papers)
     - *Year*: 2019
     - *DOI*: [10.18653/v1/N19-1167](https://aclanthology.org/N19-1167)
+-->
