@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Extracting Support and Opposition Relationships in Portuguese Political News Headlines
+title: Support and Opposition Relationships in Political News Headlines
 date: 2023-09-14 00:00:00
 tags: relationship-extraction dataset semantic-web political-science
 categories: [blog]
@@ -194,7 +194,7 @@ In the annotation process all the titles were loaded into the Argilla[^4] annota
 
 For each title, we corrected the recognised entities and their Wikidata identifiers where necessary. We annotated the existing relationship: **opposition** or **support**, and its direction. When neither is the case, the relationship is noted as **other**. 
 
-Table 1 shows some examples of the annotated relationships. The annotation process was carried out by one single annotator. In the most ambiguous situations, for example, where the full information in the news text is needed to decide, the relationships have been annotated as **other**.
+__Table 1__ shows some examples of the annotated relationships. The annotation process was carried out by one single annotator. In the most ambiguous situations, for example, where the full information in the news text is needed to decide, the relationships have been annotated as **other**.
 
 <br>
 
@@ -210,14 +210,14 @@ Table 1 shows some examples of the annotated relationships. The annotation proce
 |Teresa Zambujo acknowledges Isaltino Morais' victory 							 | other
 |CDS accuses Marcelo Rebelo de Sousa of jeopardising the relationship with Cavaco | other
 
-__Table 1__: 
+__Table 1__: Examples of headlines and the corresponding manually annotated relationships.
 
 
 <br>
 
-This process resulted in a dataset containing 3,324 annotated titles. For each title we annotated only two personalities and the relationship between them, even if the titles contain references to more than two personalities. 
+This process resulted in a dataset containing 3 324 annotated titles. For each title we annotated only two personalities and the relationship between them, even if the titles contain references to more than two personalities. 
 
-Table 2 characterises the data in terms of number of relationships and direction. Most titles contain an **opposition** or **other** relationship, and the vast majority of relationships have a direction from the first to the second entity, __Ent1 &rarr; Ent2__.
+__Table 2__ characterises the data in terms of number of relationships and direction. Most titles contain an **opposition** or **other** relationship, and the vast majority of relationships have a direction from the first to the second entity, __Ent1 &rarr; Ent2__.
 
 <br>
 
@@ -228,7 +228,7 @@ Table 2 characterises the data in terms of number of relationships and direction
 |outra 					|             -                    | -                                | 1,306
 |Total 					| 1,872                            | 146                              | 3,324
 
-__Table 2__: 
+__Table 2__: Relationships by class and direction.
 
 <br>
 
@@ -238,6 +238,10 @@ The ratio of oppositional relationships to supportive relationships is 1.6. This
   <img style="width: 65%; height: 65%" src="/assets/images/2023-09-14-power_law_ent_freq.png">
   <figcaption>Figure 1 - Frequency distribution of occurrences of the personalities in the annotated titles. annotated.</figcaption>
 </figure>
+
+
+<br>
+
 
 Of the 6 648 mentions of names of political personalities annotated, 515 are distinct and have an identifier on Wikidata. A total of 129 distinct entities, identified by aggregating the string that mentions them in the title, are not associated with an identifier because they are not present in Wikidata.
 
@@ -256,7 +260,7 @@ In terms of the number of words contained in the titles, excluding words that ar
    "ent2_id": "Q15849"}
 ```
 
-__Figure 2__: Example of the annotated dataset in JSON.
+__Figure 2__: Example of one annotated sample in JSON.
 
 
 <br>
@@ -291,7 +295,7 @@ To detect entities of type `PERSON` this classifier applies first the rules and 
 | Model         | 0,97  | 0,91  | 0,94  |
 | Rules+Model   | 0,97  | 0,92  | 0,94  |
 
-__Table 3__: 
+__Table 3__: Precision, Recall and F<sub>1</sub> for the NER component combining rules and a supervised model.
 
 <br>
 
@@ -321,7 +325,7 @@ If no candidates are generated in the first phase or none are selected from the 
 
 The algorithm identifies all the people mentioned in the news text, using the component described in [Section 6.1](#subsec:ner), and selects only those that have at least one name in common with the name of the personality mentioned in the headline, thus generating an expanded entity, and assuming that it corresponds to the same entity mentioned in the headline.
 
-If the process results in only one expanded entity and there is a similarity of 1.0 with one of the candidates previously selected from the CBB, that candidate is chosen. Otherwise, the expanded entity is used to interrogate the CBB and collect a new list of candidates. If there is only one candidate on this list and its similarity is at least 0.8 to the expanded entity, that candidate is chosen. If there is more than one candidate and only one has a similarity of 1.0 to the expanded entity, that one is chosen.
+If the process results in only one expanded entity and there is a similarity of 1.0 with one of the candidates previously selected from the KB, that candidate is chosen. Otherwise, the expanded entity is used to query the KB and collect a new list of candidates. If there is only one candidate on this list and its similarity is at least 0.8 to the expanded entity, that candidate is chosen. If there is more than one candidate and only one has a similarity of 1.0 to the expanded entity, that one is chosen.
 
 
 ```python
@@ -352,7 +356,7 @@ def article_text(expanded, candidates):
   return None
 ```
 
-If the expansion process results in several expanded entities, we filter out candidates from the CB with a similarity of 1.0 to the expanded entity, and if there is only one, that candidate is chosen. In any other case not described here, no candidate is selected.
+If the expansion process results in several expanded entities, we filter out candidates from the KB with a similarity of 1.0 to the expanded entity, and if there is only one, that candidate is chosen. In any other case not described here, no candidate is selected.
 
 Algorithm 2 describes this procedure using the text of the news item.
 
@@ -370,7 +374,7 @@ In Table [3](#tab:ent_linking_results) two evaluations are reported, the first c
 |-----------------------------------------------
 | **Accuracy**       | 0,93     | 0,96        |
 
-__Table 4__:  Resultados da avaliação do algoritmo de ligação com a Base de Conhecimento.
+__Table 4__:  Accuracy results for the linking approach .
 
 
 <br>
@@ -402,8 +406,7 @@ The DistilBERT model was trained on the basis of a pre-trained model for Portugu
 | apoia         | 0,65  | 0,69  | 0,67  |
 | Macro-Média   | 0,69  | 0,69  | 0,69  |
 
-__Table 5__:  
-
+__a)__: SVM with a linear kernel linear.
 
 | Relação       | P     | A     | F1    |
 | ------------- | ----- | ----- | ----- |
@@ -412,7 +415,8 @@ __Table 5__:
 | apoia         | 0,65  | 0,62  | 0,63  |
 | Macro-Média   | 0,69  | 0,68  | 0,68  |
 
-__Table 6__: 
+
+__b)__: bi-Directional LSTM.
 
 
 | Relação       | P     | A     | F1    |
@@ -422,7 +426,9 @@ __Table 6__:
 | apoia         | 0,72  | 0,71  | 0,71  |
 | Macro-Média   | 0,73  | 0,72  | 0,72  |
 
-__Table 7__: 
+__c)__: DistilBERT pre-trained on Portuguese corpora.
+
+__Table 5__: Precision, Recall and F1 for an evaluation with 4-partitions and cross-validation with different classifiers.
 
 
 <br>
@@ -442,27 +448,27 @@ The results obtained with the approaches described, for Portuguese data, are in 
 
 The direction classifier has 2 possible classes. As shown in Table [1](#tab:rel_dataset), the dataset has a bias towards the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class representing 91.5% of the data. We therefore chose to develop a rule-based approach to detect only the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class, and whenever none of the rules are verified, the classifier assigns the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class.
 
-We defined rules based on patterns built with morphological and syntactic information [@nivre-etal-2020-universal] extracted from the title with spaCy, using the same model as described in Section [5](#sec:rel_data_annot). We extracted morpho-syntactic information from all the words, including information on conjugation for verbs: person and number. The patterns defined were as follows:
+We defined rules based on patterns built with morphological and syntactic information [@nivre-etal-2020-universal] extracted from the title with spaCy, using the same model as described in [Section 5](#sec:rel_data_annot). We extracted morpho-syntactic information from all the words, including information on conjugation for verbs: person and number. The patterns defined were as follows:
 
-- **PASSIVE_VOICE**: we look for patterns `<VERB><ADP>`, a verb followed by a proposition. We check whether the passive voice is present and involves the personalities mentioned in the title: whether the Ent~1~ entity has a dependency on the verb of type **acl**, whether the verb has a dependency on the Ent~1~ of type **nsubj:pass** or whether the verb has a dependency on the Ent~2~ of type **obl:agent**.
+- **PASSIVE_VOICE**: we look for patterns `<VERB><ADP>`, a verb followed by a proposition. We check whether the passive voice is present and involves the personalities mentioned in the title: whether the Ent1 entity has a dependency on the verb of type **acl**, whether the verb has a dependency on the Ent<sub>1</sub> of type **nsubj:pass** or whether the verb has a dependency on the Ent<sub>2</sub> of type **obl:agent**.
 
-- **VERBO_ENT2**: detects the morphological pattern `<PUNCT><VERB>Ent`~`2`~`<EOS>`, a punctuation mark followed by a verb, and ending with Ent~2~, restricting the verb to be conjugated in the 3rd person singular of the present tense, and where `<EOS>` represents the end of the title, meaning that Ent~2~ is the last word in the title text.
+- **VERBO_ENT2**: detects the morphological pattern `<PUNCT><VERB>Ent2<EOS>`, a punctuation mark followed by a verb, and ending with Ent2, restricting the verb to be conjugated in the 3rd person singular of the present tense, and where `<EOS>` represents the end of the title, meaning that Ent2 is the last word in the title text.
 
-- **NOUN_ENT2**: checks whether the pattern `<ADJ>?<NOUN><ADJ>?<ADP>Ent`~`2`~`<EOS>` is present in the title, i.e.: a noun can be preceded or succeeded by one or more adjectives ending with Ent~2~, and the noun is restricted to a predefined list of nouns.
+- **NOUN_ENT2**: checks whether the pattern `<ADJ>?<NOUN><ADJ>?<ADP>Ent2<EOS>` is present in the title, i.e.: a noun can be preceded or succeeded by one or more adjectives ending with Ent2, and the noun is restricted to a predefined list of nouns.
 
-Table [\[tab:examples_patterns_direction\]](#tab:examples_patterns_direction) shows some examples of news headlines and the rules that were applied to detect the Ent~1~$\leftarrow$Ent~2~ direction. The rules are applied sequentially, in the same order as described here. If none of the patterns are detected in the headline, the classifier assigns the Ent~1~$\rightarrow$Ent~2~ class.
+Table [\[tab:examples_patterns_direction\]](#tab:examples_patterns_direction) shows some examples of news headlines and the rules that were applied to detect the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class direction. The rules are applied sequentially, in the same order as described here. If none of the patterns are detected in the headline, the classifier assigns the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class.
 
 
-| Título<img width=150/>                                                                           | Regra Aplicada |
-| -------------------------------------------------------------------------------- | -------------- |
-| Marques Júnior elogiado por Cavaco Silva pela "integridade de carácter"       | VOZ_PASSIVA    |
-| Passos Coelho é acusado de imaturidade política por Santos Silva               | VOZ_PASSIVA    |
-| António Costa vive no "país das maravilhas" acusa Assunção Cristas             | VERBO_ENT2     |
-| Passos Coelho "insultou 500 mil portugueses", acusa José Sócrates              | VERBO_ENT2     |
-| Maria Luís Albuquerque sob críticas de Luís Amado                               | NOUN_ENT2      |
-| André Ventura diz-se surpreendido com perda de apoio de Cristas                 | NOUN_ENT2      |
+| Título<img width=150/>                                                           | Regra Aplicada|
+| -------------------------------------------------------------------------------- | --------------|
+| Marques Júnior elogiado por Cavaco Silva pela "integridade de carácter"          | VOZ_PASSIVA   |
+| Passos Coelho é acusado de imaturidade política por Santos Silva                 | VOZ_PASSIVA   |
+| António Costa vive no "país das maravilhas" acusa Assunção Cristas               | VERBO_ENT2    |
+| Passos Coelho "insultou 500 mil portugueses", acusa José Sócrates                | VERBO_ENT2    |
+| Maria Luís Albuquerque sob críticas de Luís Amado                                | NOUN_ENT2     |
+| André Ventura diz-se surpreendido com perda de apoio de Cristas                  | NOUN_ENT2     |
 
-__Table 8__:
+__Table 6__: Examples of titles and respective rules used to detect the direction of the relationship.
 
 
 Table [7](#tab:direction_clf_results) contains the results of this classifier for the annotated data set.
@@ -475,10 +481,10 @@ Table [7](#tab:direction_clf_results) contains the results of this classifier fo
 | Ent1 ← Ent2                  | 0,95  | 0,84  | 0,89  | 129      |
 | weighted avg.                | 0,98  | 0,98  | 0,98  | 1,517    |
 
-__Table 9__: (P)recisão, A(brangência) e F1 usando 3 regras baseadas em padrões.
+__Table 7__: Precision, Recall and F1 using 3 pattern-based rules.
 
 
-The results show that the proposed method correctly classifies a large part of the direction of the Ent~1~$\leftarrow$Ent~2~ relations, the only class for which rules have been developed, without prejudice to the Ent~1~$\rightarrow$Ent~2~ class.
+The results show that the proposed method correctly classifies a large part of the direction of the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class relations, the only class for which rules have been developed, without prejudice to the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class class.
 
 
 <br>
@@ -492,7 +498,7 @@ The extraction process begins by recognising the personalities in the headline a
 
 For all the headlines considered, the final result is an RDF triple linking the personalities through a relationship of opposition or support supported by a news item. The RDF triples generated are indexed in a SPARQL engine [@jena2015free] together with a Wikidata sub-graph described in [Section 3](#sec_kb).
 
-The graph generated has a total of 680 political personalities, 107 political parties and 10,361 news items covering a period of 25 years. It is available *online* in *Terse RDF Triple Language* format[^8] and can also be explored via a web interface[^9].
+The graph generated has a total of 680 political personalities, 107 political parties and 10,361 news items covering a period of 25 years. It is available online in Terse RDF Triple Language format[^8] and can also be explored via a web interface[^9].
 
 
 <br>
@@ -515,7 +521,7 @@ Some headlines contain a mutual relationship, for example:
 - *"Sócrates and Alegre exchange accusations over co-incineration\"*
 - *"Pinto da Costa hits back at Pacheco Pereira's criticisms\"*
 
-could be categorised as Ent~2~$\leftrightarrow$Ent~1~, indicating in this case that both personalities are accusing each other.
+could be categorised as Ent<sub>1</sub>&harr;Ent<sub>2</sub>, indicating in this case that both personalities are accusing each other.
 
 This work also leaves open the possibility of carrying out various studies based on the structure of the graph, for example: finding communities of support and opposition as a function of time and verifying the changes within these communities. Political triangles can also be studied: if two political personalities, X and Y, always accuse or defend a third personality Z, what is the typical relationship expected between X and Y?
 
