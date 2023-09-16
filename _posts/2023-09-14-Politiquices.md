@@ -380,13 +380,19 @@ __Table 4__:  Resultados da avaliação do algoritmo de ligação com a Base de 
 
 We chose to break down the task of classifying the relationship into two tasks: classifying the type of relationship and the direction of the relationship, as opposed to developing a single classifier that would have to distinguish between 5 possible classes, and with classes that are very unbalanced in terms of representativeness. This section describes the classifier developed to detect the type of relationship present in a title, with 3 possible classes: **opposes**, **supports** and **other**. All the experiments were carried out with a cross-evaluation of 4 partitions[^7].
 
-We evaluated different approaches for the supervised classification of the relationships present in the titles, namely: an SVM classifier [@cortes1995support] with a linear *kernel*, a recurrent neural network of the LSTM type [@10.1162/neco.1997.9.8.1735], and a neural network of the *transformer* type, DistilBERT [@9463516].
+We evaluated different approaches for the supervised classification of the relationships present in the titles, namely: an SVM classifier [@cortes1995support] with a linear kernel, a recurrent neural network of the LSTM type [@10.1162/neco.1997.9.8.1735], and a neural network of the *transformer* type, DistilBERT [@9463516].
 
-For the SVM classifier we used as *features* an approach based on TF-IDF vectors [@DBLP:journals/ipm/SaltonB88], pre-processing the title using a pattern in order to identify the relevant context, i.e. the context in the title that contains information describing the relationship: `<Ent`~`1`~` X Ent`~`2`~` `**`context`**`>` where `X` = {*"says to", "responds to", "suggests to", "says that, "claims that", "hopes that", "argues that", "considers that", "suggests that", "wonders if", "considers", "commands"*}. Whenever the pattern doesn't hold, we use all the words in the title to build the vector, except for the names of the personalities.
+For the SVM classifier we used as *features* an approach based on TF-IDF vectors [@DBLP:journals/ipm/SaltonB88], pre-processing the title using a pattern in order to identify the relevant context, i.e. the context in the title that contains information describing the relationship: 
 
-The LSTM recurrent neural network was used in a bidirectional architecture, i.e. two LSTM networks are used, both with a dimension of 128, one reading the title from the first to the last word and the other from the last to the first word, and the two final states of each LSTM are concatenated and passed to a linear *layer*. We used pre-trained *embeddings* for Portuguese based on the FastText method (*skip-gram*) of dimension 50 [@hartmann-etal-2017-portuguese]. The network was trained by 5 *epochs* with a *batch size* of 8.
+`<Ent1 X Ent2 context>` 
 
-The DistilBERT model was trained on the basis of a pre-trained model for Portuguese [@abdaoui-etal-2020-load] and then fine-tuned on the annotated dataset, i.e.: the weights of all the pre-trained *layers* were updated taking into account the task of classifying the relation. The network was trained for 5 *epochs* with a *batch size* of 8.
+where `X` = {*"says to", "responds to", "suggests to", "says that, "claims that", "hopes that", "argues that", "considers that", "suggests that", "wonders if", "considers", "commands"*}. 
+
+Whenever the pattern doesn't hold, we use all the words in the title to build the vector, except for the names of the personalities.
+
+The LSTM recurrent neural network was used in a bidirectional architecture, i.e. two LSTM networks are used, both with a dimension of 128, one reading the title from the first to the last word and the other from the last to the first word, and the two final states of each LSTM are concatenated and passed to a linear *layer*. We used pre-trained *embeddings* for Portuguese based on the FastText method (*skip-gram*) of dimension 50 [@hartmann-etal-2017-portuguese]. The network was trained by 5 epoch* with a batch size of 8.
+
+The DistilBERT model was trained on the basis of a pre-trained model for Portuguese [@abdaoui-etal-2020-load] and then fine-tuned on the annotated dataset, i.e.: the weights of all the pre-trained *layers* were updated taking into account the task of classifying the relation. The network was trained for 5 *epochs* with a batch size of 8.
 
 
 | Relação       | P     | A     | F1    |
@@ -396,7 +402,7 @@ The DistilBERT model was trained on the basis of a pre-trained model for Portugu
 | apoia         | 0,65  | 0,69  | 0,67  |
 | Macro-Média   | 0,69  | 0,69  | 0,69  |
 
-__Table 5__:  Results for Relationship Evaluation para uma avaliação com 4-partições e validação cruzada com SVM.**
+__Table 5__:  
 
 
 | Relação       | P     | A     | F1    |
@@ -406,7 +412,7 @@ __Table 5__:  Results for Relationship Evaluation para uma avaliação com 4-par
 | apoia         | 0,65  | 0,62  | 0,63  |
 | Macro-Média   | 0,69  | 0,68  | 0,68  |
 
-__Table 6__: Results for Relationship Evaluation** (P)recisão, (A)brangência e F1 para uma avaliação com 4-partições e validação cruzada com LSTM bidireccional..
+__Table 6__: 
 
 
 | Relação       | P     | A     | F1    |
@@ -416,7 +422,7 @@ __Table 6__: Results for Relationship Evaluation** (P)recisão, (A)brangência e
 | apoia         | 0,72  | 0,71  | 0,71  |
 | Macro-Média   | 0,73  | 0,72  | 0,72  |
 
-__Table 7__:(P)recisão, (A)brangência e F1 para uma avaliação com 4-partições e validação cruzada com DistilBERT pr´e-treinado em Portuguˆes..
+__Table 7__: 
 
 
 <br>
@@ -434,7 +440,7 @@ The results obtained with the approaches described, for Portuguese data, are in 
 
 ## __Relationship Direction Classifier__ {#subsec:rel_direction}
 
-The direction classifier has 2 possible classes. As shown in Table [1](#tab:rel_dataset), the dataset has a bias towards the Ent~1~$\rightarrow$Ent~2~ class representing 91.5% of the data. We therefore chose to develop a rule-based approach to detect only the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class, and whenever none of the rules are verified, the classifier assigns the Ent~1~$\rightarrow$Ent~2~ class.
+The direction classifier has 2 possible classes. As shown in Table [1](#tab:rel_dataset), the dataset has a bias towards the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class representing 91.5% of the data. We therefore chose to develop a rule-based approach to detect only the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class, and whenever none of the rules are verified, the classifier assigns the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class.
 
 We defined rules based on patterns built with morphological and syntactic information [@nivre-etal-2020-universal] extracted from the title with spaCy, using the same model as described in Section [5](#sec:rel_data_annot). We extracted morpho-syntactic information from all the words, including information on conjugation for verbs: person and number. The patterns defined were as follows:
 
