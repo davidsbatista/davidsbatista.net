@@ -9,7 +9,7 @@ disqus_identifier: 20230914
 preview_pic: /assets/images/2023-09-14-politiquices.png
 ---
 
-I was awarded the 2nd place in the [Arquivo.pt Awards 2021](https://sobre.arquivo.pt/en/meet-the-winners-of-the-arquivo-pt-award-2021) for the [Politiquices project](https://www.politiquices.pt). The project aimed at extracting supportive and opposing relationships between political personalities from news headlines archived by [Arquivo.PT](https://www.arquivo.pt), and associating the personalities with their identifier on Wikidata, thus resulting in a semantic graph. I [published a paper](https://davidsbatista.net/assets/documents/publications/politiquices_dsbatista_20230705.pdf) in Portuguese describing this work in [Linguamatica v. 15 n. 1](https://linguamatica.com/index.php/linguamatica/issue/view/30). The content of this blog post is the same as in the paper but translated to English.
+I was awarded the 2nd place in the [Arquivo.pt Awards 2021](https://sobre.arquivo.pt/en/meet-the-winners-of-the-arquivo-pt-award-2021){:target="_blank"} for the [Politiquices project](https://www.politiquices.pt){:target="_blank"}. The project aimed at extracting supportive and opposing relationships between political personalities from news headlines archived by [Arquivo.PT](https://www.arquivo.pt){:target="_blank"}, and associating the personalities with their identifier on Wikidata, thus resulting in a semantic graph. I published the results of this project in Portuguese on [Linguamatica v. 15 n. 1](https://linguamatica.com/index.php/linguamatica/article/view/386){:target="_blank"}. The content of this blog post is the same as in the paper but translated to English.
 
 
 <br>
@@ -75,7 +75,7 @@ This article is organised as follows:
 
 # __Related Work__ {#sec_related_work}
 
-Sentiment analysis, in the context of Natural Language Processing, has mostly been studied in content generated on social networks [@10.1145/3185045] or in the evaluation of products or services [@pontiki-etal-2016-semeval]. In these areas, the author of the text and the target of the opinion are explicit. In the context of analysing political news, where there is often sentiment expressed between political actors in the form of support or opposition relationships [@balahur2009opinion; @balahur-etal-2010-sentiment], sentiment analysis approaches to products or services do not apply, as the direction of the sentiment relationship has to be considered.
+Sentiment analysis, in the context of Natural Language Processing, has mostly been studied in content generated on social networks [(Zimbra et al., 2018) ](https://doi.org/10.1145/3185045){:target="_blank"}[^33] or in the evaluation of products or services [(Pontiki et al., 2016) ](https://aclanthology.org/S16-1002){:target="_blank"}[^34]. In these areas, the author of the text and the target of the opinion are explicit. In the context of analysing political news, where there is often sentiment expressed between political actors in the form of support or opposition relationships ([Balahur et al., 2009 ](https://dl.acm.org/doi/abs/10.1109/WI-IAT.2009.340){:target="_blank"}[^31][, 2010 ](http://www.lrec-conf.org/proceedings/lrec2010/pdf/909_Paper.pdf){:target="_blank"}[^32]), sentiment analysis approaches to products or services do not apply, as the direction of the sentiment relationship has to be considered.
 
 In this section we describe resources similar to those we have produced in this work, which we have made public, and approaches to the task of extracting targeted sentiment in political news text.
 
@@ -97,9 +97,9 @@ Some explore these relationships in an international political context, i.e.: th
 
 [Han et al. (2019)  ](https://aclanthology.org/N19-1167){:target="_blank"}[^11] also propose an unsupervised model to generate relationship descriptors for pairs of nations mentioned in English news articles. The proposed model extends the work of [Iyyer et al. (2016) ](https://aclanthology.org/N16-1180){:target="_blank"}[^7] by integrating linguistic information (i.e.: verbal predicates and common and proper nouns) in order to identify the context of the relations.
 
-[@liang2019blames] defines the task of extracting guilt relations for English texts: given an article $$d$$ and a set of entities $$E$$, present in the article, detect if there is a guilt relation $$(s,t)$$, where $$s,t \in E$$, when $$s$$ blames $$t$$ based on the article $$d$$, and there$ are $$\lvert{E}\rvert \cdot (\lvert{E}\rvert - 1)$$, possible guilt relations. To detect these relationships, the authors propose 3 models. The *Entity Prior* model extracts information about entities, trying to capture a prior about who is likely to blame whom without additional information. The *Context* model makes use of the context information of the sentence where two entities occur to determine the presence of a blame relationship. The *Combined* model combines the information from the two previous models into a single model. The authors applied this approach to a corpus with 998 news articles and about 3 entities per article, reporting a macro-average F<sub>1</sub> of 0.70 with the *Combined* model.
+[Liang et al. (2019) ](https://ojs.aaai.org/index.php/AAAI/article/view/3842){:target="_blank"}[^30] defines the task of extracting guilt relations for English texts: given an article $$d$$ and a set of entities $$E$$, present in the article, detect if there is a guilt relation $$(s,t)$$, where $$s,t \in E$$, when $$s$$ blames $$t$$ based on the article $$d$$, and there$ are $$\lvert{E}\rvert \cdot (\lvert{E}\rvert - 1)$$, possible guilt relations. To detect these relationships, the authors propose 3 models. The *Entity Prior* model extracts information about entities, trying to capture a prior about who is likely to blame whom without additional information. The *Context* model makes use of the context information of the sentence where two entities occur to determine the presence of a blame relationship. The *Combined* model combines the information from the two previous models into a single model. The authors applied this approach to a corpus with 998 news articles and about 3 entities per article, reporting a macro-average F<sub>1</sub> of 0.70 with the *Combined* model.
 
-[@park-etal-2021-blames] proposes a structure of relations to detect sentiment and direction: given a sentence $$s$$ referring to two entities $$p$$ and $$q$$, detect which sentiment relation between $$p$$ and $$q$$ out of five possible ones: neutral, $$p$$ has a positive or negative opinion of $$q$$, or $$q$$ has a positive or negative opinion of $$p$$. In their work, the authors use multiple models by transforming the sentiment extraction task into sub-tasks that answer yes/no questions for each of the 5 possible sentiments, then combining the various results into a final result. This approach is applied to English in a corpus created by the authors containing sentences from news articles containing at least two entities.The pairs of entities are annotated with one of the 5 possible sentiments. The authors report a macro-average F<sub>1</sub> of 0.68.
+[Park et al. (2021) ](https://aclanthology.org/2021.findings-acl.358){:target="_blank"}[^29] proposes a structure of relations to detect sentiment and direction: given a sentence $$s$$ referring to two entities $$p$$ and $$q$$, detect which sentiment relation between $$p$$ and $$q$$ out of five possible ones: neutral, $$p$$ has a positive or negative opinion of $$q$$, or $$q$$ has a positive or negative opinion of $$p$$. In their work, the authors use multiple models by transforming the sentiment extraction task into sub-tasks that answer yes/no questions for each of the 5 possible sentiments, then combining the various results into a final result. This approach is applied to English in a corpus created by the authors containing sentences from news articles containing at least two entities.The pairs of entities are annotated with one of the 5 possible sentiments. The authors report a macro-average F<sub>1</sub> of 0.68.
 
 
 <br>
@@ -208,7 +208,7 @@ __Table 2__: Relationships by class and direction.
 
 <br>
 
-The ratio of oppositional relationships to supportive relationships is 1.6. This value is similar to the data for English provided by [@park-etal-2021-blames], where this same ratio between the two classes is 1.8. In terms of class representativeness, aggregated by sentiment, the two datasets are also similar, with **other** being the most present class, followed by **opposition** and lastly **support**.
+The ratio of oppositional relationships to supportive relationships is 1.6. This value is similar to the data for English provided by [Park et al. (2021) ](https://aclanthology.org/2021.findings-acl.358){:target="_blank"}[^29], where this same ratio between the two classes is 1.8. In terms of class representativeness, aggregated by sentiment, the two datasets are also similar, with **other** being the most present class, followed by **opposition** and lastly **support**.
 
 <figure>
   <img style="width: 65%; height: 65%" src="/assets/images/2023-09-14-power_law_ent_freq.png">
@@ -433,7 +433,7 @@ __Table 5__ describes the results for the various classifiers. There are no mark
 
 Other relationships are ambiguous and difficult to categorise without any other context than the one in the title. In the dataset we have made public, all the headlines contain a URL to the text of the news item.
 
-The results obtained with the approaches described, for Portuguese data, are in line with the results previously reported on English data [@liang2019blames; @park-etal-2021-blames].
+The results obtained with the approaches described, for Portuguese data, are in line with the results previously reported on English data [[(Liang et al. 2019) ](https://ojs.aaai.org/index.php/AAAI/article/view/3842){:target="_blank"}[^30]; [Park et al. (2021) ](https://aclanthology.org/2021.findings-acl.358){:target="_blank"}[^29].
 
 ## __Relationship Direction Classifier__ {#subsec:rel_direction}
 
@@ -705,9 +705,61 @@ We would like to thank [Nuno Feliciano](https://www.linkedin.com/in/nuno-felicia
 	  - *Year*: 1989
 	  - *DOI*: [10.1080/01621459.1989.10478785](https://doi.org/10.1080/01621459.1989.10478785)
 
-
 [^28]:  **RDF 1.1 Primer W3C Working Group Note**
 	  - *Authors*: Guus Schreiber, Yves Raimond
 	  - *Year*: 2014
 	  - *URL*: [RDF 1.1 Primer W3C Working Group Note](https://www.w3.org/TR/rdf11-primer/)
 
+[^29]:  **Park, Kunwoo, Zhufeng Pan, and Jungseock Joo**
+	  - *Title*: Who Blames or Endorses Whom? Entity-to-Entity Directed Sentiment Extraction in News Text
+	  - *Book Title*: Findings of the Association for Computational Linguistics: ACL-IJCNLP 2021
+	  - *Year*: 2021
+	  - *Month*: August
+	  - *DOI*: [10.18653/v1/2021.findings-acl.358](https://aclanthology.org/2021.findings-acl.358)
+	  - *Pages*: 4091--4102
+
+[^30]:  **Liang, Shuailong, Olivia Nicol, and Yue Zhang**
+	  - *Title*: Who blames whom in a crisis? detecting blame ties from news articles using neural networks
+	  - *Book Title*: Proceedings of the AAAI Conference on Artificial Intelligence
+	  - *Volume*: 33
+	  - *Number*: 01
+	  - *Year*: 2019
+	  - *Pages*: 655--662
+	  - *DOI*: [Link](https://ojs.aaai.org/index.php/AAAI/article/view/3842)
+
+
+[^31]: **Balahur, Alexandra, Ralf Steinberger, Erik van der Goot, Bruno Pouliquen, and Mijail Kabadjov**
+	  - *Title*: Opinion Mining on Newspaper Quotations
+	  - *Book Title*: Proceedings of the 2009 IEEE/WIC/ACM International Joint Conference on Web Intelligence and Intelligent Agent Technology-Volume 03
+	  - *Year*: 2009
+	  - *Pages*: 523--526
+	  - *DOI*: [Link](https://dl.acm.org/doi/abs/10.1109/WI-IAT.2009.340)
+
+[^32]: **Balahur, Alexandra, Ralf Steinberger, Mijail Kabadjov, Vanni Zavarella, Erik van der Goot, Matina Halkia, Bruno Pouliquen, and Jenya Belyaeva**
+	  - *Title*: Sentiment Analysis in the News
+	  - *Book Title*: Proceedings of the Seventh International Conference on Language Resources and Evaluation (LREC'10)
+	  - *Year*: 2010
+	  - *Month*: May
+	  - *Pages*: 655--662
+	  - *DOI*: [Link](http://www.lrec-conf.org/proceedings/lrec2010/pdf/909_Paper.pdf)
+
+[^33]: **David Zimbra, Ahmed Abbasi, Daniel Zeng, and Hsinchun Chen**
+	  - *Title*: The State-of-the-Art in Twitter Sentiment Analysis: A Review and Benchmark Evaluation
+	  - *Year*: 2018
+	  - *Issue Date*: June 2018
+	  - *Journal*: ACM Trans. Manage. Inf. Syst.
+	  - *Volume*: 9
+	  - *Number*: 2
+	  - *ISSN*: 2158-656X
+	  - *DOI*: [10.1145/3185045](https://doi.org/10.1145/3185045)
+	  - *Month*: August
+	  - *Article No*: 5
+	  - *Number of Pages*: 29
+
+[^34]: **Maria Pontiki, Dimitris Galanis, Haris Papageorgiou, Ion Androutsopoulos, Suresh Manandhar, Mohammad AL-Smadi, Mahmoud Al-Ayyoub, Yanyan Zhao, Bing Qin, Orphée De Clercq, Véronique Hoste, Marianna Apidianaki, Xavier Tannier, Natalia Loukachevitch, Evgeniy Kotelnikov, Nuria Bel, Salud María Jiménez-Zafra, and Gülşen Eryiğit**
+	  - *Title*: SemEval-2016 Task 5: Aspect Based Sentiment Analysis
+	  - *Book Title*: Proceedings of the 10th International Workshop on Semantic Evaluation (SemEval-2016)
+	  - *Year*: 2016
+	  - *Month*: June
+	  - *Pages*: 19--30
+	  - *DOI*: [10.18653/v1/S16-1002](https://aclanthology.org/S16-1002)
