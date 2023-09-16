@@ -47,7 +47,7 @@ Having an automatic method for extracting relationships and being able to apply 
 
 In this paper we present a method for extracting relationships of support or opposition between political personalities and describe the results of applying it to a news collection covering a period of around 25 years. 
 
-During the relationship extraction process, we linked the political personalities involved with their Wikidata identifier(@MKGGB2018), thus enriching the relationship with information associated with the personality (e.g. political affiliation, public offices held, legislatures, family relationships, etc.).
+During the relationship extraction process, we linked the political personalities involved with their Wikidata identifier [(Malyshev et al., 2018) ](https://iccl.inf.tu-dresden.de/w/images/5/5a/Malyshev-et-al-Wikidata-SPARQL-ISWC-2018.pdf){:target="_blank"}[^1], thus enriching the relationship with information associated with the personality (e.g. political affiliation, public offices held, legislatures, family relationships, etc.).
 
 All the relationships extracted are represented in the form of semantic triples following the Resource Description Framework (RDF) standard [@schreiber2014primer]. The political personalities involved, represented by their Wikidata identifier, are linked through a relationship of opposition or support represented by the news item that supports the relationship. This structure thus gives rise to a semantic graph, making it possible to formulate SPARQL queries [@2013sparql] involving the Wikidata information associated with each personality and the relationships extracted from the news headlines, for example:
 
@@ -103,7 +103,7 @@ In this section we describe resources similar to those we have produced in this 
 
 ## __Extracting Targeted Sentiment from News Text__
 
-Several authors have explored methods for extracting sentiment involving political actors. It should be noted that many of the works transform the task of detecting sentiment into a task of detecting a relationship between mentioned entities [Bassignana & Plank, 2022 ](https://aclanthology.org/2022.acl-srw.7){:target="_blank"}[^1].
+Several authors have explored methods for extracting sentiment involving political actors. It should be noted that many of the works transform the task of detecting sentiment into a task of detecting a relationship between mentioned entities [(Bassignana & Plank, 2022) ](https://aclanthology.org/2022.acl-srw.7){:target="_blank"}[^2].
 
 Some explore these relationships in an international political context, i.e.: the actors are nations mentioned in political news text, and some of these relationships implicitly have a positive or negative sentiment. [@oconnor-etal-2013-learning] propose an unsupervised model based on *topic models* and linguistic patterns to identify relationships, in an open-ended way, describing conflicts between nations referenced in English news articles. [@han-etal-2019-permanent] also propose an unsupervised model to generate relationship descriptors for pairs of nations mentioned in English news articles. The proposed model extends the work of [@iyyer-etal-2016-feuding] by integrating linguistic information (i.e.: verbal predicates and common and proper nouns) in order to identify the context of the relations.
 
@@ -539,7 +539,14 @@ We would like to thank Nuno Feliciano for all his comments during the preparatio
 
 # __References__ {#references}
 
-[^1]: **What Do You Mean by Relation Extraction? A Survey on Datasets and Study on Scientific Relation Classification**
+
+[^1]: **Getting the Most out of Wikidata: Semantic Technology Usage in Wikipedia’s Knowledge Graph**
+	   - *Authors*: Stanislav Malyshev, Markus Krötzsch, Larry González, Julius Gonsior, Adrian Bielefeldt
+	   - *Conference*: Proceedings of the 17th International Semantic Web Conference (ISWC'18)
+	   - *Year*: 2018
+	   - *DOI*: [N/A](https://iccl.inf.tu-dresden.de/w/images/5/5a/Malyshev-et-al-Wikidata-SPARQL-ISWC-2018.pdf)
+
+[^2]: **What Do You Mean by Relation Extraction? A Survey on Datasets and Study on Scientific Relation Classification**
        - *Authors*: Elisa Bassignana, Barbara Plank
        - *Conference*: Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics: Student Research Workshop
        - *Year*: 2022
@@ -556,13 +563,6 @@ We would like to thank Nuno Feliciano for all his comments during the preparatio
    - *Year*: 2016
    - *DOI*: [10.18653/v1/N16-1180](https://aclanthology.org/N16-1180)
    - *Pages*: 1534-1544
-
-2. **What Do You Mean by Relation Extraction? A Survey on Datasets and Study on Scientific Relation Classification**
-   - *Authors*: Elisa Bassignana, Barbara Plank
-   - *Conference*: Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics: Student Research Workshop
-   - *Year*: 2022
-   - *DOI*: [10.18653/v1/2022.acl-srw.7](https://aclanthology.org/2022.acl-srw.7)
-   - *Pages*: 67-83
 
 3. **Tracking politics with POWER**
    - *Authors*: Silvio Moreira, David S. Batista, Paula Carvalho, Francisco M. Couto, Mario J. Silva
