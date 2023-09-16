@@ -9,7 +9,7 @@ disqus_identifier: 20230914
 preview_pic: /assets/images/2023-09-14-politiquices.png
 ---
 
-Back in 2020, I was awarded the 2nd place in the [Arquivo.pt Awards 2021](https://sobre.arquivo.pt/en/meet-the-winners-of-the-arquivo-pt-award-2021) for the [Politiquices project](https://www.politiquices.pt). The project aimed at extracting supportive or opposing relationships between political personalities from newspaper headlines archived by [Arquivo.PT](https://www.arquivo.pt), and associating the political personalities with their identifier on Wikidata, thus resulting in a semantic graph. I [published a paper](https://davidsbatista.net/assets/documents/publications/politiquices_dsbatista_20230705.pdf) in Portuguese describing this work in [Linguamatica v. 15 n. 1](https://linguamatica.com/index.php/linguamatica/issue/view/30). The content of this blog post is the same as in the paper but translated to English.
+I was awarded the 2nd place in the [Arquivo.pt Awards 2021](https://sobre.arquivo.pt/en/meet-the-winners-of-the-arquivo-pt-award-2021) for the [Politiquices project](https://www.politiquices.pt). The project aimed at extracting supportive and opposing relationships between political personalities from news headlines archived by [Arquivo.PT](https://www.arquivo.pt), and associating the personalities with their identifier on Wikidata, thus resulting in a semantic graph. I [published a paper](https://davidsbatista.net/assets/documents/publications/politiquices_dsbatista_20230705.pdf) in Portuguese describing this work in [Linguamatica v. 15 n. 1](https://linguamatica.com/index.php/linguamatica/issue/view/30). The content of this blog post is the same as in the paper but translated to English.
 
 
 <br>
@@ -198,20 +198,23 @@ __Table 1__ shows some examples of the annotated relationships. The annotation p
 
 <br>
 
-<img width=10/>|Title   														 | Relationship
+----
+
+<img width=10/>|Headline   														    | Relationship
 :-|:--------------------------------------------------------------------------------| ---:
-|Sá Fernandes accuses António Costa of defending corporate interests 			 | Ent1-opposes-Ent2
-|Joana Mortágua: statements by Cavaco are "a series of nonsense" 				 | Ent1-opposes-Ent2
-|Passos Coelho is accused of political immaturity by Santos Silva 				 | Ent2-opposes-Ent1
-|Durão Barroso supports Paulo Portas as an "excellent minister" 				 | Ent1-supports-Ent2
-|Armando Vara chosen by Guterres to coordinate local elections	 				 | Ent2-supports-Ent1
-|Manuel Alegre receives support from Jorge Sampaio 								 | Ent2-supports-Ent1
-|Rui Tavares and Ana Drago elected in the LIVRE primaries 						 | other
-|Teresa Zambujo acknowledges Isaltino Morais' victory 							 | other
-|CDS accuses Marcelo Rebelo de Sousa of jeopardising the relationship with Cavaco | other
+|*Sá Fernandes accuses António Costa of defending corporate interests* 			    | Ent1-opposes-Ent2
+|*Joana Mortágua: statements by Cavaco are "a series of nonsense"* 				    | Ent1-opposes-Ent2
+|*Passos Coelho is accused of political immaturity by Santos Silva* 				| Ent2-opposes-Ent1
+|*Durão Barroso supports Paulo Portas as an "excellent minister"* 				    | Ent1-supports-Ent2
+|*Armando Vara chosen by Guterres to coordinate local elections*	 				| Ent2-supports-Ent1
+|*Manuel Alegre receives support from Jorge Sampaio* 								| Ent2-supports-Ent1
+|*Rui Tavares and Ana Drago elected in the LIVRE primaries* 						| other
+|*Teresa Zambujo acknowledges Isaltino Morais' victory* 							| other
+|*CDS accuses Marcelo Rebelo de Sousa of jeopardising the relationship with Cavaco* | other
 
 __Table 1__: Examples of headlines and the corresponding manually annotated relationships.
 
+----
 
 <br>
 
@@ -221,6 +224,8 @@ __Table 2__ characterises the data in terms of number of relationships and direc
 
 <br>
 
+----
+
 <img width=100/>|Relação<img width=200/>| Ent1 &rarr; Ent2<img width=150/> | Ent1 &larr; Ent2<img width=150/> | Total<img width=150/>
 |--- 				    | --- 							   | --- 							  | ---
 |opõe-se 				| 1 155                            | 102                              | 1 257
@@ -229,6 +234,8 @@ __Table 2__ characterises the data in terms of number of relationships and direc
 |Total 					| 1,872                            | 146                              | 3,324
 
 __Table 2__: Relationships by class and direction.
+
+----
 
 <br>
 
@@ -288,6 +295,9 @@ Using the `EntityRuler`[^6] component of spaCy 3.0, we define a series of of rul
 
 To detect entities of type `PERSON` this classifier applies first the rules and then the supervised model for Portuguese model. In situations of disagreement between the two approaches, the entities marked with rules are prioritised. Table 3 shows the performance for the 3 approaches on the annotated dataset.
 
+<br>
+
+----
 
 <img width=150/>| Approach<img width=150/>      | Precision<img width=150/>     | Recall<img width=150/>     | F-1    |
 | -------------- | ----- | ----- | ----- |
@@ -296,6 +306,8 @@ To detect entities of type `PERSON` this classifier applies first the rules and 
 | Rules+Model   | 0,97  | 0,92  | 0,94  |
 
 __Table 3__: Precision, Recall and F<sub>1</sub> for the NER component combining rules and a supervised model.
+
+----
 
 <br>
 
@@ -366,16 +378,19 @@ In Table [3](#tab:ent_linking_results) two evaluations are reported, the first c
 
 <br>
 
-| Classificação<img width=250/>       | base<img width=150/>     | mapeamentos<img width=150/> |
+---
+
+| Classification<img width=250/>       | base<img width=150/>     | mappings<img width=150/> |
 | ------------------- | -------- | ----------- |
-| correcta             | 5,059    | 5,136       |
-| incorrecta           | 43       | 43          |
-| não desambiguada    | 246      | 169         |
+| correct             | 5,059    | 5,136       |
+| incorrect           | 43       | 43          |
+| not disambiguated   | 246      | 169         |
 |-----------------------------------------------
 | **Accuracy**       | 0,93     | 0,96        |
 
 __Table 4__:  Accuracy results for the linking approach .
 
+---
 
 <br>
 
