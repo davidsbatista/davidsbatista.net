@@ -144,12 +144,9 @@ Several authors have explored methods for extracting sentiment involving politic
 
 Some explore these relationships in an international political context, i.e.: the actors are nations mentioned in political news text, and some of these relationships implicitly have a positive or negative sentiment. [@oconnor-etal-2013-learning] propose an unsupervised model based on *topic models* and linguistic patterns to identify relationships, in an open-ended way, describing conflicts between nations referenced in English news articles. [@han-etal-2019-permanent] also propose an unsupervised model to generate relationship descriptors for pairs of nations mentioned in English news articles. The proposed model extends the work of [@iyyer-etal-2016-feuding] by integrating linguistic information (i.e.: verbal predicates and common and proper nouns) in order to identify the context of the relations.
 
-[@liang2019blames] defines the task of extracting guilt relations for English texts: given an article $d$ and a set of entities $E$, present in the article, detect if there is a guilt relation $(s,t)$, where $s,t \in E$, when $s$ blames $t$ based on the article $d$, and there are $\lvert{E}\rvert \cdot (\lvert{E}\rvert - 1)$, possible guilt relations. To detect these relationships, the authors propose 3 models. The *Entity Prior* model extracts information about entities, trying to capture a *prior* about who is likely to blame whom without additional information. The *Context* model makes use of the context information of the sentence where two entities occur to determine the presence of a blame relationship. The *Combined* model combines the information from the two previous models into a single model. The authors applied this approach to a corpus with 998 news articles and about 3 entities per article, reporting a macro-average F~1~ of 0.70 with the *Combined* model.
+[@liang2019blames] defines the task of extracting guilt relations for English texts: given an article $$d$$ and a set of entities $$E$$, present in the article, detect if there is a guilt relation $$(s,t)$$, where $$s,t \in E$$, when $$s$$ blames $$t$$ based on the article $$d$$, and there$ are $$\lvert{E}\rvert \cdot (\lvert{E}\rvert - 1)$$, possible guilt relations. To detect these relationships, the authors propose 3 models. The *Entity Prior* model extracts information about entities, trying to capture a *prior* about who is likely to blame whom without additional information. The *Context* model makes use of the context information of the sentence where two entities occur to determine the presence of a blame relationship. The *Combined* model combines the information from the two previous models into a single model. The authors applied this approach to a corpus with 998 news articles and about 3 entities per article, reporting a macro-average F<sub>1</sub> of 0.70 with the *Combined* model.
 
-
-Translated with www.DeepL.com/Translator (free version)
-[@park-etal-2021-blames] proposes a structure of relations to detect sentiment and direction: given a sentence $s$ referring to two entities $p$ and $q$, detect which sentiment relation between $p$ and $q$ out of five possible ones: neutral, $p$ has a positive or negative opinion of $q$, or $q$ has a positive or negative opinion of $p$.
-In their work, the authors use multiple models by transforming the sentiment extraction task into sub-tasks that answer yes/no questions for each of the 5 possible sentiments, then combining the various results into a final result.This approach is applied to English in a corpus created by the authors containing sentences from news articles containing at least two entities.The pairs of entities are annotated with one of the 5 possible sentiments.The authors report a macro-average F~1~ of 0.68.
+[@park-etal-2021-blames] proposes a structure of relations to detect sentiment and direction: given a sentence $$s$$ referring to two entities $$p$$ and $$q$$, detect which sentiment relation between $$p$$ and $$q$$ out of five possible ones: neutral, $$p$$ has a positive or negative opinion of $$q$$, or $$q$$ has a positive or negative opinion of $$p$$. In their work, the authors use multiple models by transforming the sentiment extraction task into sub-tasks that answer yes/no questions for each of the 5 possible sentiments, then combining the various results into a final result. This approach is applied to English in a corpus created by the authors containing sentences from news articles containing at least two entities.The pairs of entities are annotated with one of the 5 possible sentiments. The authors report a macro-average F<sub>1</sub> of 0.68.
 
 
 <br>
@@ -195,7 +192,9 @@ We began by pre-processing all the headlines collected using the spaCy 3.0 softw
 
 In the annotation process all the titles were loaded into the Argilla[^4] annotation tool, and using the graphical interface we selected titles to annotate.
 
-For each title, we corrected the recognised entities and their Wikidata identifiers where necessary. We annotated the existing relationship: **opposition** or **support**, and its direction. When neither is the case, the relationship is noted as **other**. Table [\[tab:samples\]](#tab:samples){reference-type="ref" reference="tab:samples"} shows some examples of the annotated relationships. The annotation process was carried out by an annotator. In the most ambiguous situations, for example, where the information in the news text is needed to decide, the relationships have been annotated as **other**.
+For each title, we corrected the recognised entities and their Wikidata identifiers where necessary. We annotated the existing relationship: **opposition** or **support**, and its direction. When neither is the case, the relationship is noted as **other**. 
+
+Table 1 shows some examples of the annotated relationships. The annotation process was carried out by one single annotator. In the most ambiguous situations, for example, where the full information in the news text is needed to decide, the relationships have been annotated as **other**.
 
 <br>
 
@@ -216,7 +215,9 @@ __Table 1__:
 
 <br>
 
-This process resulted in a dataset containing 3,324 annotated titles. For each title we annotated only two personalities and the relationship between them, even if the titles contain references to more than two personalities. Table [1](#tab:rel_dataset){reference-type="ref" reference="tab:rel_dataset"} characterises the data in terms of number of relationships and direction. Most titles contain an **opposition** or **other** relationship, and the vast majority of relationships have a direction from the first to the second entity, Ent~1~$\rightarrow$Ent~2~.
+This process resulted in a dataset containing 3,324 annotated titles. For each title we annotated only two personalities and the relationship between them, even if the titles contain references to more than two personalities. 
+
+Table 2 characterises the data in terms of number of relationships and direction. Most titles contain an **opposition** or **other** relationship, and the vast majority of relationships have a direction from the first to the second entity, __Ent1 &rarr; Ent2__.
 
 <br>
 
@@ -238,11 +239,11 @@ The ratio of oppositional relationships to supportive relationships is 1.6. This
   <figcaption>Figure 1 - Frequency distribution of occurrences of the personalities in the annotated titles. annotated.</figcaption>
 </figure>
 
-Of the 6,648 mentions of names of political personalities annotated, 515 are distinct and have an identifier on Wikidata. A total of 129 distinct entities, identified by aggregating the *string* that mentions them in the title, are not associated with an identifier because they are not present in Wikidata.
+Of the 6 648 mentions of names of political personalities annotated, 515 are distinct and have an identifier on Wikidata. A total of 129 distinct entities, identified by aggregating the string that mentions them in the title, are not associated with an identifier because they are not present in Wikidata.
 
-Analysing the frequency of occurrence of each entity shows that there are a small number of entities responsible for a large proportion of all entity occurrences in the annotated data. As shown in Figure [1](#fig:ent_power_law){reference-type="ref" reference="fig:ent_power_law"} there are a small number of frequent entities, and a long list of infrequent entities, specifically, 96 distinct personalities, i,.e.: 19% of the personalities, are responsible for 80% of the mentions of personalities in the data.
+Analysing the frequency of occurrence of each entity shows that there are a small number of entities responsible for a large proportion of all entity occurrences in the annotated data. As shown in Figure 1 there is a small number of frequent entities, and a long list of infrequent entities, specifically, 96 distinct personalities, i,.e.: 19% of the personalities, are responsible for 80% of the mentions of personalities in the data.
 
-In terms of the number of words contained in the titles, excluding words that are part of the entities, there is a median of 8 words with a maximum of 22 and a minimum of 1. This set of annotated data is online[^5] in JSON format as illustrated in Figure [\[fig:json_sample\]](#fig:json_sample){reference-type="ref" reference="fig:json_sample"}.
+In terms of the number of words contained in the titles, excluding words that are part of the entities, there is a median of 8 words with a maximum of 22 and a minimum of 1. This set of annotated data is online[^5] in JSON format as illustrated in below in Figure 2.
 
 ``` {fontsize="\\small"}
 {"title": "Ana Gomes defende Durão Barroso",
@@ -254,6 +255,8 @@ In terms of the number of words contained in the titles, excluding words that ar
    "ent1_id": "Q2844986'",
    "ent2_id": "Q15849"}
 ```
+
+__Figure 2__: Example of the annotated dataset in JSON.
 
 
 <br>
@@ -277,12 +280,12 @@ The process of extracting RDF triples from news headlines involves 4 sub-process
 
 The recognition of entities mentioned is based on a hybrid method, combining rules with a supervised model.
 
-Using the `EntityRuler`[^6] component of spaCy 3.0, we define a series of of rules combining patterns based on the names of all the personalities from the knowledge base described in Section [3](#sec_kb){reference-type="ref" reference="sec_kb"}. To detect entities of type `PERSON` this classifier applies first the rules and then the supervised model for Portuguese model. In situations of disagreement between the two approaches, the entities marked with rules are prioritised.
+Using the `EntityRuler`[^6] component of spaCy 3.0, we define a series of of rules combining patterns based on the names of all the personalities from the knowledge base described in [Section 3](#sec_kb). 
 
-Table [2](#tab:results_ner){reference-type="ref" reference="tab:results_ner"} shows the performance for the 3 approaches on the annotated dataset.
+To detect entities of type `PERSON` this classifier applies first the rules and then the supervised model for Portuguese model. In situations of disagreement between the two approaches, the entities marked with rules are prioritised. Table 3 shows the performance for the 3 approaches on the annotated dataset.
 
 
-| Approach<img width=150/>      | Precision<img width=150/>     | Recall<img width=150/>     | F-1    |
+<img width=150/>| Approach<img width=150/>      | Precision<img width=150/>     | Recall<img width=150/>     | F-1    |
 | -------------- | ----- | ----- | ----- |
 | Rules         | 0,99  | 0,42  | 0,59  |
 | Model         | 0,97  | 0,91  | 0,94  |
@@ -316,7 +319,7 @@ def title_only(ent, candidates):
 
 If no candidates are generated in the first phase or none are selected from the list of candidates, the algorithm tries to expand the entities mentioned in the headline based on the news text, exploiting a pattern: a personality mentioned in the headline by a short version of their name (e.g. just their surname) is usually referred to in the news text by a fuller name.
 
-The algorithm identifies all the people mentioned in the news text, using the component described in Section [6.1](#subsec:ner){reference-type="ref" reference="subsec:ner"}, and selects only those that have at least one name in common with the name of the personality mentioned in the headline, thus generating an expanded entity, and assuming that it corresponds to the same entity mentioned in the headline.
+The algorithm identifies all the people mentioned in the news text, using the component described in [Section 6.1](#subsec:ner), and selects only those that have at least one name in common with the name of the personality mentioned in the headline, thus generating an expanded entity, and assuming that it corresponds to the same entity mentioned in the headline.
 
 If the process results in only one expanded entity and there is a similarity of 1.0 with one of the candidates previously selected from the CBB, that candidate is chosen. Otherwise, the expanded entity is used to interrogate the CBB and collect a new list of candidates. If there is only one candidate on this list and its similarity is at least 0.8 to the expanded entity, that candidate is chosen. If there is more than one candidate and only one has a similarity of 1.0 to the expanded entity, that one is chosen.
 
@@ -353,9 +356,9 @@ If the expansion process results in several expanded entities, we filter out can
 
 Algorithm 2 describes this procedure using the text of the news item.
 
-The results of this approach on the annotated dataset are described in Table [3](#tab:ent_linking_results){reference-type="ref" reference="tab:ent_linking_results"}. The *incorrect* classification corresponds to personalities who were not associated with the correct identifier in Wikidata, *not disambiguated* for those for whom the algorithm was unable to select a unique identifier from all the candidates or the BC did not return any results.
+The results of this approach on the annotated dataset are described in Table [3]. The *incorrect* classification corresponds to personalities who were not associated with the correct identifier in Wikidata, *not disambiguated* for those for whom the algorithm was unable to select a unique identifier from all the candidates or the BC did not return any results.
 
-In Table [3](#tab:ent_linking_results){reference-type="ref" reference="tab:ent_linking_results"} two evaluations are reported, the first column describes the results for the base algorithm, without mappings. The second column considers the ambiguity that a reference may have in terms of the personalities it represents. For example, in the annotated data, all mentions of *Cavaco* correspond to the personality *Cavaco Silva*, based on this the algorithm maps all references to *Cavaco* to *Cavaco Silva*. Similarly, all mentions of *Marques Mendes* correspond to the personality *Luís Marques Mendes*. By using these mappings we reduce the number of entities for which the algorithm cannot find an identifier.
+In Table [3](#tab:ent_linking_results) two evaluations are reported, the first column describes the results for the base algorithm, without mappings. The second column considers the ambiguity that a reference may have in terms of the personalities it represents. For example, in the annotated data, all mentions of *Cavaco* correspond to the personality *Cavaco Silva*, based on this the algorithm maps all references to *Cavaco* to *Cavaco Silva*. Similarly, all mentions of *Marques Mendes* correspond to the personality *Luís Marques Mendes*. By using these mappings we reduce the number of entities for which the algorithm cannot find an identifier.
 
 <br>
 
@@ -418,7 +421,7 @@ __Table 7__:(P)recisão, (A)brangência e F1 para uma avaliação com 4-partiç�
 
 <br>
 
-Table [6](#tab:results_relation){reference-type="ref" reference="tab:results_relation"} describes the results for the various classifiers. There are no marked differences in performance between the 3 classifiers, although the approach using DistilBERT achieved the best results. When analysing the results, we noticed that there are relations that are difficult to classify correctly, particularly those containing idiomatic expressions, for example:
+Table [6](#tab:results_relation) describes the results for the various classifiers. There are no marked differences in performance between the 3 classifiers, although the approach using DistilBERT achieved the best results. When analysing the results, we noticed that there are relations that are difficult to classify correctly, particularly those containing idiomatic expressions, for example:
 
 - *José Lello says that Nogueira Leite wants to "abifar uns tachos"*
 
@@ -431,9 +434,9 @@ The results obtained with the approaches described, for Portuguese data, are in 
 
 ## __Relationship Direction Classifier__ {#subsec:rel_direction}
 
-The direction classifier has 2 possible classes. As shown in Table [1](#tab:rel_dataset){reference-type="ref" reference="tab:rel_dataset"}, the dataset has a bias towards the Ent~1~$\rightarrow$Ent~2~ class representing 91.5% of the data. We therefore chose to develop a rule-based approach to detect only the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class, and whenever none of the rules are verified, the classifier assigns the Ent~1~$\rightarrow$Ent~2~ class.
+The direction classifier has 2 possible classes. As shown in Table [1](#tab:rel_dataset), the dataset has a bias towards the Ent~1~$\rightarrow$Ent~2~ class representing 91.5% of the data. We therefore chose to develop a rule-based approach to detect only the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class, and whenever none of the rules are verified, the classifier assigns the Ent~1~$\rightarrow$Ent~2~ class.
 
-We defined rules based on patterns built with morphological and syntactic information [@nivre-etal-2020-universal] extracted from the title with spaCy, using the same model as described in Section [5](#sec:rel_data_annot){reference-type="ref" reference="sec:rel_data_annot"}. We extracted morpho-syntactic information from all the words, including information on conjugation for verbs: person and number. The patterns defined were as follows:
+We defined rules based on patterns built with morphological and syntactic information [@nivre-etal-2020-universal] extracted from the title with spaCy, using the same model as described in Section [5](#sec:rel_data_annot). We extracted morpho-syntactic information from all the words, including information on conjugation for verbs: person and number. The patterns defined were as follows:
 
 - **PASSIVE_VOICE**: we look for patterns `<VERB><ADP>`, a verb followed by a proposition. We check whether the passive voice is present and involves the personalities mentioned in the title: whether the Ent~1~ entity has a dependency on the verb of type **acl**, whether the verb has a dependency on the Ent~1~ of type **nsubj:pass** or whether the verb has a dependency on the Ent~2~ of type **obl:agent**.
 
@@ -441,7 +444,7 @@ We defined rules based on patterns built with morphological and syntactic inform
 
 - **NOUN_ENT2**: checks whether the pattern `<ADJ>?<NOUN><ADJ>?<ADP>Ent`~`2`~`<EOS>` is present in the title, i.e.: a noun can be preceded or succeeded by one or more adjectives ending with Ent~2~, and the noun is restricted to a predefined list of nouns.
 
-Table [\[tab:examples_patterns_direction\]](#tab:examples_patterns_direction){reference-type="ref" reference="tab:examples_patterns_direction"} shows some examples of news headlines and the rules that were applied to detect the Ent~1~$\leftarrow$Ent~2~ direction. The rules are applied sequentially, in the same order as described here. If none of the patterns are detected in the headline, the classifier assigns the Ent~1~$\rightarrow$Ent~2~ class.
+Table [\[tab:examples_patterns_direction\]](#tab:examples_patterns_direction) shows some examples of news headlines and the rules that were applied to detect the Ent~1~$\leftarrow$Ent~2~ direction. The rules are applied sequentially, in the same order as described here. If none of the patterns are detected in the headline, the classifier assigns the Ent~1~$\rightarrow$Ent~2~ class.
 
 
 | Título<img width=150/>                                                                           | Regra Aplicada |
@@ -456,7 +459,7 @@ Table [\[tab:examples_patterns_direction\]](#tab:examples_patterns_direction){re
 __Table 8__:
 
 
-Table [7](#tab:direction_clf_results){reference-type="ref" reference="tab:direction_clf_results"} contains the results of this classifier for the annotated data set.
+Table [7](#tab:direction_clf_results) contains the results of this classifier for the annotated data set.
 
 **Table: Direction Classification Results**
 
@@ -481,9 +484,9 @@ The components described in the previous section form the process of extracting 
 
 The extraction process begins by recognising the personalities in the headline and linking them to each personality's identifier in Wikidata. The extraction process continues if both recognised personalities have been linked with an identifier in Wikidata, otherwise the headline is discarded. The type of relationship present in the title is detected with the DistilBERT model. If the relationship between the personalities in the headline is not classified as **other** the classifier for the direction of the relationship is also applied to the headline, otherwise the headline is discarded.
 
-For all the headlines considered, the final result is an RDF triple linking the personalities through a relationship of opposition or support supported by a news item. The RDF triples generated are indexed in a SPARQL engine [@jena2015free] together with a Wikidata sub-graph described in Section [3](#sec_kb){reference-type="ref" reference="sec_kb"}.
+For all the headlines considered, the final result is an RDF triple linking the personalities through a relationship of opposition or support supported by a news item. The RDF triples generated are indexed in a SPARQL engine [@jena2015free] together with a Wikidata sub-graph described in [Section 3](#sec_kb).
 
-The graph generated has a total of 680 political personalities, 107 political parties and 10,361 news items covering a period of 25 years. It is available *online* in *Terse RDF Triple Language* format[^8] and can also be explored via a textitweb interface[^9].
+The graph generated has a total of 680 political personalities, 107 political parties and 10,361 news items covering a period of 25 years. It is available *online* in *Terse RDF Triple Language* format[^8] and can also be explored via a web interface[^9].
 
 
 <br>
