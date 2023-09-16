@@ -49,7 +49,7 @@ In this paper we present a method for extracting relationships of support or opp
 
 During the relationship extraction process, we linked the political personalities involved with their Wikidata identifier [(Malyshev et al., 2018) ](https://iccl.inf.tu-dresden.de/w/images/5/5a/Malyshev-et-al-Wikidata-SPARQL-ISWC-2018.pdf){:target="_blank"}[^1], thus enriching the relationship with information associated with the personality (e.g. political affiliation, public offices held, legislatures, family relationships, etc.).
 
-All the relationships extracted are represented in the form of semantic triples following the Resource Description Framework (RDF) standard [@schreiber2014primer]. The political personalities involved, represented by their Wikidata identifier, are linked through a relationship of opposition or support represented by the news item that supports the relationship. This structure thus gives rise to a semantic graph, making it possible to formulate SPARQL queries [@2013sparql] involving the Wikidata information associated with each personality and the relationships extracted from the news headlines, for example:
+All the relationships extracted are represented in the form of semantic triples following the Resource Description Framework (RDF) standard [(Schreiber & Raimond, 2014) ](#){:target="_blank"}[^3]. The political personalities involved, represented by their Wikidata identifier, are linked through a relationship of opposition or support represented by the news item that supports the relationship. This structure thus gives rise to a semantic graph, making it possible to formulate SPARQL queries [(Prud’hommeaux et al., 2013) ](http://www.w3.org/TR/sparql11-query){:target="_blank"}[^4] involving the Wikidata information associated with each personality and the relationships extracted from the news headlines, for example:
 
 - List all the news items where personality X opposes personality Y
 
@@ -93,11 +93,13 @@ In this section we describe resources similar to those we have produced in this 
 
 ## __Resources and annotated datasets__
 
-[@10.1145/1651461.1651468] propose a method for the automatic creation of a corpus for the detection of positive or negative sentiment towards a political personality, and apply the method to comments on *online* newspaper reports. In this resource, the source of the sentiment is assumed to be the commentator.
+[Sarmento et al., (2009) ](https://doi.org/10.1145/1651461.1651468){:target="_blank"}[^5] propose a method for the automatic creation of a corpus for the detection of positive or negative sentiment towards a political personality, and apply the method to comments on *online* newspaper reports. In this resource, the source of the sentiment is assumed to be the commentator.
 
-[@moreira2013tracking] provide an ontology describing political actors, their positions and affiliated political parties, using official sources of information and information gathered from the *web* to add alternative names to the personalities present in the ontology.
+[Moreira et al., (2013) ](#){:target="_blank"}[^6] provide an ontology describing political actors, their positions and affiliated political parties, using official sources of information and information gathered from the *web* to add alternative names to the personalities present in the ontology.
 
-[@de-arruda-etal-2015-annotated] created a corpus of political news in Brazilian Portuguese, annotating each paragraph with the sentiment according to two dimensions: the political actor referred to by the paragraph, and the sentiment of that reference: positive, negative or neutral. The origin of the sentiment is left open in this resource. [@BARANIAK20213627] provide similar corpora, annotating the sentiment towards a political personality in newspaper texts *on-line*, for English and Polish.
+[de Arruda et al. (2015) ](https://aclanthology.org/W15-5614){:target="_blank"}[^9] created a corpus of political news in Brazilian Portuguese, annotating each paragraph with the sentiment according to two dimensions: the political actor referred to by the paragraph, and the sentiment of that reference: positive, negative or neutral. The origin of the sentiment is left open in this resource. [Baraniak & Sydow, (2021) ](https://www.sciencedirect.com/science/article/pii/S1877050921018755){:target="_blank"}[^8] provide similar corpora, annotating the sentiment towards a political personality in newspaper texts on-line, for English and Polish.
+
+
 
 
 
@@ -259,8 +261,6 @@ The process of extracting RDF triples from news headlines involves 4 sub-process
 
 - classifying the direction of the relationship
 
-
-
 ## __Named-Entity Recognition__ {#subsec:ner}
 
 The recognition of entities mentioned is based on a hybrid method, combining rules with a supervised model.
@@ -368,7 +368,6 @@ __Table 4__:  Accuracy results for the linking approach.
 
 <br>
 
-
 ## __Relationship Type Classifier__ {#subsec:rel_classifier}
 
 We chose to break down the task of classifying the relationship into two tasks: classifying the type of relationship and the direction of the relationship, as opposed to developing a single classifier that would have to distinguish between 5 possible classes, and with classes that are very unbalanced in terms of representativeness. 
@@ -442,7 +441,6 @@ Other relationships are ambiguous and difficult to categorise without any other 
 
 The results obtained with the approaches described, for Portuguese data, are in line with the results previously reported on English data [@liang2019blames; @park-etal-2021-blames].
 
-
 ## __Relationship Direction Classifier__ {#subsec:rel_direction}
 
 The direction classifier has 2 possible classes. As shown in __Table 1__, the dataset has a bias towards the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class representing 91.5% of the data. We therefore chose to develop a rule-based approach to detect only the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class, and whenever none of the rules are verified, the classifier assigns the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class.
@@ -494,7 +492,6 @@ The results show that the proposed method correctly classifies a large part of t
 
 <br>
 
-
 # __Semantic Graph__ {#sec:pipeline}
 
 The components described in the previous section form the process of extracting RDF triples from the collected news headlines.
@@ -507,7 +504,6 @@ The graph generated has a total of 680 political personalities, 107 political pa
 
 
 <br>
-
 
 # __Conclusions and Future Work__ {#sec:future_work}
 
@@ -530,12 +526,9 @@ could be categorised as Ent<sub>1</sub>&harr;Ent<sub>2</sub>, indicating in this
 
 This work also leaves open the possibility of carrying out various studies based on the structure of the graph, for example: finding communities of support and opposition as a function of time and verifying the changes within these communities. Political triangles can also be studied: if two political personalities, X and Y, always accuse or defend a third personality Z, what is the typical relationship expected between X and Y?
 
-
-
 # __Acknowledgements__ {#agradecimentos}
 
-We would like to thank Nuno Feliciano for all his comments during the preparation of this work and the Arquivo.PT team for providing access to the archived data via an API and for considering this work for the Arquivo.PT 2021 awards. To Edgar Felizardo and Tiago Cogumbreiro for their extensive revisions to the article, and also to reviewers Sérgio Nunes and José Paulo Leal for all their comments and corrections.
-
+We would like to thank [Nuno Feliciano](https://www.linkedin.com/in/nuno-feliciano/) for all his comments during the preparation of this work and the Arquivo.PT team for providing access to the archived data via an API and for considering this work for the Arquivo.PT 2021 awards. To [Edgar Felizardo](https://www.linkedin.com/in/edgar-felizardo-44322518/) and [Tiago Cogumbreiro](https://cogumbreiro.github.io/) for their extensive revisions to the article, and also to reviewers Sérgio Nunes and José Paulo Leal for all their comments and corrections.
 
 # __References__ {#references}
 
@@ -546,52 +539,65 @@ We would like to thank Nuno Feliciano for all his comments during the preparatio
 	   - *Year*: 2018
 	   - *DOI*: [N/A](https://iccl.inf.tu-dresden.de/w/images/5/5a/Malyshev-et-al-Wikidata-SPARQL-ISWC-2018.pdf)
 
-[^2]: **What Do You Mean by Relation Extraction? A Survey on Datasets and Study on Scientific Relation Classification**
+[^2]: **What Do You Mean by Relation Extraction? A Studyurvey on Datasets and Study on Scientific Relation Classification**
        - *Authors*: Elisa Bassignana, Barbara Plank
        - *Conference*: Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics: Student Research Workshop
        - *Year*: 2022
        - *DOI*: [10.18653/v1/2022.acl-srw.7](https://aclanthology.org/2022.acl-srw.7)
        - *Pages*: 67-83
 
+[^3]: **Resource Description Framework**
+	   - *Author*: Jeff Z. Pan
+       - *Book*: Handbook on Ontologies
+       - *Pages*: 71-90
+       - *Year*: 2009
+
+[^4]: **SPARQL 1.1 Query Language**
+       - *Authors*: Eric Prud'hommeaux, Steve Harris, Andy Seaborne
+       - *Year*: 2013
+       - *URL*: [SPARQL 1.1 Query Language](http://www.w3.org/TR/sparql11-query)
+
+
+[^5]: **Automatic Creation of a Reference Corpus for Political Opinion Mining in User-Generated Content**
+      - *Authors*: Luís Sarmento, Paula Carvalho, Mario J. Silva, Eugénio de Oliveira
+      - *Conference*: Proceedings of the 1st International CIKM Workshop on Topic-Sentiment Analysis for Mass Opinion
+      - *Year*: 2009
+      - *DOI*: [10.1145/1651461.1651468](https://doi.org/10.1145/1651461.1651468)
+      - *Pages*: 29–36
+
+[^6]: **Tracking politics with POWER**
+	  - *Authors*: Silvio Moreira, David S. Batista, Paula Carvalho, Francisco M. Couto, Mario J. Silva
+	  - *Journal*: Program: electronic library and information systems
+	  - *Volume*: 47
+	  - *Number*: 2
+	  - *Year*: 2013
+
+[^7]: **Feuding Families and Former Friends: Unsupervised Learning for Dynamic Fictional Relationships**
+	  - *Authors*: Mohit Iyyer, Anupam Guha, Snigdha Chaturvedi, Jordan Boyd-Graber, Hal Daumé III
+	  - *Conference*: Proceedings of the 2016 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies
+	  - *Year*: 2016
+	  - *DOI*: [10.18653/v1/N16-1180](https://aclanthology.org/N16-1180)
+	  - *Pages*: 1534-1544
+
+[^8]: **A dataset for Sentiment analysis of Entities in News headlines (SEN)**
+	  - *Authors*: Katarzyna Baraniak, Marcin Sydow
+	  - *Journal*: Procedia Computer Science
+	  - *Volume*: 192
+	  - *Year*: 2021
+	  - *DOI*: [10.1016/j.procs.2021.09.136](https://www.sciencedirect.com/science/article/pii/S1877050921018755)
+	  - *Pages*: 3627-3636
+
+
+[^9]: **An Annotated Corpus for Sentiment Analysis in Political News**
+	  - *Authors*: Gabriel Domingos de Arruda, Norton Trevisan Roman, Ana Maria Monteiro
+	  - *Conference*: Proceedings of the 10th Brazilian Symposium in Information and Human Language Technology
+	  - *Year*: 2015
+	  - *DOI*: [10.1145/2835988.2835995](https://aclanthology.org/W15-5614)
+	  - *Pages*: 101-110
+
+
 <!--
 
-# __References__ {#references}
-
-1. **Feuding Families and Former Friends: Unsupervised Learning for Dynamic Fictional Relationships**
-   - *Authors*: Mohit Iyyer, Anupam Guha, Snigdha Chaturvedi, Jordan Boyd-Graber, Hal Daumé III
-   - *Conference*: Proceedings of the 2016 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies
-   - *Year*: 2016
-   - *DOI*: [10.18653/v1/N16-1180](https://aclanthology.org/N16-1180)
-   - *Pages*: 1534-1544
-
-3. **Tracking politics with POWER**
-   - *Authors*: Silvio Moreira, David S. Batista, Paula Carvalho, Francisco M. Couto, Mario J. Silva
-   - *Journal*: Program: electronic library and information systems
-   - *Volume*: 47
-   - *Number*: 2
-   - *Year*: 2013
-
-4. **Automatic Creation of a Reference Corpus for Political Opinion Mining in User-Generated Content**
-   - *Authors*: Luís Sarmento, Paula Carvalho, Mario J. Silva, Eugénio de Oliveira
-   - *Conference*: Proceedings of the 1st International CIKM Workshop on Topic-Sentiment Analysis for Mass Opinion
-   - *Year*: 2009
-   - *DOI*: [10.1145/1651461.1651468](https://doi.org/10.1145/1651461.1651468)
-   - *Pages*: 29–36
-
-5. **A dataset for Sentiment analysis of Entities in News headlines (SEN)**
-   - *Authors*: Katarzyna Baraniak, Marcin Sydow
-   - *Journal*: Procedia Computer Science
-   - *Volume*: 192
-   - *Year*: 2021
-   - *DOI*: [10.1016/j.procs.2021.09.136](https://www.sciencedirect.com/science/article/pii/S1877050921018755)
-   - *Pages*: 3627-3636
-
-6. **An Annotated Corpus for Sentiment Analysis in Political News**
-   - *Authors*: Gabriel Domingos de Arruda, Norton Trevisan Roman, Ana Maria Monteiro
-   - *Conference*: Proceedings of the 10th Brazilian Symposium in Information and Human Language Technology
-   - *Year*: 2015
-   - *DOI*: [10.1145/2835988.2835995](https://aclanthology.org/W15-5614)
-   - *Pages*: 101-110
 
 7. **Load What You Need: Smaller Versions of Multilingual BERT**
    - *Authors*: Amine Abdaoui, Camille Pradel, Grégoire Sigel
@@ -630,21 +636,11 @@ We would like to thank Nuno Feliciano for all his comments during the preparatio
     - *Year*: 2013
     - *DOI*: [10.1145/2487788.2487934](https://doi.org/10.1145/2487788.2487934)
 
-13. **Resource Description Framework**
-    - *Author*: Jeff Z. Pan
-    - *Book*: Handbook on Ontologies
-    - *Pages*: 71-90
-    - *Year*: 2009
 
 14. **RDF 1.1 Primer W3C Working Group Note**
     - *Authors*: Guus Schreiber, Yves Raimond
     - *Year*: 2014
     - *URL*: [RDF 1.1 Primer W3C Working Group Note](https://www.w3.org/TR/rdf11-primer/)
-
-15. **SPARQL 1.1 Query Language**
-    - *Authors*: Eric Prud'hommeaux, Steve Harris, Andy Seaborne
-    - *Year*: 2013
-    - *URL*: [SPARQL 1.1 Query Language](http://www.w3.org/TR/sparql11-query)
 
 16. **Evaluating CETEMPúblico, a Free Resource for Portuguese**
     - *Authors*: Diana Santos, Paulo Rocha
