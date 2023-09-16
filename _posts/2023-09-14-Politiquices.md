@@ -155,7 +155,8 @@ Some explore these relationships in an international political context, i.e.: th
 # __Knowledge Base Construction__ {#sec_kb}
 
 Given that the personalities involved in the relationships to be extracted are relevant political personalities, we started by building a knowledge base from Wikidata [@MKGGB2018].
-By making SPARQL queries to the public *endpoint*[^1] we collected the identifier of all:
+
+By making SPARQL queries to the [public endpoint](https://query.wikidata.org){:target="_blank"} we collected the identifier of all:
 
 - people who are or have been affiliated with a Portuguese political party
 
@@ -164,7 +165,7 @@ By making SPARQL queries to the public *endpoint*[^1] we collected the identifie
 - people who hold or have held at least one office from a list of previously selected Portuguese public offices (e.g.: *minister, party leader, ambassador*, etc.)
 
 In addition to the results of these queries, we manually selected some identifiers of personalities not covered by the SPARQL queries defined above, many of them from an international political context, but who interact with Portuguese personalities.
-We also added all the identifiers of political parties to which the personalities collected are affiliated. This process resulted in a total of 1,757 personalities and 37 political parties. It should be noted that some of the parties included are now defunct and/or from an international context. For each of the identifiers of the personalities and parties, we downloaded the corresponding page from Wikidata using another public *endpoint*[^2].
+We also added all the identifiers of political parties to which the personalities collected are affiliated. This process resulted in a total of 1,757 personalities and 37 political parties. It should be noted that some of the parties included are now defunct and/or from an international context. For each of the identifiers of the personalities and parties, we downloaded the corresponding page from Wikidata using another [public endpoint](https://www.wikidata.org/wiki/Special:EntityData?){:target="_blank"}.
 
 For each political figure we selected: their Wikidata identifier, their most common name and alternative names, i.e. combinations of first names and surnames. Based on these three fields, we created an index in ElasticSearch [@10.5555/2904394] using its default configuration, not making use of any extra functionality such as $n$-gram parsers.
 
@@ -380,15 +381,15 @@ In Table [3](#tab:ent_linking_results) two evaluations are reported, the first c
 
 ---
 
-| Classification<img width=250/>       | base<img width=150/>     | mappings<img width=150/> |
+| Classification<img width=250/>       | Base<img width=150/>     | Mappings<img width=150/> |
 | ------------------- | -------- | ----------- |
 | correct             | 5,059    | 5,136       |
 | incorrect           | 43       | 43          |
 | not disambiguated   | 246      | 169         |
 |-----------------------------------------------
-| **Accuracy**       | 0,93     | 0,96        |
+| **Accuracy**        | 0,93     | 0,96        |
 
-__Table 4__:  Accuracy results for the linking approach .
+__Table 4__:  Accuracy results for the linking approach.
 
 ---
 
@@ -419,42 +420,46 @@ The LSTM recurrent neural network was used in a bidirectional architecture, i.e.
 
 The DistilBERT model was trained on the basis of a pre-trained model for Portuguese [@abdaoui-etal-2020-load] and then fine-tuned on the annotated dataset, i.e.: the weights of all the pre-trained layers were updated taking into account the task of classifying the relation. The network was trained for 5 epochs with a batch size of 8.
 
+<br>
 
-| Relação       | P     | A     | F1    |
-| ------------- | ----- | ----- | ----- |
-| opõe-se       | 0,71  | 0,69  | 0,70  |
-| outra         | 0,69  | 0,69  | 0,69  |
-| apoia         | 0,65  | 0,69  | 0,67  |
-| Macro-Média   | 0,69  | 0,69  | 0,69  |
+---
+
+| Relationship<img width=250/>       | Precision<img width=250/> | Recall<img width=250/>| F1    |
+| ------------------ | ----------| ------| ----- |
+| opõe-se            | 0,71      | 0,69  | 0,70  |
+| outra              | 0,69      | 0,69  | 0,69  |
+| apoia              | 0,65      | 0,69  | 0,67  |
+| Macro-Média        | 0,69      | 0,69  | 0,69  |
 
 __a)__: SVM with a linear kernel linear.
 
-| Relação       | P     | A     | F1    |
-| ------------- | ----- | ----- | ----- |
-| opõe-se       | 0,75  | 0,64  | 0,69  |
-| outra         | 0,65  | 0,75  | 0,70  |
-| apoia         | 0,65  | 0,62  | 0,63  |
-| Macro-Média   | 0,69  | 0,68  | 0,68  |
+| Relationship<img width=250/>       | Precision<img width=250/> | Recall<img width=250/>| F1    |
+| ------------------ | --------- | ----- | ----- |
+| opõe-se            | 0,75      | 0,64  | 0,69  |
+| outra              | 0,65      | 0,75  | 0,70  |
+| apoia              | 0,65      | 0,62  | 0,63  |
+| Macro-Média        | 0,69      | 0,68  | 0,68  |
 
 
 __b)__: bi-Directional LSTM.
 
 
-| Relação       | P     | A     | F1    |
-| ------------- | ----- | ----- | ----- |
-| opõe-se       | 0,74  | 0,76  | 0,75  |
-| outra         | 0,72  | 0,71  | 0,72  |
-| apoia         | 0,72  | 0,71  | 0,71  |
-| Macro-Média   | 0,73  | 0,72  | 0,72  |
+| Relationship<img width=250/>       | Precision<img width=250/>| Recall<img width=250/>| F1    |
+| ------------------ | -------- | ----- | ----- |
+| opõe-se            | 0,74     | 0,76  | 0,75  |
+| outra              | 0,72     | 0,71  | 0,72  |
+| apoia              | 0,72     | 0,71  | 0,71  |
+| Macro-Média        | 0,73     | 0,72  | 0,72  |
 
 __c)__: DistilBERT pre-trained on Portuguese corpora.
 
 __Table 5__: Precision, Recall and F1 for an evaluation with 4-partitions and cross-validation with different classifiers.
 
+---
 
 <br>
 
-Table [6](#tab:results_relation) describes the results for the various classifiers. There are no marked differences in performance between the 3 classifiers, although the approach using DistilBERT achieved the best results. When analysing the results, we noticed that there are relations that are difficult to classify correctly, particularly those containing idiomatic expressions, for example:
+__Table 5__ describes the results for the various classifiers. There are no marked differences in performance between the 3 classifiers, although the approach using DistilBERT achieved the best results. When analysing the results, we noticed that there are relations that are difficult to classify correctly, particularly those containing idiomatic expressions, for example:
 
 - *José Lello says that Nogueira Leite wants to "abifar uns tachos"*
 
@@ -473,36 +478,44 @@ We defined rules based on patterns built with morphological and syntactic inform
 
 - **PASSIVE_VOICE**: we look for patterns `<VERB><ADP>`, a verb followed by a proposition. We check whether the passive voice is present and involves the personalities mentioned in the title: whether the Ent1 entity has a dependency on the verb of type **acl**, whether the verb has a dependency on the Ent<sub>1</sub> of type **nsubj:pass** or whether the verb has a dependency on the Ent<sub>2</sub> of type **obl:agent**.
 
-- **VERBO_ENT2**: detects the morphological pattern `<PUNCT><VERB>Ent2<EOS>`, a punctuation mark followed by a verb, and ending with Ent2, restricting the verb to be conjugated in the 3rd person singular of the present tense, and where `<EOS>` represents the end of the title, meaning that Ent2 is the last word in the title text.
+- **VERB_ENT2**: detects the morphological pattern `<PUNCT><VERB>Ent2<EOS>`, a punctuation mark followed by a verb, and ending with Ent2, restricting the verb to be conjugated in the 3rd person singular of the present tense, and where `<EOS>` represents the end of the title, meaning that Ent2 is the last word in the title text.
 
 - **NOUN_ENT2**: checks whether the pattern `<ADJ>?<NOUN><ADJ>?<ADP>Ent2<EOS>` is present in the title, i.e.: a noun can be preceded or succeeded by one or more adjectives ending with Ent2, and the noun is restricted to a predefined list of nouns.
 
-Table [\[tab:examples_patterns_direction\]](#tab:examples_patterns_direction) shows some examples of news headlines and the rules that were applied to detect the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class direction. The rules are applied sequentially, in the same order as described here. If none of the patterns are detected in the headline, the classifier assigns the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class.
+__Table 6__ shows some examples of news headlines and the rules that were applied to detect the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class direction. The rules are applied sequentially, in the same order as described here. If none of the patterns are detected in the headline, the classifier assigns the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class.
 
+<br>
 
-| Título<img width=150/>                                                           | Regra Aplicada|
+---
+
+| Headline<img width=650/>                                                         | Matched Rule  |
 | -------------------------------------------------------------------------------- | --------------|
-| Marques Júnior elogiado por Cavaco Silva pela "integridade de carácter"          | VOZ_PASSIVA   |
-| Passos Coelho é acusado de imaturidade política por Santos Silva                 | VOZ_PASSIVA   |
-| António Costa vive no "país das maravilhas" acusa Assunção Cristas               | VERBO_ENT2    |
-| Passos Coelho "insultou 500 mil portugueses", acusa José Sócrates                | VERBO_ENT2    |
+| Marques Júnior elogiado por Cavaco Silva pela "integridade de carácter"          | PASSIVE_VOICE |
+| Passos Coelho é acusado de imaturidade política por Santos Silva                 | PASSIVE_VOICE |
+| António Costa vive no "país das maravilhas" acusa Assunção Cristas               | VERB_ENT2     |
+| Passos Coelho "insultou 500 mil portugueses", acusa José Sócrates                | VERB_ENT2     |
 | Maria Luís Albuquerque sob críticas de Luís Amado                                | NOUN_ENT2     |
 | André Ventura diz-se surpreendido com perda de apoio de Cristas                  | NOUN_ENT2     |
 
 __Table 6__: Examples of titles and respective rules used to detect the direction of the relationship.
 
+---
 
-Table [7](#tab:direction_clf_results) contains the results of this classifier for the annotated data set.
+Table 7 contains the results of this classifier for the annotated data set.
 
-**Table: Direction Classification Results**
+<br>
 
-| Direction<img width=150/>    | Precision<img width=150/>     | Recall<img width=150/>     | F1<img width=150/>    | Number of Headlines |
+---
+
+| Direction<img width=150/>    | Precision<img width=150/>     | Recall<img width=150/>     | F1<img width=150/>    | # of Headlines |
 | ---------------------------- | ----- | ----- | ----- | -------- |
 | Ent1 → Ent2                  | 0,99  | 1,00  | 0,99  | 1,488    |
 | Ent1 ← Ent2                  | 0,95  | 0,84  | 0,89  | 129      |
 | weighted avg.                | 0,98  | 0,98  | 0,98  | 1,517    |
 
-__Table 7__: Precision, Recall and F1 using 3 pattern-based rules.
+__Table 7__: Precision, Recall and F1 for the relationship direction classifier.
+
+
 
 
 The results show that the proposed method correctly classifies a large part of the direction of the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class relations, the only class for which rules have been developed, without prejudice to the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class class.
@@ -555,10 +568,6 @@ We would like to thank Nuno Feliciano for all his comments during the preparatio
 
 
 # __Links__ {#links}
-
-[^1]: <https://query.wikidata.org>
-
-[^2]: <https://www.wikidata.org/wiki/Special:EntityData?>
 
 [^3]: <https://www.linguateca.pt/CHAVE/>
 
