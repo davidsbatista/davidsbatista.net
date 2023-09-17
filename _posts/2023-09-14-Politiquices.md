@@ -9,7 +9,7 @@ disqus_identifier: 20230914
 preview_pic: /assets/images/2023-09-14-politiquices.png
 ---
 
-I was awarded the 2nd place in the [Arquivo.pt Awards 2021](https://sobre.arquivo.pt/en/meet-the-winners-of-the-arquivo-pt-award-2021){:target="_blank"} for the [Politiquices project](https://www.politiquices.pt){:target="_blank"}. The project aimed at extracting supportive and opposing relationships between political personalities from news headlines archived by [Arquivo.PT](https://www.arquivo.pt){:target="_blank"}, and associating the personalities with their identifier on Wikidata, thus resulting in a semantic graph. I published the results of this project in Portuguese on [Linguamatica v. 15 n. 1](https://linguamatica.com/index.php/linguamatica/article/view/386){:target="_blank"}. The content of this blog post is the same as in the paper but translated to English.
+I was awarded the 2nd place in the [Arquivo.pt Awards 2021](https://sobre.arquivo.pt/en/meet-the-winners-of-the-arquivo-pt-award-2021){:target="_blank"} for the [Politiquices project](https://www.politiquices.pt){:target="_blank"}. The project aimed at extracting supportive and opposing relationships between political personalities from news headlines archived by [Arquivo.PT](https://www.arquivo.pt){:target="_blank"}, and associating the personalities with their identifier on Wikidata, thus resulting in a semantic graph. I published recently the results of this project in Portuguese on [Linguamatica v. 15 n. 1](https://linguamatica.com/index.php/linguamatica/article/view/386){:target="_blank"}. The content of this blog post is the same as in the paper but translated to English.
 
 
 <br>
@@ -84,7 +84,7 @@ In this section we describe resources similar to those we have produced in this 
 
 [Sarmento et al., (2009) ](https://doi.org/10.1145/1651461.1651468){:target="_blank"}[^5] propose a method for the automatic creation of a corpus for the detection of positive or negative sentiment towards a political personality, and apply the method to comments on *online* newspaper reports. In this resource, the source of the sentiment is assumed to be the commentator.
 
-[Moreira et al., (2013) ](#){:target="_blank"}[^6] provide an ontology describing political actors, their positions and affiliated political parties, using official sources of information and information gathered from the *web* to add alternative names to the personalities present in the ontology.
+[Moreira et al., (2013) ](https://www.emerald.com/insight/content/doi/10.1108/00330331311313708/full/html){:target="_blank"}[^6] provide an ontology describing political actors, their positions and affiliated political parties, using official sources of information and information gathered from the *web* to add alternative names to the personalities present in the ontology.
 
 [de Arruda et al. (2015) ](https://aclanthology.org/W15-5614){:target="_blank"}[^9] created a corpus of political news in Brazilian Portuguese, annotating each paragraph with the sentiment according to two dimensions: the political actor referred to by the paragraph, and the sentiment of that reference: positive, negative or neutral. The origin of the sentiment is left open in this resource. [Baraniak & Sydow, (2021) ](https://www.sciencedirect.com/science/article/pii/S1877050921018755){:target="_blank"}[^8] provide similar corpora, annotating the sentiment towards a political personality in newspaper texts on-line, for English and Polish.
 
@@ -130,7 +130,7 @@ We also added all the identifiers of political parties to which the personalitie
 
 For each of the identifiers of the personalities and parties, we downloaded the corresponding page from Wikidata using another [public endpoint](https://www.wikidata.org/wiki/Special:EntityData?){:target="_blank"}. For each political figure we selected: their Wikidata identifier, their most common name and alternative names, i.e. combinations of first names and surnames. 
 
-Based on these three fields, we created an index in ElasticSearch [(Gormley & Tong, 2015) ](#){:target="_blank"}[^12] using its default configuration, not making use of any extra functionality such as $$n$$-gram parsers.
+Based on these three fields, we created an index in ElasticSearch [(Gormley & Tong, 2015) ](https://www.elastic.co/guide/en/elasticsearch/guide/index.html){:target="_blank"}[^12] using its default configuration, not making use of any extra functionality such as $$n$$-gram parsers.
 
 
 <br>
@@ -145,7 +145,7 @@ The main source of news was the Portuguese web archive [(Gomes et al., 2013) ](h
 - radio stations websites
 - content aggregator portals
 
-A second news source was the [CHAVE collection](https://www.linguateca.pt/CHAVE) ([Santos & Rocha, 2004 ](){:target="_blank"}[^16] [2001](){:target="_blank"}[^17]), containing articles from the newspaper PÚBLICO published between 1994 and 1995. Finally, some articles not archived by arquivo.pt were also added, taken directly from the *World*, *Politics* and *Society* sections of the publico.pt website.
+A second news source was the [CHAVE collection](https://www.linguateca.pt/CHAVE) ([Santos & Rocha, 2004 ](https://www.aclweb.org/anthology/P01-1058){:target="_blank"}[^16], [2001](http://ceur-ws.org/Vol-1170/CLEF2004wn-other-Santos2004.pdf){:target="_blank"}[^17]), containing articles from the newspaper PÚBLICO published between 1994 and 1995. Finally, some articles not archived by arquivo.pt were also added, taken directly from the *World*, *Politics* and *Society* sections of the publico.pt website.
 
 This process resulted in a collection of around 13.7 million article titles published between 1994 and 2022. Pre-processing was then applied in order to remove news items with: duplicate titles, titles with less than 4 words, and titles or URLs containing words that are part of a pre-defined list (e.g.: *sports*, *celebrities*, *arts*, *cinema*, etc.) that suggest a context other than politics. This pre-processing resulted in 1.3 million different titles, around 10 per cent of the data initially collected.
 
@@ -157,7 +157,7 @@ This process resulted in a collection of around 13.7 million article titles publ
 
 In order to be able to train supervised learning classifiers to identify the relationships present in the news headlines, and to link the personalities with Wikidata, we manually annotated headlines with: the mentions of personalities, the identifiers in Wikidata and the relationship between the personalities mentioned.
 
-We began by pre-processing all the headlines collected using the [spaCy 3.0 software package](https://doi.org/10.5281/zenodo.1212303){:target="_blank"}[^16], and the `pt_core_news_lg-3.0.0` model to recognise named-entities of the `PERSON` type. For each recognised entity we tried to find its corresponding identifier in Wikidata by querying the index described in [Section 3](#sec_kb) and assuming that in the list of results the first is the correct identifier associated with the entity. We then selected the titles for annotation, including only titles referring to at least two personalities.
+We began by pre-processing all the headlines collected using the [spaCy 3.0 software package ](https://doi.org/10.5281/zenodo.1212303){:target="_blank"}[^18], and the `pt_core_news_lg-3.0.0` model to recognise named-entities of the `PERSON` type. For each recognised entity we tried to find its corresponding identifier in Wikidata by querying the index described in [Section 3](#sec_kb) and assuming that in the list of results the first is the correct identifier associated with the entity. We then selected the titles for annotation, including only titles referring to at least two personalities.
 
 In the annotation process all the titles were loaded into the [Argilla](https://argilla.io/){:target="_blank"} annotation tool, and using the graphical interface we selected titles to annotate.
 
@@ -197,9 +197,9 @@ __Table 2__ characterises the data in terms of number of relationships and direc
 
 <img width=100/>|Relação<img width=200/>| Ent1 &rarr; Ent2<img width=150/> | Ent1 &larr; Ent2<img width=150/> | Total<img width=150/>
 |--- 				    | --- 							   | --- 							  | ---
-|opõe-se 				| 1 155                            | 102                              | 1 257
-|apoia 					| 717                              | 44                               | 761
-|outra 					|             -                    | -                                | 1,306
+|opposes 				| 1 155                            | 102                              | 1 257
+|supports				| 717                              | 44                               | 761
+|other 					|             -                    | -                                | 1,306
 |Total 					| 1,872                            | 146                              | 3,324
 
 __Table 2__: Relationships by class and direction.
@@ -282,7 +282,7 @@ __Table 3__: Precision, Recall and F<sub>1</sub> for the NER component combining
 
 The algorithm for associating personalities with identifiers on Wikidata has two phases. In the first phase, the algorithm only tries to use the title of the news item; if this process fails, it then tries to use possible references to the personalities in the text of the news item.
 
-The algorithm first interrogates the knowledge base (KB) using the reference to the personality in the headline, thus generating a list of candidates for a given personality. If the list contains only one candidate and the [Jaro (1998)](https://doi.org/10.1080/01621459.1989.10478785)[^27] similarity to the personality mentioned in the headline is at least 0.8, that candidate is selected. If there is more than one candidate, the algorithm filters out only those with a similarity of 1.0 and if there is only one, that is the candidate selected. In any other case, no candidate is returned.
+The algorithm first interrogates the knowledge base (KB) using the reference to the personality in the headline, thus generating a list of candidates for a given personality. If the list contains only one candidate and the [Jaro (1998) ](https://doi.org/10.1080/01621459.1989.10478785){:target="_blank"}[^27] similarity to the personality mentioned in the headline is at least 0.8, that candidate is selected. If there is more than one candidate, the algorithm filters out only those with a similarity of 1.0 and if there is only one, that is the candidate selected. In any other case, no candidate is returned.
 
 Algorithm 1 describes the procedure that uses only the headline.
 
@@ -392,19 +392,19 @@ The DistilBERT model was trained on the basis of a pre-trained model for Portugu
 
 | Relationship<img width=250/>       | Precision<img width=250/> | Recall<img width=250/>| F1    |
 | -----------------------------------|-----------| ------| ----- |
-| opõe-se                            | 0,71      | 0,69  | 0,70  |
-| outra                              | 0,69      | 0,69  | 0,69  |
-| apoia                              | 0,65      | 0,69  | 0,67  |
-| Macro-Média                        | 0,69      | 0,69  | 0,69  |
+| opposes                            | 0,71      | 0,69  | 0,70  |
+| supports                           | 0,65      | 0,69  | 0,67  |
+| other                              | 0,69      | 0,69  | 0,69  |
+| macro avg.                         | 0,69      | 0,69  | 0,69  |
 
 __a)__: SVM with a linear kernel linear.
 
 | Relationship<img width=250/>       | Precision<img width=250/> | Recall<img width=250/>| F1    |
 | ------------------ | --------- | ----- | ----- |
-| opõe-se            | 0,75      | 0,64  | 0,69  |
-| outra              | 0,65      | 0,75  | 0,70  |
-| apoia              | 0,65      | 0,62  | 0,63  |
-| Macro-Média        | 0,69      | 0,68  | 0,68  |
+| opposes            | 0,75      | 0,64  | 0,69  |
+| supports           | 0,65      | 0,62  | 0,63  |
+| other              | 0,65      | 0,75  | 0,70  |
+| macro avg.         | 0,69      | 0,68  | 0,68  |
 
 
 __b)__: bi-directional LSTM with Portuguese embeddings.
@@ -412,10 +412,10 @@ __b)__: bi-directional LSTM with Portuguese embeddings.
 
 | Relationship<img width=250/>       | Precision<img width=250/>| Recall<img width=250/>| F1    |
 | ------------------ | -------- | ----- | ----- |
-| opõe-se            | 0,74     | 0,76  | 0,75  |
-| outra              | 0,72     | 0,71  | 0,72  |
-| apoia              | 0,72     | 0,71  | 0,71  |
-| Macro-Média        | 0,73     | 0,72  | 0,72  |
+| opposes            | 0,74     | 0,76  | 0,75  |
+| supports           | 0,72     | 0,71  | 0,71  |
+| other              | 0,72     | 0,71  | 0,72  |
+| macro avg.         | 0,73     | 0,72  | 0,72  |
 
 __c)__: DistilBERT pre-trained on Portuguese corpora.
 
@@ -462,7 +462,7 @@ __Table 6__ shows some examples of news headlines and the rules that were applie
 | Maria Luís Albuquerque sob críticas de Luís Amado                                | NOUN_ENT2     |
 | André Ventura diz-se surpreendido com perda de apoio de Cristas                  | NOUN_ENT2     |
 
-__Table 6__: Examples of titles and respective rules used to detect the direction of the relationship.
+__Table 6__: Examples of titles in Portuguese and respective rules used to detect the direction of the relationship.
 
 ---
 
@@ -470,7 +470,7 @@ __Table 6__: Examples of titles and respective rules used to detect the directio
 
 ---
 
-| Direction<img width=150/>    | Precision<img width=150/>     | Recall<img width=150/>     | F1<img width=150/>    | # of Headlines |
+| Direction<img width=150/>    | Precision<img width=150/>     | Recall<img width=150/>     | F1<img width=150/>    | #Headlines |
 | ---------------------------- | ----- | ----- | ----- | -------- |
 | Ent1 → Ent2                  | 0,99  | 1,00  | 0,99  | 1,488    |
 | Ent1 ← Ent2                  | 0,95  | 0,84  | 0,89  | 129      |
@@ -524,7 +524,7 @@ This work also leaves open the possibility of carrying out various studies based
 
 # __Acknowledgements__ {#agradecimentos}
 
-We would like to thank [Nuno Feliciano](https://www.linkedin.com/in/nuno-feliciano/) for all his comments during the preparation of this work and the Arquivo.PT team for providing access to the archived data via an API and for considering this work for the Arquivo.PT 2021 awards. To [Edgar Felizardo](https://www.linkedin.com/in/edgar-felizardo-44322518/) and [Tiago Cogumbreiro](https://cogumbreiro.github.io/) for their extensive revisions to the article, and also to reviewers Sérgio Nunes and José Paulo Leal for all their comments and corrections.
+We would like to thank [Nuno Feliciano](https://www.linkedin.com/in/nuno-feliciano/){:target="_blank"} for all his comments during the preparation of this work and the Arquivo.PT team for providing access to the archived data via an API and for considering this work for the Arquivo.PT 2021 awards. To [Edgar Felizardo](https://www.linkedin.com/in/edgar-felizardo-44322518/){:target="_blank"} and [Tiago Cogumbreiro](https://cogumbreiro.github.io/){:target="_blank"} for their extensive revisions to the article, and also to reviewers Sérgio Nunes and José Paulo Leal for all their comments and corrections.
 
 <br>
 
@@ -571,6 +571,7 @@ We would like to thank [Nuno Feliciano](https://www.linkedin.com/in/nuno-felicia
 	  - *Volume*: 47
 	  - *Number*: 2
 	  - *Year*: 2013
+	  - *DOI*: [Link](https://www.emerald.com/insight/content/doi/10.1108/00330331311313708/full/html)
 
 [^7]: **Feuding Families and Former Friends: Unsupervised Learning for Dynamic Fictional Relationships**
 	  - *Authors*: Mohit Iyyer, Anupam Guha, Snigdha Chaturvedi, Jordan Boyd-Graber, Hal Daumé III
