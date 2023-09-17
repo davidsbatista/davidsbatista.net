@@ -347,13 +347,13 @@ In __Table 3__ two evaluations are reported, the first column describes the resu
 
 ---
 
-| Classification<img width=250/>       | Base<img width=150/>     | Mappings<img width=150/> |
+<img width=150/>| Classification<img width=250/>       | Base<img width=150/>     | Mappings<img width=150/> |
 | ------------------- | -------- | ----------- |
-| correct             | 5,059    | 5,136       |
+| correct             | 5 059    | 5 136       |
 | incorrect           | 43       | 43          |
 | not disambiguated   | 246      | 169         |
 |-----------------------------------------------
-| **Accuracy**        | 0,93     | 0,96        |
+| **Accuracy**        | **0,93**    | **0,96**        |
 
 __Table 4__:  Accuracy results for the linking approach.
 
@@ -447,7 +447,7 @@ We defined rules based on patterns built with morphological and syntactic inform
 
 - **NOUN_ENT2**: checks whether the pattern `<ADJ>?<NOUN><ADJ>?<ADP>Ent2<EOS>` is present in the title, i.e.: a noun can be preceded or succeeded by one or more adjectives ending with Ent2, and the noun is restricted to a predefined list of nouns.
 
-__Table 6__ shows some examples of news headlines and the rules that were applied to detect the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class direction. The rules are applied sequentially, in the same order as described here. If none of the patterns are detected in the headline, the classifier assigns the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class. __Table 7__ contains the results of this classifier for the annotated data set.
+__Table 6__ shows some examples of news headlines and the rules that were applied to detect the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class direction. The rules are applied sequentially, in the same order as described here. If none of the patterns are detected in the headline, the classifier assigns the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class. 
 
 <br>
 
@@ -468,9 +468,12 @@ __Table 6__: Examples of titles in Portuguese and respective rules used to detec
 
 <br>
 
+
+Above in __Table 7__ we can see the results of this classifier for the annotated data set. The results show that the proposed method correctly classifies a large part of the direction of the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class relations, the only class for which rules have been developed, without prejudice to the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class class.
+
 ---
 
-| Direction<img width=150/>    | Precision<img width=150/>     | Recall<img width=150/>     | F1<img width=150/>    | #Headlines |
+<img width=100/>| Direction<img width=150/>    | Precision<img width=150/>     | Recall<img width=150/>     | F1<img width=150/>    | #Headlines |
 | ---------------------------- | ----- | ----- | ----- | -------- |
 | Ent1 → Ent2                  | 0,99  | 1,00  | 0,99  | 1,488    |
 | Ent1 ← Ent2                  | 0,95  | 0,84  | 0,89  | 129      |
@@ -480,8 +483,6 @@ __Table 7__: Precision, Recall and F1 for the relationship direction classifier.
 
 
 
-
-The results show that the proposed method correctly classifies a large part of the direction of the Ent<sub>1</sub> &larr; Ent<sub>2</sub> class relations, the only class for which rules have been developed, without prejudice to the Ent<sub>1</sub> &rarr; Ent<sub>2</sub> class class.
 
 
 <br>
