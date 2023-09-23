@@ -14,6 +14,37 @@ I was awarded the 2nd place in the [Arquivo.pt Awards 2021](https://sobre.arquiv
 
 <br>
 
+---
+
+## __The datasets resulted from this work are publicly available__
+
+- __[Semantic Graph as TTL file](https://github.com/politiquices/data-releases/blob/master/politiquices_2022-02-06_0135.ttl.bz2)__
+- __[JSONL containing the annotated headlines](https://github.com/politiquices/data-releases/blob/master/politiquices_data_v1.0.jsonl)__
+- __[Annotated headlines 4-fold cross validation](https://github.com/politiquices/data-releases/blob/master/politiquices_data_v1.0_four_folds.jsonl)__
+
+```BibTeX
+@article{Soares Batista_2023, 
+  title={Extracção de Relações de Apoio e Oposição em Títulos de Notícias de Política em Português}, 
+  volume={15}, 
+  url={https://linguamatica.com/index.php/linguamatica/article/view/386}, 
+  DOI={10.21814/lm.15.1.386},
+  number={1}, 
+  journal = {Linguam{\'a}tica},
+  author={Soares Batista, David}, 
+  year={2023}, 
+  month={Jul.}, 
+  pages={91-101}
+}
+```
+
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
+
+[cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
+[cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
+[cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
+
+<br>
+
 
 ---
 
