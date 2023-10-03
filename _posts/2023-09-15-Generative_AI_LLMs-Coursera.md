@@ -9,7 +9,7 @@ disqus_identifier: 20230915
 preview_pic: /assets/images/2023-09-15-2001.png
 ---
 
-I'm happy to have completed this course and recommend it to anyone interested in delving into the intricacies of Transformer architecture and Large Language Models. The course covered a wide range of topics, including the Transformer architecture, the Generative AI lifecycle, it provided in-depth insights into fine-tuning LLMs with parameter-efficient fine-tuning (PEFT), LoRA, and soft-prompts. The course also explored advanced topics such as Reinforcement Learning with Human Feedback, chain-of-thought prompting, and the use of information retrieval and augmentation techniques to overcome knowledge limitations.
+I'm happy to have completed this course and recommend it to anyone interested in delving into some of the intricacies of Transformer architecture and Large Language Models. The course covered a wide range of topics, starting the Transformer architecture, insights into fine-tuning LLMs, and exploring chain-of-thought prompting augmentation techniques to overcome knowledge limitations. This blog post contains my personal notes taken during the course.
 
 
 ## __Week 1 - Introduction__
