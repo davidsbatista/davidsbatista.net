@@ -2,7 +2,7 @@
 layout: post
 title: Generative AI with Large Language Models
 date: 2023-09-15 00:00:00
-tags: llms coursera
+tags: llms coursera generative-ai
 categories: [blog]
 comments: true
 disqus_identifier: 20230915
@@ -12,7 +12,7 @@ preview_pic: /assets/images/2023-09-15-2001.png
 I'm happy to have completed this course and recommend it to anyone interested in delving into some of the intricacies of Transformer architecture and Large Language Models. The course covered a wide range of topics, starting the Transformer architecture, insights into fine-tuning LLMs, and exploring chain-of-thought prompting augmentation techniques to overcome knowledge limitations. This blog post contains my personal notes taken during the course.
 
 
-## __Week 1 - Introduction__
+## __Introduction__
 
 Discuss model pre-training and the value of continued pre-training vs fine-tuning
 Define the terms Generative AI, large language models, prompt, and describe the transformer architecture that powers LLMs
@@ -147,7 +147,7 @@ learning memory optimizaions and parallel computing for efficient LLms training
 
 
 
-## __Week 2 - Fine-Tuning__
+## __Fine-Tuning__
 
 - Fine-tuning
     Describe how fine-tuning with instructions using prompt datasets can improve performance on one or more tasks
@@ -336,7 +336,7 @@ Prompt tuning with soft prompts
 
 
 
-## __Week 3__
+## __Reinforcement Learning From Human Feedback (RLHF)__
 
 - Reinforcement Learning with Human Feedback
 - Describe how RLHF uses human feedback to improve the performance and alignment of large language models
@@ -604,14 +604,7 @@ The result is a model generated preference dataset that you can use to train a r
 
 
 
-
-
-
-
-
-
-
-### LLM-powered Applications
+## Large Language Models-powered Applications
 
 
 LLM optimisation techniques
@@ -640,7 +633,6 @@ The loss between these two is the __student loss__. The combined __distillation 
 The key benefit of distillation methods is that the smaller student model can be used for inference in deployment instead of the teacher model.
 
 In practice, distillation is not as effective for generative decoder models. It's typically more effective for encoder only models, such as Burt that have a lot of representation redundancy. Note that with Distillation, you're training a second, smaller model to use during inference. You aren't reducing the model size of the initial LLM in any way.
-
 
 ### Quantisation:
 
@@ -692,19 +684,11 @@ In practice, distillation is not as effective for generative decoder models. It'
 LLM is only one part of the history...
 
 
-
-
-
-### ISsues with LLM
+### Issues with LLM
 
 toxiticiy
 hallucination
 use of intellectual property
-
-
-
-
-
 
 
 <!--
