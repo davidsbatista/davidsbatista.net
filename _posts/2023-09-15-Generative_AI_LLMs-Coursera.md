@@ -9,7 +9,7 @@ disqus_identifier: 20230915
 preview_pic: /assets/images/2023-09-15-2001.png
 ---
 
-I'm happy to have completed this course and recommend it to anyone interested in delving into some of the intricacies of Transformer architecture and Large Language Models. The course covered a wide range of topics, starting the Transformer architecture, insights into fine-tuning LLMs, and exploring chain-of-thought prompting augmentation techniques to overcome knowledge limitations. This blog post contains my personal notes taken during the course.
+I'm happy to have completed the [course](https://www.coursera.org/learn/generative-ai-with-llms) and recommend it to anyone interested in delving into some of the intricacies of Transformer architecture and Large Language Models. The course covered a wide range of topics, from the Transformer architecture into fine-tuning LLMs and exploring chain-of-thought prompting augmentation techniques to overcome knowledge limitations. This post contains my personal notes taken during the course.
 
 
 ## __Introduction__
