@@ -17,7 +17,7 @@ I hold a Ph.D, where I focused on [__semantic relationship extraction__](http://
 
 I’m skilled in applying Machine Learning, Deep Learning and other AI techniques to tackle diverse problems while also managing the associated software infrastructure ecosystem. 
 
-My professional experiences span over academia, startups environment, freelancing projects, and established enterprises, where I’ve collaborated effectively with dedicated teams to deliver production‑ready software solutions.
+My professional experiences span over academia, startup environments, freelancing projects, and established enterprises, where I’ve collaborated effectively with dedicated teams to deliver production‑ready software solutions.
 
 Occasionally, I <a href="/posts/" target="_blank"><b>blog</b></a> about Software Engineering, Machine Learning and Natural Language Processing.
 
