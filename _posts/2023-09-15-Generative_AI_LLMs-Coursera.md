@@ -21,6 +21,7 @@ Discuss computational challenges during model pre-training and determine how to 
 Define the term scaling law and describe the laws that have been discovered for LLMs related to training dataset size, compute budget, inference requirements, and other factors.
 
 
+
 ### __Introduction to Transformers architecture__
 
 Going through uses cases of generative AI with Large Language Models, given examples such as:  summarisation, translation or information retrieval; and also how those were achieved before Transformers came into play. There's also an introduction to the Transformer architecture which is the base component for Large Language Models, and also an overview of the inference parameters that one can tune.
