@@ -12,7 +12,7 @@ preview_pic: /assets/images/2023-09-15-2001.png
 I'm happy to have completed the [course](https://www.coursera.org/learn/generative-ai-with-llms) and recommend it to anyone interested in delving into some of the intricacies of Transformer architecture and Large Language Models. The course covered a wide range of topics, from the Transformer architecture into fine-tuning LLMs and exploring chain-of-thought prompting augmentation techniques to overcome knowledge limitations. This post contains my personal notes taken during the course.
 
 
-## __Week 1__
+## __Week 1 - Introduction__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W1.pdf))
 
 <!--
 - Discuss model pre-training and the value of continued pre-training vs fine-tuning
@@ -45,17 +45,49 @@ Then it's first introduced in the course the Generative AI project lifecycle whi
 
 #### __In-Context Learning__
 
-- no prompt engineering - essentially just asking the model predict next sequence of words	
-- zero-shot - giving an instruction for a task
-- one-shot - giving an instruction for a task with one example
-- few shot - giving an instruction for a tasl with a few examples (2~6)
+- __no-prompt engineering__: just asking the model predict next sequence of words
 
-__TODO__: figures and pictures?
+		"Whats the capital of Portugal?"
 
 
-#### __Inference__
+    <span style="height: 20px; display: block;"></span>
 
-[transformers.GenerationConfig](https://huggingface.co/docs/transformers/v4.29.1/en/main_classes/text_generation#transformers.GenerationConfig)
+
+- __zero-shot___:  giving an instruction for a task
+
+		"Classify this review: I loved this movie! Sentiment: "
+
+
+    <span style="height: 20px; display: block;"></span>
+
+
+- __one-shot__ - giving an instruction for a task with one example
+	
+		"Classify this review: I loved this movie! Sentiment: Positive"
+	
+		"Classify this review: I don't like this album! Sentiment: "
+	
+
+    <span style="height: 20px; display: block;"></span>
+
+- __few shot__ - giving an instruction for a task with a few examples (2~6)
+
+
+		"Classify this review: I loved this movie! Sentiment: Positive"
+	
+		"Classify this review: I don't like this album! Sentiment: Negative"
+		
+		...
+		
+		"Classify this review: I don't like this soing! Sentiment: "
+
+
+#### __Inference Parameters__
+
+<figure>
+  <img style="width: 85%; height: 85%" src="/assets/images/2023-09-15-Generative_configuration_-_inference_parameters.png">
+  <figcaption>Figure 2 - Parameters affecting how the model selects the next token to generate.</figcaption>
+</figure>
 
 - greedy vs. random sampling
 - top-k: select only from the top-k tokens
@@ -66,12 +98,12 @@ __TODO__: figures and pictures?
 	temperature <1
 	temperature = 1 softmax function at default, unaltered prob distribution
 
-__TODO__: figures and pictures?
 
+see: [transformers.GenerationConfig](https://huggingface.co/docs/transformers/v4.29.1/en/main_classes/text_generation#transformers.GenerationConfig)
 
 ### __Laboratory Exercise #1__
 
-Dialogue summarization task using generative AI using the T5 model from huggingface and the XXX dataset exploreing how in-context leearning and inference parameters affects the output of the model.
+Dialogue summarisation task using generative AI using the T5 model from Huggingface and the XXX dataset exploring how in-context learning and inference parameters affects the output of the model.
 
 
 ### __Large Language Models pre-training and Scaling Laws__
@@ -117,12 +149,12 @@ Pre-training for domain adaptation
 - https://arxiv.org/abs/2303.17564
 
 
-learning memory optimizaions and parallel computing for efficient LLms training
+learning memory optimisations and parallel computing for efficient LLms training
 
 
 
 
-## __Fine-Tuning__
+## __Week 2: Fine-Tuning__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W2.pdf))
 
 - Fine-tuning
     Describe how fine-tuning with instructions using prompt datasets can improve performance on one or more tasks
@@ -311,7 +343,7 @@ Prompt tuning with soft prompts
 
 
 
-## __Reinforcement Learning From Human Feedback (RLHF)__
+## __Reinforcement Learning From Human Feedback (RLHF)__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W3.pdf))
 
 - Reinforcement Learning with Human Feedback
 - Describe how RLHF uses human feedback to improve the performance and alignment of large language models
