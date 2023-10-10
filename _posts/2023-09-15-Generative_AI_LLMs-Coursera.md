@@ -12,60 +12,54 @@ preview_pic: /assets/images/2023-09-15-2001.png
 I'm happy to have completed the [course](https://www.coursera.org/learn/generative-ai-with-llms) and recommend it to anyone interested in delving into some of the intricacies of Transformer architecture and Large Language Models. The course covered a wide range of topics, from the Transformer architecture into fine-tuning LLMs and exploring chain-of-thought prompting augmentation techniques to overcome knowledge limitations. This post contains my personal notes taken during the course.
 
 
-## __Introduction__
+## __Week 1:__
 
-Discuss model pre-training and the value of continued pre-training vs fine-tuning
-Define the terms Generative AI, large language models, prompt, and describe the transformer architecture that powers LLMs
-Describe the steps in a typical LLM-based, generative AI model lifecycle and discuss the constraining factors that drive decisions at each step of model lifecycle
-Discuss computational challenges during model pre-training and determine how to efficiently reduce memory footprint
-Define the term scaling law and describe the laws that have been discovered for LLMs related to training dataset size, compute budget, inference requirements, and other factors.
-
+<!--
+- Discuss model pre-training and the value of continued pre-training vs fine-tuning
+- Define the terms Generative AI, large language models, prompt, and describe the transformer architecture that powers LLMs
+- Describe the steps in a typical LLM-based, generative AI model lifecycle and discuss the constraining factors that drive decisions at each step of model lifecycle
+- Discuss computational challenges during model pre-training and determine how to efficiently reduce memory footprint
+- Define the term scaling law and describe the laws that have been discovered for LLMs related to training dataset size, compute budget, inference requirements, and other factors.
+-->
 
 
 ### __Introduction to Transformers architecture__
 
-Going through uses cases of generative AI with Large Language Models, given examples such as:  summarisation, translation or information retrieval; and also how those were achieved before Transformers came into play. There's also an introduction to the Transformer architecture which is the base component for Large Language Models, and also an overview of the inference parameters that one can tune.
+Going through uses cases of generative AI with Large Language Models, given examples such as: summarisation, translation or information retrieval; and also how those were achieved before Transformers came into play. There's also an introduction to the Transformer architecture which is the base component for Large Language Models, and also an overview of the inference parameters that one can tune.
 
 
 ### __Generative AI project life-cycle__
 
 Then it's first introduced in the course the Generative AI project lifecycle which is followed up to the end of the course
 
-__TODO__: imagem
 
-- Generative AI project life-cycle ?
-	- Scope: define use case
-		- multi-tasks? specific tasks?
-	- Select pre-trained or trained-own
-	- Adapt and align model - iterative process
-		- prompt engineering
-		- fine-tuning
-		- align with human feedback
-		===========================
-		- Evaluate		
-	- Application Integration
-		- OPtimize inference
-		- agument model and build LLM-pxoewr applications
+<figure>
+  <img style="width: 85%; height: 85%" src="/assets/images/2023-09-15-Generative_AI_project_life-cycle.png">
+  <figcaption>Figure 1 - Generative AI projet life-cycle as presented in the course.</figcaption>
+</figure>
 
 
-### __Prompt Engineering and Inference paramaters__
 
-- Prompt Engineering 
-	in-context learning
-		- zero-shot
-		- one-shot
-		- few shot
+### __Prompt Engineering and Inference Paramaters__
 
-- Inference
-	- generative config: 
-		- greedy vs. random sampling
-		- top-k: select only from the top-k tokens
-		- top-p: select from top results by probability and with a cumulative probability <= p
-		- temperature: 
-			higher temperature higher randomness, affects softmax directly and how probability is computed
-			temperature >1
-			temperature <1
-			temperature = 1 softmax function at default, unaltered prob distribution
+
+#### In-Context Learning
+	
+- zero-shot
+- one-shot
+- few shot
+
+
+#### Inference
+- generative config: 
+	- greedy vs. random sampling
+	- top-k: select only from the top-k tokens
+	- top-p: select from top results by probability and with a cumulative probability <= p
+	- temperature: 
+		higher temperature higher randomness, affects softmax directly and how probability is computed
+		temperature >1
+		temperature <1
+		temperature = 1 softmax function at default, unaltered prob distribution
 
 
 ### __Laboratory Exercise about Prompt Engineering__
