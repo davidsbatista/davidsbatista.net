@@ -12,7 +12,7 @@ preview_pic: /assets/images/2023-09-15-2001.png
 I'm happy to have completed the [course](https://www.coursera.org/learn/generative-ai-with-llms) and recommend it to anyone interested in delving into some of the intricacies of Transformer architecture and Large Language Models. The course covered a wide range of topics, from the Transformer architecture into fine-tuning LLMs and exploring chain-of-thought prompting augmentation techniques to overcome knowledge limitations. This post contains my personal notes taken during the course.
 
 
-## __Week 1:__
+## __Week 1__
 
 <!--
 - Discuss model pre-training and the value of continued pre-training vs fine-tuning
@@ -43,58 +43,38 @@ Then it's first introduced in the course the Generative AI project lifecycle whi
 ### __Prompt Engineering and Inference Paramaters__
 
 
-#### In-Context Learning
-	
-- zero-shot
-- one-shot
-- few shot
+#### __In-Context Learning__
+
+- no prompt engineering - essentially just asking the model predict next sequence of words	
+- zero-shot - giving an instruction for a task
+- one-shot - giving an instruction for a task with one example
+- few shot - giving an instruction for a tasl with a few examples (2~6)
+
+__TODO__: figures and pictures?
 
 
-#### Inference
-- generative config: 
-	- greedy vs. random sampling
-	- top-k: select only from the top-k tokens
-	- top-p: select from top results by probability and with a cumulative probability <= p
-	- temperature: 
-		higher temperature higher randomness, affects softmax directly and how probability is computed
-		temperature >1
-		temperature <1
-		temperature = 1 softmax function at default, unaltered prob distribution
+#### __Inference__
+
+[transformers.GenerationConfig](https://huggingface.co/docs/transformers/v4.29.1/en/main_classes/text_generation#transformers.GenerationConfig)
+
+- greedy vs. random sampling
+- top-k: select only from the top-k tokens
+- top-p: select from top results by probability and with a cumulative probability <= p
+- temperature: 
+	higher temperature higher randomness, affects softmax directly and how probability is computed
+	temperature >1
+	temperature <1
+	temperature = 1 softmax function at default, unaltered prob distribution
+
+__TODO__: figures and pictures?
 
 
-### __Laboratory Exercise about Prompt Engineering__
+### __Laboratory Exercise #1__
+
+Dialogue summarization task using generative AI using the T5 model from huggingface and the XXX dataset exploreing how in-context leearning and inference parameters affects the output of the model.
 
 
-- Lab exercise
-
-T5 model from huggingface
-
-__ Generative AI Use Case: Summarize Dialogue __
-
-Welcome to the practical side of this course. In this lab you will do the dialogue summarization task using generative AI. You will explore how the input text affects the output of the model, and perform prompt engineering to direct it towards the task you need. By comparing zero shot, one shot, and few shot inferences, you will take the first step towards prompt engineering and see how it can enhance the generative output of Large Language Models.
-
-
-https://huggingface.co/blog/few-shot-learning-gpt-neo-and-inference-api
-
-1 - without any prompt engineering - essentially asking the predict next sequence of words
-2 - zero-shot - giving an instruction
-3 - one-shot - giving an instruction with one example
-4 - few shot - giving an instruction with a few examples (2~6)
-
-5 - Generative Configuration Parameters for Inference
-	pretty cool
-	
-	https://huggingface.co/docs/transformers/v4.29.1/en/main_classes/text_generation#transformers.GenerationConfig
-
-
-Summarize Dialogue without Prompt Engineering
-
-In this use case, you will be generating a summary of a dialogue with the pre-trained Large Language Model (LLM) FLAN-T5 from Hugging Face. The list of available models in the Hugging Face `transformers` package can be found [here](https://huggingface.co/docs/transformers/index). 
-
-Let's upload some simple dialogues from the [DialogSum](https://huggingface.co/datasets/knkarthick/dialogsum) Hugging Face dataset. This dataset contains 10,000+ dialogues with the corresponding manually labeled summaries and topics. 
-
-
-### __LLM pre-training and Scaling Laws__
+### __Large Language Models pre-training and Scaling Laws__
 
 - models are trained on vast amounts of text data
 	- pre-training
