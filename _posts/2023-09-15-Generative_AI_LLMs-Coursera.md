@@ -12,7 +12,7 @@ preview_pic: /assets/images/2023-09-15-2001.png
 I'm happy to have completed the [course](https://www.coursera.org/learn/generative-ai-with-llms) and recommend it to anyone interested in delving into some of the intricacies of Transformer architecture and Large Language Models. The course covered a wide range of topics, from the Transformer architecture into fine-tuning LLMs and exploring chain-of-thought prompting augmentation techniques to overcome knowledge limitations. This post contains my personal notes taken during the course.
 
 
-## __Week 1 - Introduction__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W1.pdf))
+# __Week 1 - Introduction__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W1.pdf))
 
 <!--
 - Discuss model pre-training and the value of continued pre-training vs fine-tuning
@@ -23,12 +23,12 @@ I'm happy to have completed the [course](https://www.coursera.org/learn/generati
 -->
 
 
-### __Introduction to Transformers architecture__
+## __Introduction to Transformers architecture__
 
 Going through uses cases of generative AI with Large Language Models, given examples such as: summarisation, translation or information retrieval; and also how those were achieved before Transformers came into play. There's also an introduction to the Transformer architecture which is the base component for Large Language Models, and also an overview of the inference parameters that one can tune.
 
 
-### __Generative AI project life-cycle__
+## __Generative AI project life-cycle__
 
 Then it's first introduced in the course the Generative AI project lifecycle which is followed up to the end of the course
 
@@ -39,11 +39,10 @@ Then it's first introduced in the course the Generative AI project lifecycle whi
 </figure>
 
 
+## __Prompt Engineering and Inference Paramaters__
 
-### __Prompt Engineering and Inference Paramaters__
 
-
-#### __In-Context Learning__
+### __In-Context Learning__
 
 - __no-prompt engineering__: just asking the model predict next sequence of words
 
@@ -82,16 +81,33 @@ Then it's first introduced in the course the Generative AI project lifecycle whi
 		"Classify this review: I don't like this soing! Sentiment: "
 
 
-#### __Inference Parameters__
+### __Inference Parameters__
 
 <figure>
   <img style="width: 85%; height: 85%" src="/assets/images/2023-09-15-Generative_configuration_-_inference_parameters.png">
   <figcaption>Figure 2 - Parameters affecting how the model selects the next token to generate.</figcaption>
 </figure>
 
-- greedy vs. random sampling
-- top-k: select only from the top-k tokens
-- top-p: select from top results by probability and with a cumulative probability <= p
+- __greedy__: the word/token with the highest probability is selected.
+
+- __random(-weighted) sampling__: select a token using a random-weighted strategy across the probabilities of all tokens.
+
+- __top-k__: select an output from the top-k results after applying random-weighted strategy using the probabilities
+
+<figure>
+  <img style="width: 45%; height: 25%" src="/assets/images/2023-09-15-top-k.png">
+  <figcaption>Figure 3 - top-k, with k=3</figcaption>
+</figure>
+
+- __top-p__: select an output using the random-weighted strategy with the top-ranked consecutive results by probability and with a cumulative probability <= p
+
+<figure>
+  <img style="width: 45%; height: 25%" src="/assets/images/2023-09-15-top-p.png">
+  <figcaption>Figure 4 - top-p, with p=30.</figcaption>
+</figure>
+
+
+
 - temperature: 
 	higher temperature higher randomness, affects softmax directly and how probability is computed
 	temperature >1
