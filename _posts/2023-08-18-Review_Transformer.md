@@ -33,10 +33,21 @@ A Transformer is a particular type of attention-based model, more specifically a
   <figcaption></figcaption>
 </figure>
 
+## __Input Tokens and Tokenisations__
+
+Subword tokenisation
+- Byte-pair encoding (BPE)
+- wordpiece
+- sentencepiece
 
 ## __Self-Attention__
 
-<!-- verbatim -->
+- scaled dot product self-attention
+- query, key, value
+
+- attention-head the whole meachnism: inputs -> oututs
+
+<!-- verbatim 
 
 In deep learning, we often use CNNs or RNNs to encode sequences. Now, with attention mechanisms in mind, imagine feeding a sequence of tokens into an attention mechanism such that each token has its own query, keys, and values at each step. 
 
@@ -46,7 +57,7 @@ Self-Attention Mechanism: The paper introduced the concept of self-attention, en
 
 
 Think about attention within a sentence, the Transformer model relies solely on the use of self-attention, i.e.: the representation of a sequence (or sentence) is computed by relating different words in the same sequence. It compares each word with every other word in the sequence (or sentence) trying to understand which ones are more related to each other.
-
+-->
 
 
 <!-- 
@@ -125,14 +136,14 @@ Self-Attention as an NLP building block:
 
 -->
 
-## __Multi-Head Attention__
+## __Multi-Head Self-Attention__
 
 
-<!-- verbatim  -->
+<!-- verbatim  
 
 In practice, given the same set of queries, keys, and values we may want our model to combine knowledge from different behaviours of the same attention mechanism, such as capturing dependencies of various ranges (e.g., shorter-range vs. longer-range) within a sequence. Thus, it may be beneficial to allow our attention mechanism to jointly use different representation subspaces of queries, keys, and values.
 
-The model can capture different types of relationships and learn diverse representations, leading to more expressive and robust contextual embeddings.
+The model can capture different types of relationships and learn diverse representations, leading to more expressive and robust contextual embeddings. -->
 
 
 <!--
@@ -143,12 +154,39 @@ The multi-head attention output is another linear transformation via learnable p
 see: https://d2l.ai/chapter_attention-mechanisms-and-transformers/multihead-attention.html
 -->
 
-
-
 ## __Positional Encoding__
 
+## __Adding a Non-Linearity Layer__ 
+
+- Feed forward neural network
+- Network is applied point-wise
+- each embedding is passed on its own through the network. So the first embedding will go through, then the second, and finally the third. 
+- In practice, it doesn't have to be sequential. It can be done in parallel. 
+
+## __Batch Normalisation__
+
+## __Skip/Residual Connections__
+
+## __Encoder Block__ 
+
+- summarise here with a picture a bullet points
 
 
+## __Decoder Block__ 
+
+### __Input Tokens and Tokenisations__
+
+### __Positional Encoding__
+
+### __Masked Multi-Head Self-Attention__
+
+- Attention Mask: matrix with the same dimension as the attention scores, lower diagonal set to 1 and the other to 0
+
+- Each output is going to take into account only the inputs up to and including its current position.
+
+### __Multi-Head Cross-Attention__
+
+- keys and values come from the encoder outputs
 
 ## __The Transformer Encoder-Decoder__
 
@@ -199,18 +237,21 @@ see: https://d2l.ai/chapter_attention-mechanisms-and-transformers/multihead-atte
 		
 -->
 
+<figure>
+  <img style="width: 100%; height: 100%" src="/assets/images/2023-08-18-original_transformer_arch_detail.png">
+  <figcaption></figcaption>
+</figure>
+
+
+Drawbacks:
+- Attention mechanism is quadratic, scaling is expensive
+
+## __Pre-training and Transfer Learning__
 
 
 
 
 
-
-
-
-## __Subword Modelling__
-
-- Byte-pair encoding
-- Word-piece
 
 
 
@@ -223,7 +264,6 @@ Transformers can be used in three different modes:
 - __encoder-decoder__
 - __decoder-only__
 
-
 #### __Encoder only__
 
 <!-- verbatim -->
@@ -232,7 +272,6 @@ When only the Transformer encoder is used, a sequence of input tokens is convert
 Since this representation depends on all input tokens, it is further projected into classification labels. This design was inspired by an earlier encoder-only Transformer pre-trained on text: BERT (Bidirectional Encoder Representations from Transformers) 
 
 BERT is pre-trained on text sequences using masked language modelling: input text with randomly masked tokens is fed into a Transformer encoder to predict the masked tokens. As illustrated in Fig. 11.9.1, an original text sequence “I”, “love”, “this”, “red”, “car” is prepended with the “<cls>” token, and the “<mask>” token randomly replaces “love”; then the cross-entropy loss between the masked token “love” and its prediction is to be minimised during pre-training. Note that there is no constraint in the attention pattern of Transformer encoders (right of Fig. 11.9.1) so all tokens can attend to each other. Thus, the prediction of “love” depends on input tokens before and after it in the sequence. This is why BERT is a “bidirectional encoder”. Without the need for manual labelling, large-scale text data from books and Wikipedia can be used for pre-training BERT.
-
 
 #### __Encoder-Decoder__
 
@@ -248,17 +287,14 @@ BART (Lewis et al., 2019) and T5 (Raffel et al., 2020) are two concurrently prop
 
 In the encoder-decoder cross-attention (upper rectangle), each target token attends to all input tokens; In the decoder self-attention (upper triangle), each target token attends to present and past target tokens only (causal)
 
-
 #### __Decoder-Only__
 
 Note that the attention pattern in the Transformer decoder enforces that each token can only attend to its past tokens (future tokens cannot be attended to because they have not yet been chosen).
 
 
 <!--
-## __BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding__
 
 <!-- https://aclanthology.org/N19-1423.pdf -->
-
 
 <!-- 
 How is BERT different from the original transformer architecture?
@@ -297,7 +333,6 @@ BERT uses different hyper-parameters than the ones used in Attention is all you 
 BERT also uses segment embeddings, while the original transformer only uses word embeddings and positional encodings.
 
 
-
 When to use BERT and the transformer?
 Although I never used them, I would say that you want to use BERT whenever you want to solve an NLP task in a supervised fashion, but your labeled training dataset is not big enough to achieve good performance. In that case, you start with a pre-trained BERT model, then fine-tune it with your small labeled dataset. You probably need to add specific layers to BERT to solve your task.
 
@@ -308,8 +343,6 @@ Although I never used them, I would say that you want to use BERT whenever you w
  - whats' the loss in a encoder?
  - https://www.reddit.com/r/MachineLearning/comments/14y7ajc/dencoder_only_vs_encoderdecoder_vs_decoder_only/
  
-
-
 ### __References__
 
 <!-- "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding": https://aclanthology.org/N19-1423.pdf -->
@@ -320,6 +353,7 @@ Although I never used them, I would say that you want to use BERT whenever you w
 - __["Attention? Attention!" from Lilian Weng blog](https://lilianweng.github.io/posts/2018-06-24-attention/)__
 
 
+<!--
 http://jalammar.github.io/illustrated-transformer/
 
 https://www.youtube.com/watch?v=rBCqOTEfxvg
@@ -332,4 +366,4 @@ https://sebastianraschka.com/blog/2023/self-attention-from-scratch.html
 
 https://www.youtube.com/watch?v=acxqoltilME
 
-
+-->
