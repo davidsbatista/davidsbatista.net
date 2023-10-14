@@ -266,16 +266,38 @@ Transformers can be used in three different modes:
 
 #### __Encoder only__
 
-<!-- verbatim -->
+- BERT
+- ALBERT
+- RoBERTa
+- DistilBERT
+
+BERT Training:
+
+### __Masked Language Modelling__
+
+- Randomly pick 15% of the input tokens
+- Out of the 15%, 80% are replaced with a [MASK] token
+- use the left and right context next to the [MASK] token to predict what the token is
+
+### __Next Sentence Prediction__
+
+<!-- verbatim
 When only the Transformer encoder is used, a sequence of input tokens is converted into the same number of representations that can be further projected into output (e.g., classification). A Transformer encoder consists of self-attention layers, where all input tokens attend to each other.
 
 Since this representation depends on all input tokens, it is further projected into classification labels. This design was inspired by an earlier encoder-only Transformer pre-trained on text: BERT (Bidirectional Encoder Representations from Transformers) 
 
 BERT is pre-trained on text sequences using masked language modelling: input text with randomly masked tokens is fed into a Transformer encoder to predict the masked tokens. As illustrated in Fig. 11.9.1, an original text sequence “I”, “love”, “this”, “red”, “car” is prepended with the “<cls>” token, and the “<mask>” token randomly replaces “love”; then the cross-entropy loss between the masked token “love” and its prediction is to be minimised during pre-training. Note that there is no constraint in the attention pattern of Transformer encoders (right of Fig. 11.9.1) so all tokens can attend to each other. Thus, the prediction of “love” depends on input tokens before and after it in the sequence. This is why BERT is a “bidirectional encoder”. Without the need for manual labelling, large-scale text data from books and Wikipedia can be used for pre-training BERT.
 
+-->
+
 #### __Encoder-Decoder__
 
-<!-- verbatim -->
+- T5
+- Switch
+- BART
+- Pegasus
+
+<!-- verbatim
 Since a Transformer encoder converts a sequence of input tokens into the same number of output representations, the encoder-only mode cannot generate a sequence of arbitrary length like in machine translation. As originally proposed for machine translation, the Transformer architecture can be outfitted with a decoder that auto-regressively predicts the target sequence of arbitrary length, token by token, conditional on both encoder output and decoder output: 
 
 - (i) for conditioning on encoder output, encoder-decoder cross-attention (multi-head attention of decoder in Fig. 11.7.1) allows target tokens to attend to all input tokens
@@ -286,17 +308,22 @@ BART (Lewis et al., 2019) and T5 (Raffel et al., 2020) are two concurrently prop
 
 
 In the encoder-decoder cross-attention (upper rectangle), each target token attends to all input tokens; In the decoder self-attention (upper triangle), each target token attends to present and past target tokens only (causal)
+-->
 
 #### __Decoder-Only__
 
-Note that the attention pattern in the Transformer decoder enforces that each token can only attend to its past tokens (future tokens cannot be attended to because they have not yet been chosen).
-
+- GPT-1,2,3
+- Gopher
+- Gato
+- PaLM
+- general LLMs?
 
 <!--
 
-<!-- https://aclanthology.org/N19-1423.pdf -->
+Note that the attention pattern in the Transformer decoder enforces that each token can only attend to its past tokens (future tokens cannot be attended to because they have not yet been chosen).
 
-<!-- 
+https://aclanthology.org/N19-1423.pdf
+
 How is BERT different from the original transformer architecture?
 
 (https://ai.stackexchange.com/questions/23221/how-is-bert-different-from-the-original-transformer-architecture)
@@ -340,8 +367,12 @@ Although I never used them, I would say that you want to use BERT whenever you w
 
 ### __Frequently Asked Questions__
 
- - whats' the loss in a encoder?
- - https://www.reddit.com/r/MachineLearning/comments/14y7ajc/dencoder_only_vs_encoderdecoder_vs_decoder_only/
+- whats' the loss in a encoder?
+- https://www.reddit.com/r/MachineLearning/comments/14y7ajc/dencoder_only_vs_encoderdecoder_vs_decoder_only/
+- are all LLMs decoder only models?
+ 
+ 
+ 
  
 ### __References__
 
