@@ -367,7 +367,10 @@ Although I never used them, I would say that you want to use BERT whenever you w
 
 ### __Frequently Asked Questions__
 
-- whats' the loss in a encoder?
+- whats' the loss in a encoder and how does the loss fucntion looks like?
+- does it change depdending on the task?
+	- MAsked Language Modelling
+	- Next Sentence preditction
 - https://www.reddit.com/r/MachineLearning/comments/14y7ajc/dencoder_only_vs_encoderdecoder_vs_decoder_only/
 - are all LLMs decoder only models?
  
