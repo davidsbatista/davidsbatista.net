@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
   
 jobs:
@@ -11,7 +11,7 @@ jobs:
     
     steps:
     - name: install ssh keys
-      # check this thread to understand why its needed:
+      # check this thread to understand why it's needed:
       # https://stackoverflow.com/a/70447517
       run: |
         install -m 600 -D /dev/null ~/.ssh/id_rsa
