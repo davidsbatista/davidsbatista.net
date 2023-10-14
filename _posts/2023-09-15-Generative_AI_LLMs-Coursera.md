@@ -115,7 +115,7 @@ Then it's first introduced in the course the Generative AI project lifecycle whi
 	temperature = 1 softmax function at default, unaltered prob distribution
 
 
-see: [transformers.GenerationConfig](https://huggingface.co/docs/transformers/v4.29.1/en/main_classes/text_generation#transformers.GenerationConfig)
+- see the __[transformers.GenerationConfig](https://huggingface.co/docs/transformers/v4.29.1/en/main_classes/text_generation#transformers.GenerationConfig)__ class for the complete details
 
 ### __Laboratory Exercise #1__
 
