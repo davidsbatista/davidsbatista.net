@@ -374,9 +374,6 @@ Although I never used them, I would say that you want to use BERT whenever you w
 - https://www.reddit.com/r/MachineLearning/comments/14y7ajc/dencoder_only_vs_encoderdecoder_vs_decoder_only/
 - are all LLMs decoder only models?
  
- 
- 
- 
 ### __References__
 
 <!-- "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding": https://aclanthology.org/N19-1423.pdf -->
