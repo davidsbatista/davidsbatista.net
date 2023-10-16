@@ -79,7 +79,7 @@ For the __regression objective function__, the authors trained on the training s
 
 ### __Training: fine-tuning__
 
-In order to fine-tune BERT and RoBERTa, the authors used a __Siamese Neural Network (SNN)__ strategy to update the weights such that the produced sentence embeddings are semantically meaningful.
+In order to fine-tune __[BERT](https://aclanthology.org/N19-1423/)__ and __[RoBERTa](https://aclanthology.org/2021.ccl-1.108/)__, the authors used a __Siamese Neural Network (SNN)__ strategy to update the weights such that the produced sentence embeddings are semantically meaningful.
 
 An SNNs can be used to find the similarity of the inputs by comparing its feature vectors, so these networks learn a similarity function that takes two inputs and outputs 1 if they belong to the same class and zero other wise, 
 
@@ -104,6 +104,8 @@ We fine-tune SBERT with a 3-way softmax-classifier objective function for one ep
 
 ### __Evaluation__
 
+
+
 We evaluate the performance of SBERT for common Semantic Textual Similarity (STS) tasks. State-of-the-art methods often learn a (complex) regression function that maps sentence embed- dings to a similarity score. However, these regres- sion functions work pair-wise and due to the combinatorial explosion those are often not scalable if the collection of sentences reaches a certain size. Instead, we always use cosine-similarity to com- pare the similarity between two sentence embed- dings. We ran our experiments also with nega- tive Manhatten and negative Euclidean distances as similarity measures, but the results for all approaches remained roughly the same.
 
 
@@ -113,20 +115,25 @@ We evaluate the performance of SBERT for common Semantic Textual Similarity (STS
 </figure>
 
 
-We evaluate the performance of SBERT for com- mon Semantic Textual Similarity (STS) tasks.
+We evaluate the performance of SBERT for common Semantic Textual Similarity (STS) tasks.
+
+SemEval data, STSb: STSbenchmark and the SICK relatedness dataset (SICK-R)
+
+STS12-STS16: SemEval 2012-2016 - Semantic Textual Similarity (STS) from SemEval datasets:
+
+- [2012](https://aclanthology.org/S12-1051/)
+- [2013](https://aclanthology.org/S13-1004/)
+- [2014](https://aclanthology.org/S14-2010/)
+- [2015](https://aclanthology.org/S15-2045/)
+- [2016](https://aclanthology.org/S16-1081/)
 
 
-STS12-STS16: SemEval 2012-2016, STSb: STSbenchmark, SICK-R: SICK relatedness dataset.
 
+- [SICK (Sentences Involving Compositional Knowledge)](http://www.lrec-conf.org/proceedings/lrec2014/pdf/363_Paper.pdf)
 
-Semantic Textual Similarity (STS) from SemEval datasets of [2012](https://aclanthology.org/S12-1051/), [2013](https://aclanthology.org/S13-1004/), [2014](https://aclanthology.org/S14-2010/), [2015](https://aclanthology.org/S15-2045/), [2016](https://aclanthology.org/S16-1081/)
+- STS benchmark :https://aclanthology.org/S17-2001/
 
-
-STS benchmark :https://aclanthology.org/S17-2001/
-
-SICK (Sentences Involving Compositional Knowledge): http://www.lrec-conf.org/proceedings/lrec2014/pdf/363_Paper.pdf
-
-SentEval https://aclanthology.org/L18-1269/
+- SentEval https://aclanthology.org/L18-1269/
 
 
 <figure>
