@@ -79,7 +79,7 @@ For the __regression objective function__, the authors trained on the training s
 
 ### __Training: fine-tuning__
 
-In order to fine-tune __[BERT](https://aclanthology.org/N19-1423/)__ and __[RoBERTa](https://aclanthology.org/2021.ccl-1.108/)__, the authors used a __Siamese Neural Network (SNN)__ strategy to update the weights such that the produced sentence embeddings are semantically meaningful.
+In order to fine-tune __[BERT](https://aclanthology.org/N19-1423/)__ and __[RoBERTa](https://arxiv.org/abs/1907.11692)__, the authors used a __Siamese Neural Network (SNN)__ strategy to update the weights such that the produced sentence embeddings are semantically meaningful.
 
 An SNNs can be used to find the similarity of the inputs by comparing its feature vectors, so these networks learn a similarity function that takes two inputs and outputs 1 if they belong to the same class and zero other wise, 
 
@@ -104,9 +104,13 @@ We fine-tune SBERT with a 3-way softmax-classifier objective function for one ep
 
 ### __Evaluation__
 
+We evaluate the performance of SBERT for common Semantic Textual Similarity (STS) tasks. State-of-the-art methods often learn a (complex) regression function that maps sentence embed- dings to a similarity score. 
 
 
-We evaluate the performance of SBERT for common Semantic Textual Similarity (STS) tasks. State-of-the-art methods often learn a (complex) regression function that maps sentence embed- dings to a similarity score. However, these regres- sion functions work pair-wise and due to the combinatorial explosion those are often not scalable if the collection of sentences reaches a certain size. Instead, we always use cosine-similarity to com- pare the similarity between two sentence embed- dings. We ran our experiments also with nega- tive Manhatten and negative Euclidean distances as similarity measures, but the results for all approaches remained roughly the same.
+However, these regression functions work pair-wise and due to the combinatorial explosion those are often not scalable if the collection of sentences reaches a certain size. Instead, we always use cosine-similarity to com- pare the similarity between two sentence embed- dings. 
+
+
+We ran our experiments also with negative Manhatten and negative Euclidean distances as similarity measures, but the results for all approaches remained roughly the same.
 
 
 <figure>
