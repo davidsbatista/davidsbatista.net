@@ -91,22 +91,30 @@ and if the two sentences are dissimilar:
 
 $$|| f(x_1) - (f(x_2) ||^2 \text{ is large}$$
 
+where $$f()$$ is 
+
 <!--
 Another way using the triplet loss function to train the network to output a good encoding.
-
-We used a batch-size of 16, Adam optimizer with learning rate 2e−5,  linear learning rate warm-up over 10% of the training data. 
-
-Our default pooling strategy is MEAN.
-
-We fine-tune SBERT with a 3-way softmax-classifier objective function for one epoch. 
 -->
+
+#### __Configuration parameters__
+- batch-size: 16, 
+- Adam optimizer with learning rate 2e−5,  
+- linear learning rate warm-up over 10% of the training data. 
+- MEAN as the default pooling strategy is .
+-  3-way softmax-classifier objective function for one epoch. 
+
 
 
 ### __Evaluation__
 
+The authors evaluated the approach on common Semantic Textual Similarity (STS) tasks, using the cosine-similarity to compare the similarity between two sentence embeddings, in opposition to other methods which learn a regression function that maps two sentence embeddings to a similarity score.
 
 
-We evaluate the performance of SBERT for common Semantic Textual Similarity (STS) tasks. State-of-the-art methods often learn a (complex) regression function that maps sentence embed- dings to a similarity score. However, these regres- sion functions work pair-wise and due to the combinatorial explosion those are often not scalable if the collection of sentences reaches a certain size. Instead, we always use cosine-similarity to com- pare the similarity between two sentence embed- dings. We ran our experiments also with nega- tive Manhatten and negative Euclidean distances as similarity measures, but the results for all approaches remained roughly the same.
+However, these regression functions work pair-wise and due to the combinatorial explosion those are often not scalable if the collection of sentences reaches a certain size. 
+
+
+We ran our experiments also with negative Manhatten and negative Euclidean distances as similarity measures, but the results for all approaches remained roughly the same.
 
 
 <figure>
