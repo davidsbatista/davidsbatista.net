@@ -373,6 +373,10 @@ Although I never used them, I would say that you want to use BERT whenever you w
 	- Next Sentence preditction
 - https://www.reddit.com/r/MachineLearning/comments/14y7ajc/dencoder_only_vs_encoderdecoder_vs_decoder_only/
 - are all LLMs decoder only models?
+
+- https://www.reddit.com/r/LanguageTechnology/comments/16nl811/decoderonly_transformer_models_still_have_an/?share_id=NXw8BvyONQ1HTLqrVKiwK&utm_content=1&utm_medium=android_app&utm_name=androidcss&utm_source=share&utm_term=10
+
+“Decoder-only” Transformer models still have an encoder…right? Otherwise how do they “understand” a prompt?
  
 ### __References__
 
