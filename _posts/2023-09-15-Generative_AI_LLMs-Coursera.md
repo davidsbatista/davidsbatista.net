@@ -276,7 +276,7 @@ Instruction fine-tuning/fine-tuning trains the whole model parameters using exam
 
 - [GLUE 2018](https://gluebenchmark.com/leaderboard/)
 - [SUPERGLUE 2019](https://super.gluebenchmark.com/leaderboard)
-- [Measuring Massive Multitask Language Understanding 2021](https://github.com/hendrycks/test)
+- [Measuring Massive Multitask Language Understanding (MMLU) 2021](https://github.com/hendrycks/test)
 - [BIG Bench 2023](https://github.com/google/BIG-bench)
 - [Holistic Evaluation of Language Models 2023](https://crfm.stanford.edu/helm/latest/)
 
@@ -401,8 +401,6 @@ Switch out the weights when you need to use them,
 and avoid having to store
 multiple full-size versions of the LLM. 
 
-
-
  - two new matrices much lower dimensions, new weights for tokens, replace original weights
  - how to choose the rank for the matrices? original paper found plateu at 16
  - 4-32 good trade-off
@@ -411,81 +409,15 @@ multiple full-size versions of the LLM.
 
 
 
-__Soft Prompts__:
+__Soft Prompts or Prompt Tuning__:
  - improve without changing the weights
- - prompt tunning
- - not promot enginerrong 
-	- prompt enginerrong: work on the language of input prompt
- - With prompt tuning, you add additional trainable tokens to your prompt and leave it up to the supervised learning process to determine their optimal values. The set of trainable tokens is called a soft prompt, and it gets prepended to embedding vectors that represent your input text. The soft prompt vectors have the same length as the embedding vectors of the language tokens. And including somewhere between 20 and 100 virtual tokens can be sufficient for good performance. The tokens that represent natural language are hard in the sense that they each correspond to a fixed loc
-	- soft prompt
-		a set of trainable tokens that are added to a prompt and whose values are updated during additional training to improve performance on specific tasks
+ - With prompt tuning, you add additional trainable tokens to your prompt and leave it up to the supervised learning process to determine their optimal values. 
+ - The set of trainable tokens is called a soft prompt, and it gets prepended to embedding vectors that represent your input text. The soft prompt vectors have the same length as the embedding vectors of the language tokens. And including somewhere between 20 and 100 virtual tokens can be sufficient for good performance
 
+- __[LoRA Low-Rank Adaptation of Large Language Models]()__
+- __[QLoRA: Efficient Finetuning of Quantized LLMs]()__
+- __[The Power of Scale for Parameter-Efficient Prompt Tuning]()__
 
-
-### Reading material
-
-
-Multi-task, instruction fine-tuning
-
-    Scaling Instruction-Finetuned Language Models
-
- - Scaling fine-tuning with a focus on task, model size and chain-of-thought data.
-
-Introducing FLAN: More generalizable Language Models with Instruction Fine-Tuning
-
-     - This blog (and article) explores instruction fine-tuning, which aims to make language models better at performing NLP tasks with zero-shot inference.
-
-Model Evaluation Metrics
-
-    HELM - Holistic Evaluation of Language Models
-
- - HELM is a living benchmark to evaluate Language Models more transparently. 
-
-General Language Understanding Evaluation (GLUE) benchmark
-
- - This paper introduces GLUE, a benchmark for evaluating models on diverse natural language understanding (NLU) tasks and emphasizing the importance of improved general NLU systems.
-
-SuperGLUE
-
- - This paper introduces SuperGLUE, a benchmark designed to evaluate the performance of various NLP models on a range of challenging language understanding tasks.
-
-ROUGE: A Package for Automatic Evaluation of Summaries
-
- - This paper introduces and evaluates four different measures (ROUGE-N, ROUGE-L, ROUGE-W, and ROUGE-S) in the ROUGE summarization evaluation package, which assess the quality of summaries by comparing them to ideal human-generated summaries.
-
-Measuring Massive Multitask Language Understanding (MMLU)
-
- - This paper presents a new test to measure multitask accuracy in text models, highlighting the need for substantial improvements in achieving expert-level accuracy and addressing lopsided performance and low accuracy on socially important subjects.
-
-BigBench-Hard - Beyond the Imitation Game: Quantifying and Extrapolating the Capabilities of Language Models
-
-     - The paper introduces BIG-bench, a benchmark for evaluating language models on challenging tasks, providing insights on scale, calibration, and social bias.
-
-Parameter- efficient fine tuning (PEFT)
-
-    Scaling Down to Scale Up: A Guide to Parameter-Efficient Fine-Tuning
-
- - This paper provides a systematic overview of Parameter-Efficient Fine-tuning (PEFT) Methods in all three categories discussed in the lecture videos.
-
-On the Effectiveness of Parameter-Efficient Fine-Tuning
-
-     - The paper analyzes sparse fine-tuning methods for pre-trained models in NLP.
-
-LoRA
-
-    LoRA Low-Rank Adaptation of Large Language Models
-
- -  This paper proposes a parameter-efficient fine-tuning method that makes use of low-rank decomposition matrices to reduce the number of trainable parameters needed for fine-tuning language models.
-
-QLoRA: Efficient Finetuning of Quantized LLMs
-
-     - This paper introduces an efficient method for fine-tuning large language models on a single GPU, based on quantization, achieving impressive results on benchmark tests.
-
-Prompt tuning with soft prompts
-
-    The Power of Scale for Parameter-Efficient Prompt Tuning
-
- - The paper explores "prompt tuning," a method for conditioning language models with learned soft prompts, achieving competitive performance compared to full fine-tuning and enabling model reuse for many tasks.
 
 <br>
 
