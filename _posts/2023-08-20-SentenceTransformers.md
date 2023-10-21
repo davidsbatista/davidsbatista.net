@@ -203,6 +203,10 @@ At inference, when predicting similarities for the STS benchmark dataset, only t
 
 ### __Conclusions__
 
+
+Training State-of-the-Art Sentence Embedding Models: https://www.youtube.com/watch?v=RHXZKUr8qOY
+
+
 <!--
 We showed that BERT out-of-the-box maps sentences to a vector space that is rather unsuitable to be used with common similarity measures like cosine-similarity. The performance for seven STS tasks was below the performance of average GloVe embeddings.
 
