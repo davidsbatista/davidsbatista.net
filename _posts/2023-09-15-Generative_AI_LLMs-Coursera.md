@@ -330,6 +330,79 @@ For inference, the two low-rank matrices are multiplied together to create a mat
 You then add this to the original weights and replace them in the model with these updated values.
 You now have a LoRA fine-tuned model that can carry out your specific task.
 
+Researchers have found that applying
+LoRA to just the self-attention layers of
+the model is often enough to
+fine-tune for a task and achieve performance gains.
+However, in principle,
+you can also use LoRA on
+other components like the feed-forward layers.
+But since most of the parameters of
+LLMs are in the attention layers,
+you get the biggest savings in
+trainable parameters by applying
+LoRA to these weights matrices. 
+
+
+Let's look at a practical example using
+the transformer architecture described in
+the Attention is All You Need paper.
+The paper specifies that the transformer weights
+have dimensions of 512 by 64.
+This means that each weights matrix
+has 32,768 trainable parameters.
+If you use LoRA as
+a fine-tuning method with the rank equal to eight,
+you will instead train
+two small rank decomposition matrices
+whose small dimension is eight.
+This means that Matrix A will have dimensions of 8 by 64,
+resulting in 512 total parameters.
+Matrix B will have dimensions of 512 by 8,
+or 4,096 trainable parameters.
+By updating the weights of
+these new low-rank matrices
+instead of the original weights,
+you'll be training 4,608 parameters instead of
+32,768 and 86% reduction.
+Because LoRA allows you to significantly
+reduce the number of trainable parameters,
+you can often perform this method of
+parameter efficient fine tuning with
+a single GPU and avoid
+the need for a distributed cluster of GPUs.
+Since the rank-decomposition matrices are small,
+you can fine-tune a different set for each task and then
+switch them out at inference time
+by updating the weights.
+Suppose you train a pair of
+LoRA matrices for a specific task;
+let's call it Task A.
+To carry out inference on this task,
+you would multiply these matrices together and
+then add the resulting matrix
+to the original frozen weights.
+You then take this new summed weights matrix
+and replace the original weights
+where they appear in your model.
+You can then use this model to
+carry out inference on Task A.
+If instead, you want to carry out
+a different task, say Task B,
+you simply take the LoRA matrices you
+trained for this task, calculate their product,
+and then add this matrix to
+the original weights and update the model again.
+The memory required to store
+these LoRA matrices is very small.
+So in principle, you can use
+LoRA to train for many tasks.
+Switch out the weights when you need to use them,
+and avoid having to store
+multiple full-size versions of the LLM. 
+
+
+
  - two new matrices much lower dimensions, new weights for tokens, replace original weights
  - how to choose the rank for the matrices? original paper found plateu at 16
  - 4-32 good trade-off
@@ -414,9 +487,11 @@ Prompt tuning with soft prompts
 
  - The paper explores "prompt tuning," a method for conditioning language models with learned soft prompts, achieving competitive performance compared to full fine-tuning and enabling model reuse for many tasks.
 
+<br>
 
 ---
 
+<br>
 
 ## __Week 3: Reinforcement Learning From Human Feedback (RLHF)__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W3.pdf))
 
