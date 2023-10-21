@@ -11,6 +11,7 @@ preview_pic: /assets/images/2023-09-15-LLMs.jpeg
 
 I'm happy to have completed the [course](https://www.coursera.org/learn/generative-ai-with-llms) and recommend it to anyone interested in delving into some of the intricacies of Transformer architecture and Large Language Models. The course covered a wide range of topics, from the Transformer architecture into fine-tuning LLMs and exploring chain-of-thought prompting augmentation techniques to overcome knowledge limitations. This post contains my personal notes taken during the course.
 
+---
 
 # __Week 1 - Introduction__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W1.pdf))
 
@@ -161,8 +162,11 @@ Pre-training for domain adaptation
 
 learning memory optimisations and parallel computing for efficient LLms training
 
+<br>
 
+---
 
+<br>
 
 ## __Week 2: Fine-Tuning__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W2.pdf))
 
@@ -245,27 +249,39 @@ Instruction fine-tuning/fine-tuning trains the whole model parameters using exam
 	- FLAN-T5 - fine-tune version of pre-trained T5 model
 	- Paper: [Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
 
-
 ## __Model Evaluation__
 
-- ROUGE-n ngrams bla bla
-- ROUGE-L longest common subsequence between generatedoutput and reference
+### __ROUGE__
 
-- BLEU metric - avg(precision across range of n-gram sizes)
+- based on $$n$$-grams
+   
+   $$\text{ROUGE-Precision} = \frac{\text{n-grams matches}}{\text{n-grams in reference}}$$
 
-- BLEU focuses on precision in. matching generated output to the reference text
+   $$\text{ROUGE-Recall} = \frac{\text{n-grams matches}}{\text{n-grams in output}}$$
+   		
+   
+- __ROUGE-L-score__: longest common subsequence between generated output and reference
+   
+   $$\text{ROUGE-Precision} = \frac{\text{LCS(gen,ref)}}{\text{n-grams in reference}}$$
+
+   $$\text{ROUGE-Recall} = \frac{\text{LCS(gen,ref)}}{\text{n-grams in output}}$$
+
+### __BLEU__
+   
+- focuses on precision, it computes the precisions across different $$n$$-gram sizes and then averaged
+
+## __Benchmarks__
+
+- [GLUE 2018](https://gluebenchmark.com/leaderboard/)
+- [SUPERGLUE 2019](https://super.gluebenchmark.com/leaderboard)
+- [Measuring Massive Multitask Language Understanding 2021](https://github.com/hendrycks/test)
+- [BIG Bench 2023](https://github.com/google/BIG-bench)
+- [Holistic Evaluation of Language Models 2023](https://crfm.stanford.edu/helm/latest/)
 
 
-### Benchmarks
+---
 
-- GLUE 2018
-- SUPERGLUE 2019
-- Leaderboards
-- HELM Language Models
-		- rouge and helm
-
-
-###  Parameter Efficient Fine-Tuning (PEFT)
+## __Parameter Efficient Fine-Tuning (PEFT)__
 
 Full-fine tuning Large Language Models is challenging, you need lots of memory:
 
@@ -387,6 +403,7 @@ Prompt tuning with soft prompts
  - The paper explores "prompt tuning," a method for conditioning language models with learned soft prompts, achieving competitive performance compared to full fine-tuning and enabling model reuse for many tasks.
 
 
+---
 
 
 ## __Week 3: Reinforcement Learning From Human Feedback (RLHF)__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W3.pdf))
