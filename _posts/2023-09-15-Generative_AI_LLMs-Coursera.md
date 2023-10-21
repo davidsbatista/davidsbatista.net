@@ -17,14 +17,6 @@ I'm happy to have completed the [course](https://www.coursera.org/learn/generati
 
 # __Week 1 - Introduction__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W1.pdf))
 
-<!--
-- Discuss model pre-training and the value of continued pre-training vs fine-tuning
-- Define the terms Generative AI, large language models, prompt, and describe the transformer architecture that powers LLMs
-- Describe the steps in a typical LLM-based, generative AI model lifecycle and discuss the constraining factors that drive decisions at each step of model lifecycle
-- Discuss computational challenges during model pre-training and determine how to efficiently reduce memory footprint
-- Define the term scaling law and describe the laws that have been discovered for LLMs related to training dataset size, compute budget, inference requirements, and other factors.
--->
-
 ## __Introduction to Transformers architecture__
 
 Going through uses cases of generative AI with Large Language Models, given examples such as: summarisation, translation or information retrieval; and also how those were achieved before Transformers came into play. There's also an introduction to the Transformer architecture which is the base component for Large Language Models, and also an overview of the inference parameters that one can tune.
@@ -172,20 +164,6 @@ learning memory optimisations and parallel computing for efficient LLms training
 
 ## __Week 2: Fine-Tuning__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W2.pdf))
 
-<!--
-- Fine-tuning
-    Describe how fine-tuning with instructions using prompt datasets can improve performance on one or more tasks
-    Define catastrophic forgetting and explain techniques that can be used to overcome it
-    Define the term Parameter-efficient Fine Tuning (PEFT)
-    Explain how PEFT decreases computational cost and overcomes catastrophic forgetting
-    Explain how fine-tuning with instructions using prompt datasets can increase LLM performance on one or more tasks
-
-	- instruction fine-tunning
-	- fine-tunning for specific application
-	- parameter efficient fine-tunning (PEFT)
-	- LoRA - 
--->
-
 ## __Instruction Fine-Tuning__
 
 Instruction fine-tuning/fine-tuning trains the whole model parameters using examples that demonstrate how it should respond to a specific instruction, e.g:
@@ -325,6 +303,8 @@ LoRA reduces the number of parameters to be trained during fine-tuning by freezi
 
 During training the original weights are frozen and only the smaller matrices are updated. For inference the two low-rank matrices are multiplied together to create a matrix with the same dimensions as the frozen weights, and added to the original weights, replacing them in the model with these updated values.
 
+You can then use this model to carry out inference on Task A. If instead, you want to carry out a different task, say Task B, you simply take the LoRA matrices you trained for this task, calculate their product, and then add this matrix to the original weights and update the model again. So in principle, you can use LoRA to train for many tasks. Switch out the weights when you need to use them, and avoid having to store multiple full-size versions of the LLM. 
+
 Researchers have found that applying LoRA only to the self-attention layers of the model is often enough to fine-tune for a task and achieve performance gains.
 
 The Transformer architecture described in the __[Attention is All You Need](https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf)__ paper, specifies that the transformer weights have dimensions of 512 x 64, meaning each weight matrix has 32,768 trainable parameters.
@@ -335,17 +315,39 @@ $$
     & \ddots & & & \\
     & & \ddots & & \\
     & & & \ddots & \\
+	& & &  & \ddots\\
 \end{bmatrix}
 _{512 \times 64 = 32,768 \text{ parameters}}
 $$
 
 Applying LoRA as a fine-tuning method with the $$rank = 8$$, we train two small rank decomposition matrices whose small dimension is 8:
 
+$$
+A=
+\begin{bmatrix}
+    \ddots & & \\
+    & \ddots & \\
+\end{bmatrix}
+_{8 \times 64 = 512 \text{ parameters}}
+$$
+
+$$
+B=
+\begin{bmatrix}
+    \ddots & & \\
+    & & & \\
+    & \ddots & \\
+    & & \ddots \\
+	& & & \\
+\end{bmatrix}
+_{512 \times 8 = 32,768 \text{ parameters}}
+$$
+
+
 - Matrix A will have dimensions of 8 x 64 =  512 total parameters. 
 - Matrix B will have dimensions of 512 x 8 = 4,096 trainable parameters.
 
 By updating the weights of these new low-rank matrices instead of the original weights, you'll be training 4,608 parameters instead of 32,768 and 86% reduction.
-
 
 Advantages:
 
@@ -353,38 +355,14 @@ Advantages:
 
 - Since the rank-decomposition matrices are small, you can fine-tune a different set for each task and then switch them out at inference time by updating the weights.
 
-<!--
-
-Suppose you train a pair of LoRA matrices for a specific task; let's call it Task A.
-
-To carry out inference on this task, you would multiply these matrices together and then add the resulting matrix to the original frozen weights.
-
-You then take this new summed weights matrix and replace the original weights where they appear in your model.
-
-You can then use this model to carry out inference on Task A. If instead, you want to carry out a different task, say Task B, you simply take the LoRA matrices you trained for this task, calculate their product,
-and then add this matrix to the original weights and update the model again. 
-
-The memory required to store these LoRA matrices is very small. 
-
-So in principle, you can use LoRA to train for many tasks. Switch out the weights when you need to use them, and avoid having to store multiple full-size versions of the LLM. 
-
- - two new matrices much lower dimensions, new weights for tokens, replace original weights
- - how to choose the rank for the matrices? original paper found plateu at 16
- - 4-32 good trade-off
- - decomposes weights into two smaller rank matrices and trains those instead of the full model
- - QLoRA (ideia: combined it with quantization techniques)
--->
-
-
 #### __Soft Prompts or Prompt Tuning__
  - improve without changing the weights
  - With prompt tuning, you add additional trainable tokens to your prompt and leave it up to the supervised learning process to determine their optimal values. 
  - The set of trainable tokens is called a soft prompt, and it gets prepended to embedding vectors that represent your input text. The soft prompt vectors have the same length as the embedding vectors of the language tokens. And including somewhere between 20 and 100 virtual tokens can be sufficient for good performance
 
-- __[LoRA Low-Rank Adaptation of Large Language Models](https://arxiv.org/pdf/2106.09685.pdf)__
-- __[QLoRA: Efficient Finetuning of Quantized LLMs]()__
-- __[The Power of Scale for Parameter-Efficient Prompt Tuning]()__
 - __[Scaling Down to Scale Up: A Guide to Parameter-Efficient Fine-Tuning](https://vladlialin.com/publications/peft-survey)__
+- __[LoRA Low-Rank Adaptation of Large Language Models](https://arxiv.org/pdf/2106.09685.pdf)__
+- __[The Power of Scale for Parameter-Efficient Prompt Tuning](https://aclanthology.org/2021.emnlp-main.243/)__
 
 
 <br>
