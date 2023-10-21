@@ -327,21 +327,17 @@ During training the original weights are frozen and only the smaller matrices ar
 
 Researchers have found that applying LoRA only to the self-attention layers of the model is often enough to fine-tune for a task and achieve performance gains.
 
-The Transformer architecture described in the Attention is All You Need paper, specifies that the transformer weights have dimensions of 512 by 64.
+The Transformer architecture described in the __[Attention is All You Need](https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf)__ paper, specifies that the transformer weights have dimensions of 512 x 64, meaning each weight matrix has 32,768 trainable parameters.
 
 $$
-
 \begin{bmatrix}
     \ddots & & & & \\
     & \ddots & & & \\
     & & \ddots & & \\
     & & & \ddots & \\
 \end{bmatrix}
-_{512 \times 64}
-
+_{512 \times 64 = 32,768 \text{ parameters}}
 $$
-
-This means that each weight matrix has 32,768 trainable parameters.
 
 Applying LoRA as a fine-tuning method with the $$rank = 8$$, we train two small rank decomposition matrices whose small dimension is 8:
 
