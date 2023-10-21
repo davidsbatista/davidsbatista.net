@@ -281,25 +281,37 @@ Instruction fine-tuning/fine-tuning trains the whole model parameters using exam
 
 ---
 
-## __Parameter Efficient Fine-Tuning (PEFT)__
+## __Parameter Efficient Fine-Tuning__
 
-Full-fine tuning Large Language Models is challenging, you need lots of memory:
+During a full-fine tuning of LLMs every model weight is updated during supervised learning, this operation has memory requirements which can be 12-20x the model's memory:
+  - gradients
+  - forward activations
+  - temporary memory for training process
 
-- not only the model in memory
-- optimize states
-- gradients
-- forward activates
-- temporary memory for training process
-- this can be 12-20x the model's memory
-	
-Parameter Efficient Fine-Tuning (PEFT)
- - only a small number of trainable layers
- - LLM with additional layers for PEFT, new trainable layers
- - can often be performed on a single GPU
- - less prone to catraspojhic forgetting
-	
-PEFT methods
- - selective: select a subset of initial LLM parameters to fine-tune
+
+There are techniques, called Parameter Efficient Fine-Tuning (PEFT) to train LLMs for specific tasks and which don't require to train ever weight in the model:
+
+  - only a small number of trainable layers
+  - LLM with additional layers, new trainable layers
+  - can often be performed on a single GPU
+  - less prone to catastrophic forgetting
+  - these weights are trained for each task and can be easily swapped out for inference
+
+<figure>
+  <img style="width: 25%; height: 25%" src="/assets/images/2023-09-15-PEFT-small-number-of-layers.png">
+  <figcaption>Figure 1 - .</figcaption>
+</figure>
+
+
+<figure>
+  <img style="width: 25%; height: 25%" src="/assets/images/2023-09-15-PEFT-news-layers.png">
+  <figcaption>Figure 1 - .</figcaption>
+</figure>
+
+
+Main classes of PEFT methods:
+
+ - Selective: select a subset of initial LLM parameters to fine-tune
  - LoRA:
 	- reparamterize model weights using a low-rank representation
  - Additive
@@ -307,6 +319,28 @@ PEFT methods
 		- adapters
 		- soft prompts: prompt tuning
 		
+
+Selective methods are those that fine-tune only a subset of the original LLM parameters.
+There are several approaches that you can take to identify which parameters you want to update.
+You have the option to train only certain components of the model or specific layers, or even individual parameter types.
+Researchers have found that the performance of these methods is mixed and there are significant trade-offs between parameter efficiency and compute efficiency.
+
+Reparameterization methods also work with the original LLM parameters, but reduce the number of parameters to train by creating new low rank transformations of the original network weights.
+A commonly used technique of this type is LoRA,
+
+Lastly, additive methods carry out fine-tuning by keeping all of the original LLM weights frozen and introducing new trainable components.
+
+Adapter methods add new trainable layers to the architecture of the model, typically inside the encoder or decoder components after the attention or feed-forward layers.
+Soft prompt methods, on the other hand, keep the model architecture fixed and frozen, and focus on manipulating
+the input to achieve better performance.
+This can be done by adding trainable parameters to the prompt embeddings or keeping the input fixed and retraining the embedding weights.
+
+- [Scaling Down to Scale Up: A Guide to Parameter-Efficient Fine-Tuning](https://vladlialin.com/publications/peft-survey)-
+
+
+### __PEFT techniques: LoRA__ 
+
+	
 LoRA:
  - Low-Rank Adaptation for Large Language Models (LoRA)
  - two new matrices much lower dimensions, new weights for tokens, replace original weights
@@ -324,6 +358,8 @@ Soft Prompts:
  - With prompt tuning, you add additional trainable tokens to your prompt and leave it up to the supervised learning process to determine their optimal values. The set of trainable tokens is called a soft prompt, and it gets prepended to embedding vectors that represent your input text. The soft prompt vectors have the same length as the embedding vectors of the language tokens. And including somewhere between 20 and 100 virtual tokens can be sufficient for good performance. The tokens that represent natural language are hard in the sense that they each correspond to a fixed loc
 	- soft prompt
 		a set of trainable tokens that are added to a prompt and whose values are updated during additional training to improve performance on specific tasks
+
+
 
 
 
