@@ -13,6 +13,8 @@ I'm happy to have completed the [course](https://www.coursera.org/learn/generati
 
 ---
 
+<br>
+
 # __Week 1 - Introduction__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W1.pdf))
 
 <!--
@@ -320,7 +322,7 @@ Main classes of PEFT methods:
 		- soft prompts: prompt tuning
 		
 
-Selective methods are those that fine-tune only a subset of the original LLM parameters.
+Selective methods fine-tune only a subset of the original LLM parameters.
 There are several approaches that you can take to identify which parameters you want to update.
 You have the option to train only certain components of the model or specific layers, or even individual parameter types.
 Researchers have found that the performance of these methods is mixed and there are significant trade-offs between parameter efficiency and compute efficiency.
@@ -358,13 +360,6 @@ Soft Prompts:
  - With prompt tuning, you add additional trainable tokens to your prompt and leave it up to the supervised learning process to determine their optimal values. The set of trainable tokens is called a soft prompt, and it gets prepended to embedding vectors that represent your input text. The soft prompt vectors have the same length as the embedding vectors of the language tokens. And including somewhere between 20 and 100 virtual tokens can be sufficient for good performance. The tokens that represent natural language are hard in the sense that they each correspond to a fixed loc
 	- soft prompt
 		a set of trainable tokens that are added to a prompt and whose values are updated during additional training to improve performance on specific tasks
-
-
-
-
-
-review:
-=======
 
 
 ### Laboratory Exercises
