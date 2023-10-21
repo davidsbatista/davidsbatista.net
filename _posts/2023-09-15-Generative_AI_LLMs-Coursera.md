@@ -313,22 +313,20 @@ There are techniques, called Parameter Efficient Fine-Tuning (PEFT) to train LLM
 
 Main classes of PEFT methods:
 
- - Selective: select a subset of initial LLM parameters to fine-tune
- - LoRA:
-	- reparamterize model weights using a low-rank representation
+ - Selective: fine-tune only a subset of the original LLM parameters
+ - Reparameterization:
+    - work with the original LLM parameters, but reduce the number of parameters to train by creating new low rank transformations of the original network weights
  - Additive
 	- add trainable layers or parameters to model
 		- adapters
 		- soft prompts: prompt tuning
 		
 
-Selective methods fine-tune only a subset of the original LLM parameters.
-There are several approaches that you can take to identify which parameters you want to update.
-You have the option to train only certain components of the model or specific layers, or even individual parameter types.
+There are several approaches to identify which parameters you want to update: only certain components of the model or specific layers, or even individual parameter types.
 Researchers have found that the performance of these methods is mixed and there are significant trade-offs between parameter efficiency and compute efficiency.
 
-Reparameterization methods also work with the original LLM parameters, but reduce the number of parameters to train by creating new low rank transformations of the original network weights.
-A commonly used technique of this type is LoRA,
+
+
 
 Lastly, additive methods carry out fine-tuning by keeping all of the original LLM weights frozen and introducing new trainable components.
 
