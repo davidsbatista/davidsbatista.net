@@ -22,11 +22,9 @@ I'm happy to have completed the [course](https://www.coursera.org/learn/generati
 - Define the term scaling law and describe the laws that have been discovered for LLMs related to training dataset size, compute budget, inference requirements, and other factors.
 -->
 
-
 ## __Introduction to Transformers architecture__
 
 Going through uses cases of generative AI with Large Language Models, given examples such as: summarisation, translation or information retrieval; and also how those were achieved before Transformers came into play. There's also an introduction to the Transformer architecture which is the base component for Large Language Models, and also an overview of the inference parameters that one can tune.
-
 
 ## __Generative AI project life-cycle__
 
@@ -38,9 +36,7 @@ Then it's first introduced in the course the Generative AI project lifecycle whi
   <figcaption>Figure 1 - Generative AI projet life-cycle as presented in the course.</figcaption>
 </figure>
 
-
 ## __Prompt Engineering and Inference Paramaters__
-
 
 ### __In-Context Learning__
 
@@ -80,7 +76,6 @@ Then it's first introduced in the course the Generative AI project lifecycle whi
 		
 		"Classify this review: I don't like this soing! Sentiment: "
 
-
 ### __Inference Parameters__
 
 <figure>
@@ -119,10 +114,9 @@ Then it's first introduced in the course the Generative AI project lifecycle whi
 
 ### __Laboratory Exercise #1__
 
-Dialogue summarisation task using generative AI using the T5 model from Huggingface and the XXX dataset exploring how in-context learning and inference parameters affects the output of the model.
+The lab exercise consists of a dialogue summarisation task using the T5 model from Huggingface and the XXX dataset by exploring how in-context learning and inference parameters affects the output of the model.
 
-
-### __Large Language Models pre-training and Scaling Laws__
+## __Large Language Models pre-training and Scaling Laws__
 
 - models are trained on vast amounts of text data
 	- pre-training
@@ -172,6 +166,7 @@ learning memory optimisations and parallel computing for efficient LLms training
 
 ## __Week 2: Fine-Tuning__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W2.pdf))
 
+<!--
 - Fine-tuning
     Describe how fine-tuning with instructions using prompt datasets can improve performance on one or more tasks
     Define catastrophic forgetting and explain techniques that can be used to overcome it
@@ -183,32 +178,68 @@ learning memory optimisations and parallel computing for efficient LLms training
 	- fine-tunning for specific application
 	- parameter efficient fine-tunning (PEFT)
 	- LoRA - 
+-->
 
+## __Instruction Fine-Tuning__
 
-###  Instruction Fine-Tuning
+Instruction fine-tuning/fine-tuning trains the whole model parameters using examples that demonstrate how it should respond to a specific instruction, e.g:
 
-Instruction fine-tuning or simple fine-tuning trains the whole model parameters using examples that demonstrate how it should respond to a specific instruction.
-
-Example:
+		
+	[PROMT]
+	[1.EXAMPLE TEXT]
+	[1.EXAMPLE COMPLETION]
 	
-	PROMPT, EXAMPLE TEXT, EXAMPLE COMPLETION
+	[PROMT]
+	[2.EXAMPLE TEXT]
+	[2.EXAMPLE COMPLETION]
+	
+	...
+	
+	[PROMT]
+	[n.EXAMPLE TEXT]
+	[n.EXAMPLE COMPLETION]
+	
 
-Since all the all of the model's weights are updated is known as: __full fine-tuning__ and it involves using many prompt-completion examples as the labeled training dataset to continue training the model by updating its weights.
+- All of the model's weights are updated (__full fine-tuning__) and it involves using many prompt-completion examples as the labeled training dataset to continue training the model by updating its weights
 
-Comparing to in-context learning, one only provides prompt-completion during inference, here we do it during training.
+- Comparing to in-context learning, where one only provides prompt-completion during inference, here we do it during training
 
-Adapt a foundation model through instruction fine-tuning, requires prompt templates and datasets
+- Adapting a foundation model through instruction fine-tuning, requires __prompt templates and datasets__
+
+- Compare the __LLM completion__ with the __label__ use the loss (cross-entropy) to calculate the loss between the two token distribution, and use the loss the updated the model weights using back-propagation
+
+- The instruction fine-tuning dataset can include multiple tasks
+
+### __Single-Task Fine-Tuning__
+
+- An application may only need to perform a single task, one can fine-tune a pre-trained model to improve performance the single-task only
+
+- Often just 500-1,000 examples can result in good performance, however, this process may lead to a phenomenon called __catastrophic forgetting__
+
+- Catastrophic forgetting happens because the full fine-tuning process modifies the weights of the original LLM
+
+- Leads to great performance on the single fine-tuning task, it can degrade performance on other tasks
 
 
-### Single-Task Fine-Tuning
-
-The output of an LLM is a prob distribution across tokens, so you can compare the distribution of the completion and the training label and use standard cross-entropy function to calculate loss between the two token distributions, and use that loss to 
-to update the model weights in standard back propagation.
-
-This type of tuning, on a single task, leads to __catastrophic forgetting__. Fine-tuning the weights of the original LLM, yields great results on a single task degrads on other tasks, if the model was trained for several tasks
+### __Multi-Task Fine-Tuning__
 
 
-### Multi-Task Fine-Tuning
+		
+	Summarize the following text
+	[1.EXAMPLE TEXT]
+	[1.EXAMPLE COMPLETION]
+	
+	Classify the following reviews
+	[2.EXAMPLE TEXT]
+	[2.EXAMPLE COMPLETION]
+	
+	...
+	
+	Extract the following named-entities
+	[n.EXAMPLE TEXT]
+	[n.EXAMPLE COMPLETION]
+	
+
 
 - FLAN-T5
 - FLAN-PALM
@@ -359,15 +390,13 @@ Prompt tuning with soft prompts
 
 
 
-## __Reinforcement Learning From Human Feedback (RLHF)__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W3.pdf))
+## __Week 3: Reinforcement Learning From Human Feedback (RLHF)__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W3.pdf))
 
 - Reinforcement Learning with Human Feedback
 - Describe how RLHF uses human feedback to improve the performance and alignment of large language models
 - Explain how data gathered from human labellers is used to train a reward model for RLHF
 - Define chain-of-thought prompting and describe how it can be used to improve LLMs reasoning and planning abilities
 - Discuss the challenges that LLMs face with knowledge cut-offs, and explain how information retrieval and augmentation techniques can overcome these challenges
-
-
 
 ### Reinforcement Learning From Human Feedback (RLHF)
 
@@ -379,7 +408,6 @@ Prompt tuning with soft prompts
 	the objective of maximizing the reward received for actions taken
 	- Agent
 	- Environment
-
 
 ### the case of fine-tuning large language models with RLHF.
 
@@ -418,9 +446,7 @@ train a new human aligned version.
 Exactly how the weights get updated as the model completions are assessed,
 depends on the algorithm used to optimize the policy. 
 
-
 ## reward model
-
 
 ### collect data and training a reward model
 
@@ -435,7 +461,6 @@ depends on the algorithm used to optimize the policy.
 
 - use the model as a binary classifier
 - a reward model can be as well an LLM such as BERT for instance
-
 
 ### RLHF: Fine-tuning with reinforcement learning
 
@@ -482,10 +507,6 @@ https://huggingface.co/blog/trl-peft
 
 KL-divergence.png
 
-
-
-
-
 ### Reward Hacking
 
 - As the policy tries to optimize the reward, it can diverge too much from the initial language model.
@@ -506,10 +527,6 @@ KL-divergence.png
 - Once you have completed your RHF alignment of the model, you will want to assess the model's performance. The number you'll use here is the toxicity score, this is the probability of the negative class, in this case, a toxic or hateful response averaged across the completions. If RHF has successfully reduce the toxicity of your LLM, this score should go down. First, you'll create a baseline toxicity score for the original instruct LLM by evaluating its completions off the summarization data set with a reward model that can assess toxic language.
 
 - Then you'll evaluate your newly human aligned model on the same data set and compare the scores.
-
-
-
-
 
 ### Scaling Human Feedback
 
@@ -603,9 +620,6 @@ This is sometimes referred to as reinforcement learning from AI feedback or RLAI
 
 The result is a model generated preference dataset that you can use to train a reward model. With this reward model, you can now fine-tune your model further using a reinforcement learning algorithm like PPO, as discussed earlier.
 
-
-
-
 ## Laboratory Exercise 3
 
 
@@ -621,10 +635,6 @@ The result is a model generated preference dataset that you can use to train a r
     3.2 - Fine-Tune the Model
     3.3 - Evaluate the Model Quantitatively
     3.4 - Evaluate the Model Qualitatively
-
-
-
-
 
 
 ## Large Language Models-powered Applications
@@ -669,9 +679,7 @@ In practice, distillation is not as effective for generative decoder models. It'
 - PEFT/LoRA
 - Post-Training
 
-
 ### Generative AI Project Lifecycle Cheat Sheet
-
 
 ## Using the LLM in Applications
 
@@ -701,7 +709,6 @@ In practice, distillation is not as effective for generative decoder models. It'
 	- memory
 	- agents: PAL, ReAct
 
-
 ## LLM application architectures
 
 LLM is only one part of the history...
@@ -712,20 +719,3 @@ LLM is only one part of the history...
 toxiticiy
 hallucination
 use of intellectual property
-
-
-<!--
-<figure>
-  <img style="width: 65%; height: 65%" src="/assets/images/2023-09-14-power_law_ent_freq.png">
-  <figcaption>Source: rawpixel https://www.rawpixel.com/image/9975355/photo-image-art-space-vintage.</figcaption>
-</figure>
--->
-
-
-
-
-
-
-
-
-
