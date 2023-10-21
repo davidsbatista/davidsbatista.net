@@ -9,7 +9,7 @@ disqus_identifier: 20230915
 preview_pic: /assets/images/2023-09-15-LLMs.jpeg
 ---
 
-I'm happy to have completed the [course](https://www.coursera.org/learn/generative-ai-with-llms) and recommend it to anyone interested in delving into some of the intricacies of Transformer architecture and Large Language Models. The course covered a wide range of topics, from the Transformer architecture into fine-tuning LLMs and exploring chain-of-thought prompting augmentation techniques to overcome knowledge limitations. This post contains my personal notes taken during the course.
+I'm happy to have completed the __[course](https://www.coursera.org/learn/generative-ai-with-llms)__ and recommend it to anyone interested in delving into some of the intricacies of Transformer architecture and Large Language Models. The course covered a wide range of topics, from the Transformer architecture into fine-tuning LLMs and exploring chain-of-thought prompting augmentation techniques to overcome knowledge limitations. This post contains my personal notes taken during the course.
 
 ---
 
@@ -106,8 +106,6 @@ Then it's first introduced in the course the Generative AI project lifecycle whi
 
 
 - see the __[transformers.GenerationConfig](https://huggingface.co/docs/transformers/v4.29.1/en/main_classes/text_generation#transformers.GenerationConfig)__ class for the complete details
-
-### __Laboratory Exercise #1__
 
 The lab exercise consists of a dialogue summarisation task using the T5 model from Huggingface and the XXX dataset by exploring how in-context learning and inference parameters affects the output of the model.
 
@@ -340,7 +338,7 @@ B=
     & & \ddots \\
 	& & & \\
 \end{bmatrix}
-_{512 \times 8 = 32,768 \text{ parameters}}
+_{512 \times 8 = 4,096 \text{ parameters}}
 $$
 
 
@@ -349,6 +347,11 @@ $$
 
 By updating the weights of these new low-rank matrices instead of the original weights, you'll be training 4,608 parameters instead of 32,768 and 86% reduction.
 
+<figure>
+  <img style="width: 65%; height: 35%" src="/assets/images/2023-09-15-PEFT-LoRA-multi-task.png">
+  <figcaption>Figure 1 - </figcaption>
+</figure>
+
 Advantages:
 
 - Because LoRA allows you to significantly reduce the number of trainable parameters, you can often perform this method of parameter efficient fine tuning with a single GPU and avoid the need for a distributed cluster of GPUs.
@@ -356,9 +359,32 @@ Advantages:
 - Since the rank-decomposition matrices are small, you can fine-tune a different set for each task and then switch them out at inference time by updating the weights.
 
 #### __Soft Prompts or Prompt Tuning__
- - improve without changing the weights
- - With prompt tuning, you add additional trainable tokens to your prompt and leave it up to the supervised learning process to determine their optimal values. 
- - The set of trainable tokens is called a soft prompt, and it gets prepended to embedding vectors that represent your input text. The soft prompt vectors have the same length as the embedding vectors of the language tokens. And including somewhere between 20 and 100 virtual tokens can be sufficient for good performance
+
+<figure>
+  <img style="width: 75%; height: 35%" src="/assets/images/2023-09-15-PEFT-Soft-Prompt-Tunning.png">
+  <figcaption>Figure 1 - </figcaption>
+</figure>
+
+ - Add additional trainable tokens to your prompt and leave it up to the supervised learning process to determine their optimal values. The set of trainable tokens is called a __soft prompt__, and it gets prepended to embedding vectors that represent the input text. 
+ - The soft prompt vectors have the same length as input embedding vectors, and usually somewhere between 20 and 100 virtual tokens can be sufficient for good performance.
+
+<figure>
+  <img style="width: 45%; height: 35%" src="/assets/images/2023-09-15-PEFT-Prompt-Tunning.png">
+  <figcaption>Figure 1 - </figcaption>
+</figure>
+
+ - The trainable tokens and the input flow normally through the model, which is going to generate a prediction which is used to calculate a loss. 
+ - The loss is back-propagated through the model to create gradients, but the original model weights are frozen and only the the virtual tokens embeddings are updated such that the model learns embeddings for those virtual tokens.
+
+<figure>
+  <img style="width: 65%; height: 45%" src="/assets/images/2023-09-15-PEFT-Prompt-Tunning-multi-task.png">
+  <figcaption>Figure 1 - </figcaption>
+</figure>
+
+- One can train soft prompts for different tasks and store them, which take much less resources.
+- At inference time one can switch them to change the LLMs task.
+
+### __References__
 
 - __[Scaling Down to Scale Up: A Guide to Parameter-Efficient Fine-Tuning](https://vladlialin.com/publications/peft-survey)__
 - __[LoRA Low-Rank Adaptation of Large Language Models](https://arxiv.org/pdf/2106.09685.pdf)__
@@ -371,13 +397,20 @@ Advantages:
 
 <br>
 
-## __Week 3: Reinforcement Learning From Human Feedback (RLHF)__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W3.pdf))
 
+
+
+
+
+## __Week 3: Reinforcement Learning From Human Feedback__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W3.pdf))
+
+<!--
 - Reinforcement Learning with Human Feedback
 - Describe how RLHF uses human feedback to improve the performance and alignment of large language models
 - Explain how data gathered from human labellers is used to train a reward model for RLHF
 - Define chain-of-thought prompting and describe how it can be used to improve LLMs reasoning and planning abilities
 - Discuss the challenges that LLMs face with knowledge cut-offs, and explain how information retrieval and augmentation techniques can overcome these challenges
+-->
 
 ### Reinforcement Learning From Human Feedback (RLHF)
 
@@ -600,22 +633,6 @@ we now use feedback generated by a model.
 This is sometimes referred to as reinforcement learning from AI feedback or RLAIF. Here you use the fine-tuned model from the previous step to generate a set of responses to your prompt. You then ask the model which of the responses is preferred according to the constitutional principles.
 
 The result is a model generated preference dataset that you can use to train a reward model. With this reward model, you can now fine-tune your model further using a reinforcement learning algorithm like PPO, as discussed earlier.
-
-## Laboratory Exercise 3
-
-
- 2 - Load FLAN-T5 Model, Prepare Reward Model and Toxicity Evaluator
-
-    2.1 - Load Data and FLAN-T5 Model Fine-Tuned with Summarization Instruction
-    2.2 - Prepare Reward Model
-    2.3 - Evaluate Toxicity
-
-3 - Perform Fine-Tuning to Detoxify the Summaries
-
-    3.1 - Initialize PPOTrainer
-    3.2 - Fine-Tune the Model
-    3.3 - Evaluate the Model Quantitatively
-    3.4 - Evaluate the Model Qualitatively
 
 ## Large Language Models-powered Applications
 
