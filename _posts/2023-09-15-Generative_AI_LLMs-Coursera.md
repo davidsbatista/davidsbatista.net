@@ -285,13 +285,9 @@ Instruction fine-tuning/fine-tuning trains the whole model parameters using exam
 
 ## __Parameter Efficient Fine-Tuning__
 
-During a full-fine tuning of LLMs every model weight is updated during supervised learning, this operation has memory requirements which can be 12-20x the model's memory:
-  - gradients
-  - forward activations
-  - temporary memory for training process
+During a full-fine tuning of LLMs every model weight is updated during supervised learning, this operation has memory requirements which can be 12-20x the model's memory: gradients, forward activations, temporary memory for training process. 
 
-
-There are techniques, called Parameter Efficient Fine-Tuning (PEFT) to train LLMs for specific tasks and which don't require to train ever weight in the model:
+There are Parameter Efficient Fine-Tuning (PEFT) techniques to train LLMs for specific tasks which don't require to train ever weight in the model:
 
   - only a small number of trainable layers
   - LLM with additional layers, new trainable layers
@@ -313,36 +309,27 @@ There are techniques, called Parameter Efficient Fine-Tuning (PEFT) to train LLM
 
 Main classes of PEFT methods:
 
- - Selective: fine-tune only a subset of the original LLM parameters
- - Reparameterization:
-    - work with the original LLM parameters, but reduce the number of parameters to train by creating new low rank transformations of the original network weights
- - Additive
-	- add trainable layers or parameters to model
-		- adapters
-		- soft prompts: prompt tuning
-		
+ - __Selective__: fine-tune only a subset of the original LLM parameters (not covered in the course)
+ - __Reparameterization__: reduce the number of parameters to train by creating new low rank transformations of the original network weights
+ - __Additive__: keep all of the original LLM weights frozen and introduce new trainable components:
+    - __Adapters__: add new trainable layers to the architecture of the model, typically inside the encoder or decoder components after the attention or feed-forward layers
+	- __Soft prompts__: 
+		- keep the model architecture fixed and frozen, and focus on manipulating the input to achieve better performance
+		- add trainable parameters to the prompt embeddings or keep the input fixed and retraining the embedding weights
 
-There are several approaches to identify which parameters you want to update: only certain components of the model or specific layers, or even individual parameter types.
-Researchers have found that the performance of these methods is mixed and there are significant trade-offs between parameter efficiency and compute efficiency.
+- __[Scaling Down to Scale Up: A Guide to Parameter-Efficient Fine-Tuning](https://vladlialin.com/publications/peft-survey)__
 
+### __PEFT techniques__ 
 
+__Low-Rank Adaptation for Large Language Models (LoRA)__
 
+LoRA is a strategy that reduces the number of parameters to be trained during fine-tuning by freezing all of the original model parameters and then injecting a pair of rank decomposition matrices alongside the original weights.
+The dimensions of the smaller matrices are set so that their product is a matrix with the same dimensions as the weights they're modifying.
+You then keep the original weights of the LLM frozen and train the smaller matrices using the same supervised learning process you saw earlier this week.
+For inference, the two low-rank matrices are multiplied together to create a matrix with the same dimensions as the frozen weights.
+You then add this to the original weights and replace them in the model with these updated values.
+You now have a LoRA fine-tuned model that can carry out your specific task.
 
-Lastly, additive methods carry out fine-tuning by keeping all of the original LLM weights frozen and introducing new trainable components.
-
-Adapter methods add new trainable layers to the architecture of the model, typically inside the encoder or decoder components after the attention or feed-forward layers.
-Soft prompt methods, on the other hand, keep the model architecture fixed and frozen, and focus on manipulating
-the input to achieve better performance.
-This can be done by adding trainable parameters to the prompt embeddings or keeping the input fixed and retraining the embedding weights.
-
-- [Scaling Down to Scale Up: A Guide to Parameter-Efficient Fine-Tuning](https://vladlialin.com/publications/peft-survey)-
-
-
-### __PEFT techniques: LoRA__ 
-
-	
-LoRA:
- - Low-Rank Adaptation for Large Language Models (LoRA)
  - two new matrices much lower dimensions, new weights for tokens, replace original weights
  - how to choose the rank for the matrices? original paper found plateu at 16
  - 4-32 good trade-off
@@ -350,7 +337,8 @@ LoRA:
  - QLoRA (ideia: combined it with quantization techniques)
 
 
-Soft Prompts:
+
+__Soft Prompts__:
  - improve without changing the weights
  - prompt tunning
  - not promot enginerrong 
@@ -359,11 +347,6 @@ Soft Prompts:
 	- soft prompt
 		a set of trainable tokens that are added to a prompt and whose values are updated during additional training to improve performance on specific tasks
 
-
-### Laboratory Exercises
-
-
-You just run code nothing is expected - although you can play around with the parameters
 
 
 ### Reading material
