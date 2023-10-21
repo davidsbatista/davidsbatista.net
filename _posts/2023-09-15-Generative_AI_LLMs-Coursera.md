@@ -317,106 +317,78 @@ Main classes of PEFT methods:
 		- keep the model architecture fixed and frozen, and focus on manipulating the input to achieve better performance
 		- add trainable parameters to the prompt embeddings or keep the input fixed and retraining the embedding weights
 
-- __[Scaling Down to Scale Up: A Guide to Parameter-Efficient Fine-Tuning](https://vladlialin.com/publications/peft-survey)__
-
 ### __PEFT techniques__ 
 
-__Low-Rank Adaptation for Large Language Models (LoRA)__
+#### __Low-Rank Adaptation for Large Language Models (LoRA)__
 
-LoRA is a strategy that reduces the number of parameters to be trained during fine-tuning by freezing all of the original model parameters and then injecting a pair of rank decomposition matrices alongside the original weights.
-The dimensions of the smaller matrices are set so that their product is a matrix with the same dimensions as the weights they're modifying.
-You then keep the original weights of the LLM frozen and train the smaller matrices using the same supervised learning process you saw earlier this week.
-For inference, the two low-rank matrices are multiplied together to create a matrix with the same dimensions as the frozen weights.
-You then add this to the original weights and replace them in the model with these updated values.
-You now have a LoRA fine-tuned model that can carry out your specific task.
+LoRA reduces the number of parameters to be trained during fine-tuning by freezing all of the original model parameters and then injecting a pair of rank decomposition matrices alongside the original weights. The dimensions of the smaller matrices are set so that their product is a matrix with the same dimensions as the weights they're modifying. 
 
-Researchers have found that applying
-LoRA to just the self-attention layers of
-the model is often enough to
-fine-tune for a task and achieve performance gains.
-However, in principle,
-you can also use LoRA on
-other components like the feed-forward layers.
-But since most of the parameters of
-LLMs are in the attention layers,
-you get the biggest savings in
-trainable parameters by applying
-LoRA to these weights matrices. 
+During training the original weights are frozen and only the smaller matrices are updated. For inference the two low-rank matrices are multiplied together to create a matrix with the same dimensions as the frozen weights, and added to the original weights, replacing them in the model with these updated values.
+
+Researchers have found that applying LoRA only to the self-attention layers of the model is often enough to fine-tune for a task and achieve performance gains.
+
+The Transformer architecture described in the Attention is All You Need paper, specifies that the transformer weights have dimensions of 512 by 64.
+
+$$
+
+\begin{bmatrix}
+    \ddots & & & & \\
+    & \ddots & & & \\
+    & & \ddots & & \\
+    & & & \ddots & \\
+\end{bmatrix}
+_{512 \times 64}
+
+$$
+
+This means that each weight matrix has 32,768 trainable parameters.
+
+Applying LoRA as a fine-tuning method with the $$rank = 8$$, we train two small rank decomposition matrices whose small dimension is 8:
+
+- Matrix A will have dimensions of 8 x 64 =  512 total parameters. 
+- Matrix B will have dimensions of 512 x 8 = 4,096 trainable parameters.
+
+By updating the weights of these new low-rank matrices instead of the original weights, you'll be training 4,608 parameters instead of 32,768 and 86% reduction.
 
 
-Let's look at a practical example using
-the transformer architecture described in
-the Attention is All You Need paper.
-The paper specifies that the transformer weights
-have dimensions of 512 by 64.
-This means that each weights matrix
-has 32,768 trainable parameters.
-If you use LoRA as
-a fine-tuning method with the rank equal to eight,
-you will instead train
-two small rank decomposition matrices
-whose small dimension is eight.
-This means that Matrix A will have dimensions of 8 by 64,
-resulting in 512 total parameters.
-Matrix B will have dimensions of 512 by 8,
-or 4,096 trainable parameters.
-By updating the weights of
-these new low-rank matrices
-instead of the original weights,
-you'll be training 4,608 parameters instead of
-32,768 and 86% reduction.
-Because LoRA allows you to significantly
-reduce the number of trainable parameters,
-you can often perform this method of
-parameter efficient fine tuning with
-a single GPU and avoid
-the need for a distributed cluster of GPUs.
-Since the rank-decomposition matrices are small,
-you can fine-tune a different set for each task and then
-switch them out at inference time
-by updating the weights.
-Suppose you train a pair of
-LoRA matrices for a specific task;
-let's call it Task A.
-To carry out inference on this task,
-you would multiply these matrices together and
-then add the resulting matrix
-to the original frozen weights.
-You then take this new summed weights matrix
-and replace the original weights
-where they appear in your model.
-You can then use this model to
-carry out inference on Task A.
-If instead, you want to carry out
-a different task, say Task B,
-you simply take the LoRA matrices you
-trained for this task, calculate their product,
-and then add this matrix to
-the original weights and update the model again.
-The memory required to store
-these LoRA matrices is very small.
-So in principle, you can use
-LoRA to train for many tasks.
-Switch out the weights when you need to use them,
-and avoid having to store
-multiple full-size versions of the LLM. 
+Advantages:
+
+- Because LoRA allows you to significantly reduce the number of trainable parameters, you can often perform this method of parameter efficient fine tuning with a single GPU and avoid the need for a distributed cluster of GPUs.
+
+- Since the rank-decomposition matrices are small, you can fine-tune a different set for each task and then switch them out at inference time by updating the weights.
+
+<!--
+
+Suppose you train a pair of LoRA matrices for a specific task; let's call it Task A.
+
+To carry out inference on this task, you would multiply these matrices together and then add the resulting matrix to the original frozen weights.
+
+You then take this new summed weights matrix and replace the original weights where they appear in your model.
+
+You can then use this model to carry out inference on Task A. If instead, you want to carry out a different task, say Task B, you simply take the LoRA matrices you trained for this task, calculate their product,
+and then add this matrix to the original weights and update the model again. 
+
+The memory required to store these LoRA matrices is very small. 
+
+So in principle, you can use LoRA to train for many tasks. Switch out the weights when you need to use them, and avoid having to store multiple full-size versions of the LLM. 
 
  - two new matrices much lower dimensions, new weights for tokens, replace original weights
  - how to choose the rank for the matrices? original paper found plateu at 16
  - 4-32 good trade-off
  - decomposes weights into two smaller rank matrices and trains those instead of the full model
  - QLoRA (ideia: combined it with quantization techniques)
+-->
 
 
-
-__Soft Prompts or Prompt Tuning__:
+#### __Soft Prompts or Prompt Tuning__
  - improve without changing the weights
  - With prompt tuning, you add additional trainable tokens to your prompt and leave it up to the supervised learning process to determine their optimal values. 
  - The set of trainable tokens is called a soft prompt, and it gets prepended to embedding vectors that represent your input text. The soft prompt vectors have the same length as the embedding vectors of the language tokens. And including somewhere between 20 and 100 virtual tokens can be sufficient for good performance
 
-- __[LoRA Low-Rank Adaptation of Large Language Models]()__
+- __[LoRA Low-Rank Adaptation of Large Language Models](https://arxiv.org/pdf/2106.09685.pdf)__
 - __[QLoRA: Efficient Finetuning of Quantized LLMs]()__
 - __[The Power of Scale for Parameter-Efficient Prompt Tuning]()__
+- __[Scaling Down to Scale Up: A Guide to Parameter-Efficient Fine-Tuning](https://vladlialin.com/publications/peft-survey)__
 
 
 <br>
@@ -671,7 +643,6 @@ The result is a model generated preference dataset that you can use to train a r
     3.3 - Evaluate the Model Quantitatively
     3.4 - Evaluate the Model Qualitatively
 
-
 ## Large Language Models-powered Applications
 
 
@@ -747,7 +718,6 @@ In practice, distillation is not as effective for generative decoder models. It'
 ## LLM application architectures
 
 LLM is only one part of the history...
-
 
 ### Issues with LLM
 
