@@ -216,13 +216,11 @@ Instruction fine-tuning/fine-tuning trains the whole model parameters using exam
 
 - Often just 500-1,000 examples can result in good performance, however, this process may lead to a phenomenon called __catastrophic forgetting__
 
-- Catastrophic forgetting happens because the full fine-tuning process modifies the weights of the original LLM
+- Happens because the full fine-tuning process modifies the weights of the original LLM
 
 - Leads to great performance on the single fine-tuning task, it can degrade performance on other tasks
 
-
 ### __Multi-Task Fine-Tuning__
-
 
 		
 	Summarize the following text
@@ -240,21 +238,22 @@ Instruction fine-tuning/fine-tuning trains the whole model parameters using exam
 	[n.EXAMPLE COMPLETION]
 	
 
+- Requires lot of data, one may need as many as 50-100,000 examples
 
-- FLAN-T5
-- FLAN-PALM
+- Fine-tuned Language Net
 
-https://arxiv.org/abs/2210.11416
+	- FLAN-T5 - fine-tune version of pre-trained T5 model
+	- Paper: [Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
 
 
-### Model Evaluation
+## __Model Evaluation__
 
 - ROUGE-n ngrams bla bla
 - ROUGE-L longest common subsequence between generatedoutput and reference
 
 - BLEU metric - avg(precision across range of n-gram sizes)
 
-- BLEU focues on precision in. matching genearted output to the refernec text
+- BLEU focuses on precision in. matching generated output to the reference text
 
 
 ### Benchmarks
