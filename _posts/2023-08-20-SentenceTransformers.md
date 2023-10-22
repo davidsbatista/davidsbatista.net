@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Sentence Transformers
-date: 2023-08-20 00:00:00
+date: 2023-10-22 00:00:00
 tags: sentence-transformers BERT triplet-loss embeddings fine-tuning RoBERTa
 categories: [blog]
 comments: true
-disqus_identifier: 20230820
-preview_pic: /assets/images/2023-08-20-sentence-transformer-fine-tunning.png
+disqus_identifier: 20231022
+preview_pic: /assets/images/2023-10-22-sentence-transformer-fine-tunning.png
 ---
 
 The `sentence-transformers` proposed in __[Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks](https://aclanthology.org/D19-1410.pdf)__ is an effective and efficient way to train a neural network such that it represents good embeddings for a sentence or paragraph based on the Transformer architecture. In this post I review mechanism to train such embeddings presented in the paper.
@@ -27,7 +27,7 @@ To overcame this issue, and still use the contextual word embeddings representat
 The main architectural components of this approach is a __Siamese Neural Network__, a neural network containing two or more identical sub-networks, whose weights are updated equally across both sub-networks.
 
 <figure>
-  <img style="width: 40%; height: 40%" src="/assets/images/2023-08-20-sentence-transformer-fine-tunning.png">
+  <img style="width: 40%; height: 40%" src="/assets/images/2023-10-22-sentence-transformer-fine-tunning.png">
   <figcaption>Figure 1 - The architecture to fine-tune sentence-transformers.</figcaption>
 </figure>
 
@@ -102,7 +102,7 @@ __Configuration parameters__
 The authors evaluated their approach on several datasets common Semantic Textual Similarity (STS) tasks, using the cosine-similarity to compare the similarity between two sentence embeddings, in opposition to learning a regression function that maps two sentence embeddings to a similarity score. They also experimented with __[Manhatten](https://en.wikipedia.org/wiki/Taxicab_geometry)__ and negative __[Euclidean distances](https://en.wikipedia.org/wiki/Euclidean_distance)__ as similarity measures, but the results remained roughly the same.
 
 <figure>
-  <img style="width: 35%; height: 40%" src="/assets/images/2023-08-20-sentence-transformer-inference.png">
+  <img style="width: 35%; height: 40%" src="/assets/images/2023-10-22-sentence-transformer-inference.png">
   <figcaption>Figure 2 - sentence-transformers in inference mode.</figcaption>
 </figure>
 
@@ -114,7 +114,7 @@ To recapitulate BERT and RoBERTa are fine-tuned using the training described abo
 
 
 <figure>
-  <img style="width: 75%; height: 50%" src="/assets/images/2023-08-20-sentence-transformer-results-STS.png">
+  <img style="width: 75%; height: 50%" src="/assets/images/2023-10-22-sentence-transformer-results-STS.png">
   <figcaption>Figure 3 - Results from the experimental evaluation. </figcaption>
 </figure>
 
@@ -127,7 +127,7 @@ The study explored different methods to concatenate the sentence embeddings for 
 According to the authors the most important component is the element-wise difference $$ \vert u − v \vert $$ which measures the distance between the dimensions of the two sentence embeddings, ensuring that similar pairs are closer and dissimilar pairs are further apart.
 
 <figure>
-  <img style="width: 35%; height: 50%" src="/assets/images/2023-08-20-sentence-ablation-study.png">
+  <img style="width: 35%; height: 50%" src="/assets/images/2023-10-22-sentence-ablation-study.png">
   <figcaption>Figure 8 - Results from the ablations study.</figcaption>
 </figure>
 
@@ -145,26 +145,3 @@ One of the authors of the paper [Nils Reimers](https://www.nils-reimers.de/) has
 ### __References__
 
 - __[Triplet Loss and Online Triplet Mining in TensorFlow from Olivier Moindrot blog](https://omoindrot.github.io/triplet-loss#why-not-just-use-softmax)__
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
