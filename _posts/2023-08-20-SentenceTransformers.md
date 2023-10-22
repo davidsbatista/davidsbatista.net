@@ -46,7 +46,7 @@ __Classification__:
 
 $$o = \text{softmax}(Wt(u, v, |u − v|))$$
    		
-concatenating the sentence embeddings $$u$$ and $$v$$ with the element-wise difference $$ \|u − v\| $$ and multiply it with the trainable weight $$ W_t \in R^{3n×k} $$.
+concatenating the sentence embeddings $$u$$ and $$v$$ with the element-wise difference $$ \vert u − v \vert $$ and multiply it with the trainable weight $$ W_t \in R^{3n×k} $$.
 
 
 __Regression__:
@@ -88,7 +88,7 @@ and if the two sentences are dissimilar:
 
 $$|| f(x_1) - (f(x_2) ||^2 \text{ is large}$$
 
-where $$f()$$ is 
+where $$f(x)$$ is embedding of $$x$$.
 
 __Configuration parameters__
 - batch-size: 16, 
@@ -122,29 +122,49 @@ The authors also carry other experiments with a few other datasets, but I will r
 
 ### __Ablation Study__
 
-We evaluated different pooling strategies (MEAN, MAX, and CLS). For the classification objective function, we evaluate different concatenation methods. For each possible configuration, we train SBERT with 10 different random seeds and average the performances.
+The study explored different methods to concatenate the sentence embeddings for training the softmax classifier in the process of fine-tuning a BERT/RoBERTa transformer model. 
 
-At inference, when predicting similarities for the STS benchmark dataset, only the sentence embeddings u and v are used in combi- nation with cosine-similarity.
+According to the authors the most important component is the element-wise difference $$ \vert u − v \vert $$ which measures the distance between the dimensions of the two sentence embeddings, ensuring that similar pairs are closer and dissimilar pairs are further apart.
 
 <figure>
   <img style="width: 35%; height: 50%" src="/assets/images/2023-08-20-sentence-ablation-study.png">
-  <figcaption>Figure 8 - </figcaption>
+  <figcaption>Figure 8 - Results from the ablations study.</figcaption>
 </figure>
 
-### __Conclusions__
 
-Training State-of-the-Art Sentence Embedding Models: https://www.youtube.com/watch?v=RHXZKUr8qOY
+### __Implementation and others__
 
-<!--
-We showed that BERT out-of-the-box maps sentences to a vector space that is rather unsuitable to be used with common similarity measures like cosine-similarity. The performance for seven STS tasks was below the performance of average GloVe embeddings.
+The `sentence-transformers` package gain popularity in the NLP community and can be used for multiple tasks as semantic text similarity, semantic search, retrieve and re-rank, clustering and others, see the official webpage [SBERT](https://www.sbert.net/examples/applications/clustering/README.html) for several tutorials and API documentation
 
-To overcome this shortcoming, we presented Sentence-BERT (SBERT). SBERT fine-tunes BERT in a siamese / triplet network architecture. We evaluated the quality on various com- mon benchmarks, where it could achieve a significant improvement over state-of-the-art sen- tence embeddings methods. Replacing BERT with RoBERTa did not yield a significant improvement in our experiments.
-SBERT is computationally efficient. 
+One of the authors of the paper [Nils Reimers](https://www.nils-reimers.de/) has made several talks on ideas and approaches levering on sentence-transformers, here are two I've found interesting:
 
-SBERT can be used for tasks which are computationally not feasible to be modeled with BERT. For exam- ple, clustering of 10,000 sentences with hierarchical clustering requires with BERT about 65 hours, as around 50 Million sentence combinations must be computed. With SBERT, we were able to re- duce the effort to about 5 seconds.
--->
+- __[Training State-of-the-Art Sentence Embedding Models](https://www.youtube.com/watch?v=RHXZKUr8qOY)__
+- __[Introduction to Dense Text Representations](https://www.youtube.com/watch?v=qmN1fJ7Fdmo&list=PL7kaex1gKh6BDLHEwEeO45wZRDm5QlRil&index=1)__
 
 
 ### __References__
 
 - __[Triplet Loss and Online Triplet Mining in TensorFlow from Olivier Moindrot blog](https://omoindrot.github.io/triplet-loss#why-not-just-use-softmax)__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
