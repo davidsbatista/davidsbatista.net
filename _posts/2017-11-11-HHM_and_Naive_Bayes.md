@@ -30,15 +30,15 @@ A classical example in NLP is part-of-speech tagging, in this scenario, each $$x
 
 Another example is named-entity recognition, in which, again, each $$x_{i}$$ describes a word and $$y_{i}$$ is a semantic label associated with that word (e.g.: _person_, _location_, _organization_, _event_, etc.).
 
-In both examples __the data consist of sequences of $(x, y)$ pairs__, and we want to model our learning problem based on that sequence:
+In both examples the data consist of sequences of $$(x, y)$$ pairs, and we want to model our learning problem based on that sequence:
 
 $$p(y_1, y_2, \dots, y_m \mid x_1, x_2, \dots, x_m)$$
 
-in most problems, these sequences can have a sequential correlation. That is, nearby $x$ and $y$ values are likely to be related to each other. For instance, in English, it's common after the word _to_ the have a word whose part-of-speech tag is a _verb_.
+in most problems, these sequences can have a sequential correlation. That is, nearby $$x$$ and $$y$$ values are likely to be related to each other. For instance, in English, it's common after the word _to_ the have a word whose part-of-speech tag is a _verb_.
 
 Note that there are other machine learning problems which also involve sequences but are clearly different. For instance, there is also a sequence in time series, but we want to predict a value $$y$$ at point $$t+1$$, and we can use all the previous true observed $$y$$ to predict. In sequential supervised learning we must predict all $$y$$ values in the sequence.
 
-The Hidden Markov Model (HMM) was one of the first proposed algorithms to classify sequences. There are other sequence models, but I will start by explaining the HMMM as a sequential extension to the Naive Bayes model.
+The Hidden Markov Model (HMM) was one of the first proposed algorithms to classify sequences. There are other sequence models, but I will start by explaining the HMM as a sequential extension to the Naive Bayes model.
 
 ## __Naive Bayes classifier__
 
