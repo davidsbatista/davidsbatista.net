@@ -6,7 +6,7 @@ tags: coursera mlops production deployment monitoring
 categories: [blog]
 comments: true
 disqus_identifier: 20230627
-preview_pic: /assets/images/2023-07-11-Machine_Learning_in_Production.jpg
+preview_pic: /assets/images/2023-07-11-Machine_Learning_in_Production_skew.png
 ---
 
 I enrolled and successfully completed the [Machine Learning Engineering for Production - Specialisation](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops) from Coursera. This blog post aims to give a review of the course and the topics discussed, it's mostly based on the notes I took during the video lectures. The course covers a wide range of topics and it can feel overwhelming, which is another reason for me to write these review notes.

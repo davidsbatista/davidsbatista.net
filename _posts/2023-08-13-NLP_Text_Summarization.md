@@ -6,7 +6,7 @@ tags: text-summarisation transformers
 categories: [blog]
 comments: true
 disqus_identifier: 20230813
-preview_pic: /assets/images/2023-08-13-NLP_Text_Summarisation.jpg
+preview_pic: /assets/images/2023-08-13-MatchSum.png
 ---
 
 Text summarisation resumes the information contained in a text, into a shorter version, still capturing the original semantics. This can be achieved by selecting representative words or phrases from the original text and combining them to make a summary (extractive), or by writing a summary as a human would do, by generating a textual summary of the main content in the original text (abstractive). This post quickly reviews some of the recent works on NLP Text summarisation using both approaches.
