@@ -351,23 +351,14 @@ As with the LoRA method, one can also train soft prompts for different tasks and
 - Discuss the challenges that LLMs face with knowledge cut-offs, and explain how information retrieval and augmentation techniques can overcome these challenges
 -->
 
-### Reinforcement Learning From Human Feedback (RLHF)
+The goal of Reinforcement Learning From Human Feedback (RLHF) is to align the model with human values using a type of machine learning where an agen learns to make decisions related to a specific goal by taking actions in an environment with the objective of maximising the reward received for actions taken, i.e.: Reinforcement Learning.
 
-- align the model with human values
-
-- Reinforcement Learning
-	- type of machine learning where an agent learns to make decisions
-	related to a specific goal by taking actions in an envorinment with
-	the objective of maximizing the reward received for actions taken
-	- Agent
-	- Environment
 
 ### the case of fine-tuning large language models with RLHF.
 
 - the agent's policy that guides the actions is the LLM,
 
 - its objective is to generate text that is perceived as being aligned with the human preferences, i.e.: helpful, accurate, and non-toxic.
-
 
 - environment is the context window of the model, the space in which text can be entered via a prompt.
 
@@ -644,10 +635,6 @@ In practice, distillation is not as effective for generative decoder models. It'
 	- prompt templates
 	- memory
 	- agents: PAL, ReAct
-
-## LLM application architectures
-
-LLM is only one part of the history...
 
 ### Issues with LLM
 
