@@ -347,8 +347,8 @@ $$ A \times B = W $$
 By updating the weights of these new low-rank matrices instead of the original weights, we train 4,608 parameters instead of 32,768 resulting in a 86% reduction of parameters to train.
 
 <figure>
-  <img style="width: 65%; height: 35%" src="/assets/images/2023-09-15-PEFT-LoRA-multi-task.png">
-  <figcaption>Figure 1 - </figcaption>
+  <img style="width: 60%; height: 35%" src="/assets/images/2023-09-15-PEFT-LoRA-multi-task.png">
+  <figcaption>Figure 5 - </figcaption>
 </figure>
 
 Advantages:
@@ -357,31 +357,32 @@ Advantages:
 
 - The rank-decomposition matrices are small, can be fine-tune a different set for each task and then switch them out at inference time by updating the weights.
 
+<br>
+
 ### __Soft Prompts or Prompt Tuning__
 
-<figure>
-  <img style="width: 75%; height: 35%" src="/assets/images/2023-09-15-PEFT-Soft-Prompt-Tunning.png">
-  <figcaption>Figure 1 - </figcaption>
-</figure>
-
- - Add additional trainable tokens to your prompt and leave it up to the supervised learning process to determine their optimal values. The set of trainable tokens is called a __soft prompt__, and it gets prepended to embedding vectors that represent the input text. 
- - The soft prompt vectors have the same length as input embedding vectors, and usually somewhere between 20 and 100 virtual tokens can be sufficient for good performance.
+This technique adds additional trainable tokens to your prompt and leave it up to the supervised learning process to determine their optimal values. The set of trainable tokens is called a __soft prompt__, and it gets prepended to embedding vectors that represent the input text.
 
 <figure>
-  <img style="width: 45%; height: 35%" src="/assets/images/2023-09-15-PEFT-Prompt-Tunning.png">
-  <figcaption>Figure 1 - </figcaption>
+  <img style="width: 65%; height: 35%" src="/assets/images/2023-09-15-PEFT-Soft-Prompt-Tunning.png">
+  <figcaption>Figure 6 - </figcaption>
 </figure>
 
- - The trainable tokens and the input flow normally through the model, which is going to generate a prediction which is used to calculate a loss. 
- - The loss is back-propagated through the model to create gradients, but the original model weights are frozen and only the the virtual tokens embeddings are updated such that the model learns embeddings for those virtual tokens.
+The soft prompt vectors have the same length as input embedding vectors, and usually somewhere between 20 and 100 virtual tokens can be sufficient for good performance.
 
 <figure>
-  <img style="width: 65%; height: 45%" src="/assets/images/2023-09-15-PEFT-Prompt-Tunning-multi-task.png">
-  <figcaption>Figure 1 - </figcaption>
+  <img style="width: 35%; height: 35%" src="/assets/images/2023-09-15-PEFT-Prompt-Tunning.png">
+  <figcaption>Figure 7 - </figcaption>
 </figure>
 
-- One can train soft prompts for different tasks and store them, which take much less resources.
-- At inference time one can switch them to change the LLMs task.
+The trainable tokens and the input flow normally through the model, which is going to generate a prediction which is used to calculate a loss. The loss is back-propagated through the model to create gradients, but the original model weights are frozen and only the the virtual tokens embeddings are updated such that the model learns embeddings for those virtual tokens.
+
+<figure>
+  <img style="width: 60%; height: 45%" src="/assets/images/2023-09-15-PEFT-Prompt-Tunning-multi-task.png">
+  <figcaption>Figure 8 - </figcaption>
+</figure>
+
+As with the LoRA method, one can also train soft prompts for different tasks and store them, which take much less resources, an then at inference time switch them to change the LLMs task.
 
 ### __References__
 
