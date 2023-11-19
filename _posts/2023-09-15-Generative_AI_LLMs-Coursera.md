@@ -74,7 +74,7 @@ Then it's first introduced in the course the Generative AI project lifecycle whi
 ### __Inference Parameters__
 
 <figure>
-  <img style="width: 85%; height: 85%" src="/assets/images/2023-09-15-Generative_configuration_-_inference_parameters.png">
+  <img style="width: 60%; height: 85%" src="/assets/images/2023-09-15-Generative_configuration_-_inference_parameters.png">
   <figcaption>Figure 2 - Parameters affecting how the model selects the next token to generate.</figcaption>
 </figure>
 
@@ -85,80 +85,23 @@ Then it's first introduced in the course the Generative AI project lifecycle whi
 - __top-k__: select an output from the top-k results after applying random-weighted strategy using the probabilities
 
 <figure>
-  <img style="width: 45%; height: 25%" src="/assets/images/2023-09-15-top-k.png">
+  <img style="width: 40%; height: 25%" src="/assets/images/2023-09-15-top-k.png">
   <figcaption>Figure 3 - top-k, with k=3</figcaption>
 </figure>
 
 - __top-p__: select an output using the random-weighted strategy with the top-ranked consecutive results by probability and with a cumulative probability <= p
 
 <figure>
-  <img style="width: 45%; height: 25%" src="/assets/images/2023-09-15-top-p.png">
+  <img style="width: 40%; height: 25%" src="/assets/images/2023-09-15-top-p.png">
   <figcaption>Figure 4 - top-p, with p=30.</figcaption>
 </figure>
 
-
-
-- temperature: 
-	higher temperature higher randomness, affects softmax directly and how probability is computed
-	temperature >1
-	temperature <1
-	temperature = 1 softmax function at default, unaltered prob distribution
+A higher __temperature__ results in higher randomness and affects softmax directly and how probability is computed, the __temperature__ = 1 is the softmax function at default, meaning an unaltered probability distribution.
 
 
 - see the __[transformers.GenerationConfig](https://huggingface.co/docs/transformers/v4.29.1/en/main_classes/text_generation#transformers.GenerationConfig)__ class for the complete details
 
-The lab exercise consists of a dialogue summarisation task using the T5 model from Huggingface and the XXX dataset by exploring how in-context learning and inference parameters affects the output of the model.
-
-## __Large Language Models pre-training and Scaling Laws__
-
-- models are trained on vast amounts of text data
-	- pre-training
-	- computational challenges
-	- quantisation is always necessary then training
-- scaling laws for LLMs and 
-	- used to design compute optimal models
-
-
-
-LLM pre-training and scaling laws
-
-architectures:
-
-- encoder only
-- encoder-decoder
-- decoder only
-
-training models:
-
-- Computational challenges of training LLMs
-- memory requirements
-- techniques to reduce memory requirement
-- to train you need around 20x more the size of the model in number of parameters
-- Efficient multi-GPU compute strategies
-
-Scaling laws and compute-optimal models:
-
-- compute budget
-- dataset size
-- model size
-
-- optimal parameters and tokens
-	
-
-Pre-training for domain adaptation
-
-- BloombergGPT
-- BloombergGPT: A Large Language Model for Finance
-- https://arxiv.org/abs/2303.17564
-
-
-learning memory optimisations and parallel computing for efficient LLms training
-
-<br>
-
----
-
-<br>
+The lab exercise consists of a dialogue summarisation task using the T5 model from Huggingface by exploring how in-context learning and inference parameters affects the output of the model.
 
 ## __Week 2: Fine-Tuning__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W2.pdf))
 
@@ -396,10 +339,6 @@ As with the LoRA method, one can also train soft prompts for different tasks and
 ---
 
 <br>
-
-
-
-
 
 
 ## __Week 3: Reinforcement Learning From Human Feedback__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W3.pdf))
