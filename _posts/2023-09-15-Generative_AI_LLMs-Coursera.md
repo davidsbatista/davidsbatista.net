@@ -6,10 +6,10 @@ tags: llms coursera generative-ai
 categories: [blog]
 comments: true
 disqus_identifier: 20230915
-preview_pic: /assets/images/2023-09-15-LLMs.jpeg
+preview_pic: /assets/images/2023-09-15-PEFT-Prompt-Tunning.png
 ---
 
-I'm happy to have completed the __[course](https://www.coursera.org/learn/generative-ai-with-llms)__ and recommend it to anyone interested in delving into some of the intricacies of Transformer architecture and Large Language Models. The course covered a wide range of topics, from the Transformer architecture into fine-tuning LLMs and exploring chain-of-thought prompting augmentation techniques to overcome knowledge limitations. This post contains my personal notes taken during the course.
+I've completed the __[course](https://www.coursera.org/learn/generative-ai-with-llms)__ and recommend it to anyone interested in delving into some of the intricacies of Transformer architecture and Large Language Models. The course covered a wide range of topics, starting with a quick introduction to the Transformer architecture and dwelling into fine-tuning LLMs and also exploring chain-of-thought prompting augmentation techniques to overcome knowledge limitations. This post contains my  notes taken during the course and concepts learned.
 
 ---
 
@@ -261,96 +261,90 @@ Instruction fine-tuning/fine-tuning trains the whole model parameters using exam
 
 ## __Parameter Efficient Fine-Tuning__
 
-During a full-fine tuning of LLMs every model weight is updated during supervised learning, this operation has memory requirements which can be 12-20x the model's memory: gradients, forward activations, temporary memory for training process. 
+During a full-fine tuning of LLMs every model weight is updated during supervised learning, this operation has memory requirements which can be 12-20x the model's memory: 
+
+- gradients, forward activations, temporary memory for training process. 
 
 There are Parameter Efficient Fine-Tuning (PEFT) techniques to train LLMs for specific tasks which don't require to train ever weight in the model:
 
   - only a small number of trainable layers
   - LLM with additional layers, new trainable layers
-  - can often be performed on a single GPU
-  - less prone to catastrophic forgetting
-  - these weights are trained for each task and can be easily swapped out for inference
 
-<figure>
-  <img style="width: 25%; height: 25%" src="/assets/images/2023-09-15-PEFT-small-number-of-layers.png">
-  <figcaption>Figure 1 - .</figcaption>
-</figure>
+### __Low-Rank Adaptation for Large Language Models (LoRA)__
 
+LoRA reduces fine-tuning parameters by freezing the original model's weights and injecting smaller rank decomposition matrices that match the dimensions of the weights they modify.
 
-<figure>
-  <img style="width: 25%; height: 25%" src="/assets/images/2023-09-15-PEFT-news-layers.png">
-  <figcaption>Figure 1 - .</figcaption>
-</figure>
+During training, the original weights remain static while the two low-rank matrices are updated. For inference, multiplying the two low-rank matrices generates a matrix matching the frozen weights' dimensions, which then is added to the original weights in the model.
 
-
-Main classes of PEFT methods:
-
- - __Selective__: fine-tune only a subset of the original LLM parameters (not covered in the course)
- - __Reparameterization__: reduce the number of parameters to train by creating new low rank transformations of the original network weights
- - __Additive__: keep all of the original LLM weights frozen and introduce new trainable components:
-    - __Adapters__: add new trainable layers to the architecture of the model, typically inside the encoder or decoder components after the attention or feed-forward layers
-	- __Soft prompts__: 
-		- keep the model architecture fixed and frozen, and focus on manipulating the input to achieve better performance
-		- add trainable parameters to the prompt embeddings or keep the input fixed and retraining the embedding weights
-
-### __PEFT techniques__ 
-
-#### __Low-Rank Adaptation for Large Language Models (LoRA)__
-
-LoRA reduces the number of parameters to be trained during fine-tuning by freezing all of the original model parameters and then injecting a pair of rank decomposition matrices alongside the original weights. The dimensions of the smaller matrices are set so that their product is a matrix with the same dimensions as the weights they're modifying. 
-
-During training the original weights are frozen and only the smaller matrices are updated. For inference the two low-rank matrices are multiplied together to create a matrix with the same dimensions as the frozen weights, and added to the original weights, replacing them in the model with these updated values.
-
-You can then use this model to carry out inference on Task A. If instead, you want to carry out a different task, say Task B, you simply take the LoRA matrices you trained for this task, calculate their product, and then add this matrix to the original weights and update the model again. So in principle, you can use LoRA to train for many tasks. Switch out the weights when you need to use them, and avoid having to store multiple full-size versions of the LLM. 
+LoRA allows using a single model for different tasks by switching out matrices trained for specific tasks. It avoids storing multiple large versions of the model by employing smaller matrices that can be added to and replace the original weights as needed for various tasks.
 
 Researchers have found that applying LoRA only to the self-attention layers of the model is often enough to fine-tune for a task and achieve performance gains.
 
 The Transformer architecture described in the __[Attention is All You Need](https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf)__ paper, specifies that the transformer weights have dimensions of 512 x 64, meaning each weight matrix has 32,768 trainable parameters.
 
-$$
-W=
-\begin{bmatrix}
-    \ddots & & & & \\
-    & \ddots & & & \\
-    & & \ddots & & \\
-    & & & \ddots & \\
-	& & &  & \ddots\\
-\end{bmatrix}
-_{512 \times 64 = 32,768 \text{ parameters}}
-$$
+<div style="display: flex; flex-direction: row;">
+    <div style="flex: 1;">
+        \[
+        W=
+        \begin{bmatrix}
+            \ddots & & & & \\
+            & \ddots & & & \\
+            & & \ddots & & \\
+            & & & \ddots & \\
+            & & & & \ddots\\
+        \end{bmatrix}
+        \]
+    </div>
+	<div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+        <div style="text-align: center;">
+            Dimensions
+            \[
+            512 \times 64 = 32,768 \text{ parameters}
+            \]
+        </div>
+    </div>
+</div>
 
-Applying LoRA as a fine-tuning method with the $$rank = 8$$, we train two small rank decomposition matrices whose small dimension is 8:
+
+Applying LoRA as a fine-tuning method with the $$rank = 8$$, we train two small rank decomposition matrices A and B, whose small dimension is 8:
 
 
-$$
-A=
-\begin{bmatrix}
-    \ddots & & \\
-    & & & \\
-    & \ddots & \\
-    & & \ddots \\
-	& & & \\
-\end{bmatrix}
-_{512 \times 8 = 4,096 \text{ parameters}}
-$$
+<div style="display: flex; flex-direction: row;">
+    <div style="flex: 1;">
+        \[
+        A=
+        \begin{bmatrix}
+            \ddots & & \\
+            & & & \\
+            & \ddots & \\
+            & & \ddots \\
+            & & & \\
+        \end{bmatrix}
+        \]
+    </div>
+    <div style="flex: 1;">
+        \[
+        B=
+        \begin{bmatrix}
+            \ddots & & \\
+            & \ddots & \\
+        \end{bmatrix}
 
-$$
-B=
-\begin{bmatrix}
-    \ddots & & \\
-    & \ddots & \\
-\end{bmatrix}
-_{8 \times 64 = 512 \text{ parameters}}
-$$
+        \]
+    </div>
+</div>
+
+
+$$ {512 \times 8 = 4,096 \text{ parameters}}$$
+
+
+$$ {8 \times 64 = 512 \text{ parameters}}$$
 
 
 $$ A \times B = W $$
 
 
-- Matrix A will have dimensions of 8 x 64 =  512 total parameters. 
-- Matrix B will have dimensions of 512 x 8 = 4,096 trainable parameters.
-
-By updating the weights of these new low-rank matrices instead of the original weights, you'll be training 4,608 parameters instead of 32,768 and 86% reduction.
+By updating the weights of these new low-rank matrices instead of the original weights, we train 4,608 parameters instead of 32,768 resulting in a 86% reduction of parameters to train.
 
 <figure>
   <img style="width: 65%; height: 35%" src="/assets/images/2023-09-15-PEFT-LoRA-multi-task.png">
@@ -359,11 +353,11 @@ By updating the weights of these new low-rank matrices instead of the original w
 
 Advantages:
 
-- Because LoRA allows you to significantly reduce the number of trainable parameters, you can often perform this method of parameter efficient fine tuning with a single GPU and avoid the need for a distributed cluster of GPUs.
+- LoRA allows you to significantly reduce the number of trainable parameters, allowing this method of fine tuning to be performed in a single GPU.
 
-- Since the rank-decomposition matrices are small, you can fine-tune a different set for each task and then switch them out at inference time by updating the weights.
+- The rank-decomposition matrices are small, can be fine-tune a different set for each task and then switch them out at inference time by updating the weights.
 
-#### __Soft Prompts or Prompt Tuning__
+### __Soft Prompts or Prompt Tuning__
 
 <figure>
   <img style="width: 75%; height: 35%" src="/assets/images/2023-09-15-PEFT-Soft-Prompt-Tunning.png">
