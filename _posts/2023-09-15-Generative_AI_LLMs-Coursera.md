@@ -351,7 +351,14 @@ As with the LoRA method, one can also train soft prompts for different tasks and
 - Discuss the challenges that LLMs face with knowledge cut-offs, and explain how information retrieval and augmentation techniques can overcome these challenges
 -->
 
-The goal of Reinforcement Learning From Human Feedback (RLHF) is to align the model with human values using a type of machine learning where an agen learns to make decisions related to a specific goal by taking actions in an environment with the objective of maximising the reward received for actions taken, i.e.: Reinforcement Learning.
+The goal of Reinforcement Learning From Human Feedback (RLHF) is to align the model with human values. This is done using a type of machine learning where an agent learns to make decisions related to a specific goal by taking actions in an environment, with the objective of maximising the reward received for actions taken, i.e.: __Reinforcement Learning__
+
+
+<figure>
+  <img style="width: 85%; height: 85%" src="/assets/images/2023-09-15-RLHF-overview.png">
+  <figcaption>Figure X - </figcaption>
+</figure>
+
 
 
 ## Fine-Tuning Large Language Models with RLHF
