@@ -351,11 +351,9 @@ As with the LoRA method, one can also train soft prompts for different tasks and
 - Discuss the challenges that LLMs face with knowledge cut-offs, and explain how information retrieval and augmentation techniques can overcome these challenges
 -->
 
-The goal of Reinforcement Learning From Human Feedback (RLHF) is to align the model with human values. 
+The goal of Reinforcement Learning From Human Feedback (RLHF) is to align the model with human values.  This is accomplished using a type of machine learning where an agent learns to make decisions related to a specific goal by taking actions in an environment, with the objective of maximising the reward received for actions taken, i.e.: __Reinforcement Learning__; this is yet another method to fine-tune Large Language Models.
 
-This is done using a type of machine learning where an agent learns to make decisions related to a specific goal by taking actions in an environment, with the objective of maximising the reward received for actions taken, i.e.: __Reinforcement Learning__
-
-## Fine-Tuning Large Language Models with RLHF
+## __Fine-Tuning with RLHF__
 
 <figure>
   <img style="width: 75%; height: 85%" src="/assets/images/2023-09-15-RLHF-overview.png">
@@ -367,49 +365,38 @@ This is done using a type of machine learning where an agent learns to make deci
 
 - __Goal__:
 
-- __Actions__:
+- __Actions__: the act of generating text, this could be a single word, a sentence, or a longer form text, depending on the task specified by the user.
 
-- __Environment__:
+- __Environment__: the context window of the model, the space in which text can be entered via a prompt.
 
-- __Objective__:
+- __Objective__: to generate text that is perceived as being aligned with the human preferences, i.e.: helpful, accurate, and non-toxic.
 
-- __Reward__:
+- __Reward__: assigned based on how closely the completions align with human preferences.
 
-- its objective is to generate text that is perceived as being aligned with the human preferences, i.e.: helpful, accurate, and non-toxic.
-
-- environment is the context window of the model, the space in which text can be entered via a prompt.
+---
 
 - The state that the model considers before taking an action is the current context. That means any text currently contained in the context window.
-
-- The action here is the act of generating text. This could be a single word, a sentence, or a longer form text, depending on the task specified by the user.
 
 - The action space is the token vocabulary, meaning all the possible tokens that the model can choose from to generate the completion.
 
 - How an LLM decides to generate the next token in a sequence, depends on the statistical representation of language that it learned during its training. At any given moment, the action that the model will take, meaning which token it will choose next, depends on the prompt text in the context and the probability distribution over the vocabulary space.
 
-- The reward is assigned based on how closely the completions align with human preferences.
-
+---
 
 Given the variation in human responses to language, determining the reward is more complicated: One way you can do this is to have a human evaluate all of the completions of the model against some alignment metric, such as determining whether the generated text is toxic or non-toxic. This feedback can be represented as a scalar value, either a zero or a one. The LLM weights are then updated iteratively to maximize the reward obtained from the human classifier,
 enabling the model to generate non-toxic completions.
 
 However, obtaining human feedback can be time consuming and expensive.
 
-As a practical and scalable alternative, you can use an additional model,
-known as the reward model, to classify the outputs of the LLM and
-evaluate the degree of alignment with human preferences.
+As a practical and scalable alternative, you can use an additional model, known as the reward model, to classify the outputs of the LLM and evaluate the degree of alignment with human preferences.
 
-You'll start with a smaller number of human examples to train the secondary
-model by your traditional supervised learning methods.
-Once trained, you'll use the reward model to assess the output of the LLM and
-assign a reward value, which in turn gets used to update the weights off the LLM and
-train a new human aligned version.
-Exactly how the weights get updated as the model completions are assessed,
-depends on the algorithm used to optimize the policy. 
+You'll start with a smaller number of human examples to train the secondary model by your traditional supervised learning methods.
+Once trained, you'll use the reward model to assess the output of the LLM and assign a reward value, which in turn gets used to update the weights off the LLM and
+train a new human aligned version. Exactly how the weights get updated as the model completions are assessed, depends on the algorithm used to optimize the policy. 
 
-## reward model
+### Reward Model
 
-### collect data and training a reward model
+#### Collect Data and Training a Reward Model
 
 - select a model which has capability for the task you are interested
 - LLM + prompt dataset = produce a set of completions
@@ -580,6 +567,10 @@ we now use feedback generated by a model.
 This is sometimes referred to as reinforcement learning from AI feedback or RLAIF. Here you use the fine-tuned model from the previous step to generate a set of responses to your prompt. You then ask the model which of the responses is preferred according to the constitutional principles.
 
 The result is a model generated preference dataset that you can use to train a reward model. With this reward model, you can now fine-tune your model further using a reinforcement learning algorithm like PPO, as discussed earlier.
+
+
+
+
 
 ## Large Language Models-powered Applications
 
