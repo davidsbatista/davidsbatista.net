@@ -462,30 +462,6 @@ Proximal Policy Optimization (PPO) makes updates to the LLM. The updates are sma
 </figure>
 
 
-In PPO, the goal is to find an improved policy for an agent by iteratively updating its parameters based on the rewards received from interacting with the environment. However, updating the policy too aggressively can lead to unstable learning or drastic policy changes. To address this, PPO introduces a constraint that limits the extent of policy updates. This constraint is enforced by using KL-Divergence.
-
-To understand how KL-Divergence works, imagine we have two probability distributions: the distribution of the original LLM, and a new proposed distribution of an RL-updated LLM. KL-Divergence measures the average amount of information gained when we use the original policy to encode samples from the new proposed policy. By minimizing the KL-Divergence between the two distributions, PPO ensures that the updated policy stays close to the original policy, preventing drastic changes that may negatively impact the learning process.
-
-https://huggingface.co/blog/trl-peft
-
-KL-divergence.png
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Reward Hacking
 
 - As the policy tries to optimize the reward, it can diverge too much from the initial language model.
