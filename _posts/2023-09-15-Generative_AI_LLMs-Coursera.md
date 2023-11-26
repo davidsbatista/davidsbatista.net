@@ -462,26 +462,28 @@ Proximal Policy Optimization (PPO) makes updates to the LLM. The updates are sma
 </figure>
 
 
-### Reward Hacking
+### __Reward Hacking__
 
-- As the policy tries to optimize the reward, it can diverge too much from the initial language model.
- 
-- For example the model can start to generate completions that will lead to very low toxicity scores by including phrases like most awesome, most incredible, sounding very exaggerated.
+As the policy seeks to maximize rewards, it may result in the model generating exaggeratedly positive language or nonsensical text to achieve low toxicity scores. Such outputs (e.g.: most awesome, most incredible) are not particularly useful.
 
-- The model could also start generating nonsensical, grammatically incorrect text that just happens to maximize the rewards in a similar way, outputs like this are definitely not very useful. To prevent our board hacking from happening, you can use the initial instruct LLM as performance reference. Let's call it the reference model. The weights of the reference model are frozen and are not updated during iterations of RHF. This way, you always maintain a single reference model to compare to. During training, each prompt is passed to both models, generating a completion by the reference LLM and the intermediate LLM updated model. At this point, you can compare the two completions and calculate a value called the Kullback-Leibler divergence, or KL divergence for short. KL divergence is a statistical measure of how different two probability distributions are. You can use it to compare the completions off the two models and determine how much the updated model has diverged from the reference. 
+To prevent board hacking, use the initial LLM as a benchmark, called the reference model. Its weights stay fixed during RLHF iterations. Each prompt is run through both models, generating responses. At this point, you can compare the two completions and calculate the Kullback-Leibler divergence and determine how much the updated model has diverged from the reference. 
 
 
-- KL divergence is calculated for each generate a token across the whole vocabulary off the LLM. This can easily be tens or hundreds of thousands of tokens. However, using a softmax function, you've reduced the number of probabilities to much less than the full vocabulary size. Keep in mind that this is still a relatively compute expensive process. You will almost always benefit from using GPUs. 
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-reward_model_hacking_1.png">
+  <figcaption>Figure X - Entropy Loss.</figcaption>
+</figure>
 
-- Once you've calculated the KL divergence between the two models, you added as a term to the reward calculation. This will penalize the RL updated model if it shifts too far from the reference LLM and generates completions that are two different.
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-reward_model_hacking_2.png">
+  <figcaption>Figure X - Entropy Loss.</figcaption>
+</figure>
 
-- Note that you now need to full copies of the LLM to calculate the KL divergence, the frozen reference LLM, and the oral updated PPO LLM.
 
-- By the way, you can benefit from combining our relationship with puffed. In this case, you only update the weights of a path adapter, not the full weights of the LLM. This means that you can reuse the same underlying LLM for both the reference model and the PPO model, which you update with a trained path parameters. This reduces the memory footprint during training by approximately half.
+KL divergence is computed for every token in the entire vocabulary of the LLM, which can reach tens or hundreds of thousands. After calculating the KL divergence between the models, it's added to the reward calculation as a penalty. This penalizes the RL updated model for deviating too much from the reference LLM and producing distinct completions.
 
-- Once you have completed your RHF alignment of the model, you will want to assess the model's performance. The number you'll use here is the toxicity score, this is the probability of the negative class, in this case, a toxic or hateful response averaged across the completions. If RHF has successfully reduce the toxicity of your LLM, this score should go down. First, you'll create a baseline toxicity score for the original instruct LLM by evaluating its completions off the summarization data set with a reward model that can assess toxic language.
+NOTE: you can benefit from combining our relationship with puffed. In this case, you only update the weights of a path adapter, not the full weights of the LLM. This means that you can reuse the same underlying LLM for both the reference model and the PPO model, which you update with a trained path parameters. This reduces the memory footprint during training by approximately half.
 
-- Then you'll evaluate your newly human aligned model on the same data set and compare the scores.
 
 ### Scaling Human Feedback
 
@@ -578,10 +580,6 @@ The result is a model generated preference dataset that you can use to train a r
 
 
 ---
-
-
----
-
 
 ## Large Language Models-powered Applications
 
