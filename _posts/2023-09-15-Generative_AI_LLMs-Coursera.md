@@ -396,8 +396,6 @@ Train a reward model to assess how well aligned is the LLM output with the human
 - LLM + prompt dataset = produce a set of completions
 - collect human feedback from the produced completions 
 
-
-
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-train-reward_1.png">
   <figcaption>Figure X - </figcaption>
@@ -409,55 +407,59 @@ Train a reward model to assess how well aligned is the LLM output with the human
 - use the model as a binary classifier
 - a reward model can be as well an LLM such as BERT for instance
 
-### RLHF: Fine-tuning with reinforcement learning
+### __Fine-Tuning With Reinforcement Learning__
+
+#### __Reward Model__
 
 <figure>
-  <img style="width: 85%; height: 85%" src="/assets/images/2023-09-15-train-reward_2.png">
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-train-reward_2.png">
+  <figcaption>Figure X - </figcaption>
+</figure>
+
+1 - pass prompt $$P$$ to an instruct LLM get the output $$X$$
+
+2 - pass the pair (P,X) to the reward model, and the get reward score
+
+3 - pass the reward value to the RL algorithm to updated the weight os the LLM
+
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-train-reward_3.png">
+  <figcaption>Figure X - </figcaption>
+</figure>
+
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-reward_model_RL.png">
   <figcaption>Figure X - </figcaption>
 </figure>
 
 
-<figure>
-  <img style="width: 85%; height: 85%" src="/assets/images/2023-09-15-train-reward_3.png">
-  <figcaption>Figure X - </figcaption>
-</figure>
-
-- using a reward model within the RLHF
-- remember one should start with an LLM that already has good performance on your task of interests
-
-1) pass prompt P to an instruct LLM get the output X
-
-2) pass the pair (P,X) to the reward model, and the get reward score
-
-3) passs the reward value to the RL algorithm to updarted the wieght os the LLM
-
-4) RL-updated LLM
-
-- this is repeat and the LLM should converge to a human-aligned LLM and the reward should improve after each iteration
+- this is repeated and the LLM should converge to a human-aligned LLM and the reward should improve after each iteration
 
 - stop when some defined threshold value for helpfulness is reached or this is repeated for a number n of steps
 
-### RL Algorithm
+#### __Reinforcement Learning Algorithm__
 
-- Proximal Policy Optimization (PPO)
+Proximal Policy Optimization (PPO) makes updates to the LLM. The updates are small and within a bounded region, resulting in an updated LLM that is close to the previous version. The loss of this algorithm is made up from 3 different losses. The whole detail of this algorithm is complex and out of scope of my notes.
 
-- PPO makes updates to the LLM. The updates are small and within a bounded region, resulting in an updated LLM that is close to the previous version, hence the name Proximal Policy Optimization. 
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-PPO-global_loss.png">
+  <figcaption>Figure X - PPO Loss.</figcaption>
+</figure>
 
-- You start PPO with your initial instruct LLM, then at a high level, each cycle of PPO goes over two phases:
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-PPO-value_loss.png">
+  <figcaption>Figure X - Value Loss.</figcaption>
+</figure>
 
-	- In Phase I, the LLM, is used to carry out a number of experiments, completing the given prompts.
-		
-		- These experiments allow you to update the LLM against the reward model in Phase II
-		- The reward model captures the human preferences, can define how helpful, harmless, and honest the responses are. 
-		- The expected reward of a completion is an important quantity used in the PPO objective.
-		- We estimate this quantity through a separate head of the LLM called the value function.
-		- Calculate value loss
-	
-	- In Phase II you make a small updates to the model and evaluate 	the impact of those updates on	your alignment goal for the model.
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-PPO-policy_loss_2.png">
+  <figcaption>Figure X - Policy Loss.</figcaption>
+</figure>
 
-        - The model weights updates are 	guided by the prompt completion,	losses, and rewards.
-		- PPO also ensures to keep the model updates within 	a certain small region called the trust region. 	This is where the proximal aspect of PPO comes into play. 	Ideally, this series of small updates 	will move the model towards higher rewards.
-
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-PPO-entropy_loss.png">
+  <figcaption>Figure X - Entropy Loss.</figcaption>
+</figure>
 
 
 In PPO, the goal is to find an improved policy for an agent by iteratively updating its parameters based on the rewards received from interacting with the environment. However, updating the policy too aggressively can lead to unstable learning or drastic policy changes. To address this, PPO introduces a constraint that limits the extent of policy updates. This constraint is enforced by using KL-Divergence.
@@ -467,6 +469,22 @@ To understand how KL-Divergence works, imagine we have two probability distribut
 https://huggingface.co/blog/trl-peft
 
 KL-divergence.png
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Reward Hacking
 
@@ -585,6 +603,8 @@ The result is a model generated preference dataset that you can use to train a r
 
 ---
 
+
+---
 
 
 ## Large Language Models-powered Applications
