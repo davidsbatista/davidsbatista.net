@@ -363,61 +363,74 @@ The goal of Reinforcement Learning From Human Feedback (RLHF) is to align the mo
 
 - __Policy__: the agent's policy that guides the actions is the LLM.
 
-- __Goal__:
+- __Environment__: the context window of the model, the space in which text can be entered via a prompt.
 
 - __Actions__: the act of generating text, this could be a single word, a sentence, or a longer form text, depending on the task specified by the user.
 
-- __Environment__: the context window of the model, the space in which text can be entered via a prompt.
+- __Action Space__: the token vocabulary, meaning all the possible tokens that the model can choose from to generate the completion.
+
+- __State__: the state that the model considers before taking an action is the current context, i.e.: any text currently contained in the context window.
 
 - __Objective__: to generate text that is perceived as being aligned with the human preferences, i.e.: helpful, accurate, and non-toxic.
 
-- __Reward__: assigned based on how closely the completions align with human preferences.
+- __Reward__: assigned based on how closely the completions align with the goal, i.e. human preferences.
 
----
+### __Reward Model__
 
-- The state that the model considers before taking an action is the current context. That means any text currently contained in the context window.
+To determine the reward a human can evaluate the completions of the model against some alignment metric, such as determining whether the generated text is toxic or non-toxic. This feedback can be represented as a scalar value, either a zero or a one. 
 
-- The action space is the token vocabulary, meaning all the possible tokens that the model can choose from to generate the completion.
+The LLM weights are then updated iteratively to maximize the reward obtained from the human classifier, enabling the model to generate non-toxic completions.
 
-- How an LLM decides to generate the next token in a sequence, depends on the statistical representation of language that it learned during its training. At any given moment, the action that the model will take, meaning which token it will choose next, depends on the prompt text in the context and the probability distribution over the vocabulary space.
+However, obtaining human feedback can be time consuming and expensive. A scalable alternative is to use an additional model, known as the reward model, to classify the outputs of the LLM and evaluate the degree of alignment with human preferences. 
 
----
+Train a reward model to assess how well aligned is the LLM output with the human preferences. Once trained, it's used to update the weights off the LLM and train a new human aligned version. Exactly how the weights get updated as the model completions are assessed, depends on the algorithm used to optimize the policy. 
 
-Given the variation in human responses to language, determining the reward is more complicated: One way you can do this is to have a human evaluate all of the completions of the model against some alignment metric, such as determining whether the generated text is toxic or non-toxic. This feedback can be represented as a scalar value, either a zero or a one. The LLM weights are then updated iteratively to maximize the reward obtained from the human classifier,
-enabling the model to generate non-toxic completions.
+#### __Collect Data and Training a Reward Model__
 
-However, obtaining human feedback can be time consuming and expensive.
-
-As a practical and scalable alternative, you can use an additional model, known as the reward model, to classify the outputs of the LLM and evaluate the degree of alignment with human preferences.
-
-You'll start with a smaller number of human examples to train the secondary model by your traditional supervised learning methods.
-Once trained, you'll use the reward model to assess the output of the LLM and assign a reward value, which in turn gets used to update the weights off the LLM and
-train a new human aligned version. Exactly how the weights get updated as the model completions are assessed, depends on the algorithm used to optimize the policy. 
-
-### Reward Model
-
-#### Collect Data and Training a Reward Model
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-prepare-labels.png">
+  <figcaption>Figure X - </figcaption>
+</figure>
 
 - select a model which has capability for the task you are interested
 - LLM + prompt dataset = produce a set of completions
 - collect human feedback from the produced completions 
+
+
+
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-train-reward_1.png">
+  <figcaption>Figure X - </figcaption>
+</figure>
+
 - humans rank completions to prompts for a task
-
 - ranking to pairwise for supervised learning
-
 - ranking gives more training data to train the reward model in comparison for instance to a thumbs up/down approach
-
 - use the model as a binary classifier
 - a reward model can be as well an LLM such as BERT for instance
 
 ### RLHF: Fine-tuning with reinforcement learning
 
+<figure>
+  <img style="width: 85%; height: 85%" src="/assets/images/2023-09-15-train-reward_2.png">
+  <figcaption>Figure X - </figcaption>
+</figure>
+
+
+<figure>
+  <img style="width: 85%; height: 85%" src="/assets/images/2023-09-15-train-reward_3.png">
+  <figcaption>Figure X - </figcaption>
+</figure>
+
 - using a reward model within the RLHF
 - remember one should start with an LLM that already has good performance on your task of interests
 
 1) pass prompt P to an instruct LLM get the output X
+
 2) pass the pair (P,X) to the reward model, and the get reward score
+
 3) passs the reward value to the RL algorithm to updarted the wieght os the LLM
+
 4) RL-updated LLM
 
 - this is repeat and the LLM should converge to a human-aligned LLM and the reward should improve after each iteration
@@ -570,6 +583,8 @@ The result is a model generated preference dataset that you can use to train a r
 
 
 
+---
+
 
 
 ## Large Language Models-powered Applications
@@ -646,6 +661,6 @@ In practice, distillation is not as effective for generative decoder models. It'
 
 ### Issues with LLM
 
-toxiticiy
-hallucination
-use of intellectual property
+- toxiticiy
+- hallucination
+- use of intellectual property
