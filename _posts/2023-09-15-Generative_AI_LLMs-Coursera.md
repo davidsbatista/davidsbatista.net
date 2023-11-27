@@ -523,12 +523,10 @@ Check the paper: __[Constitutional AI: Harmlessness from AI Feedback](https://ar
 
 ---
 
-## Large Language Models-powered Applications
+## __Large Language Models Optimization Techniques__
 
 
-LLM optimisation techniques
-
-### Distillation:
+## __Distillation__:
 
 1. Freeze the teacher model's weights and use it to generate completions for your training data. At the same time, you generate completions for the training data using your student model.
 
@@ -553,50 +551,22 @@ The key benefit of distillation methods is that the smaller student model can be
 
 In practice, distillation is not as effective for generative decoder models. It's typically more effective for encoder only models, such as Burt that have a lot of representation redundancy. Note that with Distillation, you're training a second, smaller model to use during inference. You aren't reducing the model size of the initial LLM in any way.
 
-### Quantisation:
+## __Quantisation__:
 
 - quantization quantization-training
 - post-training quantization
 
-### Pruning: 
+## __Pruning__: 
 
 - remove weights with values close or equal to zero
 - full model-retraining 
 - PEFT/LoRA
 - Post-Training
 
-### Generative AI Project Lifecycle Cheat Sheet
+## __Generative AI Project Lifecycle Cheat Sheet__
 
-## Using the LLM in Applications
 
-- Augment LLM knowledge with external components
-
-- Retrieval augmented generation (RAG)
-
-	- Retriever
-		- Query Encoder - encodes the data in the same format as the external documents
-		- External information sources
-
-	- Extended prompt that contains information retrieved from external documents is then passed to the LLM
-	
-
-- Reasoning tasks with multiple steps
-- Chain of thought prompting
-
-- Program-aided language models (PAL)
-
-- ReAct: Combining reasoning and action
-	- https://arxiv.org/abs/2210.03629
-	- ReAct: Synergizing Reasoning and Acting in Language Models
-
-- LangChainn:
-	- tools
-	- prompt templates
-	- memory
-	- agents: PAL, ReAct
-
-### Issues with LLM
-
-- toxiticiy
-- hallucination
-- use of intellectual property
+<figure>
+  <img style="width: 100%; height: 85%" src="/assets/images/2023-09-15-generative_ai_project_life_cycle_cheat_sheet.png">
+  <figcaption>Figure X - </figcaption>
+</figure>
