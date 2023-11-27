@@ -528,6 +528,22 @@ Check the paper: __[Constitutional AI: Harmlessness from AI Feedback](https://ar
 
 ## __Distillation__:
 
+
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-distill_1.png">
+  <figcaption>Figure X - </figcaption>
+</figure>
+
+
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-distill_2.png">
+  <figcaption>Figure X - </figcaption>
+</figure>
+
+
+
+
+
 1. Freeze the teacher model's weights and use it to generate completions for your training data. At the same time, you generate completions for the training data using your student model.
 
 2. The knowledge distillation between teacher and student model is achieved by __minimizing a loss function called the distillation loss__. To calculate this loss, distillation __uses the probability distribution over tokens that is produced by the teacher model's softmax layer__.
