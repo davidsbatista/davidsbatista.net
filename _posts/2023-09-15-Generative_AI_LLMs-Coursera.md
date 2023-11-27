@@ -461,7 +461,6 @@ Proximal Policy Optimization (PPO) makes updates to the LLM. The updates are sma
   <figcaption>Figure X - Entropy Loss.</figcaption>
 </figure>
 
-
 ### __Reward Hacking__
 
 As the policy seeks to maximize rewards, it may result in the model generating exaggeratedly positive language or nonsensical text to achieve low toxicity scores. Such outputs (e.g.: most awesome, most incredible) are not particularly useful.
@@ -484,29 +483,32 @@ KL divergence is computed for every token in the entire vocabulary of the LLM, w
 
 NOTE: you can benefit from combining our relationship with puffed. In this case, you only update the weights of a path adapter, not the full weights of the LLM. This means that you can reuse the same underlying LLM for both the reference model and the PPO model, which you update with a trained path parameters. This reduces the memory footprint during training by approximately half.
 
-
 ### __Scaling Human Feedback__
 
 Scaling reinforcement learning fine-tuning via reward models demands substantial human effort to create labeled datasets, involving numerous evaluators and significant resources. This labor-intensive process becomes a bottleneck as model numbers and applications grow, making human input a limited resource. 
 
 Constitutional AI offers a strategy for scaling through model self-supervision, presenting a potential remedy to the limitations by human involvement in creating labeled datasets for RLHF fine-tuning.
 
-
-
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-Scalable_Human_Feedback_1.png">
   <figcaption>Figure X - </figcaption>
 </figure>
+
+The process involves supervised learning, where red teaming prompts aim to detect potentially harmful responses. The model then evaluates its own harmful outputs based on constitutional principles, subsequently revising them to align with these rules.
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-Scalable_Human_Feedback_2.png">
   <figcaption>Figure X - </figcaption>
 </figure>
 
+
+Lastly, you put all the parts together and ask the model to write a new response that removes all of the harmful or illegal content. The model generates a new answer that puts the constitutional principles into practice and does not include the reference to the illegal app. The original red team prompt, and this final constitutional response can then be used as training data. The model undergoes fine-tuning using pairs of red team prompts and the revised constitutional responses.
+
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-Scalable_Human_Feedback_3.png">
   <figcaption>Figure X - </figcaption>
 </figure>
+
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-Scalable_Human_Feedback_4.png">
@@ -516,91 +518,24 @@ Constitutional AI offers a strategy for scaling through model self-supervision, 
 
 
 
+__[Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073)__
 
-
-
-
-
+<!--
 First proposed in 2022 by researchers at Anthropic, Constitutional AI is a method for training models using a set of rules and principles that govern the model's behavior.
 Together with a set of sample prompts, these form the constitution.
 
 You then train the model to self critique and revise its responses to comply with those principles.
 
-Constitutional AI is useful not only for scaling feedback, it can also help address some unintended consequences of RLHF.
+When implementing the Constitutional AI method, you train your model in two distinct phases.
 
-For example, depending on how the prompt is structured, an aligned model may end up revealing harmful information as it tries to provide the most helpful response it can.
+You'll build up a data set of many examples like this to create a fine-tuned NLM that has learned how to generate constitutional responses.
 
-As an example, imagine you ask the model to give you instructions on how to hack your neighbor's WiFi.
-
-Because this model has been aligned to prioritize helpfulness, it actually tells you about an app that lets you do this, even though this activity is illegal.
- 
-Providing the model with a set of constitutional principles can help the model balance these competing interests and minimize the harm.
-Here are some example rules from the research paper
-that Constitutional AI I asks LLMs to follow.
-For example, you can tell the model to choose
-the response that is the most
-helpful, honest, and harmless.
-But you can play some bounds on this,
-asking the model to prioritize harmlessness by
-assessing whether it's response encourages illegal,
-unethical, or immoral activity.
-Note that you don't have to
-use the rules from the paper,
-you can define your own set of rules that is best
-suited for your domain and use case.
-When implementing the Constitutional AI method,
-you train your model in two distinct phases.
-In the first stage, you carry out supervised learning,
-to start your prompt the model in ways that
-try to get it to generate harmful responses,
-this process is called red teaming.
-You then ask the model to critique
-its own harmful responses according to
-the constitutional principles and
-revise them to comply with those rules.
-Once done, you'll fine-tune
-the model using the pairs of red team
-prompts and the revised constitutional responses.
-Let's look at an example of
-how one of these prompt completion pairs is generated.
-Let's return to the WiFi hacking problem.
-
-As you saw earlier,
-this model gives you a harmful response
-as it tries to maximize its helpfulness.
-To mitigate this, you augment the prompt
-using the harmful completion and
-a set of predefined instructions that
-ask the model to critique its response.
-Using the rules outlined in the Constitution,
-the model detects the problems in its response.
-In this case, it correctly acknowledges
-that hacking into someone's WiFi is illegal.
-Lastly, you put all the parts
-together and ask the model to write
-a new response that removes
-all of the harmful or illegal content.
-The model generates a new answer
-that puts the constitutional principles
-into practice and does not
-include the reference to the illegal app.
-The original red team prompt,
-and this final constitutional response
-can then be used as training data.
-You'll build up a data set of
-many examples like this to create
-a fine-tuned NLM that has learned how
-to generate constitutional responses.
-The second part of
-the process performs reinforcement learning.
-This stage is similar to RLHF,
-except that instead of human feedback,
-we now use feedback generated by a model.
+The second part of the process performs reinforcement learning. This stage is similar to RLHF, except that instead of human feedback, we now use feedback generated by a model.
 
 This is sometimes referred to as reinforcement learning from AI feedback or RLAIF. Here you use the fine-tuned model from the previous step to generate a set of responses to your prompt. You then ask the model which of the responses is preferred according to the constitutional principles.
 
 The result is a model generated preference dataset that you can use to train a reward model. With this reward model, you can now fine-tune your model further using a reinforcement learning algorithm like PPO, as discussed earlier.
-
+-->
 
 
 ---
