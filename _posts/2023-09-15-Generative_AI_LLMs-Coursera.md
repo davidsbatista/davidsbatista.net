@@ -485,17 +485,41 @@ KL divergence is computed for every token in the entire vocabulary of the LLM, w
 NOTE: you can benefit from combining our relationship with puffed. In this case, you only update the weights of a path adapter, not the full weights of the LLM. This means that you can reuse the same underlying LLM for both the reference model and the PPO model, which you update with a trained path parameters. This reduces the memory footprint during training by approximately half.
 
 
-### Scaling Human Feedback
+### __Scaling Human Feedback__
 
-Although you can use a reward model to eliminate the need for human evaluation during RLHF fine tuning, the human effort required to produce the trained reward model in the first place is huge. 
+Scaling reinforcement learning fine-tuning via reward models demands substantial human effort to create labeled datasets, involving numerous evaluators and significant resources. This labor-intensive process becomes a bottleneck as model numbers and applications grow, making human input a limited resource. 
 
-The labeled data set used to train the reward model typically requires large teams of labelers, sometimes many thousands of people to evaluate many prompts each. This work requires a lot of time and other resources which can be important limiting factors. As the number of models and use cases increases, human effort becomes a limited resource.
+Constitutional AI offers a strategy for scaling through model self-supervision, presenting a potential remedy to the limitations by human involvement in creating labeled datasets for RLHF fine-tuning.
 
-Methods to scale human feedback are an active area of research.
 
-One idea to overcome these limitations is to scale through model self supervision.
 
-Constitutional AI is one approach of scale supervision.
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-Scalable_Human_Feedback_1.png">
+  <figcaption>Figure X - </figcaption>
+</figure>
+
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-Scalable_Human_Feedback_2.png">
+  <figcaption>Figure X - </figcaption>
+</figure>
+
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-Scalable_Human_Feedback_3.png">
+  <figcaption>Figure X - </figcaption>
+</figure>
+
+<figure>
+  <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-Scalable_Human_Feedback_4.png">
+  <figcaption>Figure X - </figcaption>
+</figure>
+
+
+
+
+
+
+
+
 
 First proposed in 2022 by researchers at Anthropic, Constitutional AI is a method for training models using a set of rules and principles that govern the model's behavior.
 Together with a set of sample prompts, these form the constitution.
