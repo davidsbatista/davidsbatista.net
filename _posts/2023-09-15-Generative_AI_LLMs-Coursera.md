@@ -526,14 +526,18 @@ Check the paper: __[Constitutional AI: Harmlessness from AI Feedback](https://ar
 ## __Large Language Models Optimization Techniques__
 
 
-## __Distillation__:
+## __Distillation__
 
+It's a technique used to transfer knowledge from the original (teacher) model to another model (student), the goal of distillation is to train (the student) to approximate the behavior and predictions of a larger, more complex model (the teacher).
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-distill_1.png">
   <figcaption>Figure X - </figcaption>
 </figure>
 
+- Freeze the teacher model's weights and use it to generate completions for your training data. At the same time, you generate completions for the training data using your student model.
+
+- The knowledge distillation between teacher and student model is achieved by __minimizing a loss function called the distillation loss__. To calculate this loss, distillation __uses the probability distribution over tokens that is produced by the teacher model's softmax layer__.
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-distill_2.png">
@@ -541,14 +545,8 @@ Check the paper: __[Constitutional AI: Harmlessness from AI Feedback](https://ar
 </figure>
 
 
+- Now, the teacher model is already fine tuned on the training data. So the probability distribution likely closely matches the ground truth data and won't have much variation in tokens. That's why Distillation applies a little trick adding a temperature parameter to the softmax function. As you learned in lesson one, a higher temperature increases the creativity of the language the model generates. With a temperature parameter greater than one, the probability distribution becomes broader and less strongly peaked. This softer distribution provides you with a set of tokens that are similar to the ground truth tokens.
 
-
-
-1. Freeze the teacher model's weights and use it to generate completions for your training data. At the same time, you generate completions for the training data using your student model.
-
-2. The knowledge distillation between teacher and student model is achieved by __minimizing a loss function called the distillation loss__. To calculate this loss, distillation __uses the probability distribution over tokens that is produced by the teacher model's softmax layer__.
-
-3. Now, the teacher model is already fine tuned on the training data. So the probability distribution likely closely matches the ground truth data and won't have much variation in tokens. That's why Distillation applies a little trick adding a temperature parameter to the softmax function. As you learned in lesson one, a higher temperature increases the creativity of the language the model generates. With a temperature parameter greater than one, the probability distribution becomes broader and less strongly peaked. This softer distribution provides you with a set of tokens that are similar to the ground truth tokens.
 
 - __soft labels__: freeze the teacher model's weights and use it to generate completions for your training data (adding a temperature parameter)
 
@@ -557,9 +555,9 @@ Check the paper: __[Constitutional AI: Harmlessness from AI Feedback](https://ar
 In parallel, you train the student model to generate the correct predictions based on your ground truth training data.
 Here, you don't vary the temperature setting and instead use the standard softmax function.
 
-__hard predictions__: train the student model to generate the correct predictions based on your ground truth training data, don't vary the temperature setting use the standard softmax function
+- __hard predictions__: train the student model to generate the correct predictions based on your ground truth training data, don't vary the temperature setting use the standard softmax function
 
-__hard labels__: ground truth
+- __hard labels__: ground truth
 
 The loss between these two is the __student loss__. The combined __distillation and student losses__ are used to update the weights of the student model via back propagation.__
 
