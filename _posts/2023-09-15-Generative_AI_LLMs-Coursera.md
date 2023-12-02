@@ -291,7 +291,7 @@ By updating the weights of these new low-rank matrices instead of the original w
 
 <figure>
   <img style="width: 60%; height: 35%" src="/assets/images/2023-09-15-PEFT-LoRA-multi-task.png">
-  <figcaption>Figure 5 - </figcaption>
+  <figcaption>Figure 5 - Switching LoRa generated weights for different tasks.</figcaption>
 </figure>
 
 Advantages:
@@ -308,21 +308,21 @@ This technique adds additional trainable tokens to your prompt and leave it up t
 
 <figure>
   <img style="width: 65%; height: 35%" src="/assets/images/2023-09-15-PEFT-Soft-Prompt-Tunning.png">
-  <figcaption>Figure 6 - </figcaption>
+  <figcaption>Figure 6 - Soft Prompts.</figcaption>
 </figure>
 
 The soft prompt vectors have the same length as input embedding vectors, and usually somewhere between 20 and 100 virtual tokens can be sufficient for good performance.
 
 <figure>
   <img style="width: 35%; height: 35%" src="/assets/images/2023-09-15-PEFT-Prompt-Tunning.png">
-  <figcaption>Figure 7 - </figcaption>
+  <figcaption>Figure 7 - Soft Prompts.</figcaption>
 </figure>
 
 The trainable tokens and the input flow normally through the model, which is going to generate a prediction which is used to calculate a loss. The loss is back-propagated through the model to create gradients, but the original model weights are frozen and only the the virtual tokens embeddings are updated such that the model learns embeddings for those virtual tokens.
 
 <figure>
   <img style="width: 60%; height: 45%" src="/assets/images/2023-09-15-PEFT-Prompt-Tunning-multi-task.png">
-  <figcaption>Figure 8 - </figcaption>
+  <figcaption>Figure 8 - Switching Soft Prompts embeddings for different tasks.</figcaption>
 </figure>
 
 As with the LoRA method, one can also train soft prompts for different tasks and store them, which take much less resources, an then at inference time switch them to change the LLMs task.
@@ -343,21 +343,13 @@ As with the LoRA method, one can also train soft prompts for different tasks and
 
 ## __Week 3: Reinforcement Learning From Human Feedback__ ([slides](/assets/documents/Coursera-Generative-AI-with-LLMs/Generative_AI_with_LLMs-W3.pdf))
 
-<!--
-- Reinforcement Learning with Human Feedback
-- Describe how RLHF uses human feedback to improve the performance and alignment of large language models
-- Explain how data gathered from human labellers is used to train a reward model for RLHF
-- Define chain-of-thought prompting and describe how it can be used to improve LLMs reasoning and planning abilities
-- Discuss the challenges that LLMs face with knowledge cut-offs, and explain how information retrieval and augmentation techniques can overcome these challenges
--->
-
 The goal of Reinforcement Learning From Human Feedback (RLHF) is to align the model with human values.  This is accomplished using a type of machine learning where an agent learns to make decisions related to a specific goal by taking actions in an environment, with the objective of maximising the reward received for actions taken, i.e.: __Reinforcement Learning__; this is yet another method to fine-tune Large Language Models.
 
 ## __Fine-Tuning with RLHF__
 
 <figure>
   <img style="width: 75%; height: 85%" src="/assets/images/2023-09-15-RLHF-overview.png">
-  <figcaption>Figure X - </figcaption>
+  <figcaption>Figure 9 - Reinforcement Learning From Human Feedback overview.</figcaption>
 </figure>
 
 
@@ -389,7 +381,7 @@ Train a reward model to assess how well aligned is the LLM output with the human
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-prepare-labels.png">
-  <figcaption>Figure X - </figcaption>
+  <figcaption>Figure 10 - Preparing labels for training.</figcaption>
 </figure>
 
 - select a model which has capability for the task you are interested
@@ -398,7 +390,7 @@ Train a reward model to assess how well aligned is the LLM output with the human
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-train-reward_1.png">
-  <figcaption>Figure X - </figcaption>
+  <figcaption>Figure 11 - Reward model losses based on promp completion.</figcaption>
 </figure>
 
 - humans rank completions to prompts for a task
@@ -413,7 +405,7 @@ Train a reward model to assess how well aligned is the LLM output with the human
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-train-reward_2.png">
-  <figcaption>Figure X - </figcaption>
+  <figcaption>Figure 12 - Training a reward model overview I.</figcaption>
 </figure>
 
 1 - pass prompt $$P$$ to an instruct LLM get the output $$X$$
@@ -424,12 +416,11 @@ Train a reward model to assess how well aligned is the LLM output with the human
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-train-reward_3.png">
-  <figcaption>Figure X - </figcaption>
 </figure>
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-reward_model_RL.png">
-  <figcaption>Figure X - </figcaption>
+  <figcaption>Figure 13 - Training a reward model overview II.</figcaption>
 </figure>
 
 
@@ -443,22 +434,22 @@ Proximal Policy Optimization (PPO) makes updates to the LLM. The updates are sma
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-PPO-global_loss.png">
-  <figcaption>Figure X - PPO Loss.</figcaption>
+  <figcaption>Figure 14 - PPO Loss.</figcaption>
 </figure>
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-PPO-value_loss.png">
-  <figcaption>Figure X - Value Loss.</figcaption>
+  <figcaption>Figure 15 - Value Loss.</figcaption>
 </figure>
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-PPO-policy_loss_2.png">
-  <figcaption>Figure X - Policy Loss.</figcaption>
+  <figcaption>Figure 16 - Policy Loss.</figcaption>
 </figure>
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-PPO-entropy_loss.png">
-  <figcaption>Figure X - Entropy Loss.</figcaption>
+  <figcaption>Figure 17 - Entropy Loss.</figcaption>
 </figure>
 
 ### __Reward Hacking__
@@ -470,12 +461,11 @@ To prevent board hacking, use the initial LLM as a benchmark, called the referen
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-reward_model_hacking_1.png">
-  <figcaption>Figure X - Entropy Loss.</figcaption>
 </figure>
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-reward_model_hacking_2.png">
-  <figcaption>Figure X - Entropy Loss.</figcaption>
+  <figcaption>Figure 18 - How to avoid reward hacking.</figcaption>
 </figure>
 
 
@@ -493,14 +483,14 @@ Constitutional AI offers a strategy for scaling through model self-supervision, 
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-Scalable_Human_Feedback_1.png">
-  <figcaption>Figure X - </figcaption>
+  <figcaption>Figure 19 - Constitutional AI supervised learning I.</figcaption>
 </figure>
 
 The process involves supervised learning, where red teaming prompts aim to detect potentially harmful responses. The model then evaluates its own harmful outputs based on constitutional principles, subsequently revising them to align with these rules.
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-Scalable_Human_Feedback_2.png">
-  <figcaption>Figure X - </figcaption>
+    <figcaption>Figure 20 - Constitutional AI supervised learning II.</figcaption>
 </figure>
 
 
@@ -508,13 +498,13 @@ Then we ask the model to write a new response that removes all of the harmful or
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-Scalable_Human_Feedback_3.png">
-  <figcaption>Figure X - </figcaption>
+  <figcaption>Figure 21 - Constitutional AI supervised learning III.</figcaption>
 </figure>
 
 
 <figure>
   <img style="width: 65%; height: 85%" src="/assets/images/2023-09-15-Scalable_Human_Feedback_4.png">
-  <figcaption>Figure X - </figcaption>
+  <figcaption>Figure 22 - Constitutional AI overview.</figcaption>
 </figure>
 
 
@@ -528,10 +518,9 @@ Check the paper: __[Constitutional AI: Harmlessness from AI Feedback](https://ar
 
 The distillation process trains a second, smaller model to use during inference. In practice, distillation is not as effective for generative decoder models. It's typically more effective for encoder only models.
 
-
 <figure>
   <img style="width: 55%; height: 85%" src="/assets/images/2023-09-15-distill_1.png">
-  <figcaption>Figure X - </figcaption>
+  <figcaption>Figure 23 - LLMs Distillation I.</figcaption>
 </figure>
 
    - Freeze the teacher model's weights and use it to generate completions for your training data. At the same time, you generate completions for the training data using your student model.
@@ -549,7 +538,7 @@ The distillation process trains a second, smaller model to use during inference.
 
 <figure>
   <img style="width: 85%; height: 85%" src="/assets/images/2023-09-15-distill_2.png">
-  <figcaption>Figure X - </figcaption>
+  <figcaption>Figure 24 - LLMs Distillation II.</figcaption>
 </figure>
 
    - In parallel, you train the student model to generate the correct predictions based on your ground truth training data. Here, you don't vary the temperature setting and instead use the standard softmax function. 
@@ -562,5 +551,5 @@ The distillation process trains a second, smaller model to use during inference.
 
 <figure>
   <img style="width: 100%; height: 85%" src="/assets/images/2023-09-15-generative_ai_project_life_cycle_cheat_sheet.png">
-  <figcaption>Figure X - </figcaption>
+  <figcaption>Figure 25 - Generative AI Project Lifecycle.</figcaption>
 </figure>
