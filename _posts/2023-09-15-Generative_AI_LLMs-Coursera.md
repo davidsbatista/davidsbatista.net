@@ -553,3 +553,13 @@ The distillation process trains a second, smaller model to use during inference.
   <img style="width: 100%; height: 85%" src="/assets/images/2023-09-15-generative_ai_project_life_cycle_cheat_sheet.png">
   <figcaption>Figure 25 - Generative AI Project Lifecycle.</figcaption>
 </figure>
+
+### __References__
+
+- __[Week 1](https://www.coursera.org/learn/generative-ai-with-llms/home/week/1)__
+
+- __[Week 2](https://www.coursera.org/learn/generative-ai-with-llms/home/week/2)__
+
+- __[Week 3](https://www.coursera.org/learn/generative-ai-with-llms/home/week/2)__
+
+- All the figures are taken from the slides of the course.
