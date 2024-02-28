@@ -2,7 +2,7 @@
 layout: post
 title: Sentence Transformers
 date: 2023-10-22 00:00:00
-tags: sentence-transformers BERT triplet-loss embeddings fine-tuning RoBERTa
+tags: sentence-transformers triplet-loss embeddings fine-tuning
 categories: [blog]
 comments: true
 disqus_identifier: 20231022
