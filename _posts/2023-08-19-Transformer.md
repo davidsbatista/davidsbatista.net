@@ -1,11 +1,11 @@
 ---
 layout: post
 title: Reviewing the Transformer Architecture
-date: 2023-08-19 00:00:00
+date: 2024-02-29 00:00:00
 tags: transformers neural-networks
 categories: [blog]
 comments: true
-disqus_identifier: 20230819
+disqus_identifier: 20240229
 preview_pic:
 ---
 
