@@ -29,7 +29,7 @@ A Transformer is a particular type of attention-based model, more specifically a
 
 
 <figure>
-  <img style="width: 65%; height: 65%" src="/assets/images/2023-08-18-transformer_svg_arch.svg">
+  <img style="width: 65%; height: 65%" src="/assets/images/2024-02-29-transformer_svg_arch.svg">
   <figcaption></figcaption>
 </figure>
 
