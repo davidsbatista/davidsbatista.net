@@ -602,7 +602,7 @@ img.emoji {
   }
 .content {background: #fcfcfc url(/img/bg_content.svg) center top no-repeat; background-attachment: fixed; padding: 4rem 0 5.5rem;}
 
-#navigation {background: white; border-bottom: 0.0625rem solid #e5e5e5; position: fixed; width: 100%; z-index: 99;}
+#navigation {background: white; position: fixed; width: 100%; z-index: 99;}
 #navigation .container {display: flex; align-items: center;}
 #navigation .container #menu {display: flex; align-items: center; justify-content: space-between; flex-grow: 1;}
 #navigation ul {display: flex; align-items: center;}
@@ -643,7 +643,6 @@ p:not(:last-child), pre:not(:last-child), .content ul:not(:last-child), .content
       width: 100%;
       background: white;
       z-index: -1;
-      border-bottom: 0.0625rem solid #e5e5e5;
   }
   .menuopen #navigation .container #menu {display: block;}
   #navigation .container .btn {margin: 1rem;}
