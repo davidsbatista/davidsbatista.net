@@ -14,7 +14,7 @@ The Transformer was a groundbreaking deep learning architecture which impacted N
 
 ## __Introduction__
 
-A Transformer is a particular type of attention-based model, more specifically a self-attention model. It was initially proposed as another algorithm to perform Machine Translation overcoming the limitations of the recurrent neural networks by being based solely on the attention mechanism, dispensing entirely recurrence and convolutions.
+A Transformer is a particular type of attention-based model, i.e: a self-attention model. It was initially proposed as an algorithm, within the context of Machine Translation, to overcome the limitations of recurrent neural networks, based solely on the attention mechanism and dispensing entirely recurrence and convolutions.
 
 <!--
 - unrolled left-to-right, essentially one direction
@@ -28,11 +28,10 @@ A Transformer is a particular type of attention-based model, more specifically a
 -->
 
 
-<figure>
-  <img style="width: 65%; height: 65%" src="/assets/images/2024-02-29-transformer_svg_arch.svg">
-  <figcaption></figcaption>
+<figure> 
+	<img style="width: 65%; height: 65%" src="/assets/images/2024-02-29-transformer_svg_arch.png"> 
+	<figcaption>Figure 1. Transformer Architecture (<a href="https://commons.wikimedia.org/wiki/File:Transformer,_full_architecture.png" target="_blank">source Wikimedia Commons</a>)</figcaption> 
 </figure>
-
 ## __Input Tokens and Tokenisations__
 
 Instead of word tokenisation or character tokenisation, the Transformer uses something in between named __Subword Tokenisation__
