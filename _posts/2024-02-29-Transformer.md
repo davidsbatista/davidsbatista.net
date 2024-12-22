@@ -9,7 +9,7 @@ disqus_identifier: 20240229
 preview_pic:
 ---
 
-The Transformer was a groundbreaking, revolutionary, innovative deep learning architecture that impacted NLP and other domains. I wanted to review and understand in detail the Transformer architecture which became the de-facto framework for many foundational and pre-trained models available today, used to solve a vast number of NLP tasks. This post is a review of the mechanisms that build up the Transformer: tokenisation, self-attention, multi-head attention, cross attention and how these are connected with encoder-decoder architecture.
+The Transformer was a groundbreaking deep learning architecture which impacted NLP and other domains. I wanted to review and understand in detail the Transformer architecture which became the de-facto framework for many foundational and pre-trained models available today, used to solve a vast number of NLP tasks. This post is a review of the mechanisms that build up the Transformer: tokenisation, self-attention, multi-head attention, cross attention and how these are connected with encoder-decoder architecture.
 
 
 ## __Introduction__
