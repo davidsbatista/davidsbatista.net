@@ -6,7 +6,7 @@ tags: transformers neural-networks
 categories: [blog]
 comments: true
 disqus_identifier: 20240229
-preview_pic:
+preview_pic: /assets/images/2024-02-29-transformer_svg_arch.png
 ---
 
 The Transformer was a groundbreaking deep learning architecture which impacted NLP and other domains. I wanted to review and understand in detail the Transformer architecture which became the de-facto framework for many foundational and pre-trained models available today, used to solve a vast number of NLP tasks. This post is a review of the mechanisms that build up the Transformer: tokenisation, self-attention, multi-head attention, cross attention and how these are connected with encoder-decoder architecture.
@@ -32,15 +32,26 @@ A Transformer is a particular type of attention-based model, i.e: a self-attenti
 	<img style="width: 65%; height: 65%" src="/assets/images/2024-02-29-transformer_svg_arch.png"> 
 	<figcaption>Figure 1. Transformer Architecture (<a href="https://commons.wikimedia.org/wiki/File:Transformer,_full_architecture.png" target="_blank">source Wikimedia Commons</a>)</figcaption> 
 </figure>
+
+
+
 ## __Input Tokens and Tokenisations__
 
-Instead of word tokenisation or character tokenisation, the Transformer uses something in between named __Subword Tokenisation__
+Instead of word tokenisation or character tokenisation, the Transformer uses something in between named __Subword Tokenisation__. 
+
+If it was word tokenisation it would have to store a large number of words which could lead to memory and processing issues. This could be handled with with a cut-off but then it would always lead to some out of vocabulary words. 
+
+In the other extreme are character-based tokenisation, memory footprint would no longer be a problem as well as out-of-vocabulary words, but it would need to first learn each character representation before learning a new word, this for each word in the text. 
+
+With __Subword Tokenisation__ frequent words are kept they are and rare words are break words into subwords.
 
 
 
 - Byte-pair encoding (BPE)
 - wordpiece
 - sentencepiece
+
+
 
 ## __Self-Attention__
 
