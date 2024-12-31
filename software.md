@@ -45,10 +45,10 @@ __[PyPI Package](https://pypi.org/project/snowball-extractor/){:target="_blank"}
 
 
 
-I've analysed thousands of archived titles, identifying those that report supportive or opposing relationships between political actors and also associated the political personalities with their identifier on Wikidata. The result was a semantic graph,  [__politiquices.pt__](https://www.politiquices.pt) allowing answering questions involving political personalities and parties. The project was awarded [__2nd place in the "Arquivo.pt Awards 2021"__](https://sobre.arquivo.pt/en/meet-the-winners-of-the-arquivo-pt-award-2021/).
+I've analysed thousands of archived titles, identifying those that report supportive or opposing relationships between political actors and also associated the political personalities with their identifier on Wikidata. The result was a semantic graph,  [__politiquices.pt__](http://www.politiquices.pt) allowing answering questions involving political personalities and parties. The project was awarded [__2nd place in the "Arquivo.pt Awards 2021"__](https://sobre.arquivo.pt/en/meet-the-winners-of-the-arquivo-pt-award-2021/).
 
 
-__[Web](https://www.politiquices.pt/){:target="_blank"}__
+__[Web](http://www.politiquices.pt/){:target="_blank"}__
 &nbsp;
 __[GitHub](https://github.com/politiquices){:target="_blank"}__
 
