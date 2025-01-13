@@ -43,19 +43,46 @@ solely on the attention mechanism and dispensing entirely recurrence and convolu
 
 ## __Input Tokens and Tokenisations__
 
-Instead of word tokenisation or character tokenisation, the Transformer uses something in between named __Subword Tokenisation__. 
+Instead of word tokenisation or character tokenisation, the Transformer is based on __Subword Tokenisation__. 
 
 If it was word tokenisation it would have to store a large number of words which could lead to memory and processing issues. This could be handled with a cut-off, but then it would lead to some out of vocabulary words. 
 
 In the other extreme are character-based tokenisation, memory footprint would no longer be a problem as well as out-of-vocabulary words, but it would need to first learn each character representation before learning a new word, this for each word in the text. 
 
-With __Subword Tokenisation__ frequent words are kept as they are and rare words are break words into sub-words.
+With __Subword Tokenisation__ frequent words are kept as they are and rare words are break words into sub-words. Example:
 
+The word "unhappiness" might be tokenized as: ["un", "happi", "ness"]; instead of storing the word 'unhappiness' the model would store this 3 tokens, which could also allow the model to understand the components of the word:
 
+- "un" (prefix meaning "not")
+- "happi" (root word, variant of "happy")
+- "ness" (suffix forming a noun)
 
-- Byte-pair encoding (BPE)
-- wordpiece
-- sentencepiece
+Subword tokenisation helps models handle rare or unseen words (i.e.: out-of-vocabulary (OOV) words) by breaking them into more common subwords.
+
+__Example of Byte-pair encoding (BPE):__
+
+__"The tree trembled in the breeze"__
+
+Initial tokenisation: ["The</w>", "tree</w>", "trembled</w>", "in</w>", "the</w>", "breeze</w>"] 
+
+We start with a vocabulary consisting of the all the characters in the sentence and we add, adding end-of-word token represented as </w>: {'T', 'h', 'e', 'r', 't', 'm', 'b', 'l', 'd', 'i', 'n', 'z', '</w>'} 
+
+We then perform _n_ merge-steps. We look for the most frequently adjacent vocabulary members, we merge them together and add it to the vocabulary.
+
+Merge steps:
+
+- Most frequent pair: 'e' + '</w>' → 'e</w>'
+- Updated vocabulary: {'T', 'h', 'e', 'r', 't', 'm', 'b', 'l', 'd', 'i', 'n', 'z', '</w>', __'e</w>'__}
+
+- Next most frequent: 'T' + 'h' → 'Th'
+- Updated vocabulary: {'T', 'h', 'e', 'r', 't', 'm', 'b', 'l', 'd', 'i', 'n', 'z', '</w>', __'e</w>', 'Th'__}
+
+- Next: 't' + 'r' → 'tr'
+- Updated vocabulary: {'T', 'h', 'e', 'r', 't', 'm', 'b', 'l', 'd', 'i', 'n', 'z', '</w>', __'e</w>', 'Th', 'tr'__}
+
+And so on until there are no more possible merges or we reached _n_ merge-steps.
+
+Other used __Subword Tokenisation__ are [Wordpiece](https://paperswithcode.com/method/wordpiece) and [Sentencepiece](https://aclanthology.org/D18-2012/).
 
 
 
