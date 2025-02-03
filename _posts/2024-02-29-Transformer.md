@@ -80,9 +80,7 @@ Merge steps:
 - Next: 't' + 'r' → 'tr'
 - Updated vocabulary: {'T', 'h', 'e', 'r', 't', 'm', 'b', 'l', 'd', 'i', 'n', 'z', '</w>', __'e</w>', 'Th', 'tr'__}
 
-And so on until there are no more possible merges or we reached _n_ merge-steps.
-
-Other used __Subword Tokenisation__ are [Wordpiece](https://paperswithcode.com/method/wordpiece) and [Sentencepiece](https://aclanthology.org/D18-2012/).
+And so on until there are no more possible merges or we reached _n_ merge-steps. Other popular __Subword Tokenisation__ algorithms are [Wordpiece](https://paperswithcode.com/method/wordpiece) and [Sentencepiece](https://aclanthology.org/D18-2012/).
 
 
 
