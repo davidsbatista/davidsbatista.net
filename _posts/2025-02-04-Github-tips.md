@@ -32,6 +32,6 @@ todo
 #### __Create a new local branch (test) from a github's remote branch (pu):__
 
 ```
-git branch base-url-validation raspawar/raspawar/base-url-validation
+git branch local-name remote-repo
 git checkout base-url-validation
 ```
