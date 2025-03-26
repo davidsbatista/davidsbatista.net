@@ -21,6 +21,15 @@
         <li><a class="site-link" target="_blank" href="{{ "/feed.xml" | prepend: site.baseurl }}"><i class="fa fa-rss-square fa-fw fa-2x"></i></a></li>
       </center>
     </div>
-    <div class="footer-bottom">© 2017-2024 David S. Batista</div>
+    <div class="footer-bottom" id="footer-year">© 2017-2024 David S. Batista</div> <!-- this will be replaced by the output of the script below -->
   </div>
+
+  <!-- JavaScript to update the year dynamically -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var footerYear = document.getElementById("footer-year");
+      var currentYear = new Date().getFullYear();
+      footerYear.innerHTML = "© 2017-" + currentYear + " David S. Batista";
+    });
+  </script>
 </footer>
