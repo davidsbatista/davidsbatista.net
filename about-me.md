@@ -21,7 +21,7 @@ My professional experiences span over academia, startup environments, freelancin
 
 Occasionally, I <a href="/posts/" target="_blank"><b>blog</b></a> about Software Engineering, Machine Learning and Natural Language Processing.
 
-I am available for consultancy or freelance work on projects, subject to my time availability and ongoing commitments. Please feel free to contact me via email or fill in this [__form__](https://o0dzsg71ld8.typeform.com/to/tA9kn9Dd){:target="_blank"} if you think you have a project I might help.
+Once in a while, I like to wander around instrumental melodies using an electric guitar. If you are curious about it you can listen to it at [__chilosopher.com__](https://www.chilosopher.com/){:target="_blank"}
 
 
 <div style="text-align: right;">
