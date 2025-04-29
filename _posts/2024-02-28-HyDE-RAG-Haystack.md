@@ -5,7 +5,6 @@ featured_image: thumbnail.png
 images: ["blog/optimizing-retrieval-with-hyde/thumbnail.png"]
 toc: True
 date: 2024-02-28
-last_updated: 2024-02-28
 tags: ["generative AI", "retrieval-augmented-generation", "rag", "haystack"]
 categories: [blog]
 comments: true
