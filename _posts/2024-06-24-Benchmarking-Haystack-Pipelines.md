@@ -4,7 +4,7 @@ title: "Benchmarking Haystack Pipelines for Optimal Performance"
 featured_image: thumbnail.png
 alt_image: "'Benchmarking Haystack Pipelines for Optimal Performance' text in front of an image with illustrations about evaluation and benchmarking"
 date: 2024-06-24
-tags: ["evaluation", "RAG", "haystack"]
+tags: ["evaluation", "RAG", "Haystack", "retrieval-augmented-generation"]
 preview_pic: /assets/images/2024-06-24-thumbnail.png
 categories: [blog]
 comments: true
