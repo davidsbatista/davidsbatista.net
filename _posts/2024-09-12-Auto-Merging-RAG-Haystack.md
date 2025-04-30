@@ -3,7 +3,7 @@ layout: post
 title: Improving RAG Retrieval with Auto-Merging
 toc: True
 date: 2024-09-12
-tags: ["retrieval", "RAG", "Haystack", "retrieval-augmented-generation"]
+tags: retrieval RAG Haystack retrieval-augmented-generation
 preview_pic: /assets/images/2024-09-12-thumbnail.png
 categories: [blog]
 comments: true
