@@ -4,7 +4,7 @@ title: "Extract Metadata from Queries to Improve Retrieval"
 description: Use LLMs to extract metadata from queries to use as filters that improve retrieval in RAG applications. 
 toc: True
 date: 2024-05-13
-tags: ["retrieval-augmented-generation", "rag", "haystack", "metadata-extraction"]
+tags: ["retrieval-augmented-generation", "RAG", "Haystack", "metadata-extraction"]
 preview_pic: /assets/images/2024-05-13-extracting-metadata-haystack.png
 categories: [blog]
 comments: true
