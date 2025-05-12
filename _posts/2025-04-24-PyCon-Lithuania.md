@@ -9,17 +9,20 @@ disqus_identifier: 2025024
 preview_pic: /assets/images/2025-04-24-PyCon-Lithuania.png
 ---
 
-The RAG process consists of indexing, which converts textual data into searchable formats; retrieval, which selects relevant documents for a query using different methods; and augmentation, which feeds retrieved information and the user's query into a Large Language Model (LLM) via a prompt for output generation. Typically, one has little control over the augmentation step besides what's provided to the LLM via the prompt and a few parameters, like the maximum length of the generated text or the temperature of the sampling process. On the other hand, the indexing and retrieval steps are more flexible and can be customized to the specific needs of the task or the data.
-
-
 Retrieval Augmented Generation (RAG) is a model architecture for tasks requiring information retrieval from large corpora combined with generative models to fulfill a user information need. It's typically used for question-answering, fact-checking, summarization, and information discovery.
 
-The RAG process consists of indexing, which converts textual data into searchable formats; retrieval, which selects relevant documents for a query using different methods; and augmentation, which feeds retrieved information and the user's query into a Large Language Model (LLM) via a prompt for output generation. Typically, one has little control over the augmentation step besides what's provided to the LLM via the prompt and a few parameters, like the maximum length of the generated text or the temperature of the sampling process. On the other hand, the indexing and retrieval steps are more flexible and can be customized to the specific needs of the task or the data.
+The RAG process consists of indexing, which converts textual data into searchable formats; retrieval, which selects relevant documents for a query using different methods; and augmentation, which feeds retrieved information and the user's query into a Large Language Model (LLM) via a prompt for output generation.
+
+Typically, one has little control over the augmentation step besides what's provided to the LLM via the prompt and a few parameters, like the maximum length of the generated text or the temperature of the sampling process. On the other hand, the indexing and retrieval steps are more flexible and can be customized to the specific needs of the task or the data.
 
 
+My talk will focus on RAG systems' indexing and retrieval techniques. Attendees will learn about various methods, starting with classical approaches rooted in the Information Retrieval community. While these methods have been around for decades, they remain widely used today due to their simplicity and efficiency.
 
+The session will then explore more modern techniques that leverage LLMs to enhance the indexing process or optimize user queries. These approaches aim to improve the retrieval of relevant documents and improve the performance of RAG systems.
 
+Participants will gain insights into each technique's unique features, advantages, and limitations, along with guidance on selecting the most appropriate approach for specific tasks and datasets. 
 
+The talk will conclude with a performance analysis, comparing the implementation of all these techniques in Python using Haystack and evaluating them over an annotated dataset. Speed, accuracy, and efficiency will be assessed, offering an understanding of trade-offs and practical takeaways.
 
 
 
