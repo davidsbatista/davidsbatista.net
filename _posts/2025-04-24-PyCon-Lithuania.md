@@ -2,19 +2,25 @@
 layout: post
 title: Retrieval methods in RAG - Haystack
 date: 2025-04-24 00:00:00
-tags: haystack retrieval
+tags: haystack information-retrieval RAG 
 categories: [blog]
 comments: true
 disqus_identifier: 2025024
-preview_pic: /assets/images/2024-11-17-ml-report-toolkit.png
+preview_pic: /assets/images/2025-04-24-PyCon-Lithuania.png
 ---
 
+The RAG process consists of indexing, which converts textual data into searchable formats; retrieval, which selects relevant documents for a query using different methods; and augmentation, which feeds retrieved information and the user's query into a Large Language Model (LLM) via a prompt for output generation. Typically, one has little control over the augmentation step besides what's provided to the LLM via the prompt and a few parameters, like the maximum length of the generated text or the temperature of the sampling process. On the other hand, the indexing and retrieval steps are more flexible and can be customized to the specific needs of the task or the data.
 
-**Smarter Retrieval, Better Generation:** **Improving RAG Systems**
 
-**David S. Batista**
+Retrieval Augmented Generation (RAG) is a model architecture for tasks requiring information retrieval from large corpora combined with generative models to fulfill a user information need. It's typically used for question-answering, fact-checking, summarization, and information discovery.
 
-**PyCon Lithuania - Vilnius, April 2025**
+The RAG process consists of indexing, which converts textual data into searchable formats; retrieval, which selects relevant documents for a query using different methods; and augmentation, which feeds retrieved information and the user's query into a Large Language Model (LLM) via a prompt for output generation. Typically, one has little control over the augmentation step besides what's provided to the LLM via the prompt and a few parameters, like the maximum length of the generated text or the temperature of the sampling process. On the other hand, the indexing and retrieval steps are more flexible and can be customized to the specific needs of the task or the data.
+
+
+
+
+
+
 
 
 
