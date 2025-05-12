@@ -4,12 +4,12 @@ description: "Ph.D., Natural Language Processing, Machine Learning"
 baseurl: ""
 url: "http://www.davidsbatista.net/"
 email: dsbatista@gmail.com
-#twitter_username: DavidSBatista
 github_username:  davidsbatista
 linkedin_link: http://linkedin.com/in/dsbatista
 stackoverflow: 4324153/david-batista
 gscholar: -tRNGd0AAAAJ
 researchgate: David_Batista4
+orchid: 0000-0002-9324-5773
 timezone: Europe/Berlin
 
 markdown: kramdown
