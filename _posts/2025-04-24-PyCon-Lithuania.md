@@ -16,138 +16,27 @@ The RAG process consists of indexing, which converts textual data into searchabl
 Typically, one has little control over the augmentation step besides what's provided to the LLM via the prompt and a few parameters, like the maximum length of the generated text or the temperature of the sampling process. On the other hand, the indexing and retrieval steps are more flexible and can be customized to the specific needs of the task or the data.
 
 
-My talk will focus on RAG systems' indexing and retrieval techniques. Attendees will learn about various methods, starting with classical approaches rooted in the Information Retrieval community. While these methods have been around for decades, they remain widely used today due to their simplicity and efficiency.
 
-The session will then explore more modern techniques that leverage LLMs to enhance the indexing process or optimize user queries. These approaches aim to improve the retrieval of relevant documents and improve the performance of RAG systems.
 
-Participants will gain insights into each technique's unique features, advantages, and limitations, along with guidance on selecting the most appropriate approach for specific tasks and datasets. 
 
-The talk will conclude with a performance analysis, comparing the implementation of all these techniques in Python using Haystack and evaluating them over an annotated dataset. Speed, accuracy, and efficiency will be assessed, offering an understanding of trade-offs and practical takeaways.
+## __From classic Information Systems to RAG__
 
 
+- Return a list of documents or snippets, requiring users to read through multiple results to find the information they need
+- A complex or nuanced query requires a deeper understanding of the context and relationships between different pieces of information 6
+- What if, instead the user sifting through the results, we build a prompt composed by retrieved snippets together with the query and feed it to an LLM? 
 
 
-**From classic Information Systems to RAG**
 
-**Query**
+## __RAG - Retrieval Augmented Generation__
 
-**Returns**
 
-**Reads**
 
-**Document Collection**
-
-**Documents relevant to **
-
-**the query**
-
-5
-
-
-
-
-
-**From classic Information Systems to RAG**
-
-**Query**
-
-**Returns**
-
-**Reads**
-
-**Document Collection**
-
-**Documents relevant to **
-
-**the query**
-
-●
-
-Return a list of documents or snippets, requiring users to read through multiple results to find the information they need
-
-●
-
-A complex or nuanced query requires a deeper understanding of the context and relationships between different pieces of information 6
-
-
-
-
-
-**From classic Information Systems to RAG**
-
-**Query**
-
-**Returns**
-
-**Reads**
-
-**Document Collection**
-
-**Documents relevant to **
-
-**the query**
-
-●
-
-What if, instead the user sifting through the results, we build a prompt composed by retrieved snippets together with the query and feed it to an LLM? 
-
-7
-
-
-
-
-
-**From classic Information Systems to RAG**
-
-**Documents**
-
-**Documents relevant **
-
-**to the query**
-
-**Answer**
-
-**Query**
-
-8
-
-
-
-
-
-**RAG - Retrieval Augmented Generation** 9
-
-
-
-
-
-**RAG - Retrieval Step**
-
-10
-
-
-
-
-
-**Motivation - Baseline Retrieval**
+### __Baseline Retrieval__
 
 Indexing
 
 Top-3
-
-chunk\_3
-
-chunk\_1
-
-chunk\_8
-
-chunk\_2
-
-chunk\_3
-
-chunk\_5
-
-chunk\_4
 
 …
 
@@ -190,28 +79,8 @@ b. using query as keyword filter
 ● Hybrid Retrieval \(with/ Reciprocal Rank fusion\) 13
 
 
-
-
-
 **Sentence-Window Retrieval**
 
-Indexing
-
-Top-3
-
-**chunk\_1**
-
-chunk\_1
-
-**chunk\_8**
-
-chunk\_2
-
-**chunk\_5**
-
-chunk\_3
-
-chunk\_4
 
 …
 
@@ -223,39 +92,8 @@ chunk\_4
 
 
 
-**Sentence-Window Retrieval**
+### __Sentence-Window Retrieval__
 
-**chunk\_1**
-
-Indexing
-
-Top-3
-
-chunk\_1
-
-chunk\_2
-
-chunk\_2
-
-chunk\_7
-
-chunk\_3
-
-**chunk\_8**
-
-chunk\_4
-
-…
-
-chunk\_9
-
-chunk\_4
-
-**chunk\_5**
-
-**User Query**
-
-chunk\_6
 
 ● Retrieve the chunks before and after the matching chunk
 
@@ -267,87 +105,9 @@ chunk\_6
 
 
 
-**Auto-Merging Retrieval**
-
-Doc
-
-paragraph\_1
-
-paragraph\_2
-
-paragraph\_n
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-…. 
+### __Auto-Merging Retrieval__
 
 ● Transform documents into an Hierarchical Tree structure 16
-
-
-
-
-
-**Auto-Merging Retrieval**
-
-Doc
-
-paragraph\_1
-
-paragraph\_2
-
-paragraph\_n
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-…. 
 
 **Index**
 
@@ -358,44 +118,6 @@ sent.
 
 
 
-
-**Auto-Merging Retrieval**
-
-Doc
-
-paragraph\_1
-
-paragraph\_2
-
-paragraph\_n
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-sent. 
-
-…. 
 
 **Index**
 
@@ -409,7 +131,7 @@ sent.
 
 
 
-**Maximum Marginal Relevance \(MMR\)**
+### __Maximum Marginal Relevance \(MMR\)__
 
 ● Classical retrieval ranks the retrieved documents by relevance similarity to the user query
 
@@ -417,18 +139,12 @@ sent.
 
 ● We need to consider how novel is a document compared to the already retrieved docs
 
-19
-
-
 
 
 
 **Maximum Marginal Relevance \(MMR\)**
 
 Each retrieved document is scored
-
-20
-
 
 
 
@@ -545,33 +261,7 @@ Top-3
 
 **Hybrid Retrieval \+ Reranking**
 
-**chunk\_2**
 
-Top-3
-
-**chunk\_9**
-
-**chunk\_3**
-
-**chunk\_2**
-
-**chunk\_7**
-
-**BM25**
-
-**User Query**
-
-**chunk\_9**
-
-**ReRanking**
-
-**chunk\_8**
-
-**chunk\_3**
-
-**chunk\_7**
-
-**chunk\_5**
 
 Top-3
 
@@ -637,35 +327,9 @@ Top-3
 
 **Multi-Query**
 
-chunk\_2
-
-**User Query**
-
-chunk\_1
-
-chunk\_3
-
-**LLM Query 1**
-
-chunk\_7
-
-**LLM Query 2**
-
-chunk\_9
-
-**LLM Query 3**
-
-chunk\_8
-
-…
 
 **LLM**
 
-chunk\_6
-
-chunk\_4
-
-chunk\_5
 
 ● Expand a user query into *n* similar queries reflecting the original intent
 
@@ -679,15 +343,10 @@ chunk\_5
 
 **Multi-Query**
 
-chunk\_2
 
 **User Query**
 
-chunk\_1
 
-chunk\_3
-
-chunk\_8
 
 **LLM Query 1**
 
@@ -1359,29 +1018,10 @@ n\_variations=3
 
 **Hypothetical Document Embeddings**
 
-0.77
-
-0.53
-
-0.47
-
-0.529
-
-nr\_completions=3
 
 **Document Summary Indexing**
 
-0.72
 
-0.47
-
-0.53
-
-0.514
-
-0
-
-●
 
 sentence-transformers/all-MiniLM-L6-v2
 
