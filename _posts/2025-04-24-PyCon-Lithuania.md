@@ -16,6 +16,24 @@ The RAG process consists of indexing, which converts textual data into searchabl
 Typically, one has little control over the augmentation step besides what's provided to the LLM via the prompt and a few parameters, like the maximum length of the generated text or the temperature of the sampling process. On the other hand, the indexing and retrieval steps are more flexible and can be customized to the specific needs of the task or the data.
 
 
+**Classical Techniques**
+
+● Sentence-Window Retrieval
+
+● Auto-Merging Retrieval
+
+● Maximum Marginal Relevance
+
+● Hybrid Retrieval \(with/ Reciprocal Rank fusion\)
+
+
+**LLM-based Techniques**
+
+● Multi-Query
+
+● Hypothetical Document Embeddings - HyDE
+
+● Document Summary Indexing
 
 
 
@@ -28,17 +46,8 @@ Typically, one has little control over the augmentation step besides what's prov
 
 
 
-## __RAG - Retrieval Augmented Generation__
-
-
-
 ### __Baseline Retrieval__
 
-Indexing
-
-Top-3
-
-…
 
 **User Query**
 
@@ -64,19 +73,8 @@ b. using query as keyword filter
 
 4. Experiment
 
-12
 
 
-
-**Classical Techniques**
-
-● Sentence-Window Retrieval
-
-● Auto-Merging Retrieval
-
-● Maximum Marginal Relevance
-
-● Hybrid Retrieval \(with/ Reciprocal Rank fusion\) 13
 
 
 **Sentence-Window Retrieval**
@@ -89,7 +87,7 @@ b. using query as keyword filter
 ● Retrieve the chunks before and after the matching chunk 14
 
 
-
+## __Classical Techniques__
 
 
 ### __Sentence-Window Retrieval__
@@ -100,9 +98,6 @@ b. using query as keyword filter
 ● A simple way to gather more context
 
 ● Indexing needs to preserve the order of the chunks 15
-
-
-
 
 
 ### __Auto-Merging Retrieval__
@@ -128,7 +123,6 @@ b. using query as keyword filter
 - Plus, the one sentence from paragraph\_2
 
 ● A whole paragraph might be more informative than individual chunks 18
-
 
 
 ### __Maximum Marginal Relevance \(MMR\)__
@@ -200,31 +194,7 @@ Each retrieved document is scored:
 - **λ** balances between these two terms 24
 
 
-
-
-
-**Hybrid Retrieval \+ Reranking**
-
-**chunk\_2**
-
-Top-3
-
-**chunk\_9**
-
-**chunk\_3**
-
-**BM25**
-
-**User Query**
-
-● Combines multiple search techniques
-
-● keyword-based \(BM25\)
-
-25
-
-
-
+### __Hybrid Retrieval \+ Reranking__
 
 
 **Hybrid Retrieval \+ Reranking**
@@ -281,31 +251,11 @@ Top-3
 
 
 
-**Classical Techniques**
 
-● Sentence-Window Retrieval
-
-● Auto-Merging Retrieval
-
-● Maximum Marginal Relevance
-
-● Hybrid Retrieval \(with/ Reciprocal Rank fusion\) 28
+## __LLLM-based Techniques__
 
 
-
-**LLM-based Techniques**
-
-● Multi-Query
-
-● Hypothetical Document Embeddings - HyDE
-
-● Document Summary Indexing
-
-29
-
-
-
-**Multi-Query**
+### __Multi-Query__
 
 **User Query**
 
@@ -391,8 +341,7 @@ chunk\_5
 ● Re-ranking process over all retrieved chunks 32
 
 
-
-**Hypothetical Document Embeddings - HyDE**
+### __Hypothetical Document Embeddings - HyDE__
 
 **User Query**
 
@@ -467,10 +416,7 @@ vector\_3
 ● You perform an average pooling generating a new query embedding used to search for similar documents instead of the original query 35
 
 
-
-
-
-**Document Summary Indexing**
+### __Document Summary Indexing__
 
 Doc
 
@@ -604,7 +550,7 @@ chunks
 
 
 
-**Summary**
+## __Summary__
 
 Custom Index 
 
@@ -660,7 +606,7 @@ X
 
 
 
-**Comparative Experiment**
+## __Comparative Experiment__
 
 ● "ARAGOG: Advanced RAG Output Grading" M Eibich, S Nagpal, A Fred-Ojala arXiv 
 
@@ -760,7 +706,7 @@ top\_k = 3
 
 
 
-**Takeaways**
+## __Takeaways__
 
 ● Build a dataset for our use case - **50~100 annotated questions**
 
