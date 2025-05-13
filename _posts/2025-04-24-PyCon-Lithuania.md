@@ -16,28 +16,10 @@ The RAG process consists of indexing, which converts textual data into searchabl
 Typically, one has little control over the augmentation step besides what's provided to the LLM via the prompt and a few parameters, like the maximum length of the generated text or the temperature of the sampling process. On the other hand, the indexing and retrieval steps are more flexible and can be customized to the specific needs of the task or the data.
 
 
-**Classical Techniques**
-
-● Sentence-Window Retrieval
-
-● Auto-Merging Retrieval
-
-● Maximum Marginal Relevance
-
-● Hybrid Retrieval \(with/ Reciprocal Rank fusion\)
+In this blog post I will different retrieval techniques, some rooted in the area of classic information retrieval others, which were proposed recently, and based on LLMs.
 
 
-**LLM-based Techniques**
-
-● Multi-Query
-
-● Hypothetical Document Embeddings - HyDE
-
-● Document Summary Indexing
-
-
-
-## __From classic Information Systems to RAG__
+## __From Classic Information Systems to RAG__
 
 
 - Return a list of documents or snippets, requiring users to read through multiple results to find the information they need
@@ -804,19 +786,15 @@ Document Summary Indexing
 
 
 
-**References**
+## __References__ ##
+
+
+
+**"The use of MMR, diversity-based reranking for reordering documents and producing summaries" J Carbonell, J Goldstein - ACM SIGIR 1998**
 
 **●**
 
-**"The use of MMR, diversity-based reranking for reordering documents and **
-
-**producing summaries" J Carbonell, J Goldstein - ACM SIGIR 1998**
-
-**●**
-
-**"ARAGOG: Advanced RAG Output Grading" M Eibich, S Nagpal, A Fred-Ojala arXiv **
-
-**preprint, 2024**
+**"ARAGOG: Advanced RAG Output Grading" M Eibich, S Nagpal, A Fred-Ojala arXiv preprint, 2024**
 
 **●**
 
@@ -835,8 +813,6 @@ Document Summary Indexing
 **●**
 
 **"A New Document Summary Index for LLM-powered QA Systems", Jerry Liu 2023 **
-
-46
 
 
 
