@@ -21,11 +21,23 @@ In this blog post I will different retrieval techniques, some rooted in the area
 
 ## __From Classic Information Systems to RAG__
 
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-IR-to-RAG_1.png">
+  <figcaption>Figure 1 - Classical Information System.</figcaption>
+</figure>
 
-- Return a list of documents or snippets, requiring users to read through multiple results to find the information they need
-- A complex or nuanced query requires a deeper understanding of the context and relationships between different pieces of information 6
+- Classical Information Retrieval system returns a list of documents or snippets
+- Requiring users to read through multiple results to find the information they need
+- A complex or nuanced query requires a deeper understanding of the context and relationships between different pieces of information
+
+<br>
+
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-IR-to-RAG_2.png">
+  <figcaption>Figure 2 - Retrieval Augmented Generation system.</figcaption>
+</figure>
+
 - What if, instead the user sifting through the results, we build a prompt composed by retrieved snippets together with the query and feed it to an LLM? 
-
 
 
 ### __Baseline Retrieval__
@@ -68,8 +80,20 @@ b. using query as keyword filter
 
 ● Retrieve the chunks before and after the matching chunk 14
 
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
+  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+</figure>
+
+
 
 ## __Classical Techniques__
+
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
+  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+</figure>
+
 
 
 ### __Sentence-Window Retrieval__
@@ -80,6 +104,12 @@ b. using query as keyword filter
 ● A simple way to gather more context
 
 ● Indexing needs to preserve the order of the chunks 15
+
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
+  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+</figure>
+
 
 
 ### __Auto-Merging Retrieval__
@@ -105,6 +135,12 @@ b. using query as keyword filter
 - Plus, the one sentence from paragraph\_2
 
 ● A whole paragraph might be more informative than individual chunks 18
+
+
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
+  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+</figure>
 
 
 ### __Maximum Marginal Relevance \(MMR\)__
@@ -176,6 +212,12 @@ Each retrieved document is scored:
 - **λ** balances between these two terms 24
 
 
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
+  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+</figure>
+
+
 ### __Hybrid Retrieval \+ Reranking__
 
 
@@ -239,29 +281,10 @@ Top-3
 
 ### __Multi-Query__
 
-**User Query**
-
-**LLM Query 1**
-
-**LLM Query 2**
-
-**LLM Query 3**
-
-**LLM**
 
 ● Expand a user query into *n* similar queries reflecting the original intent
 
 ● ..or break-down a complex query into individual questions 30
-
-
-
-
-
-**Multi-Query**
-
-
-**LLM**
-
 
 ● Expand a user query into *n* similar queries reflecting the original intent
 
@@ -269,50 +292,6 @@ Top-3
 
 ● Each new query is used for an individual retrieval processes 31
 
-
-
-
-
-**Multi-Query**
-
-
-**User Query**
-
-
-
-**LLM Query 1**
-
-chunk\_7
-
-chunk\_1
-
-**LLM Query 2**
-
-chunk\_9
-
-**ReRanking**
-
-chunk\_3
-
-**LLM Query 3**
-
-chunk\_8
-
-chunk\_6
-
-…
-
-chunk\_5
-
-**LLM**
-
-chunk\_6
-
-chunk\_3
-
-chunk\_4
-
-chunk\_5
 
 ● Expand a user query into *n* similar queries reflecting the original intent
 
@@ -322,80 +301,32 @@ chunk\_5
 
 ● Re-ranking process over all retrieved chunks 32
 
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
+  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+</figure>
+
+
 
 ### __Hypothetical Document Embeddings - HyDE__
 
-**User Query**
-
-Doc
-
-Doc
-
-Doc
-
-**LLM**
-
 ● Given a user query, use a LLM to generate *n* "hypothetical" \(short\) documents whose content would ideally answer the query 33
-
-
-
-**Hypothetical Document Embeddings - HyDE**
-
-**User Query**
-
-Doc
-
-vector\_1
-
-Doc
-
-**Embedder**
-
-vector\_2
-
-Doc
-
-vector\_3
-
-**LLM**
 
 ● Given a user query, use a LLM to generate *n* "hypothetical" \(short\) documents whose content would ideally answer the query
 
 ● Each of the *n* documents is embedded into a vector 34
-
-
-
-
-
-**Hypothetical Document Embeddings - HyDE**
-
-**User Query**
-
-Doc
-
-vector\_1
-
-Doc
-
-**Embedder**
-
-vector\_2
-
-query\_vector
-
-**Avg. Pool**
-
-Doc
-
-vector\_3
-
-**LLM**
 
 ● Given a user query, use a LLM to generate *n* "hypothetical" \(short\) documents whose content would ideally answer the query
 
 ● Each of the *n* documents is embedded into a vector
 
 ● You perform an average pooling generating a new query embedding used to search for similar documents instead of the original query 35
+
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
+  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+</figure>
+
 
 
 ### __Document Summary Indexing__
@@ -530,6 +461,12 @@ chunks
 
 ● Using the document\(s\) reference retrieve the most relevant chunks 39
 
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
+  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+</figure>
+
+
 
 
 ## __Summary__
@@ -585,6 +522,11 @@ X
 X
 
 40
+
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
+  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+</figure>
 
 
 
@@ -685,6 +627,12 @@ OpenAI: gpt-4o-mini
 top\_k = 3
 
 42
+
+
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
+  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+</figure>
 
 
 
@@ -859,137 +807,3 @@ Salakhutdinov, Christopher D. Manning
 ○ Evaluate the retrievers: Precision, Recall and Fallout
 
 ○ Evaluate generated answer: Semantic Answer Similarity 49
-
-
-
-
-
-**Comparative Experiment: HotpotQA**
-
-**Recall**
-
-**Precision**
-
-**Fall-out**
-
-**Semantic Answer **
-
-**Parameters**
-
-**Similarity**
-
-**Sentence-Window Retrieval**
-
-0.73
-
-0.49
-
-0.51
-
-0.688
-
-window=3
-
-**Auto-Merging Retrieval**
-
-0.36
-
-0.26
-
-0.74
-
-0.376
-
-0
-
-**Maximum Margin Relevance**
-
-0.73
-
-0.48
-
-0.52
-
-0.500
-
-lambda\_threshold=0.75
-
-**Hybrid Retrieval**
-
-0.81
-
-0.40
-
-0.60
-
-0.512
-
-join\_mode=”concatenate” 
-
-**Multi-Query**
-
-0.75
-
-0.36
-
-0.64
-
-0.515
-
-n\_variations=3
-
-**Hypothetical Document Embeddings**
-
-
-**Document Summary Indexing**
-
-
-
-sentence-transformers/all-MiniLM-L6-v2
-
-**LLM**
-
-●
-
-chunk\_size = 15
-
-●
-
-split\_by = "sentence" 
-
-OpenAI: gpt-4o-mini
-
-●
-
-top\_k = 3
-
-50
-
-
-
-
-
-**Maximum Marginal Relevance \(MMR\)**
-
-51
-
-
-
-**Number of LLM calls**
-
-● **Multi-Query:**
-
-○ Each query results in 2 LLM calls
-
-**● Hypothetical Document Embeddings**
-
-**○ **Each query results in 2 LLM calls
-
-**● Document Summary Indexing**
-
-**○ **Dependent on the detail parameter
-
-○ LLM\_calls = 1 \+ detail \* \(X / minimum\_chunk\_size - 1\) 52
-
-
-
