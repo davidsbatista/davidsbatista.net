@@ -40,6 +40,12 @@ In this blog post I will different retrieval techniques, some rooted in the area
 - What if, instead the user sifting through the results, we build a prompt composed by retrieved snippets together with the query and feed it to an LLM? 
 
 
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-RAG.png">
+  <figcaption>Figure 3 - Retrieval Augmented Generation system.</figcaption>
+</figure>
+
+
 ### __Baseline Retrieval__
 
 
@@ -81,18 +87,14 @@ b. using query as keyword filter
 ● Retrieve the chunks before and after the matching chunk 14
 
 <figure>
-  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
-  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-Baseline-Retrieval-System.png">
+  <figcaption>Figure 4 - Baseline RAG system.</figcaption>
 </figure>
 
 
 
 ## __Classical Techniques__
 
-<figure>
-  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
-  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
-</figure>
 
 
 
@@ -106,8 +108,8 @@ b. using query as keyword filter
 ● Indexing needs to preserve the order of the chunks 15
 
 <figure>
-  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
-  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-Sentence-Window-Retrieval.png">
+  <figcaption>Figure 5 - Sentence Window Retrieval.</figcaption>
 </figure>
 
 
@@ -138,8 +140,8 @@ b. using query as keyword filter
 
 
 <figure>
-  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
-  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-Auto-Merging-Retrieval.png">
+  <figcaption>Figure 6 - Auto-Merging Retrieval.</figcaption>
 </figure>
 
 
@@ -214,7 +216,7 @@ Each retrieved document is scored:
 
 <figure>
   <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
-  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+  <figcaption>Figure 7 - Precision Recall Curve and a Confusion Matrix.</figcaption>
 </figure>
 
 
@@ -274,6 +276,11 @@ Top-3
 27
 
 
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-Hybrid-Retrieval.png">
+  <figcaption>Figure 8 - Hybrid Retrieval.</figcaption>
+</figure>
+
 
 
 ## __LLLM-based Techniques__
@@ -302,10 +309,9 @@ Top-3
 ● Re-ranking process over all retrieved chunks 32
 
 <figure>
-  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
-  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-Multi-Query-Retrieval.png">
+  <figcaption>Figure 9 - Precision Recall Curve and a Confusion Matrix.</figcaption>
 </figure>
-
 
 
 ### __Hypothetical Document Embeddings - HyDE__
@@ -323,135 +329,27 @@ Top-3
 ● You perform an average pooling generating a new query embedding used to search for similar documents instead of the original query 35
 
 <figure>
-  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
-  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-HyDE.png">
+  <figcaption>Figure 10 - Precision Recall Curve and a Confusion Matrix.</figcaption>
 </figure>
 
 
 
 ### __Document Summary Indexing__
 
-Doc
-
-**LLM**
-
-summary
-
-**Summary **
-
-**Index**
 
 ● **Summary Index: **generate a summary for each document with an LLM
-
-36
-
-
-
-
-
-**Document Summary Indexing**
-
-chunks
-
-**Chunker**
-
-…
-
-Doc
-
-**LLM**
-
-summary
-
-**Summary **
-
-**Chunk **
-
-**Index**
-
-**Index**
 
 ● **Summary Index: **generate a summary for each document with an LLM
 
 ● **Chunk Index: **split each document up into chunks 37
 
 
-
-
-
-**Document Summary Indexing**
-
-chunks
-
-**Chunker**
-
-…
-
-Doc
-
-**LLM**
-
-summary
-
-Doc 
-
-ref. 
-
-**Summary **
-
-**Chunk **
-
-**Index**
-
-**Index**
-
-**User Query**
-
 ● **Summary Index: **generate a summary for each document with an LLM
 
 ● **Chunk Index: **split each document up into chunks 
 
 ● Use the **Summary Index** to retrieve top-k relevant documents to the query 38
-
-
-
-
-
-**Document Summary Indexing**
-
-chunks
-
-**Chunker**
-
-…
-
-chunks
-
-…
-
-Doc
-
-**LLM**
-
-summary
-
-Doc 
-
-ref. 
-
-chunks
-
-…
-
-**Summary **
-
-**Chunk **
-
-**Index**
-
-**Index**
-
-**User Query**
 
 ● **Summary Index: **generate a summary for each document with an LLM
 
@@ -462,8 +360,8 @@ chunks
 ● Using the document\(s\) reference retrieve the most relevant chunks 39
 
 <figure>
-  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
-  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-Document-Summary-Indexing.png">
+  <figcaption>Figure 11 - Precision Recall Curve and a Confusion Matrix.</figcaption>
 </figure>
 
 
@@ -471,70 +369,10 @@ chunks
 
 ## __Summary__
 
-Custom Index 
-
-ReRanking
-
-Query Rewriting
-
-Combining
-
-Relies on a LLM
-
-Structure
-
-multiple sources
-
-Sentence-Window Retrieval
-
-X
-
-Auto-Merging Retrieval
-
-X
-
-Maximum Margin Relevance
-
-X
-
-Hybrid Retrieval
-
-X
-
-Multi-Query
-
-X
-
-X
-
-Hypothetical Document Embeddings
-
-X
-
-X
-
-Document Summary Indexing
-
-X
-
-X
-
-X
-
-40
-
-<figure>
-  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
-  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
-</figure>
-
-
 
 ## __Comparative Experiment__
 
-● "ARAGOG: Advanced RAG Output Grading" M Eibich, S Nagpal, A Fred-Ojala arXiv 
-
-preprint, 2024
+● "ARAGOG: Advanced RAG Output Grading" M Eibich, S Nagpal, A Fred-Ojala arXiv preprint, 2024
 
 ● **Dataset:**
 
@@ -558,84 +396,6 @@ preprint, 2024
 
 
 
-**Comparative Experiment: ARAGOG**
-
-**Semantic Answer Similarity**
-
-**Specific Parameters**
-
-**Sentence-Window Retrieval**
-
-0.688
-
-window=3
-
-**Auto-Merging Retrieval**
-
-0.619
-
-threshold=0.5, block\_sizes=\{10, 5\}
-
-**Maximum Margin Relevance**
-
-0.607
-
-lambda\_threshold=0.5
-
-**Hybrid Retrieval**
-
-0.701
-
-join\_mode=”concatenate” 
-
-**Multi-Query**
-
-0.692
-
-n\_variations=3
-
-**Hypothetical Document Embeddings**
-
-0.642
-
-nr\_completions=3
-
-**Document Summary Indexing**
-
-0.731
-
--
-
-●
-
-sentence-transformers/all-MiniLM-L6-v2
-
-**LLM**
-
-●
-
-chunk\_size = 15
-
-●
-
-split\_by = "sentence" 
-
-OpenAI: gpt-4o-mini
-
-●
-
-top\_k = 3
-
-42
-
-
-<figure>
-  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
-  <figcaption>Figure 1 - Precision Recall Curve and a Confusion Matrix.</figcaption>
-</figure>
-
-
-
 ## __Takeaways__
 
 ● Build a dataset for our use case - **50~100 annotated questions**
@@ -647,9 +407,6 @@ top\_k = 3
 ● **Sentence-Window Retriever** and **Hybrid Retrieval - **good results and no need for complexing indexing or an LLM
 
 ● If none of these produces satisfying results then, explore indexing/retrieval methods based on LLMs
-
-43
-
 
 
 **Haystack Implementations**
@@ -736,74 +493,16 @@ Document Summary Indexing
 
 ## __References__ ##
 
+- "The use of MMR, diversity-based reranking for reordering documents and producing summaries" J Carbonell, J Goldstein - ACM SIGIR 1998**
 
+- "ARAGOG: Advanced RAG Output Grading" M Eibich, S Nagpal, A Fred-Ojala arXiv preprint, 2024**
 
-**"The use of MMR, diversity-based reranking for reordering documents and producing summaries" J Carbonell, J Goldstein - ACM SIGIR 1998**
+- ****Advanced RAG: Query Expansion” - Haystack Blog, 2024**
 
-**●**
+- ”Advanced RAG: Query Decomposition & Reasoning” ****- Haystack Blog, 2024**
 
-**"ARAGOG: Advanced RAG Output Grading" M Eibich, S Nagpal, A Fred-Ojala arXiv preprint, 2024**
+- “Precise Zero-Shot Dense Retrieval without Relevance Labels” Luyu Gao, ****Xueguang Ma, Jimmy Lin, and Jamie Callan- * ACL 2023***
 
-**●**
-
-**" ****Advanced RAG: Query Expansion” - Haystack Blog, 2024**
-
-●
-
-**”Advanced RAG: Query Decomposition & Reasoning” ****- Haystack Blog, 2024**
-
-●
-
-**“Precise Zero-Shot Dense Retrieval without Relevance Labels” Luyu Gao, **
-
-**Xueguang Ma, Jimmy Lin, and Jamie Callan- * ACL 2023***
-
-**●**
-
-**"A New Document Summary Index for LLM-powered QA Systems", Jerry Liu 2023 **
-
-
-
-
+- "A New Document Summary Index for LLM-powered QA Systems", Jerry Liu 2023 **
 
 **Code and experiments**
-
-**Haystack**
-
-**Code \+ Slides**
-
-**www.davidsbatista.net**
-
-47
-
-
-
-48
-
-
-
-**Comparative Experiment**
-
-● HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering Zhilin 
-
-Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio, William Cohen, Ruslan 
-
-Salakhutdinov, Christopher D. Manning
-
-● **Dataset:**
-
-○ Question-Answering dataset over Wikipedia articles
-
-○ Very short answers, e.g.: 
-
-■ *'Who is older Glenn Hughes or Ross Lynch?' *
-
-*■ 'Are Gin and tonic and Paloma both cocktails based on tequila?' *
-
-○ Select the first 100 questions from hotpot\_train\_v1.1.json
-
-**● Experiment:**
-
-○ Evaluate the retrievers: Precision, Recall and Fallout
-
-○ Evaluate generated answer: Semantic Answer Similarity 49
