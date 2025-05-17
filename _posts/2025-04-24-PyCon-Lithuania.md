@@ -46,45 +46,21 @@ In this blog post I will different retrieval techniques, some rooted in the area
 </figure>
 
 
+- The idea is to pass the results together with the question query to the LLM, asking it to compose an answer based on the question query and the results.
+
+
 ### __Baseline Retrieval__
 
-
-**User Query**
-
-● **Indexing**: split documents into chunks and index in a vector db
+● **Indexing**: split documents into chunks and index them in a vector db
 
 ● **Query**: retrieve chunks 
 
-a. embedding similarity with query
+- embedding similarity with query
 
-b. using query as keyword filter
+- using query as keyword filter
 
-● **Ranking**: rank by similarity with the query 11
+● **Ranking**: rank by similarity with the query
 
-
-
-**Outline**
-
-1. Classic Retrieval Techniques
-
-2. LLM-based Retrieval Techniques
-
-3. Comparative Summary
-
-4. Experiment
-
-
-
-
-
-**Sentence-Window Retrieval**
-
-
-…
-
-**User Query**
-
-● Retrieve the chunks before and after the matching chunk 14
 
 <figure>
   <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-Baseline-Retrieval-System.png">
@@ -92,20 +68,17 @@ b. using query as keyword filter
 </figure>
 
 
+---
 
 ## __Classical Techniques__
 
-
+- Sentence-Window-Retrieval
+- Auto-Merging Retrieval
+- Maximum Marginal Relevance
+- Hybrid Retrieval
 
 
 ### __Sentence-Window Retrieval__
-
-
-● Retrieve the chunks before and after the matching chunk
-
-● A simple way to gather more context
-
-● Indexing needs to preserve the order of the chunks 15
 
 <figure>
   <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-Sentence-Window-Retrieval.png">
@@ -113,31 +86,7 @@ b. using query as keyword filter
 </figure>
 
 
-
 ### __Auto-Merging Retrieval__
-
-● Transform documents into an Hierarchical Tree structure 16
-
-**Index**
-
-● Transform documents into an Hierarchical Tree structure
-
-● Children chunks/sentences are index and used for retrieval 17
-
-
-
-
-
-**Index**
-
-● With a threshold of 0.5
-
-- The paragraph\_1 is returned, instead of 4 sentences
-
-- Plus, the one sentence from paragraph\_2
-
-● A whole paragraph might be more informative than individual chunks 18
-
 
 <figure>
   <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-Auto-Merging-Retrieval.png">
@@ -145,7 +94,26 @@ b. using query as keyword filter
 </figure>
 
 
+**Index**
+
+- Transform documents into an Hierarchical Tree structure (e.g. full text -> paragraphs -> sentences)
+
+- Leaf chunks/sentences are index and used for retrieval
+
+
+**Retrieval**
+
+- Set a threshold of 0.5, if the number of matches is above the set threshold return the parent instead of individual children.
+
+- The paragraph_1 is returned, instead of 4 sentences
+
+- Plus, the one sentence from paragraph_2
+
+- A whole paragraph might be more informative than individual chunks
+
+
 ### __Maximum Marginal Relevance \(MMR\)__
+
 
 ● Classical retrieval ranks the retrieved documents by relevance similarity to the user query
 
@@ -154,42 +122,32 @@ b. using query as keyword filter
 ● We need to consider how novel is a document compared to the already retrieved docs
 
 
+- Maximum Marginal Relevance scores each retrieved document considering the already retrieved documents and the user query, it's essentially a re-ranking technique, where the first document is the most similar to the query and the following documents are the most relevant to the query and most dissimilar from the already retrieved documents.
 
-
-**Maximum Marginal Relevance \(MMR\)**
-
-Each retrieved document is scored
-
+It uses the following formula to score each document:
 
 
 
-**Maximum Marginal Relevance \(MMR\)**
-
-Each retrieved document is scored:
-
-- Similarity between a candidate document and the query 21
+$$ MMR = \arg \max_{d_i \in D \setminus R} \left[ \lambda \cdot \text{Sim}_1(d_i, q) - (1 - \lambda) \cdot \max_{d_j \in R} \text{Sim}_2(d_i, d_j) \right]$$
 
 
+$$ D $$ - is the set of all candidate documents
 
+$$ R $$ - is the set of already selected documents
 
+$$ q $$ - is the query
 
-**Maximum Marginal Relevance \(MMR\)**
+$$ \text{Sim}_1 $$ - is the similarity function between a document and the query
 
-Each retrieved document is scored:
+$$ \text{Sim}_2 $$ - is the similarity function between two documents
 
-- Find maximum similarity between a candidate document and any previously selected document. 
+$$ d_i $$ and $$ d_j $$ - are documents in $$D$$  and $$R$$ respectively
 
-- Maximize the similarity to already selected documents and then subtracting it - penalize documents that are too similar to what's already been selected. 
-
-22
+$$ \lambda $$ - is a parameter that controls the trade-off between relevance and diversity
 
 
 
-
-
-**Maximum Marginal Relevance \(MMR\)**
-
-Each retrieved document is scored:
+The formula is applied to each of the retrieved documents:
 
 - Similarity between the candidate document and the query
 
@@ -197,84 +155,10 @@ Each retrieved document is scored:
 
 - Maximize the similarity to already selected documents and then subtracting it - penalize documents that are too similar to what's already been selected. 
 
-- **λ** balances between these two terms 23
+- **λ** balances between these two terms
 
 
-
-
-
-**Maximum Marginal Relevance \(MMR\)**
-
-Each retrieved document is scored:
-
-- Similarity between the candidate document and the query
-
-- Find maximum similarity between the candidate document and any previously selected document. By maximizing the similarity to already selected documents and then subtracting it, we penalize documents that are too similar to what's already been selected. 
-
-- **λ** balances between these two terms 24
-
-
-<figure>
-  <img style="width: 95%; height: 50%" src="/assets/images/2024-11-17-ml-report-toolkit.png">
-  <figcaption>Figure 7 - Precision Recall Curve and a Confusion Matrix.</figcaption>
-</figure>
-
-
-### __Hybrid Retrieval \+ Reranking__
-
-
-**Hybrid Retrieval \+ Reranking**
-
-**chunk\_2**
-
-Top-3
-
-**chunk\_9**
-
-**chunk\_3**
-
-**BM25**
-
-**User Query**
-
-**chunk\_7**
-
-Top-3
-
-**chunk\_8**
-
-**chunk\_5**
-
-**Embedding Vector DB**
-
-● Combines multiple search techniques
-
-● keyword-based \(BM25\) and semantic-based \(embedding vector\) 26
-
-
-
-
-
-**Hybrid Retrieval \+ Reranking**
-
-
-
-Top-3
-
-**chunk\_8**
-
-**chunk\_5**
-
-**Embedding Vector DB**
-
-● Combines multiple search techniques
-
-● \(BM25\) and semantic-based \(embedding vector\) keyword-based \(BM25\) and semantic-based \(embedding vector\)
-
-● Rank-merge results
-
-27
-
+### __Hybrid Retrieval__
 
 <figure>
   <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-Hybrid-Retrieval.png">
@@ -282,88 +166,76 @@ Top-3
 </figure>
 
 
+● Combines multiple search techniques
+
+● \(BM25\) and semantic-based \(embedding vector\) keyword-based \(BM25\) and semantic-based \(embedding vector\)
+
+● Rank-merge results
+
+
+---
 
 ## __LLLM-based Techniques__
+
+- Multi-Query
+- Hypothetical Document Embeddings - HyDE
+- Document Summary Indexing
 
 
 ### __Multi-Query__
 
-
-● Expand a user query into *n* similar queries reflecting the original intent
-
-● ..or break-down a complex query into individual questions 30
-
-● Expand a user query into *n* similar queries reflecting the original intent
-
-● ..or break-down a complex query into individual questions
-
-● Each new query is used for an individual retrieval processes 31
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-Multi-Query-Retrieval.png">
+  <figcaption>Figure 9 - Multi-Query.</figcaption>
+</figure>
 
 
-● Expand a user query into *n* similar queries reflecting the original intent
+● Expand a user query, based on a LLM, into *n* similar queries reflecting the original intent
 
 ● ..or break-down a complex query into individual questions
 
 ● Each new query is used for an individual retrieval processes
 
-● Re-ranking process over all retrieved chunks 32
-
-<figure>
-  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-Multi-Query-Retrieval.png">
-  <figcaption>Figure 9 - Precision Recall Curve and a Confusion Matrix.</figcaption>
-</figure>
+● Re-ranking process over all retrieved chunks
 
 
 ### __Hypothetical Document Embeddings - HyDE__
 
-● Given a user query, use a LLM to generate *n* "hypothetical" \(short\) documents whose content would ideally answer the query 33
-
-● Given a user query, use a LLM to generate *n* "hypothetical" \(short\) documents whose content would ideally answer the query
-
-● Each of the *n* documents is embedded into a vector 34
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-HyDE.png">
+  <figcaption>Figure 10 - Hypothetical Document Embeddings - HyDE.</figcaption>
+</figure>
 
 ● Given a user query, use a LLM to generate *n* "hypothetical" \(short\) documents whose content would ideally answer the query
 
 ● Each of the *n* documents is embedded into a vector
 
-● You perform an average pooling generating a new query embedding used to search for similar documents instead of the original query 35
-
-<figure>
-  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-HyDE.png">
-  <figcaption>Figure 10 - Precision Recall Curve and a Confusion Matrix.</figcaption>
-</figure>
-
+● You perform an average pooling generating a new query embedding used to search for similar documents instead of the original query
 
 
 ### __Document Summary Indexing__
 
-
-● **Summary Index: **generate a summary for each document with an LLM
-
-● **Summary Index: **generate a summary for each document with an LLM
-
-● **Chunk Index: **split each document up into chunks 37
-
-
-● **Summary Index: **generate a summary for each document with an LLM
-
-● **Chunk Index: **split each document up into chunks 
-
-● Use the **Summary Index** to retrieve top-k relevant documents to the query 38
-
-● **Summary Index: **generate a summary for each document with an LLM
-
-● **Chunk Index: **split each document up into chunks 
-
-● Use the **Summary Index** to retrieve top-k relevant documents to the query
-
-● Using the document\(s\) reference retrieve the most relevant chunks 39
-
 <figure>
   <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-Document-Summary-Indexing.png">
-  <figcaption>Figure 11 - Precision Recall Curve and a Confusion Matrix.</figcaption>
+  <figcaption>Figure 11 - Document Summary Indexing.</figcaption>
 </figure>
 
+
+**Indexing**
+
+- Summary Index: generate a summary for each document with an LLM
+
+- Chunk Index: plit each document up into chunks
+
+**Retrieval**
+
+- Use the Summary Index to retrieve top-k relevant documents to the query
+
+- Summary Index: generate a summary for each document with an LLM
+
+- Chunk Index: split each document up into chunks 
+
+- Using the document\(s\) reference retrieve the most relevant chunks
 
 
 
@@ -391,9 +263,6 @@ Top-3
 ○ Compare ground-truth answer with generated answer
 
 ○ Semantic Answer Similarity: cos sim embeddings of both answers 41
-
-
-
 
 
 ## __Takeaways__
@@ -488,7 +357,6 @@ Document Summary Indexing
 - easy to reuse them across applications
 
 - Initialize a SuperComponent with a pipeline 45
-
 
 
 ## __References__ ##
