@@ -19,6 +19,9 @@ Typically, one has little control over the augmentation step besides what's prov
 In this blog post I will different retrieval techniques, some rooted in the area of classic information retrieval others, which were proposed recently, and based on LLMs.
 
 
+The code for all the experiments in this blog post can be found here:
+- __[https://github.com/davidsbatista/haystack-retrieval](https://github.com/davidsbatista/haystack-retrieval)__
+
 ## __From Classic Information Systems to RAG__
 
 <figure>
@@ -238,139 +241,82 @@ The formula is applied to each of the retrieved documents:
 - Using the document\(s\) reference retrieve the most relevant chunks
 
 
-
 ## __Summary__
+
+
+<figure>
+  <img style="width: 95%; height: 50%" src="/assets/images/2025-04-24-Summary.png">
+  <figcaption>Figure 12 - Summary of the different techniques.</figcaption>
+</figure>
 
 
 ## __Comparative Experiment__
 
-● "ARAGOG: Advanced RAG Output Grading" M Eibich, S Nagpal, A Fred-Ojala arXiv preprint, 2024
+__["ARAGOG: Advanced RAG Output Grading" M Eibich, S Nagpal, A Fred-Ojala arXiv preprint, 2024](https://arxiv.org/abs/2404.01037)__
 
-● **Dataset:**
+**Dataset:**
 
-○ ArXiv preprints covering topics around Transformers and LLMs
+- ArXiv preprints covering topics around Transformers and LLMs
 
-○ 13 PDF papers \(https://huggingface.co/datasets/jamescalam/ai-arxiv\)
+- 13 PDF papers (__[https://huggingface.co/datasets/jamescalam/ai-arxiv](https://huggingface.co/datasets/jamescalam/ai-arxiv)__)
 
-○ 107 questions and answers generated with the assistance of an LLM
+- 107 questions and answers generated with the assistance of an LLM
 
-○ All questions and answers were manually validated and corrected
+- All questions and answers were manually validated and corrected
 
-**● Experiment:**
+**Experiment:**
 
-○ Run the questions over each retrieval technique
+- Run the questions over each retrieval technique
 
-○ Compare ground-truth answer with generated answer
+- Compare ground-truth answer with generated answer
 
-○ Semantic Answer Similarity: cos sim embeddings of both answers 41
+- Semantic Answer Similarity: cos sim embeddings of both answers
+
+<center>
+<b>Results</b>
+</center>
+
+| Retrieval Method                   | Semantic Answer Similarity | Specific Parameters                          |
+|------------------------------------|:----------------------------:|:---------------------------------------------:|
+| Sentence-Window Retrieval          | 0.688                      | window=3                                    |
+| Auto-Merging Retrieval             | 0.619                      | threshold=0.5, block_sizes={10, 5}          |
+| Maximum Margin Relevance           | 0.607                      | lambda_threshold=0.5                        |
+| Hybrid Retrieval                   | 0.701                      | join_mode="concatenate"                     |
+| Multi-Query                        | 0.692                      | n_variations=3                              |
+| HyDE   							 | 0.642                      | nr_completions=3                            |
+| Document Summary Indexing          | 0.731                      | -                                           |
+
 
 
 ## __Takeaways__
 
-● Build a dataset for our use case - **50~100 annotated questions**
+- Build a dataset for your use case - **50~100 annotated questions**
 
-● Start with the simple RAG approach and set it as your baseline
+- Start with the simple RAG approach and set it as your baseline
 
-● Start by exploring “cheap” and simple techniques
+- Start by exploring “cheap” and simple techniques
 
-● **Sentence-Window Retriever** and **Hybrid Retrieval - **good results and no need for complexing indexing or an LLM
+- Sentence-Window Retriever and Hybrid Retrieval give good results and no need for complexing indexing or an LLM
 
-● If none of these produces satisfying results then, explore indexing/retrieval methods based on LLMs
-
-
-**Haystack Implementations**
-
-Sentence-Window Retrieval
-
-**haystack.components.retrievers.SentenceWindowRetriever**
-
-Auto-Merging Retrieval
-
-**haystack.components.retrievers.AutoMergingRetriever**
-
-**haystack.components.preprocessors.HierarchicalDocumentSplitter**
-
-Maximum Margin Relevance
-
-**haystack.components.rankers.SentenceTransformersDiversityRanker**
-
-Hybrid Retrieval w/ ReRanking
-
-**haystack.components.retrievers.InMemoryEmbeddingRetriever**
-
-**haystack.components.retrievers.InMemoryBM25Retriever**
-
-**haystack.components.joiners.DocumentJoiner** \(ranking techniques\) Multi-Query
-
-**https://github.com/davidsbatista/haystack-retrieval**
-
-**https://haystack.deepset.ai/blog/query-expansion**
-
-**https://haystack.deepset.ai/blog/query-decomposition**
-
-Hypothetical Document Embeddings
-
-**https://haystack.deepset.ai/blog/optimizing-retrieval-with-hyde**
-
-Document Summary Indexing
-
-**https://github.com/davidsbatista/haystack-retrieval**
-
-44
-
-
-
-**Haystack Implementations - SuperComponents** Sentence-Window Retrieval
-
-**haystack.components.retrievers.SentenceWindowRetriever**
-
-Auto-Merging Retrieval
-
-**haystack.components.retrievers.AutoMergingRetriever**
-
-**haystack.components.preprocessors.HierarchicalDocumentSplitter**
-
-Maximum Margin Relevance
-
-**haystack.components.rankers.SentenceTransformersDiversityRanker**
-
-Hybrid Retrieval w/ ReRanking
-
-**Will be soon available as a SuperComponent\! **
-
-Multi-Query
-
-**Can be built as a SuperComponent\! **
-
-Hypothetical Document Embeddings
-
-**Can be built as a SuperComponent\! **
-
-Document Summary Indexing
-
-**Can be built as a SuperComponent\! **
-
-**SuperComponent in Haystack 2.12.0\! **
-
-- wrap complex pipelines into reusable \(super\)components
-
-- easy to reuse them across applications
-
-- Initialize a SuperComponent with a pipeline 45
+- If none of these produces satisfying results then, explore indexing/retrieval methods based on LLMs
 
 
 ## __References__ ##
 
-- "The use of MMR, diversity-based reranking for reordering documents and producing summaries" J Carbonell, J Goldstein - ACM SIGIR 1998**
+- __["The use of MMR, diversity-based reranking for reordering documents and producing summaries" J Carbonell, J Goldstein - ACM SIGIR 1998](https://www.cs.cmu.edu/~jgc/publication/The_Use_MMR_Diversity_Based_LTMIR_1998.pdf)__
 
-- "ARAGOG: Advanced RAG Output Grading" M Eibich, S Nagpal, A Fred-Ojala arXiv preprint, 2024**
+- __["ARAGOG: Advanced RAG Output Grading" M Eibich, S Nagpal, A Fred-Ojala arXiv preprint, 2024](https://arxiv.org/abs/2404.01037)__
 
-- ****Advanced RAG: Query Expansion” - Haystack Blog, 2024**
+- __["Advanced RAG: Query Expansion" - Haystack Blog, 2024](https://haystack.deepset.ai/blog/query-expansion)__
 
-- ”Advanced RAG: Query Decomposition & Reasoning” ****- Haystack Blog, 2024**
+- __["Advanced RAG: Query Decomposition & Reasoning" ****- Haystack Blog, 2024](https://haystack.deepset.ai/blog/query-decomposition)__
 
-- “Precise Zero-Shot Dense Retrieval without Relevance Labels” Luyu Gao, ****Xueguang Ma, Jimmy Lin, and Jamie Callan- * ACL 2023***
+- __["Precise Zero-Shot Dense Retrieval without Relevance Labels" Luyu Gao, Xueguang Ma, Jimmy Lin, and Jamie Callan - ACL 2023](https://aclanthology.org/2023.acl-long.99/)__
 
-- "A New Document Summary Index for LLM-powered QA Systems", Jerry Liu 2023 **
+- __["A New Document Summary Index for LLM-powered QA Systems", Jerry Liu 2023](https://www.llamaindex.ai/blog/a-new-document-summary-index-for-llm-powered-qa-systems-9a32ece2f9ec)__
 
-**Code and experiments**
+## __Code__
+
+The code for all the experiments can be found here
+
+- __[https://github.com/davidsbatista/haystack-retrieval](https://github.com/davidsbatista/haystack-retrieval)__
