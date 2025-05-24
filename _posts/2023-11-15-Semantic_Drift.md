@@ -14,30 +14,10 @@ Machine Learning models are static artefacts based on historical data, which sta
 
 ### __How can drift occur?__
 
-<br>
-
-
-#### Sudden: A new concept occurs within a short time.
-![](https://web-api.textin.com/ocr_image/external/0a4238fef9f5c97d.jpg)
-<br>
-
-
-#### Gradual: A new concept gradually replaces an old one over a period of time.
-![](https://web-api.textin.com/ocr_image/external/7d86fe47764e01c7.jpg)
-<br>
-
-
-### Incremental: An old concept incrementally changes to a new concept.
-![](https://web-api.textin.com/ocr_image/external/433a00b759c6acf7.jpg)
-<br>
-
-
-#### Reoccurring: An old concept may reoccur after some time.
-![](https://web-api.textin.com/ocr_image/external/4cf0ee50ce8c7b78.jpg)
-<br>
-
-
-
+- Sudden: A new concept occurs within a short time.
+- Gradual: A new concept gradually replaces an old one over a period of time.
+- Incremental: An old concept incrementally changes to a new concept.
+- Reoccurring: An old concept may reoccur after some time.
 
 ### __Drift detection in a nutshell__
 
