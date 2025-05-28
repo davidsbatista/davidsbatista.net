@@ -1106,6 +1106,6 @@ evaluation_agg_entities_type
 
 * ["Introduction to the CoNLL-2003 Shared Task: Language-Independent Named Entity Recognition"](http://www.aclweb.org/anthology/W03-0419)
 
-* ["Evaluation of the SemEval-2013 Task 9.1"](https://www.cs.york.ac.uk/semeval-2013/task9/data/uploads/semeval_2013-task-9_1-evaluation-metrics.pdf)
+* ["Evaluation of the SemEval-2013 Task 9.1"](/assets/documents/others/semeval_2013-task-9_1-evaluation-metrics.pdf)
 
 * ["MUC-5 Evaluation Metrics"](http://www.aclweb.org/anthology/M93-1007)
