@@ -395,24 +395,69 @@ OpenReview: https://openreview.net/profile?id=~David_S._Batista1
 -->
 
 <style>
-  img {
-    width: 100px; /* Adjust the width as needed */
+  .profile-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .profile-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+  }
+  .profile-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 0.75rem;
+  }
+  .profile-item a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .profile-item span {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    font-weight: 500;
   }
 </style>
 
-<div>
-	<a href="https://dblp.org/pid/65/8420" target="_blank"><img src="/assets/icons/free-dblp-3521374-2944818.webp" alt="DBLP Icon">dblp: computer science bibliography</a>
+<div class="profile-container">
+  <div class="profile-item">
+    <a href="https://dblp.org/pid/65/8420" target="_blank">
+      <img src="/assets/icons/free-dblp-3521374-2944818.webp" alt="DBLP Icon">
+      <span>DBLP</span>
+    </a>
+  </div>
+  <div class="profile-item">
+    <a href="https://orcid.org/0000-0002-9324-5773" target="_blank">
+      <img src="/assets/icons/2560px-ORCID_logo.svg.png" alt="ORCID Icon">
+      <span>ORCID</span>
+    </a>
+  </div>
+  <div class="profile-item">
+    <a href="https://aclanthology.org/people/d/david-s-batista/" target="_blank">
+      <img src="/assets/icons/acl-logo.svg" alt="ACL Icon">
+      <span>ACL Anthology</span>
+    </a>
+  </div>
+  <div class="profile-item">
+    <a href="https://scholar.google.de/citations?user=-tRNGd0AAAAJ&hl=en" target="_blank">
+      <img src="/assets/icons/Google_Scholar_logo_2015.PNG" alt="Google Scholar Icon">
+      <span>Google Scholar</span>
+    </a>
+  </div>
 </div>
-<div>
-	<a href="https://orcid.org/0000-0002-9324-5773" target="_blank"><img src="/assets/icons/2560px-ORCID_logo.svg.png" alt="ORCID Icon" target="_blank"> ORCID Profile</a>
-</div>
-<div>
-	<a href="https://aclanthology.org/people/d/david-s-batista/" target="_blank"><img src="/assets/icons/acl-logo.svg" alt="ACL Icon" target="_blank"> ACL Anthology</a>
-</div>
-<div>
-	<a href="https://scholar.google.de/citations?user=-tRNGd0AAAAJ&hl=en" target="_blank"><img src="/assets/icons/Google_Scholar_logo_2015.PNG" alt="Google Scholar Icon" target="_blank">Google Scholar</a>
-</div>
-
 
 <hr>
 
