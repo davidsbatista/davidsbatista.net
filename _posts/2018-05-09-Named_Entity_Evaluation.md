@@ -563,6 +563,21 @@ Putting all together:
 </table>
 </center>
 
+### __Cite this blog post__
+
+```
+@online{DavidSBatista2018,
+  author = {David S. Batista},
+  title = {Named-Entity Evaluation Metrics Based on Entity-Level},
+  year = {2018},
+  url = {https://davidsbatista.net/blog/2018/05/09/Named_Entity_Evaluation/},
+  urldate = {2018-05-09},
+  note = {Accessed on XXXX X, 20XX}
+}
+```
+
+
+
 ## __Code__
 
 I did a small experiment using [sklearn-crfsuite](https://sklearn-crfsuite.readthedocs.io/en/latest/) wrapper around [CRFsuite](http://www.chokkan.org/software/crfsuite/) to train a NER over the CoNLL 2002 Spanish data. Next I evaluate the trained CRF over the test data and show the performance with the different metrics:
