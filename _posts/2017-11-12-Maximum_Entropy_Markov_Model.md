@@ -22,7 +22,7 @@ You can find the first and third posts here:
 
 ## __Discriminative vs. Generative Models__
 
-In a [previous post](../../12/HHM_and_Naive_Bayes/) I wrote about the __Naive Bayes Model__ and how it is connected with the __Hidden Markov Model__. Both are __generative models__, in contrast, __Logistic Regression__ is a __discriminative model__, this post will start, by explaining this difference.
+In a [previous post](../../11/HHM_and_Naive_Bayes/) I wrote about the __Naive Bayes Model__ and how it is connected with the __Hidden Markov Model__. Both are __generative models__, in contrast, __Logistic Regression__ is a __discriminative model__, this post will start, by explaining this difference.
 
 In general, a machine learning classifier chooses which output label $$y$$ to assign to a given input $$x$$, by selecting from all the possible $$y_{i}$$ the one that maximizes $$P(y\mid x)$$.
 
