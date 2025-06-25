@@ -3,6 +3,36 @@ layout: page
 title: Talks
 ---
 
+#### __2015 - PyCon Lithuania - Vilnius__
+
+<!-- Date: April 2025 -->
+
+#### Smarter Retrieval, Better Generation Improving RAG Systems
+
+<center>
+	<iframe src="https://www.youtube.com/embed/Qv_IlsLRdZQ" width="560" height="315" frameborder="0"></iframe>
+	<p><b><a href="https://github.com/davidsbatista/haystack-retrieval/blob/main/2025_04_PyConLit.pdf" target="_blank">Slides</a></b></p>
+	<p><b><a href="https://github.com/davidsbatista/haystack-retrieval" target="_blank">Code</a></b></p>
+</center>
+
+
+#### Ligthining talk - Autoquizzer
+
+[__Autoquizzer__](https://huggingface.co/spaces/deepset/autoquizzer){:target="blank"} is application built with [__Haystack__]() which generates a quiz from a given URL. You can then play the quiz yourself and see the score, or let the LLM play it either using only the internal knowledge or reying on web searches to generate the answers.
+
+<center>
+    <a href="https://www.youtube.com/embed/Ihuik_Ai5jY?start=274" target="_blank">
+	 <img src="/assets/images/PyConLithuania-thumbnail.png" style="width:560px;height:315px;">
+    </a>
+</center>
+
+
+<br>
+
+---
+
+<br>
+
 #### __2022 - Arquivo com Café from Portuguese Web Archive (online)__
 
 #### Politiquives.PT (in portuguese)
