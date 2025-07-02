@@ -18,7 +18,7 @@ I’m skilled in applying Machine Learning, Deep Learning and other AI technique
 
 My professional experiences span over academia, startup environments, freelancing projects, and established enterprises, where I’ve collaborated effectively with dedicated teams to deliver production‑ready software solutions.
 
-I'm currently working at [__deepset__](https://www.deepset.com) as one of the developers and mantainers of the open source AI/LLM framework [__Haystack__](https://github.com/deepset-ai/haystack).
+I'm currently working at [__deepset__](https://www.deepset.com){:target="_blank"} as one of the developers and mantainers of the open source AI/LLM framework [__Haystack__](https://github.com/deepset-ai/haystack){:target="_blank"}.
 
 Occasionally, I <a href="/posts/" target="_blank"><b>blog</b></a> about Software Engineering, Machine Learning and Natural Language Processing.
 
