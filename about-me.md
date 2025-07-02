@@ -19,6 +19,8 @@ I’m skilled in applying Machine Learning, Deep Learning and other AI technique
 
 My professional experiences span over academia, startup environments, freelancing projects, and established enterprises, where I’ve collaborated effectively with dedicated teams to deliver production‑ready software solutions.
 
+I'm currently working at [__deepset__](https://www.deepset.com) as one of the developers and mantainers of the open source AI/LLM framework [__Haystack__](https://github.com/deepset-ai/haystack).
+
 Occasionally, I <a href="/posts/" target="_blank"><b>blog</b></a> about Software Engineering, Machine Learning and Natural Language Processing.
 
 Once in a while, I like to wander around instrumental melodies using an electric guitar. If you are curious about it you can listen to it at [__chilosopher.com__](https://www.chilosopher.com/){:target="_blank"}
