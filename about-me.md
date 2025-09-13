@@ -23,7 +23,7 @@ I'm currently working at [__deepset__](https://www.deepset.com) as one of the de
 
 Occasionally, I <a href="/posts/" target="_blank"><b>blog</b></a> about Software Engineering, Machine Learning and Natural Language Processing.
 
-Once in a while, I like to wander around instrumental melodies using an electric guitar. If you are curious about it you can listen to it at [__chilosopher.com__](https://www.chilosopher.com/){:target="_blank"}
+Once in a while, I like to wander around instrumental melodies using an electric guitar. If you are curious about it you can listen to it at [__www.chilosopher.com__](https://www.chilosopher.com/){:target="_blank"}
 
 
 <div style="text-align: right;">
