@@ -96,7 +96,9 @@ Presenting [__BREDS__](https://github.com/davidsbatista/BREDS){:target="blank"},
 
 #### __Others__
 
-* 2025 - <a href="/assets/documents/talks/2025-DIS-Students-NaturalLanguageProcessing.pdf" target="_blank">__"An NLP Journey"__</a> at <a href="https://disabroad.org/stockholm/" target="_blank">Talking about NLP for students from DIS</a> (Berlin)
+* March 2025 - <a href="/assets/documents/talks/2025-DIS-Students-NaturalLanguageProcessing.pdf" target="_blank">__"An NLP Journey"__</a> at <a href="https://disabroad.org/stockholm/" target="_blank">Talking about NLP for students from DIS</a> (Berlin)
+
+* November 2025 - <a href="/assets/documents/talks/NLP-DSI-Journey-2025_11_05.pdf" target="_blank">__"An NLP Journey"__</a> at <a href="https://disabroad.org/stockholm/" target="_blank">Talking about NLP for students from DIS</a> (Berlin)
 
 * 2016 - <a href="/assets/documents/talks/pydata_berlin_hackathon_presentation_2016.pdf" target="_blank">__"Issue Focussed Sentiment Analysis of Political Parties"__</a> at <a href="https://www.meetup.com/PyData-Berlin/events/232774832/?eventId=232774832" target="_blank">PyData Berlin - Political Bias Hackathon</a> (Berlin)
 
